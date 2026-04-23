@@ -1,0 +1,111 @@
+{% extends "Dietician/common.html" %}
+{% block content %}
+<br><br><br>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+
+      <div class="card shadow-lg">
+        <div class="card-header bg-warning text-dark text-center">
+          <h4>Edit Diet Plan</h4>
+        </div>
+
+        <div class="card-body">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- PLAN DETAILS -->
+            <div class="mb-3">
+              <label class="form-label">Plan Title</label>
+              <input type="text" name="title" class="form-control" value="{{ plan.title }}">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Description</label>
+              <textarea name="description" class="form-control" rows="3">{{ plan.description }}</textarea>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Current Image</label><br>
+              {% if plan.image %}
+                <img src="{{ plan.image.url }}" class="img-fluid rounded mb-2" style="max-height:200px;">
+              {% endif %}
+              <input type="file" name="image" class="form-control mt-2">
+            </div>
+
+            <hr>
+            <h5 class="text-primary">Edit Steps</h5>
+
+            <div id="steps">
+
+              {% for step in steps %}
+              <div class="border rounded p-3 mb-3">
+
+                <!-- IMPORTANT hidden id -->
+                <input type="hidden" name="step_id" value="{{ step.id }}">
+
+                <input type="text"
+                       name="step_title"
+                       class="form-control mb-2"
+                       value="{{ step.step_title }}">
+
+                <textarea name="step_description"
+                          class="form-control mb-2">{{ step.step_description }}</textarea>
+
+                {% if step.step_image %}
+                  <img src="{{ step.step_image.url }}"
+                       class="img-fluid rounded mb-2"
+                       style="max-height:150px;">
+                {% endif %}
+
+                <input type="file" name="step_image" class="form-control">
+              </div>
+              {% endfor %}
+
+            </div>
+
+            <div class="d-flex justify-content-between mt-3">
+              <button type="button"
+                      class="btn btn-outline-primary"
+                      onclick="addStep()">Add More Steps</button>
+
+              <button type="submit"
+                      class="btn btn-success">Update Plan</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function addStep() {
+    const stepsDiv = document.getElementById("steps");
+
+    const div = document.createElement("div");
+    div.className = "border rounded p-3 mb-3";
+
+    div.innerHTML = `
+        <input type="hidden" name="step_id" value="new">
+
+        <input type="text" name="step_title"
+               class="form-control mb-2"
+               placeholder="Step Title">
+
+        <textarea name="step_description"
+                  class="form-control mb-2"
+                  placeholder="Step Description"></textarea>
+
+        <input type="file" name="step_image" class="form-control">
+    `;
+
+    stepsDiv.appendChild(div);
+}
+</script>
+
+<br><br>
+{% endblock %}

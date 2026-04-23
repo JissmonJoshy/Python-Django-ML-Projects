@@ -1,0 +1,17 @@
+{% extends "User/common.html" %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br>
+<div class="container mt-4">
+    <h2>Feedback for {{ program.title }}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="feedback">Your Feedback</label>
+            <textarea name="feedback" id="feedback" class="form-control" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Submit Feedback</button>
+    </form>
+</div>
+<br><br>
+{% endblock %}

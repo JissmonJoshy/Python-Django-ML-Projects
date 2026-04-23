@@ -1,0 +1,33 @@
+{% extends "User/common.html" %}
+{% block content %}
+<br><br><br>
+<div class="container mt-5">
+    <h3 class="text-center mb-4">My Approved Nutrition Plans</h3>
+
+    <div class="row">
+        {% for req in approved_requests %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow h-100">
+
+                <img src="{{ req.plan.image.url }}"
+                     class="card-img-top"
+                     style="height:180px; object-fit:cover;">
+
+                <div class="card-body text-center">
+                    <h6 class="fw-bold" style='color:black'>{{ req.plan.title }}</h6>
+
+                    <a href="{% url 'user_plan_detail' req.plan.id %}"
+                       class="btn btn-primary btn-sm mt-2">
+                        View Plan
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No approved plans yet.</p>
+        {% endfor %}
+    </div>
+</div>
+<br><br>
+{% endblock %}

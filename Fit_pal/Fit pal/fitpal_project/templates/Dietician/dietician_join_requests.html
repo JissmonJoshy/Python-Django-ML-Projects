@@ -1,0 +1,101 @@
+{% extends "Dietician/common.html" %}
+{% block content %}
+<br><br><br>
+
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Nutrition Plan Join Requests</h3>
+
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>User</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Plan</th>
+                    <th>Status</th>
+                    <th>Progress</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for req in requests %}
+                <tr>
+
+                    <!-- USER NAME -->
+                    <td>
+                        {% if req.user.first_name or req.user.last_name %}
+                            {{ req.user.first_name }} {{ req.user.last_name }}
+                        {% else %}
+                            {{ req.user.username }}
+                        {% endif %}
+                    </td>
+
+                    <td>{{ req.user.username }}</td>
+                    <td>{{ req.user.email }}</td>
+                    <td>{{ req.plan.title }}</td>
+
+                    <!-- STATUS -->
+                    <td>
+                        {% if req.status == "Pending" %}
+                            <span class="badge bg-warning text-dark">Pending</span>
+                        {% elif req.status == "Approved" %}
+                            <span class="badge bg-success">Approved</span>
+                        {% else %}
+                            <span class="badge bg-danger">Rejected</span>
+                        {% endif %}
+                    </td>
+
+                    <!-- PROGRESS -->
+                    <td style="min-width:220px;">
+                        {% if req.status == "Approved" %}
+                            <div class="progress mb-1" style="height:18px;">
+                                <div class="progress-bar bg-success"
+                                     role="progressbar"
+                                     style="width: {{ req.progress_percentage }}%;">
+                                    {{ req.progress_percentage }}%
+                                </div>
+                            </div>
+                            <small class="text-muted">
+                                {{ req.completed_steps }} / {{ req.total_steps }} steps completed
+                            </small>
+                        {% else %}
+                            <span class="text-muted">Not Started</span>
+                        {% endif %}
+                    </td>
+
+                    <!-- ACTION -->
+                    <td>
+                        {% if req.status == "Pending" %}
+                            <a href="{% url 'update_join_request_status' req.id 'Approved' %}"
+                               class="btn btn-success btn-sm"
+                               onclick="return confirm('Approve this request?')">
+                                Approve
+                            </a>
+
+                            <a href="{% url 'update_join_request_status' req.id 'Rejected' %}"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('Reject this request?')">
+                                Reject
+                            </a>
+                        {% else %}
+                            <span class="text-muted">No Action</span>
+                        {% endif %}
+                    </td>
+
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center text-muted">
+                        No join requests found.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br><br>
+{% endblock %}

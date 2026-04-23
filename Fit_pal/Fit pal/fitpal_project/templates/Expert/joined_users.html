@@ -1,0 +1,45 @@
+{% extends "Expert/common.html" %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br>
+<div class="container mt-4">
+    <h2>Users Joined My Diet Programs</h2>
+
+    {% if user_programs %}
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    {% comment %} <th>Phone</th> {% endcomment %}
+                    <th>Diet Program</th>
+                    <th>Progress</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for up in user_programs %}
+                    <tr>
+                        <td>{{ up.user.username }}</td>
+                        <td>{{ up.user.email }}</td>
+                        {% comment %} <td>{{ up.user.phone }}</td> {% endcomment %}
+                        <td>{{ up.program.title }}</td>
+                        <td>
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar bg-success" role="progressbar"
+                                     style="width: {{ up.progress_percent }}%;" 
+                                     aria-valuenow="{{ up.progress_percent }}" 
+                                     aria-valuemin="0" aria-valuemax="100">
+                                    {{ up.progress_percent }}%
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No users have joined your diet programs yet.</p>
+    {% endif %}
+</div>
+<br>
+{% endblock %}

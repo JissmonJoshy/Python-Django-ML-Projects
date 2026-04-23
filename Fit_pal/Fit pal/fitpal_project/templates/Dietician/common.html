@@ -1,0 +1,256 @@
+{% if messages %}
+    <script>
+        {% for message in messages %}
+            alert("{{ message }}");
+        {% endfor %}
+    </script>
+{% endif %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<!-- Mirrored from html.awaikenthemes.com/fitwell/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Aug 2025 04:32:25 GMT -->
+<head>
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="Awaiken">
+	<!-- Page Title -->
+    <title>Fitwell - Fitness and Gym HTML Template</title>
+	<!-- Favicon Icon -->
+	<link rel="shortcut icon" type="image/x-icon" href="{% static "images/favicon.png" %}">
+	<!-- Google Fonts Css-->
+	<link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&amp;family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap" rel="stylesheet">
+	<!-- Bootstrap Css -->
+	<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" media="screen">
+	<!-- SlickNav Css -->
+	<link href="{% static "css/slicknav.min.css" %}" rel="stylesheet">
+	<!-- Swiper Css -->
+	<link rel="stylesheet" href="{% static "css/swiper-bundle.min.css" %}">
+	<!-- Font Awesome Icon Css-->
+	<link href="{% static "css/all.min.css" %}" rel="stylesheet" media="screen">
+	<!-- Animated Css -->
+	<link href="{% static "css/animate.css" %}" rel="stylesheet">
+    <!-- Magnific Popup Core Css File -->
+	<link rel="stylesheet" href="{% static "css/magnific-popup.css" %}">
+	<!-- Mouse Cursor Css File -->
+	<link rel="stylesheet" href="{% static "css/mousecursor.css" %}">
+	<!-- Main Custom Css -->
+	<link href="{% static "css/custom.css" %}" rel="stylesheet" media="screen">
+</head>
+<body>
+
+    <!-- Preloader Start -->
+	{% comment %} <div class="preloader">
+		<div class="loading-container">
+			<div class="loading"></div>
+			<div id="loading-icon"><img src="{% static "images/loader.svg" %}" alt=""></div>
+		</div>
+	</div> {% endcomment %}
+	<!-- Preloader End -->
+
+    <!-- Header Start -->
+	<header class="main-header">
+		<div class="header-sticky">
+			<nav class="navbar navbar-expand-lg">
+				<div class="container">
+					<!-- Logo Start -->
+					<a class="navbar-brand" style="color:white; font-size:32px; font-weight:bold;" href="">
+    FITPAL
+</a>
+					<!-- Logo End -->
+
+					<!-- Main Menu Start -->
+					<div class="collapse navbar-collapse main-menu">
+                        <div class="nav-menu-wrapper">
+                            <ul class="navbar-nav mr-auto" id="menu">
+                                <li class="nav-item"><a class="nav-link" href="{% url 'expert_dashboard' %}">Home</a></li>       
+                           
+                               
+                                
+                                
+                                <li class="nav-item submenu"><a class="nav-link" href="#">Diet</a>
+                                    <ul>                                        
+                                        <li class="nav-item"><a class="nav-link" href="{% url 'add_diet_plan' %}">Add</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{% url 'view_diet_plans' %}">Added</a></li>
+                                        
+                                        <li class="nav-item"><a class="nav-link" href="{% url 'dietician_join_requests' %}">Join Requests</a></li>
+                                        
+                                    </ul>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'dietician_chat' %}">Chat</a>
+                                    
+                                <li class="nav-item"><a class="nav-link" href="{% url 'dietician_profile' %}">Profile</a></li>                         
+                            </ul>
+                        </div>
+                        
+                        <!-- Header Btn Start -->
+                        <div class="header-btn">
+                            <a href="{% url 'index' %}" class="btn-default">Logout</a>
+                        </div>
+                        <!-- Header Btn End -->
+					</div>
+					<!-- Main Menu End -->
+					<div class="navbar-toggle"></div>
+				</div>
+			</nav>
+			<div class="responsive-menu"></div>
+		</div>
+	</header>
+	<!-- Header End -->
+
+
+    
+{% block content %}
+
+
+{% endblock %}
+
+
+    <!-- Footer Main Start -->
+    <footer class="footer-main light-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <!-- About Footer start -->
+                    <div class="about-footer">
+                        <!-- Footer Logo Start -->
+                        <div class="footer-logo">
+                            <img src="{% static "images/logo.svg" %}" alt="">
+                        </div>
+                        <!-- Footer Logo End -->
+
+                        <!-- Footer Contact Box Start -->
+                        <div class="about-footer-content">
+                            <p>Push harder, go further. Your fitness journey starts today!</p>
+                        </div>
+                        <!-- Footer Contact Box End -->
+
+                        <!-- Footer Newsletters Form Start -->
+                        
+                        <!-- Footer Newsletters Form End -->
+                    </div>
+                    <!-- About Footer End -->
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <!-- Footer Links Start -->
+                    <div class="footer-links">
+                        <h3>contact us</h3>
+                        
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-contact-item">
+                            <div class="icon-box">
+                                <img src="{% static "images/icon-phone.svg" %}" alt="">
+                            </div>
+                            <div class="footer-contact-content">
+                                <p><a href="tel:+91123456789">+9037962778</a></p>
+                            </div>
+                        </div>
+                        <!-- Footer Contact Item End -->
+                        
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-contact-item">
+                            <div class="icon-box">
+                                <img src="{% static "images/icon-mail.svg" %}" alt="">
+                            </div>
+                            <div class="footer-contact-content">
+                                <p><a href="mailto:sharanyaselvan363@gmail.com">sharanyaselvan363@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <!-- Footer Contact Item End -->
+                    </div>
+                    <!-- Footer Links End -->
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <!-- Footer Links start -->
+                    <div class="footer-links">
+                        <h3>our gym timing</h3>
+                        <ul>
+                            <li>Mon - Fri : 08:00 AM - 10:00 PM</li>
+                            <li>Sat - Sun : 08:00 AM - 09:00 PM</li>
+                        </ul>
+                    </div>
+                    <!-- Footer Links end -->
+                </div>
+
+                <div class="col-lg-3 col-md-12">
+                    <!-- Footer Links start -->
+                    <div class="footer-links">
+                        <h3>our location</h3>
+                        <ul>
+                            <li>2715 Ash Dr. San Jose, South Dakota 83475</li>
+                        </ul>
+                    </div>
+                    <!-- Footer Links end -->
+                </div>
+
+                <div class="col-lg-12">
+                    <!-- Footer Copyright Section Start -->
+                    <div class="footer-copyright">
+                        <!-- Footer Copyright Start -->
+                        <div class="footer-copyright-text">
+                            <p>Copyright © 2025  All Rights Reserved.</p>
+                        </div>
+                        <!-- Footer Copyright End -->
+
+                        <!-- Footer Social Link Start -->
+                        <div class="footer-social-links">
+                            <ul>
+                                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- Footer Social Link End -->
+                    </div>
+                    <!-- Footer Copyright Section End -->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Main End -->
+
+    <!-- Jquery Library File -->
+    <script src="{% static "js/jquery-3.7.1.min.js" %}"></script>
+    <!-- Bootstrap js file -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <!-- Validator js file -->
+    <script src="{% static "js/validator.min.js" %}"></script>
+    <!-- SlickNav js file -->
+    <script src="{% static "js/jquery.slicknav.js" %}"></script>
+    <!-- Swiper js file -->
+    <script src="{% static "js/swiper-bundle.min.js" %}"></script>
+    <!-- Counter js file -->
+    <script src="{% static "js/jquery.waypoints.min.js" %}"></script>
+    <script src="{% static "js/jquery.counterup.min.js" %}"></script>
+    <!-- Magnific js file -->
+    <script src="{% static "js/jquery.magnific-popup.min.js" %}"></script>
+    <!-- SmoothScroll -->
+    <script src="{% static "js/SmoothScroll.js" %}"></script>
+    <!-- Parallax js -->
+    <script src="{% static "js/parallaxie.js" %}"></script>
+    <!-- MagicCursor js file -->
+    <script src="{% static "js/gsap.min.js" %}"></script>
+    <script src="{% static "js/magiccursor.js" %}"></script>
+    <!-- Text Effect js file -->
+    <script src="{% static "js/SplitText.js" %}"></script>
+    <script src="{% static "js/ScrollTrigger.min.js" %}"></script>
+    <!-- YTPlayer js File -->
+    <script src="{% static "js/jquery.mb.YTPlayer.min.js" %}"></script>
+    <!-- Wow js file -->
+    <script src="{% static "js/wow.min.js" %}"></script>
+    <!-- Main Custom js file -->
+    <script src="{% static "js/function.js" %}"></script>
+	<script src="../../demo.awaikenthemes.com/assets/js/theme-panel.js"></script>
+</body>
+
+<!-- Mirrored from html.awaikenthemes.com/fitwell/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Aug 2025 04:32:43 GMT -->
+</html>

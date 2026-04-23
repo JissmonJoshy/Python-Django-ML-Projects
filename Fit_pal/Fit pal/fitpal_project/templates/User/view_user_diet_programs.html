@@ -1,0 +1,28 @@
+{% extends "User/common.html" %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br>
+<div class="container mt-4">
+    <h2>Available Diet Programs</h2>
+    {% for program in programs %}
+        <div class="card mt-3">
+            <div class="card-body">
+                <p>{{ program.title }}</p>
+                <p>{{ program.description }}</p>
+
+                <h6>Steps:</h6>
+                <ol>
+                    {% for step in program.steps.all %}
+                        <li>{{ step.instruction }}</li>
+                    {% endfor %}
+                </ol>
+
+                <a href="{% url 'join_diet_program' program.id %}" class="btn btn-success mt-2">Join Program</a>
+            </div>
+        </div>
+    {% empty %}
+        <p>No diet programs available.</p>
+    {% endfor %}
+</div>
+<br><br>
+{% endblock %}

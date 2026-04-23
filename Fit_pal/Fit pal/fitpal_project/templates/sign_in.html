@@ -1,0 +1,127 @@
+{% extends "common.html" %}
+{% load static %}
+{% block content %}
+
+<div class="page-header parallaxie">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="page-header-box">
+                    <h1 class="text-anime-style-2" data-cursor="-opaque">Login</h1>
+                    <nav class="wow fadeInUp">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Login</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="page-contact-us">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="contact-us-content">
+                    <div class="section-title">
+                        <div class="section-bg-title wow fadeInUp">
+                            <span>Login</span>
+                        </div>
+                        <h3 class="wow fadeInUp" data-wow-delay="0.2s">Login</h3>
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">Reach out and connect with our <span>dedicated team today</span></h2>
+                    </div>
+
+                    <div class="contact-form">
+                        <form id="loginForm" action="/view_login/" method="POST" class="wow fadeInUp" data-wow-delay="0.4s">
+                            {% csrf_token %}
+                            <div class="row">                                
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text" name="username" class="form-control" placeholder="Username" required>
+                                </div>
+
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                                </div>
+
+                                <!-- User Type Dropdown -->
+                                <div class="form-group col-md-12 mb-4">
+                                    <select name="usertype" class="form-control" required>
+                                        <option value="" style="color: black;">Select User Type</option>
+                                        <option value="Admin" style="color: black;">Admin</option>
+                                        <option value="User" style="color: black;">User</option>
+                                        <option value="Expert" style="color: black;">Expert</option>
+                                        <option value="Dietician" style="color: black;">Dietician</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn-default">Login</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="contact-us-image">
+                    <div class="contact-us-img">
+                        <figure class="image-anime">
+                            <img src="{% static 'images/contact-us-image.jpg' %}" alt="">
+                        </figure>
+                    </div>
+
+                    <div class="contact-image-content">
+                        <div class="section-title">
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">Have any query? Feel free to contact us</h2>
+                        </div>
+                        <ul class="wow fadeInUp">
+                            <li><img src="{% static 'images/icon-phone-white.svg' %}" alt=""><a href="tel:+91123456789">+9037962778</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="contact-info-box">
+                    <div class="contact-info-item wow fadeInUp">
+                        <div class="icon-box"><img src="{% static 'images/icon-phone.svg' %}" alt=""></div>       
+                        <div class="contact-info-content">
+                            <h3>Contact Us</h3>
+                            <p><a href="tel:+91123456789">+9037962778</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="icon-box"><img src="{% static 'images/icon-mail.svg' %}" alt=""></div>       
+                        <div class="contact-info-content">
+                            <h3>Email Us</h3>
+                            <p><a href="mailto:sharanyaselvan363@gmail.com">sharanyaselvan363@gmail.com</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item wow fadeInUp" data-wow-delay="0.4s">
+                        <div class="icon-box"><img src="{% static 'images/icon-clock.svg' %}" alt=""></div>       
+                        <div class="contact-info-content">
+                            <h3>Working Hours</h3>
+                            <p>Mon - Fri : 08:00 AM-10:00 PM</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="icon-box"><img src="{% static 'images/icon-location.svg' %}" alt=""></div>       
+                        <div class="contact-info-content">
+                            <h3>Location</h3>
+                            <p>2715 Ash San Jose, USA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "Dietician/common.html" %}
+{% block content %}
+<br><br><br>
+<div class="container mt-5">
+    <h3 class="text-center mb-4">My Diet Plans</h3>
+
+    <div class="row justify-content-center">
+        {% for plan in plans %}
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card shadow-sm diet-card">
+
+                <img src="{{ plan.image.url }}" class="card-img-top diet-img">
+
+                <div class="card-body text-center">
+                    <h6 class="card-title fw-bold">{{ plan.title }}</h6>
+                    <p class="card-text small text-muted">
+                        {{ plan.description|truncatechars:80 }}
+                    </p>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <a href="{% url 'edit_diet_plan' plan.id %}" class="btn btn-warning btn-sm">Edit</a>
+
+                        <button class="btn btn-primary btn-sm"
+                                data-bs-toggle="modal"
+                                data-bs-target="#stepsModal{{ plan.id }}">
+                            View Steps
+                        </button>
+
+                        <a href="{% url 'delete_diet_plan' plan.id %}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Delete this plan?')">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="stepsModal{{ plan.id }}" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">{{ plan.title }} - Steps</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        {% for step in plan.nutritionstep_set.all %}
+                        <div class="border rounded p-3 mb-3">
+                            <h6 class="fw-bold text-primary">{{ step.step_title }}</h6>
+                            <p style='color:black'>{{ step.step_description }}</p>
+
+                            {% if step.step_image %}
+                            <img src="{{ step.step_image.url }}"
+                                 class="img-fluid rounded"
+                                 style="max-height:180px;">
+                            {% endif %}
+                        </div>
+                        {% empty %}
+                        <p>No steps added.</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        {% empty %}
+        <p class="text-center">No diet plans added yet.</p>
+        {% endfor %}
+    </div>
+</div>
+<br><br>
+<style>
+.diet-card {
+    height: 380px;
+    border-radius: 12px;
+}
+
+.diet-img {
+    height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+</style>
+
+{% endblock %}

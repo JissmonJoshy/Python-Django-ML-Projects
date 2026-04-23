@@ -1,0 +1,102 @@
+{% extends "User/common.html" %}
+{% block content %}
+<br><br><br>
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Nutrition Plans</h3>
+
+    <div class="row">
+        {% for plan in plans %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow h-100">
+
+                <img src="{{ plan.image.url }}"
+                     class="card-img-top"
+                     style="height:180px; object-fit:cover;">
+
+                <div class="card-body text-center">
+                    <h6 class="fw-bold">{{ plan.title }}</h6>
+                    <p class="small text-muted">
+                        {{ plan.description|truncatechars:60 }}
+                    </p>
+
+                    <div class="d-flex justify-content-between mt-2">
+
+                        <!-- VIEW DETAILS -->
+                        <button class="btn btn-primary btn-sm"
+                                data-bs-toggle="modal"
+                                data-bs-target="#planModal{{ plan.id }}">
+                            View Plan
+                        </button>
+
+                        <!-- JOIN BUTTON -->
+                        {% if plan.id in joined_plans %}
+                            <button class="btn btn-secondary btn-sm" disabled>
+                                Request Sent
+                            </button>
+                        {% else %}
+                            <a href="{% url 'join_nutrition_plan' plan.id %}"
+                               class="btn btn-success btn-sm">
+                                Join
+                            </a>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL -->
+        <div class="modal fade" id="planModal{{ plan.id }}" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">{{ plan.title }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <!-- PLAN DESCRIPTION -->
+                        <h6 class="text-primary">Description</h6>
+                        <p style='color:black'>{{ plan.description }}</p>
+
+                        <hr>
+
+                        <!-- STEPS -->
+                        <h6 class="text-primary">Steps</h6>
+
+                        {% for step in plan.nutritionstep_set.all %}
+                        <div class="border rounded p-3 mb-3">
+                            <strong style='color:black'>{{ step.step_title }}</strong>
+                            <p class="mb-1" style='color:black'>{{ step.step_description }}</p>
+
+                            {% if step.step_image %}
+                                <img src="{{ step.step_image.url }}"
+                                     class="img-fluid rounded"
+                                     style="max-height:180px;">
+                            {% endif %}
+                        </div>
+                        {% empty %}
+                        <p>No steps added.</p>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary btn-sm"
+                                data-bs-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+<br><br>
+
+{% endblock %}

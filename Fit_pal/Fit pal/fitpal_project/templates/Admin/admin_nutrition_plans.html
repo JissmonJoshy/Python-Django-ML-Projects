@@ -1,0 +1,196 @@
+{% extends "Admin/common.html" %}
+{% block content %}
+<br><br><br><ar><br><br>
+
+<div class="container">
+    <h3 class="text-center text-white mb-4">
+        Nutrition Plans & Steps
+    </h3>
+
+    <div class="row justify-content-center">
+
+        {% for plan in plans %}
+        <div class="col-xl-6 col-lg-6 col-md-12 mb-4">
+
+            <div class="card plan-card shadow">
+
+                <!-- PLAN IMAGE -->
+                <img src="{{ plan.image.url }}" class="plan-img">
+
+                <!-- PLAN BODY -->
+                <div class="card-body plan-body">
+
+                    <h5 class="fw-bold mb-1 text-dark">
+                        {{ plan.title }}
+                    </h5>
+
+                    <small class="text-muted">
+                        Dietician: {{ plan.dietician.username }}
+                    </small>
+
+                    <p class="plan-desc mt-2">
+                        {{ plan.description }}
+                    </p>
+
+                    <!-- STEPS HEADER -->
+                    <h6 class="mt-3 fw-bold text-primary">
+                        Nutrition Steps
+                    </h6>
+
+                    <!-- STEPS SCROLL AREA -->
+                    <div class="steps-scroll">
+
+                        {% for step in plan.nutritionstep_set.all %}
+                        <div class="step-card">
+
+                            <div class="row g-2 align-items-center">
+
+                                <!-- STEP IMAGE -->
+                                <div class="col-4 text-center">
+                                    {% if step.step_image %}
+                                    <img src="{{ step.step_image.url }}" class="step-img">
+                                    {% else %}
+                                    <div class="step-no-img">
+                                        No Image
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- STEP CONTENT -->
+                                <div class="col-8">
+                                    <h6 class="step-title mb-1">
+                                        {{ step.step_title }}
+                                    </h6>
+                                    <p class="step-desc mb-0">
+                                        {{ step.step_description }}
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p class="text-muted text-center mt-2">
+                            No steps added
+                        </p>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+                <!-- FOOTER -->
+                <div class="card-footer text-center">
+                    <small class="text-muted">
+                        Created on {{ plan.created_at|date:"d M Y" }}
+                    </small>
+                </div>
+
+            </div>
+        </div>
+
+        {% empty %}
+        <div class="col-12 text-center text-muted">
+            No nutrition plans found
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+<br><br>
+
+<style>
+/* PLAN CARD */
+.plan-card{
+    border-radius: 16px;
+    overflow: hidden;
+    height: 100%;
+}
+
+/* PLAN IMAGE */
+.plan-img{
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+/* BODY FIXED HEIGHT */
+.plan-body{
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* DESCRIPTION */
+.plan-desc{
+    font-size: 14px;
+    color: #444;
+}
+
+/* STEPS SCROLL AREA */
+.steps-scroll{
+    margin-top: 10px;
+    overflow-y: auto;
+    max-height: 230px;
+    padding-right: 6px;
+}
+
+/* STEP CARD */
+.step-card{
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #e1e1e1;
+}
+
+/* STEP IMAGE */
+.step-img{
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.step-no-img{
+    width: 100%;
+    height: 90px;
+    background: #eaeaea;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #777;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* STEP TEXT */
+.step-title{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.step-desc{
+    font-size: 12px;
+    color: #555;
+}
+
+/* FOOTER */
+.card-footer{
+    background: #f4f4f4;
+}
+
+/* MOBILE */
+@media (max-width: 768px){
+    .plan-img{
+        height: 180px;
+    }
+    .plan-body{
+        height: auto;
+    }
+    .steps-scroll{
+        max-height: 260px;
+    }
+}
+</style>
+
+{% endblock %}

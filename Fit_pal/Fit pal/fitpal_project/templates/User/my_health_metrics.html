@@ -1,0 +1,53 @@
+{% extends "User/common.html" %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br>
+<div class="container mt-4">
+    <h2>My Health Metrics</h2><br>
+    <a href="{% url 'add_health_metrics' %}" class="btn btn-primary mb-3">+ Add New</a>
+    <table class="table table-bordered">
+        <tr>
+            <th>Date</th>
+            <th>Weight (kg)</th>
+            <th>Height (cm)</th>
+            <th>BMI</th>
+            <th>Category</th>
+            <th>Notes</th>
+        </tr>
+        {% for metric in metrics %}
+        <tr>
+            <td>{{ metric.recorded_at|date:"Y-m-d H:i" }}</td>
+            <td>{{ metric.weight }}</td>
+            <td>{{ metric.height }}</td>
+            <td>{{ metric.bmi }}</td>
+            <td>
+                {% if metric.bmi %}
+                    {% if metric.bmi < 18.5 %}
+                        <span class="badge bg-info">Underweight</span>
+                    {% elif metric.bmi >= 18.5 and metric.bmi < 25 %}
+                        <span class="badge bg-success">Normal</span>
+                    {% elif metric.bmi >= 25 and metric.bmi < 30 %}
+                        <span class="badge bg-warning text-dark">Overweight</span>
+                    {% else %}
+                        <span class="badge bg-danger">Obese</span>
+                    {% endif %}
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+            <td>{{ metric.notes }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <h4>BMI Categories</h4>
+    <ul>
+        <li><strong>Underweight:</strong> BMI less than 18.5</li>
+        <li><strong>Normal:</strong> BMI 18.5 – 24.9</li>
+        <li><strong>Overweight:</strong> BMI 25 – 29.9</li>
+        <li><strong>Obese:</strong> BMI 30 or greater</li>
+    </ul>
+</div>
+<br><br><br>
+{% endblock %}

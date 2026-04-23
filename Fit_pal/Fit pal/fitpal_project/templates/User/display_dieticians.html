@@ -1,0 +1,71 @@
+{% extends "User/common.html" %}
+{% block content %}
+
+<br><br><br><br><br>
+<div class="container">
+    <h3 class="text-center text-white mb-4">Available Dieticians</h3>
+
+    <div class="row">
+        {% for d in dieticians %}
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card diet-card shadow-lg">
+                <div class="card-body text-center">
+
+                    <div class="avatar mb-3">
+                        {{ d.fullname|slice:":1" }}
+                    </div>
+
+                    <h5 class="text-muted mb-1">{{ d.fullname }}</h5>
+                    <p class="text-muted mb-1">{{ d.phone }}</p>
+                    <p class="text-muted mb-1">{{ d.user.email }}</p>
+
+                    <p class="small text-secondary">
+                        {{ d.address }}
+                    </p>
+
+                    <span class="badge bg-success mt-2">
+                        Verified Dietician
+                    </span>
+
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-light">No dieticians available</p>
+        {% endfor %}
+    </div>
+</div>
+
+<br><br>
+
+<style>
+body{
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+.diet-card{
+    border-radius: 15px;
+    background: #ffffff;
+    transition: transform 0.3s ease;
+}
+
+.diet-card:hover{
+    transform: translateY(-6px);
+}
+
+.avatar{
+    width: 70px;
+    height: 70px;
+    background: #203a43;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+</style>
+
+{% endblock %}

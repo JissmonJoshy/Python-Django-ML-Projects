@@ -1,0 +1,36 @@
+{% extends "Admin/common.html" %}
+{% load static %}
+{% block content %}
+<br><br><br><br>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">All Diet Feedbacks</h2>
+    <table class="table table-bordered table-hover text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Diet Program</th>
+                <th>Feedback</th>
+                <th>Submitted On</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feedback in feedbacks %}
+            <tr>
+                <td>{{ feedback.id }}</td>
+                <td>{{ feedback.user.username }}</td>
+                <td>{{ feedback.program.title }}</td>
+                <td>{{ feedback.feedback }}</td>
+                <td>{{ feedback.created_at }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-danger">No feedbacks available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br><br>
+
+{% endblock %}

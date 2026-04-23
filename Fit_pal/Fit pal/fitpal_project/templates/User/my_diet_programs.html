@@ -1,0 +1,38 @@
+{% extends "User/common.html" %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br>
+<div class="container mt-4">
+    <h2>My Diet Programs</h2>
+    {% for user_program in user_programs %}
+        <div class="card mt-3">
+            <div class="card-body">
+                <h4>{{ user_program.program.title }}</h4>
+                <p>{{ user_program.program.description }}</p>
+                <h6>Steps:</h6>
+                <ol>
+                    {% for progress in user_program.userstepprogress_set.all %}
+                        <li>
+                            {{ progress.step.instruction }}
+                            {% if progress.is_completed %}
+                                ✅ Completed
+                            {% else %}
+                                <a href="{% url 'complete_step' progress.id %}" class="btn btn-sm btn-primary">Mark Complete</a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ol>
+
+                {% comment %} Show feedback button if all steps completed {% endcomment %}
+                {% if user_program.all_completed %}
+                    <a href="{% url 'diet_feedback' user_program.program.id %}" class="btn btn-success mt-2">Give Feedback</a>
+                {% endif %}
+
+            </div>
+        </div>
+    {% empty %}
+        <p>You have not joined any programs yet.</p>
+    {% endfor %}
+</div>
+<br><br>
+{% endblock %}

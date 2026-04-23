@@ -1,0 +1,28 @@
+{% extends "User/common.html" %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br>
+<div class="container mt-4">
+    <h2>Add Health Metrics</h2><br>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group mb-2">
+            <label>Weight (kg)</label>
+            <input type="number" step="0.1" name="weight" class="form-control">
+        </div><br>
+        <div class="form-group mb-2">
+            <label>Height (cm)</label>
+            <input type="number" step="0.1" name="height" class="form-control">
+        </div><br>
+        <div class="form-group mb-2">
+            <label>Notes</label>
+            <textarea name="notes" class="form-control"></textarea>
+        </div><br>
+        <div class="form-group mb-2">
+            <button type="submit" class="btn btn-success">Save</button>
+            <a href="{% url 'my_health_metrics' %}" class="btn btn-danger">My Health Metrics</a>
+        </div>
+    </form>
+</div>
+<br>
+{% endblock %}

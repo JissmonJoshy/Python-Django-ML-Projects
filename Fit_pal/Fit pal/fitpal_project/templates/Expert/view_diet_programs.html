@@ -1,0 +1,29 @@
+{% extends "Expert/common.html" %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br><br>
+<div class="container mt-4">
+    <h2>My Diet Programs</h2>
+    {% for program in programs %}
+        <div class="card mt-3">
+            <div class="card-body">
+                <p>{{ program.title }}</p>
+                <p>{{ program.description }}</p>
+
+                <h6>Steps:</h6>
+                <ol>
+                    {% for step in program.steps.all %}
+                        <li>{{ step.instruction }}</li>
+                    {% empty %}
+                        <p>No steps added for this program.</p>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    {% empty %}
+        <p>No diet programs available.</p>
+    {% endfor %}
+</div>
+<br>
+{% endblock %}
+

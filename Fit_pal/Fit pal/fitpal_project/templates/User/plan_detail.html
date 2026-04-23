@@ -1,0 +1,170 @@
+{% extends "User/common.html" %}
+{% block content %}
+<br><br><br>
+
+<div class="container mt-5">
+
+    <!-- PLAN TITLE -->
+    <h3 class="text-center fw-bold text-white mb-2">
+        {{ plan.title }}
+    </h3>
+
+    <!-- PLAN DESCRIPTION -->
+    <p class="text-center plan-desc mb-4">
+        {{ plan.description }}
+    </p>
+
+    <!-- STEPS -->
+    {% for step in steps %}
+    <div class="card step-card mb-4 shadow-sm">
+        <div class="row g-0 align-items-center">
+
+            <!-- STEP IMAGE -->
+            <div class="col-md-4 col-sm-12 text-center">
+                {% if step.step_image %}
+                    <img src="{{ step.step_image.url }}" class="step-img">
+                {% else %}
+                    <div class="no-image">No Image</div>
+                {% endif %}
+            </div>
+
+            <!-- STEP CONTENT -->
+            <div class="col-md-8 col-sm-12">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="fw-bold text-dark mb-0">
+                            {{ step.step_title }}
+                        </h6>
+
+                        <!-- STEP BUTTON -->
+                        {% if step.id in completed_steps %}
+                            <button class="btn btn-success btn-sm" disabled>
+                                ✔ Completed
+                            </button>
+                        {% else %}
+                            <a href="{% url 'toggle_step_completion' step.id %}"
+                               class="btn btn-outline-secondary btn-sm">
+                                Mark Complete
+                            </a>
+                        {% endif %}
+                    </div>
+
+                    <p class="step-desc">
+                        {{ step.step_description }}
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- FEEDBACK SECTION -->
+    {% if all_completed %}
+    <div class="card feedback-card shadow mt-5">
+        <div class="card-body">
+
+            <h5 class="fw-bold mb-3">
+                Feedback for this Nutrition Plan
+            </h5>
+
+            {% if feedback_given %}
+                <div class="alert alert-success">
+                    ✔ Feedback already submitted. Thank you!
+                </div>
+            {% else %}
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Rating</label>
+                    <select name="rating" class="form-select" required>
+                        <option value="">Select Rating</option>
+                        <option value="5">★★★★★ Excellent</option>
+                        <option value="4">★★★★ Very Good</option>
+                        <option value="3">★★★ Good</option>
+                        <option value="2">★★ Fair</option>
+                        <option value="1">★ Poor</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Comment</label>
+                    <textarea name="comment"
+                              class="form-control"
+                              rows="4"
+                              placeholder="Write your feedback..."
+                              required></textarea>
+                </div>
+
+                <button class="btn btn-primary px-4">
+                    Submit Feedback
+                </button>
+            </form>
+            {% endif %}
+
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+<br><br>
+
+<!-- STYLES -->
+<style>
+.plan-desc {
+    color: #ffffff;
+    font-size: 15px;
+}
+
+/* STEP CARD */
+.step-card {
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+/* IMAGE */
+.step-img {
+    width: 90%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 15px auto;
+}
+
+.no-image {
+    width: 90%;
+    height: 170px;
+    margin: 15px auto;
+    background: #e9ecef;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 14px;
+}
+
+/* DESCRIPTION */
+.step-desc {
+    font-size: 14px;
+    color: #333;
+}
+
+/* FEEDBACK */
+.feedback-card {
+    border-radius: 14px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .step-img {
+        height: 150px;
+    }
+}
+</style>
+
+{% endblock %}

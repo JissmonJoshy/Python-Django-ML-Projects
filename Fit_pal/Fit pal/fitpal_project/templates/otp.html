@@ -1,0 +1,150 @@
+
+{% extends "common.html" %}
+{% load static %}
+{% block content %}
+<div class="page-header parallaxie">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-12">
+					<!-- Page Header Box Start -->
+					<div class="page-header-box">
+						<h1 class="text-anime-style-2" data-cursor="-opaque">Contact <span>us</span></h1>
+						<nav class="wow fadeInUp">
+                            <ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index-2.html">home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">contact us</li>
+							</ol>
+						</nav>
+					</div>
+					<!-- Page Header Box End -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Page Header End -->
+
+    
+
+    <!-- Page Contact Us Start -->
+    <div class="page-contact-us">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <!-- Contact Us Content Start -->
+                    <div class="contact-us-content">
+                        <!-- Section Title Start -->
+                        <div class="section-title">
+                            <div class="section-bg-title wow fadeInUp">
+                                <span>contact us</span>
+                            </div>
+                            <h3 class="wow fadeInUp" data-wow-delay="0.2s">contact us</h3>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">Reach out and connect with our <span>dedicated team today</span></h2>
+                        </div>
+                        <!-- Section Title End -->
+
+                        <!-- Contact Form Start -->
+                        <div class="contact-form">
+                            <form action="/verify_otp" method="POST" class="wow fadeInUp" data-wow-delay="0.4s">
+                                {% csrf_token %}
+                                <div class="row">                                
+                                    <div class="form-group col-md-6 mb-4">
+                                        <input type="text" name="otp" class="form-control" placeholder="Enter OTP" required>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn-default">Verify</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Contact Form End -->
+                    </div>
+                    <!-- Contact Us Content End -->
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- Contact Us Image Start -->
+                    <div class="contact-us-image">
+                        <div class="contact-us-img">
+                            <figure class="image-anime">
+                                <img src="{% static "images/contact-us-image.jpg" %}" alt="">
+                            </figure>
+                        </div>
+
+                        <!-- Contact Image Content Start -->
+                        <div class="contact-image-content">
+                            <!-- Section Title Start -->
+                            <div class="section-title">
+                                <h2 class="text-anime-style-2" data-cursor="-opaque">Have you any query fell please free contact</h2>
+                            </div>
+                            <!-- Section Title End -->
+
+                            <ul class="wow fadeInUp">
+                                <li><img src="{% static "images/icon-phone-white.svg" %}" alt=""><a href="tel:+91123456789">+9037962778</a></li>
+                            </ul>
+                        </div>
+                        <!-- Contact Image Content End -->
+                    </div>
+                    <!-- Contact Us Image End -->
+                </div>
+
+                <div class="col-lg-12">
+                    <!-- Contact Info Box Start -->
+                    <div class="contact-info-box">
+                        <!-- Contact Info Item Start -->
+                        <div class="contact-info-item wow fadeInUp">
+                            <div class="icon-box">
+                                <img src="{% static "images/icon-phone.svg" %}" alt="">
+                            </div>       
+                            <div class="contact-info-content">
+                                <h3>Contact Us</h3>
+                                <p><a href="tel:+91123456789">+9037962778</a></p>
+                            </div>
+                        </div>
+                        <!-- Contact Info Item End -->
+
+                        <!-- Contact Info Item Start -->
+                        <div class="contact-info-item wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="icon-box">
+                                <img src="{% static "images/icon-mail.svg" %}" alt="">
+                            </div>       
+                            <div class="contact-info-content">
+                                <h3>Email Us</h3>
+                                <p><a href="mailto:sharanyaselvan363@gmail.com">sharanyaselvan363@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <!-- Contact Info Item End -->
+
+                        <!-- Contact Info Item Start -->
+                        <div class="contact-info-item wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="icon-box">
+                                <img src="{% static "images/icon-clock.svg" %}" alt="">
+                            </div>       
+                            <div class="contact-info-content">
+                                <h3>Working Hours</h3>
+                                <p>Mon - Fri : 08:00 AM-10:00 PM</p>
+                            </div>
+                        </div>
+                        <!-- Contact Info Item End -->
+
+                        <!-- Contact Info Item Start -->
+                        <div class="contact-info-item wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="icon-box">
+                                <img src="{% static "images/icon-location.svg" %}" alt="">
+                            </div>       
+                            <div class="contact-info-content">
+                                <h3>location</h3>
+                                <p>2715 Ash San Jose, USA</p>
+                            </div>
+                        </div>
+                        <!-- Contact Info Item End -->
+                    </div>
+                    <!-- Contact Info Box End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Contact Us End -->
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "Admin/common.html" %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">All Diet Programs</h2>
+
+    {% if programs %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Expert</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Created At</th>
+                        <th>Steps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for program in programs %}
+                        <tr>
+                            <td>{{ program.id }}</td>
+                            <td>{{ program.expert.username }}</td>
+                            <td>{{ program.title }}</td>
+                            <td>{{ program.description }}</td>
+                            <td>{{ program.created_at }}</td>
+                            <td>
+                                {% if program.steps.all %}
+                                    <ul class="list-group text-left">
+                                        {% for step in program.steps.all %}
+                                            <li class="list-group-item">
+                                                <b>Step {{ step.step_number }}:</b> {{ step.instruction }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <span class="text-danger">No steps added</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-center text-muted">No diet programs found.</p>
+    {% endif %}
+</div>
+<br><br>
+{% endblock %}

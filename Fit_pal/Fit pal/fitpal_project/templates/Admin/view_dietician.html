@@ -1,0 +1,65 @@
+{% extends "Admin/common.html" %}
+{% load static %}
+{% block content %}
+
+<br><br><br><br>
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Registered Dieticians</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Full Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for d in dieticians %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ d.fullname }}</td>
+                    <td>{{ d.user.username }}</td>
+                    <td>{{ d.user.email }}</td>
+                    <td>{{ d.phone }}</td>
+                    <td>{{ d.address }}</td>
+                    <td>
+                        {% if d.status == "Approved" %}
+                            <span class="text-success">Approved</span>
+                        {% else %}
+                            <span class="text-warning">Pending</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if d.status != "Approved" %}
+                            <a href="{% url 'approve_dietician' d.id %}"
+                               class="btn btn-success btn-sm">Approve</a>
+
+                            <a href="{% url 'reject_dietician' d.id %}"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('Are you sure to reject?')">
+                               Reject
+                            </a>
+                        {% else %}
+                            <span class="text-muted">No Action</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8">No dieticians found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

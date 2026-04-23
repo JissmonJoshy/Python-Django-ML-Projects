@@ -1,0 +1,33 @@
+{% extends "Expert/common.html" %}
+{% load static %}
+{% block content %}
+<br><br><br><br>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Expert Profile</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>{{ expert.fullname }}</h4>
+                </div>
+                <div class="card-body">
+                    <p><strong>Email:</strong> {{ expert.user.email }}</p>
+                    <p><strong>Username:</strong> {{ expert.user.username }}</p>
+                    <p><strong>Phone:</strong> {{ expert.phone }}</p>
+                    <p><strong>Address:</strong> {{ expert.address }}</p>
+                    {% comment %} <p><strong>Status:</strong> 
+                        {% if expert.status == "Approved" %}
+                            <span class="badge bg-success">Approved</span>
+                        {% elif expert.status == "Disapproved" %}
+                            <span class="badge bg-danger">Disapproved</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">Pending</span>
+                        {% endif %}
+                    </p> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br>
+{% endblock %}

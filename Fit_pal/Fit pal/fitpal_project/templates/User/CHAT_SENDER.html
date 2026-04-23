@@ -1,0 +1,231 @@
+{% extends "User/common.html" %}
+{% block content %}
+<br><br><br><br><br>
+<br>
+<div class="container-fluid chat-app">
+
+    <div class="chat-layout">
+
+        <!-- SIDEBAR -->
+        <div class="chat-sidebar">
+            <div class="sidebar-header">Dieticians</div>
+
+            <div class="sidebar-users">
+                {% for d in dieticians %}
+                <a href="?id={{ d.id }}"
+                   class="user-card {% if id|add:'' == d.id|add:'' %}active{% endif %}">
+                    <div class="avatar">{{ d.fullname|slice:":1" }}</div>
+                    <div class="name">{{ d.fullname }}</div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- CHAT WINDOW -->
+        <div class="chat-window">
+
+            <!-- HEADER -->
+            <div class="chat-top">
+                {% if dietician_name %}
+                    <strong>{{ dietician_name }}</strong>
+                {% else %}
+                    <span>Select a Dietician</span>
+                {% endif %}
+            </div>
+
+            <!-- MESSAGES -->
+            <div class="chat-body" id="chatBox">
+                {% for c in chat_data %}
+                <div class="message {% if c.utype == 'USER' %}sent{% else %}received{% endif %}">
+                    <div class="bubble">
+                        {{ c.message }}
+                        <div class="time">{{ c.time }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- INPUT -->
+            {% if id %}
+            <form method="POST" class="chat-footer">
+                {% csrf_token %}
+                <input type="text" name="message" placeholder="Type a message..." required>
+                <button type="submit">➤</button>
+            </form>
+            {% endif %}
+
+        </div>
+
+    </div>
+</div>
+
+<style>
+/* MAIN */
+.chat-app {
+    height: calc(100vh - 150px);
+}
+
+/* LAYOUT */
+.chat-layout {
+    height: 100%;
+    display: flex;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* SIDEBAR */
+.chat-sidebar {
+    width: 280px;
+    background: linear-gradient(180deg, #0d6efd, #084298);
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    padding: 16px;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.sidebar-users {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* USER CARD */
+.user-card {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.user-card:hover,
+.user-card.active {
+    background: rgba(255,255,255,0.15);
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    background: white;
+    color: #0d6efd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* CHAT WINDOW */
+.chat-window {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER */
+.chat-top {
+    padding: 14px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+/* BODY */
+.chat-body {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    background: #eef1f5;
+}
+
+/* MESSAGE */
+.message {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.sent {
+    justify-content: flex-end;
+}
+
+.received {
+    justify-content: flex-start;
+}
+
+/* BUBBLE */
+.bubble {
+    max-width: 70%;
+    padding: 10px 14px;
+    border-radius: 18px;
+    background: #ffffff;
+    color: #000; /* BLACK TEXT */
+    font-size: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.sent .bubble {
+    background: #dbeafe;
+}
+
+/* TIME */
+.time {
+    font-size: 10px;
+    color: #666;
+    margin-top: 4px;
+    text-align: right;
+}
+
+/* FOOTER */
+.chat-footer {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+}
+
+.chat-footer input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    background: #f1f1f1;
+    outline: none;
+}
+
+.chat-footer button {
+    margin-left: 10px;
+    border: none;
+    background: #0d6efd;
+    color: white;
+    width: 42px;
+    border-radius: 50%;
+    font-size: 18px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .chat-sidebar {
+        display: none;
+    }
+    .bubble {
+        max-width: 85%;
+    }
+}
+</style>
+
+<script>
+    const chatBox = document.getElementById("chatBox");
+    if (chatBox) {
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+</script>
+
+{% endblock %}

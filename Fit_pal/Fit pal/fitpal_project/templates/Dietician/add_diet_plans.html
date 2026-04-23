@@ -1,0 +1,73 @@
+{% extends "Dietician/common.html" %}
+{% block content %}
+<br><br><br>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+
+            <div class="card shadow-lg">
+                <div class="card-header bg-success text-white text-center">
+                    <h4>Add Diet Plan</h4>
+                </div>
+
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Plan Title</label>
+                            <input type="text" name="title" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea name="description" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Diet Image</label>
+                            <input type="file" name="image" class="form-control" required>
+                        </div>
+
+                        <hr>
+                        <h5 class="text-primary">Diet Steps</h5>
+
+                        <div id="steps">
+                            <div class="border rounded p-3 mb-3">
+                                <input type="text" name="step_title" class="form-control mb-2" placeholder="Step Title">
+                                <textarea name="step_description" class="form-control mb-2" placeholder="Step Description"></textarea>
+                                <input type="file" name="step_image" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-outline-primary" onclick="addStep()">Add More Steps</button>
+                            <button type="submit" class="btn btn-success">Save Plan</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+function addStep() {
+    const stepsDiv = document.getElementById("steps");
+
+    const stepBlock = document.createElement("div");
+    stepBlock.className = "border rounded p-3 mb-3";
+
+    stepBlock.innerHTML = `
+        <input type="text" name="step_title" class="form-control mb-2" placeholder="Step Title">
+        <textarea name="step_description" class="form-control mb-2" placeholder="Step Description"></textarea>
+        <input type="file" name="step_image" class="form-control">
+    `;
+
+    stepsDiv.appendChild(stepBlock);
+}
+</script>
+
+{% endblock %}

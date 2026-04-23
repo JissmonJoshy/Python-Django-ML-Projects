@@ -1,0 +1,30 @@
+{% extends "Expert/common.html" %}
+{% load static %}
+{% block content %}
+<br><br>
+<div class="container mt-5 d-flex justify-content-center">
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Edit Fitness/Diet Image Plan</h2>
+    <form method="POST" enctype="multipart/form-data" class="border p-4 rounded shadow bg-light">
+        {% csrf_token %}
+        <div class="form-group mb-3">
+            <label for="title">Title</label>
+            <input type="text" name="title" value="{{ plan.title }}" class="form-control" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="description">Description</label>
+            <textarea name="description" rows="4" class="form-control" required>{{ plan.description }}</textarea>
+        </div>
+        <div class="form-group mb-3">
+            <label>Current Image</label><br>
+            <img src="{{ plan.image.url }}" alt="Current Image" style="height:150px; object-fit:cover;" class="mb-2">
+        </div>
+        <div class="form-group mb-3">
+            <label for="image">Change Image (Optional)</label>
+            <input type="file" name="image" class="form-control" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-success w-100">Update Plan</button>
+    </form>
+</div>
+</div>
+{% endblock %}

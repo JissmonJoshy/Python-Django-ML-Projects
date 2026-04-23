@@ -1,0 +1,204 @@
+
+{% extends "common.html" %}
+{% load static %}
+{% block content %}
+<div class="page-header parallaxie">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-12">
+					<!-- Page Header Box Start -->
+					<div class="page-header-box">
+						<h1 class="text-anime-style-2" data-cursor="-opaque">Expert Register</h1>
+						<nav class="wow fadeInUp">
+                            <ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index-2.html">home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Expert Register</li>
+							</ol>
+						</nav>
+					</div>
+					<!-- Page Header Box End -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Page Header End -->
+
+    
+
+    <!-- Page User Register Start -->
+    <div class="page-contact-us">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <!-- User Register Content Start -->
+                    <div class="contact-us-content">
+                        <!-- Section Title Start -->
+                        <div class="section-title">
+                            <div class="section-bg-title wow fadeInUp">
+                                <span>Expert Register</span>
+                            </div>
+                            <h3 class="wow fadeInUp" data-wow-delay="0.2s">User Register</h3>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">Reach out and connect with our <span>dedicated team today</span></h2>
+                        </div>
+                        <!-- Section Title End -->
+
+                        <!-- Contact Form Start -->
+                        <div class="contact-form">
+                            {% comment %} <form action="/register" method="POST">
+    {% csrf_token %}
+    <input type="text" name="fname" placeholder="First Name" required><br>
+    <input type="text" name="lname" placeholder="Last Name" required><br>
+    <input type="text" name="username" placeholder="Username" required><br>
+    <input type="email" name="email" placeholder="Email" required><br>
+    <input type="text" name="phone" placeholder="Phone Number" required><br>
+    <textarea name="address" placeholder="Address" required></textarea><br>
+    <button type="submit">Register</button>
+</form> {% endcomment %}
+
+                        <form action="" method="POST" class="wow fadeInUp" data-wow-delay="0.4s">
+                            {% csrf_token %}
+                            <div class="row">                                
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text" name="fname" class="form-control" placeholder="First Name" required>
+                                </div>
+
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text" name="lname" class="form-control" placeholder="Last Name" required>
+                                </div>
+
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text" name="username" class="form-control" placeholder="Username" required>
+                                </div>
+
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+                                </div>
+
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="tel" name="phone" class="form-control" placeholder="Phone Number" minlength=10 maxlength=10 required>
+                                </div>
+
+                                <div class="form-group col-md-6 mb-4">
+                                    <textarea class="form-control mb-4" name="address" placeholder="Address" required></textarea>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn-default">Register</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                        </div>
+                        <!-- Contact Form End -->
+                    </div>
+                    <!-- User Register Content End -->
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- User Register Image Start -->
+                    <div class="contact-us-image">
+                        <div class="contact-us-img">
+                            <figure class="image-anime">
+                                <img src="{% static "images/contact-us-image.jpg" %}" alt="">
+                            </figure>
+                        </div>
+
+                        <!-- Contact Image Content Start -->
+                        <div class="contact-image-content">
+                            <!-- Section Title Start -->
+                            <div class="section-title">
+                                <h2 class="text-anime-style-2" data-cursor="-opaque">Have you any query fell please free contact</h2>
+                            </div>
+                            <!-- Section Title End -->
+
+                            <ul class="wow fadeInUp">
+                                <li><img src="{% static "images/icon-phone-white.svg" %}" alt=""><a href="tel:+91123456789">+9037962778</a></li>
+                            </ul>
+                        </div>
+                        <!-- Contact Image Content End -->
+                    </div>
+                    <!-- User Register Image End -->
+                </div>
+
+                <div class="col-lg-12">
+                    <!-- Contact Info Box Start -->
+                    <div class="contact-info-box">
+                        <!-- Contact Info Item Start -->
+                        <div class="contact-info-item wow fadeInUp">
+                            <div class="icon-box">
+                                <img src="{% static "images/icon-phone.svg" %}" alt="">
+                            </div>       
+                            <div class="contact-info-content">
+                                <h3>User Register</h3>
+                                <p><a href="tel:+91123456789">+9037962778</a></p>
+                            </div>
+                        </div>
+                        <!-- Contact Info Item End -->
+
+                        <!-- Contact Info Item Start -->
+                        <div class="contact-info-item wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="icon-box">
+                                <img src="{% static "images/icon-mail.svg" %}" alt="">
+                            </div>       
+                            <div class="contact-info-content">
+                                <h3>Email Us</h3>
+                                <p><a href="mailto:sharanyaselvan363@gmail.com">sharanyaselvan363@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <!-- Contact Info Item End -->
+
+                        <!-- Contact Info Item Start -->
+                        <div class="contact-info-item wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="icon-box">
+                                <img src="{% static "images/icon-clock.svg" %}" alt="">
+                            </div>       
+                            <div class="contact-info-content">
+                                <h3>Working Hours</h3>
+                                <p>Mon - Fri : 08:00 AM-10:00 PM</p>
+                            </div>
+                        </div>
+                        <!-- Contact Info Item End -->
+
+                        <!-- Contact Info Item Start -->
+                        <div class="contact-info-item wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="icon-box">
+                                <img src="{% static "images/icon-location.svg" %}" alt="">
+                            </div>       
+                            <div class="contact-info-content">
+                                <h3>location</h3>
+                                <p>2715 Ash San Jose, USA</p>
+                            </div>
+                        </div>
+                        <!-- Contact Info Item End -->
+                    </div>
+                    <!-- Contact Info Box End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page User Register End -->
+    <script>
+    document.querySelector("form").addEventListener("submit", function(event) {
+        const emailField = document.getElementById("email");
+        const email = emailField.value.trim();
+
+        // Only Gmail with .com or .in
+        const gmailRegex = /^[A-Za-z0-9._%+-]+@gmail\.(com|in)$/;
+
+        if (!gmailRegex.test(email)) {
+            event.preventDefault(); // stop form submit
+
+            alert("Please enter a valid Gmail address ending with .com or .in");
+
+            emailField.style.border = "2px solid red";
+            emailField.focus();
+            return false;
+        }
+
+        emailField.style.border = "2px solid green";
+    });
+    </script>
+
+
+{% endblock %}

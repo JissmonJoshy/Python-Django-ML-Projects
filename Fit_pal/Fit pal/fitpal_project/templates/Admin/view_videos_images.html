@@ -1,0 +1,68 @@
+{% extends "Admin/common.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+    .media-card {
+        height: 350px; /* Fixed height for cards */
+        overflow: hidden;
+    }
+    .media-card img {
+        height: 200px;
+        object-fit: cover; /* Crop and fit image */
+    }
+    .media-card video {
+        height: 200px;
+        width: 100%;
+        object-fit: cover; /* Crop video */
+    }
+    .media-card .card-body {
+        height: 140px;
+        overflow-y: auto; /* Scroll if text is long */
+    }
+</style>
+<br><br><br><br><br>
+<div class="container mt-4">
+    <h2 class="text-center">Fitness Plan Images & Videos</h2>
+
+    <h3 class="mt-4">Images</h3>
+    <div class="row">
+        {% for image in images %}
+        <div class="col-md-4 mb-3">
+            <div class="card media-card">
+                <img src="{{ image.image.url }}" class="card-img-top" alt="{{ image.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ image.title }}</h5>
+                    <p class="card-text">{{ image.description }}</p>
+                    <small class="text-muted">Uploaded at: {{ image.uploaded_at }}</small>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-muted">No images uploaded yet.</p>
+        {% endfor %}
+    </div>
+
+    <h3 class="mt-4">Videos</h3>
+    <div class="row">
+        {% for video in videos %}
+        <div class="col-md-6 mb-3">
+            <div class="card media-card">
+                <video controls>
+                    <source src="{{ video.video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="card-body">
+                    <h5 class="card-title">{{ video.title }}</h5>
+                    <p class="card-text">{{ video.description }}</p>
+                    <small class="text-muted">Uploaded at: {{ video.uploaded_at }}</small>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-muted">No videos uploaded yet.</p>
+        {% endfor %}
+    </div>
+</div>
+<br><br>
+{% endblock %}

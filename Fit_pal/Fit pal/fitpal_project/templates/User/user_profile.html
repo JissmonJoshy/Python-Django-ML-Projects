@@ -1,0 +1,51 @@
+{% extends "User/common.html" %}
+{% load static %}
+{% block content %}
+<br><br>
+<div class="container mt-5 d-flex justify-content-center">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header text-center bg-primary text-white rounded-top-4">
+                    <h4 class="mb-0">My Profile</h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <img src="{% static 'images/default.jpg' %}" class="rounded-circle" width="120" height="120" alt="Profile">
+                    </div>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th>Full Name</th>
+                                <td>{{ user_detail.fullname }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>{{ user_detail.user.email }}</td>
+                            </tr>
+                            <tr>
+                                <th>Username</th>
+                                <td>{{ user_detail.user.username }}</td>
+                            </tr>
+                            <tr>
+                                <th>Phone</th>
+                                <td>{{ user_detail.phone }}</td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <td>{{ user_detail.address }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {% comment %} <div class="card-footer text-center bg-light rounded-bottom-4">
+                    <a href="{% url 'edit_profile' %}" class="btn btn-warning btn-sm px-4">Edit Profile</a>
+                </div> {% endcomment %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<br><br>
+{% endblock %}
