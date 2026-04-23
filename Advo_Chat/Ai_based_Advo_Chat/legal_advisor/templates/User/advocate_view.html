@@ -1,0 +1,123 @@
+{% extends 'User/common.html' %}
+{% load static %}
+{% block header %}
+
+
+<br>
+<!-- <section class="ftco-section ftco-no-pt">
+    <div class="container" style="border-radius: 10px;">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+                <span class="subheading">Legal Advisor </span>
+                <h2 class="mb-4">Advocates</h2>
+                <input type="text" class="form-control" placeholder="🔍 Search Advocates " id="searchInput" name="" id="">
+                <h3 id="noMatchingData"></h3>
+            </div>
+        </div>
+        <div class="row no-gutters" style="border-radius: 15px;">
+            {% for i in vie %}
+            <div class="col-lg-3 col-sm-6">
+                <div class="block-2 ftco-animate">
+                    <div class="flipper" style="border-radius: 10px;">
+                        <div class="front"
+                            style="background-image: url(/static/media/{{i.image}});border-radius: 15px;">
+                            <div class="box">
+                                <h2>{{i.name}}</h2>
+                                <p class="">{{i.category}}</p>
+                            </div>
+                        </div>
+                        <div class="back" id="back" style="border-radius: 15px;background-color: cadetblue;">
+                         
+                            <center>
+                                <br><br>
+                                <a href="/user_book_case?email={{i.email}}" class="btn btn-danger">Book Now</a>
+                            </center>
+                            <div class="author d-flex">
+                                <div class="image align-self-center">
+                                    <img src="/static/media/{{i.image}}" alt="">
+                                </div>
+                                <div class="name align-self-center ml-3">{{i.name}} <span
+                                        class="position">{{i.category}}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section> -->
+
+
+
+<section class="ftco-section ftco-no-pt">
+    <div class="container" style="border-radius: 10px;">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+                <span class="subheading">Legal Advisor</span>
+                <h2 class="mb-4">Our Advocates</h2>
+                <input type="text" class="form-control" placeholder="🔍 Search Advocates " id="searchInput" name="" id="">
+                <h3 id="noMatchingData"></h3>
+            </div>
+        </div>
+        <div class="row m-3 my-5">
+            {% for i in vie %}
+            <div class="col my-3">
+                <div class="card" style="border-radius: 10px;box-shadow: 0 0 2px 2px rgb(233, 233, 233);width: 300px;">
+                    <img src="/static/media/{{i.image}}" class="card-img-top" height="300px"
+                        alt="Hollywood Sign on The Hill" />
+                    <div class="card-body">
+                        <center>
+                            <h5 class="card-title"><b>ADV.{{i.name}}</b></h5>
+                            <!-- <p class="card-text">
+                                This is a longer card with supporting text below as a natural lead-in to
+                                additional content. This content is a little bit longer.
+                            </p> -->
+                            <p class="">{{i.category}}</p>
+                            <p class="">Email : {{i.email}}</p>
+                            <p class="">Phone : 📞 {{i.phone}}</p>
+                            <p class="">Address : {{i.address}}</p>
+                            <p class="">Rating {{i.advo_rating}} ⭐</p>
+                            <p class="">External : <a href="/static/media/{{i.files}}">Certificates</a></p>
+
+                            <a href="/user_book_case?email={{i.email}}" class="btn btn-danger">Book Now</a>
+                        </center>
+                    </div>
+                </div>
+            </div><br><br>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#searchInput').on('input', function () {
+            var searchQuery = $(this).val().trim().toLowerCase();
+            filterProducts(searchQuery);
+        });
+    });
+
+    function filterProducts(query) {
+        var found = false;
+        $('.card').hide(); // Hide all divs first
+
+        $('.card').each(function () {
+            var productText = $(this).text().toLowerCase();
+            if (productText.includes(query)) {
+                $(this).show(); // Show matched div
+                found = true;
+            }
+        });
+
+        if (!found) {
+            $("#noMatchingData").show();
+        } else {
+            $("#noMatchingData").hide();
+        }
+    }
+</script>
+{% endblock %}

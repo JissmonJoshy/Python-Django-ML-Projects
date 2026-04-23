@@ -1,0 +1,84 @@
+{% extends 'common.html' %}
+{% load static %}
+{% block header %}
+{% for i in messages %}
+<script>
+    alert("{{i}}")
+</script>
+{% endfor %}
+<section class="ftco-section contact-section">
+    <div class="container">
+        <div class="row block-9">
+            <div class="col-md-2"></div>
+
+            <div class="col-lg-8 order-md-last d-flex">
+                <form method="post" enctype="multipart/form-data" class="p-5 contact-form"
+                    style="background-color: rgb(225, 235, 243); border-radius: 10px;">
+                    {% csrf_token %}
+                    <center>
+                        <h2><b>User Registration</b></h2><br>
+                    </center>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                            name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+                            name="password" placeholder="Your Password" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" maxlength="10" minlength="10" required
+                            pattern="[6789][0-9]{9}" name="phone" placeholder="Phone Number">
+                    </div>
+                    <div class="form-group">
+                        <label for="">DOB</label>
+                        <input type="date" class="form-control" min="1980-01-02" required max="2005-12-31" name="dob"
+                            placeholder="DOB">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="ac_no" required placeholder="Account Number"
+                            maxlength="16">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="aadhaar" required minlength="12" maxlength="12"
+                            placeholder="Aadhaar Number">
+                    </div>
+                    <div class="form-group">
+
+                        <label for="gender">Male</label>
+                        <input type="radio" class="radio" value="male" required name="gender"
+                            placeholder="Aadhaar Number">
+                        <label for="gender">Female</label>
+                        <input type="radio" class="radio" name="gender" required value="female"
+                            placeholder="Aadhaar Number">
+                        <label for="gender">Others</label>
+                        <input type="radio" class="radio" name="gender" required value="others"
+                            placeholder="Aadhaar Number">
+                    </div>
+                    <div class="form-group">
+                        <input type="file" class="form-control" name="image" placeholder="" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="" cols="30" name="address" rows="5" required class="form-control"
+                            placeholder="Address"></textarea>
+                    </div>
+                    <center>
+                        <div class="form-group">
+                            <input type="submit" value="Register" class="btn btn-danger py-3 px-5">
+                        </div>
+                    </center>
+                </form>
+
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

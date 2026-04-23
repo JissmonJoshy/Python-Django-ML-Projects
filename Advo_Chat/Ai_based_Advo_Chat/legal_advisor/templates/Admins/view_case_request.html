@@ -1,0 +1,139 @@
+{% extends 'Admins/common.html' %}
+{% load static %}
+{% block header %}
+
+<style>
+    .card {
+        margin-left: 10px;
+        border-radius: 10px;
+        background: rgb(3, 74, 108);
+        background: linear-gradient(90deg, rgba(3, 74, 108, 1) 0%, rgba(6, 6, 148, 1) 30%, rgba(0, 212, 255, 1) 100%);
+        -webkit-box-shadow: 0px 0px 17px -2px rgba(68, 98, 219, 1);
+        -moz-box-shadow: 0px 0px 17px -2px rgba(68, 98, 219, 1);
+        box-shadow: 0px 0px 17px -2px rgba(68, 98, 219, 1);
+    }
+</style>
+
+{% for i in messages %}
+<script>
+    alert("{{i}}");
+</script>
+{% endfor %}
+<center>
+
+
+    <br>
+    <h1><b>Case Requests</b></h1>
+    <br>
+    {% if view %}
+
+    <div class="row">
+        {% for i in view %}
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><b style="color: aliceblue;">{{i.sub}}</b></h5>
+                    <p class="card-text" style="color: aliceblue;">{{i.desc}}</p>
+                    <a href="/approve_case_request?id={{i.id}}" class="btn btn-success">Approve</a>
+                    <a href="/reject_case_request?id={{i.id}}" class="btn btn-danger">Reject</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    {% else %}
+
+    <p>
+        No Case Request Found!
+    </p>
+    {% endif %}
+</center>
+
+
+<style>
+    .table {
+        border-radius: 15px;
+        border: 1px solid rgb(225, 227, 228);
+        max-width: 60%;
+        text-align: center;
+    }
+</style>
+
+<br>
+<center>
+    {% if ap %}
+    <h1><b>Approved Cases</b></h1><br>
+
+    <table border="1" cellpadding="15px" cellspacing="10px" class="table">
+        <tr>
+            <th>User</th>
+            <th>Sub</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Request</th>
+
+        </tr>
+        {% for i in ap %}
+        <tr>
+            <td>{{i.user.name}}{{i.user.name}}</td>
+            <td>{{i.sub}}</td>
+            <td>{{i.desc}}</td>
+            <td>{{i.date}}</td>
+            <td>{{i.request}}</td>
+        </tr>
+
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No Data Has Found!</p>
+    {% endif %}
+
+</center>
+<br>
+
+</div>
+
+
+<style>
+    .table {
+        border-radius: 15px;
+        border: 1px solid rgb(225, 227, 228);
+        max-width: 60%;
+        text-align: center;
+    }
+</style>
+
+<center>
+    <h1><b>Rejected Cases</b></h1><br>
+    {% if rj %}
+    
+
+    <table border="1" cellpadding="15px" cellspacing="10px" class="table">
+        <tr>
+            <th>User</th>
+            <th>Sub</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Request</th>
+
+        </tr>
+        {% for i in rj %}
+        <tr>
+            <td>{{i.user.name}}</td>
+            <td>{{i.sub}}</td>
+            <td>{{i.desc}}</td>
+            <td>{{i.date}}</td>
+            <td>{{i.request}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No Data Has Found!</p>
+    {% endif %}
+
+</center>
+<br><br>
+
+
+{% endblock %}

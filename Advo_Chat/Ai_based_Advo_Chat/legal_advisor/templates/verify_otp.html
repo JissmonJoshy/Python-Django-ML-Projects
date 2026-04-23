@@ -1,0 +1,15 @@
+{% extends 'common.html' %}
+{% block header %}
+<br><br>
+<div class="container mt-5">
+    <form method="post" class="p-4 shadow" style="max-width:500px;margin:auto;">
+        {% csrf_token %}
+        <h3 class="text-center">Enter OTP</h3>
+
+        <input type="text" name="otp" class="form-control mb-3" placeholder="Enter OTP" required>
+
+        <button class="btn btn-success w-100">Verify</button>
+    </form>
+</div>
+<br><br>
+{% endblock %}
