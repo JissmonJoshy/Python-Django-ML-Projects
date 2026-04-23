@@ -1,0 +1,75 @@
+{% extends 'Admin/common.html' %}
+{% block content %}
+{% load static %}
+
+<section class="space-ptb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <h4 class="text-center">OWNERS LIST</h4>
+            </div>
+
+            {% for i in data %}
+            {% if i.status == "Pending" %}
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-post blog-style-02 mb-4 p-3 shadow rounded">
+                    <div class="blog-img text-center">
+                        {% if i.image %}
+                        <img class="img-fluid rounded-circle" src="{{ i.image.url }}" alt="Owner Image" style="width: 100px; height: 100px; object-fit: cover;">
+                        {% else %}
+                        <img class="img-fluid rounded-circle" src="{% static 'images/default-avatar.png' %}" alt="Default Image" style="width: 100px; height: 100px; object-fit: cover;">
+                        {% endif %}
+                    </div>
+                    <div class="blog-info text-center mt-3">
+                        <p><strong>Name:</strong> {{ i.firstName }} {{ i.lastName }}</p>
+                        <p><strong>Email:</strong> {{ i.email }}</p>
+                        <p><strong>Place:</strong> {{ i.place }}</p>
+                        <div class="d-flex gap-2 justify-content-center">
+                            <a href="/deleteOwner?id={{ i.id }}" class="btn btn-outline-danger w-50">Reject</a>
+                            <a href="/ApproveOwner?id={{ i.loginId.id }}" class="btn btn-outline-success w-50">Approve</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="space-ptb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <h4 class="text-center">APPROVED OWNERS</h4>
+            </div>
+
+            {% for i in data %}
+            {% if i.status == "APPROVED" %}
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-post blog-style-02 mb-4 p-3 shadow rounded">
+                    <div class="blog-img text-center">
+                        {% if i.image %}
+                        <img class="img-fluid rounded-circle" src="{{ i.image.url }}" alt="Owner Image" style="width: 100px; height: 100px; object-fit: cover;">
+                        {% else %}
+                        <img class="img-fluid rounded-circle" src="{% static 'images/default-avatar.png' %}" alt="Default Image" style="width: 100px; height: 100px; object-fit: cover;">
+                        {% endif %}
+                    </div>
+                    <div class="blog-info text-center mt-3">
+                        <p><strong>Name:</strong> {{ i.firstName }} {{ i.lastName }}</p>
+                        <p><strong>Email:</strong> {{ i.email }}</p>
+                        <p><strong>Place:</strong> {{ i.place }}</p>
+                        <div class="d-flex gap-2 justify-content-center">
+                            <a href="/deleteOwner/?id={{ i.id }}" class="btn btn-outline-danger w-50">Reject</a>
+                            <a href="/ApproveOwner/?id={{ i.loginId.id }}" class="btn btn-outline-success w-50">Approve</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

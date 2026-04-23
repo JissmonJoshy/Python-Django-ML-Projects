@@ -1,0 +1,90 @@
+{% extends 'Admin/common.html' %}
+{% block content %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container mt-5">
+
+    <h3 class="text-center mb-4">Booking & Revenue Report</h3>
+
+    <!-- Average Daily Bookings -->
+    <div class="card mb-4 shadow p-3">
+        <h5>Average Daily Bookings</h5>
+        <h2 class="text-success">{{ avg_daily }}</h2>
+    </div>
+
+    <!-- Station Summary Table -->
+    <div class="card shadow p-4 mb-4">
+        <h5 class="mb-3">Station-wise Summary (PAID)</h5>
+
+        <table class="table table-bordered text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Station</th>
+                    <th>Owner</th>
+                    <th>Total Paid Bookings</th>
+                    <th>Price</th>
+                    <th>Total Revenue</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in paid_station_data %}
+                <tr>
+                    <td>{{ s.booking__station__station_name }}</td>
+                    <td>{{ s.booking__station__owner__firstName }}</td>
+                    <td>{{ s.total_paid_bookings }}</td>
+                    <td>₹ {{ s.booking__station__price }}</td>
+                    <td>₹ {{ s.total_amount }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No paid bookings found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Revenue Graph -->
+    <!-- Revenue Graph -->
+<div class="card shadow p-4">
+    <h5 class="mb-3">Revenue per Station</h5>
+
+    <div style="height:300px;">
+        <canvas id="revenueChart"></canvas>
+    </div>
+</div>
+
+
+</div>
+<script>
+    const labels = [
+        {% for s in paid_station_data %}
+            "{{ s.booking__station__station_name }}",
+        {% endfor %}
+    ];
+
+    const revenueData = [
+        {% for s in paid_station_data %}
+            {{ s.total_amount }},
+        {% endfor %}
+    ];
+
+    new Chart(document.getElementById('revenueChart'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Total Revenue (₹)',
+                data: revenueData
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+</script>
+
+
+{% endblock %}

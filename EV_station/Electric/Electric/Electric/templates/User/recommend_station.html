@@ -1,0 +1,45 @@
+{% extends 'User/common.html' %}
+{% block content %}
+
+<br><br>
+<h2 style="text-align:center;">Nearest Charging Stations</h2>
+
+<div class="container mt-4">
+
+    <!-- FILTER FORM -->
+    <form method="get" class="row mb-4">
+        <div class="col-md-4">
+            <select name="charging_type" class="form-control">
+                <option value="">All Charging Types</option>
+                <option value="AC" {% if selected_type == "AC" %}selected{% endif %}>AC</option>
+                <option value="DC" {% if selected_type == "DC" %}selected{% endif %}>DC</option>
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <button class="btn btn-primary">Filter</button>
+        </div>
+    </form>
+
+    <!-- STATION CARDS -->
+    <div class="row">
+        {% for s in stations %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow p-3">
+                <h5>{{ s.name }}</h5>
+                <p><b>City:</b> {{ s.city }}</p>
+                <p><b>State:</b> {{ s.state }}</p>
+                <p><b>Address:</b> {{ s.address }}</p>
+                <p><b>Latitude:</b> {{ s.lattitude }}</p>
+                <p><b>Longitude:</b> {{ s.longitude }}</p>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-danger">No stations found</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+<br><br>
+{% endblock %}

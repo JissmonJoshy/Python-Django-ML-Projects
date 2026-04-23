@@ -1,0 +1,67 @@
+{% extends 'EV_Owner/common.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+
+                <h4 class="text-center mb-4">Owner Profile</h4>
+
+                <div class="text-center mb-3">
+                    {% if owner.image %}
+                        <img src="{{ owner.image.url }}" class="rounded-circle"
+                             style="width:120px; height:120px; object-fit:cover;">
+                    {% else %}
+                        <img src="{% static 'images/default-avatar.png' %}" class="rounded-circle"
+                             style="width:120px; height:120px; object-fit:cover;">
+                    {% endif %}
+                </div>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <th>First Name</th>
+                        <td>{{ owner.firstName }}</td>
+                    </tr>
+                    <tr>
+                        <th>Last Name</th>
+                        <td>{{ owner.lastName }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ owner.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone</th>
+                        <td>{{ owner.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th>Place</th>
+                        <td>{{ owner.place }}</td>
+                    </tr>
+                    <tr>
+                        {% comment %} <th>Status</th>
+                        <td>
+                            {% if owner.status == "Approved" %}
+                                <span class="text-success">{{ owner.status }}</span>
+                            {% else %}
+                                <span class="text-warning">{{ owner.status }}</span>
+                            {% endif %}
+                        </td> {% endcomment %}
+                    </tr>
+                </table>
+
+                <div class="text-center mt-2">
+    <a href="{% url 'edit_owner_profile' %}" class="btn btn-primary">Edit Profile</a>
+</div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

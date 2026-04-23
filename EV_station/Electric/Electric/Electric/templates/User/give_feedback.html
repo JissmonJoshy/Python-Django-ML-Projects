@@ -1,0 +1,18 @@
+{% extends 'User/common.html' %}
+{% block content %}
+<br><br><br><br>
+<div class="container pt-5">
+  <h3 class="text-center text-success">Give Feedback</h3>
+  <br><br>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="feedback">Your Feedback:</label>
+      <textarea class="form-control" id="feedback" name="feedback" rows="4" required></textarea>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+<br><br><br><br>
+{% endblock %}

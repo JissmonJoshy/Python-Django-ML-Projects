@@ -1,0 +1,40 @@
+{% extends 'Admin/common.html' %}
+{% block content %}
+{% load static %}
+<br><br><br>
+<div class="page-content">
+    <section class="section-md">
+        <div class="container">
+            <h2 style="text-align: center;">User List</h2>
+            <br><br>
+            <div class="row">
+                {% for i in data %}
+                <div class="col-md-6 col-lg-3 mb-4 d-flex align-items-stretch">
+                    <div class="card shadow-sm text-center" style="border-radius: 15px; overflow: hidden;">
+                        {% if i.image %}
+                        <img src="{{ i.image.url }}" class="card-img-top" alt="User Image"
+                             style="height: 200px; object-fit: cover; border-radius: 15px 15px 0 0;">
+                        {% else %}
+                        <img src="{% static 'default-user.jpg' %}" class="card-img-top" alt="Default User Image"
+                             style="height: 200px; object-fit: cover; border-radius: 15px 15px 0 0;">
+                        {% endif %}
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <h5 class="card-title">{{ i.firstName }} {{ i.lastName }}</h5>
+                            <p class="card-text"><strong>Email:</strong> {{ i.email }}</p>
+                            <p class="card-text"><strong>Place:</strong> {{ i.place }}</p>
+                            <p class="card-text"><strong>Phone:</strong> {{ i.phone }}</p>
+                            <div>
+                                <a href="/deleteUser/?id={{ i.id }}" class="btn btn-outline-danger btn-sm">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p style="text-align: center; width: 100%;">No users found.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>
+<br><br><br>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'User/common.html' %}
+{% block content %}
+{% load static %}
+<br><br><br>
+<div class="page-content">
+    <!-- Our Team Start --> 
+    <section class="section-md">
+        <div class="container">
+            <h2 style="text-align: center;">Stations</h2><br><br>
+            <div class="row">
+                {% for i in data %}
+                <div class="col-md-6 col-lg-3 mb-4 d-flex align-items-stretch">
+                    <div class="card shadow-sm">
+                        <img src="/static/media/{{ i.image}}" class="card-img-top img-fluid" alt="Worker Image">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Name:{{i.station_name}}</h5>
+                            <p class="card-text">location: {{ i.location}}</p>
+                            <p class="card-text">contact_number: {{ i.contact_number }}</p>
+                            <p class="card-text">licence_number: {{ i.licence_number}}</p>
+                            <p class="card-text">operating_hours: {{ i.operating_hours}}</p>
+                            <p class="card-text">charging_types: {{ i.charging_types}}</p>
+                            <div>
+                            <a href="/bookStation?id={{i.id}}" class="btn btn-outline-success" style="text-align: center; margin-left: 50px;">SELECT</a>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Our Team End --> 
+</div>
+
+<br><br><br>
+{% endblock %}

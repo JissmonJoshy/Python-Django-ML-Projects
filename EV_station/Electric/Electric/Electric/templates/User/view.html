@@ -1,0 +1,66 @@
+{% extends 'User/common.html' %}
+{% block content %}
+{% load static %}
+<br><br>
+<div class="container my-4">
+    <form method="GET" action="/view">
+        <div class="row g-2">
+
+            <div class="col-md-5">
+                <input type="text" class="form-control"
+                       name="location"
+                       placeholder="Search by location"
+                       value="{{ request.GET.location }}">
+            </div>
+
+            <div class="col-md-5">
+                <select class="form-control" name="charging_type">
+                    <option value="">All Charging Types</option>
+                    <option value="AC" {% if request.GET.charging_type == "AC" %}selected{% endif %}>AC</option>
+                    <option value="DC" {% if request.GET.charging_type == "DC" %}selected{% endif %}>DC</option>
+                    <option value="FAST" {% if request.GET.charging_type == "FAST" %}selected{% endif %}>FAST</option>
+                    <option value="ULTRA" {% if request.GET.charging_type == "ULTRA" %}selected{% endif %}>ULTRA</option>
+                </select>
+            </div>
+
+            <div class="col-md-2 d-grid">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+<div class="page-content">
+    <section class="section-md">
+        <div class="container">
+            <h2 style=" text-align: center;">Ev Stations</h2>
+            <br><br>
+            <div class="row">
+                {% for station in stations %}
+                <div class="col-md-6 col-lg-3 mb-4 d-flex align-items-stretch">
+                    <div class="card shadow-sm">
+                        <img src="/static/media/{{ station.image }}" class="card-img-top img-fluid" alt="Station Image">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Name: {{ station.station_name }}</h5>
+                            <p class="card-text">Location: {{ station.location }}</p>
+                            <p class="card-text">Contact Number: {{ station.contact_number }}</p>
+                            <p class="card-text">Licence Number: {{ station.licence_number }}</p>
+                            <p class="card-text">Operating Hours: {{ station.operating_hours }}</p>
+                            <p class="card-text">Charging Types: {{ station.charging_types }}</p>
+                            <a href='/bookStation?id={{station.id}}' style="padding: 12px; background-color: #09cf69; color: rgb(10, 10, 10); border: none;text-align: center;">
+                                Select</a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <p class="text-center text-muted">No stations found for this location.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
