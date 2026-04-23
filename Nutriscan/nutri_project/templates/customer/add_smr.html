@@ -1,0 +1,24 @@
+{% extends 'customer/common.html' %}
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height:80vh;">
+    <div class="card p-4" style="width: 400px;">
+        <h4 class="text-center mb-3">Add SMR</h4>
+
+        {% if smr_status %}
+            <div class="alert alert-info text-center">
+                Your SMR: {{ smr_value }} <br>
+                Status: {{ smr_status }}
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <input type="number" step="0.1" name="smr_value" placeholder="SMR Value" class="form-control mb-2" required>
+            <textarea name="notes" placeholder="Optional notes" class="form-control mb-2"></textarea>
+            <button class="btn btn-success w-100">Save</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
