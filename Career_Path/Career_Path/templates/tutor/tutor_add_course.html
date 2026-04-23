@@ -1,0 +1,55 @@
+{% extends 'tutor/common.html' %}
+{% block content %}
+{% load static %}
+
+<div class="dashboard_project scrollbar_custom w-full bg-surface">
+    <form method="POST" enctype="multipart/form-data"
+        class="container h-fit lg:pt-15 lg:pb-30 max-lg:py-12 max-sm:py-8">
+        {% csrf_token %}
+
+        <div class="flex flex-wrap items-center justify-between gap-4">
+            <h4 class="heading4 max-lg:mt-3">Add Course</h4>
+            <button class="button-main" type="submit">Save Course</button>
+        </div>
+
+        <div class="infomation p-8 mt-7.5 rounded-lg bg-white">
+            <h5 class="heading5">Course Information</h5>
+
+            <div class="form grid sm:grid-cols-2 gap-5 mt-5">
+
+                <div>
+                    <label>Course Title *</label>
+                    <input class="w-full h-12 px-4 mt-2 border-line rounded-lg"
+                        name="name" type="text" required>
+                </div>
+
+                <div>
+                    <label>Description *</label>
+                    <input class="w-full h-12 px-4 mt-2 border-line rounded-lg"
+                        name="description" type="text" required>
+                </div>
+
+                <div>
+                    <label>Duration *</label>
+                    <input class="w-full h-12 px-4 mt-2 border-line rounded-lg"
+                        name="duration" type="text" required>
+                </div>
+
+                <div>
+                    <label>Fees *</label>
+                    <input class="w-full h-12 px-4 mt-2 border-line rounded-lg"
+                        name="fees" type="text" required>
+                </div>
+
+                <div class="col-span-full">
+                    <label>Course Image *</label>
+                    <input class="w-full h-12 px-4 mt-2 border-line rounded-lg"
+                        name="img" type="file" required>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

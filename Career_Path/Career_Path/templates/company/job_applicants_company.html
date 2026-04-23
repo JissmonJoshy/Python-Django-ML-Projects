@@ -1,0 +1,76 @@
+{% extends 'company/common.html' %}
+{% block content %}
+{% load static %}
+
+<div class="dashboard_main lg:w-screen lg:h-screen sm:pt-20 pt-16 overflow-auto">
+    <div class="inner scrollbar_custom max-h-full h-full py-10 px-10 overflow-y-auto">
+
+        <div class="heading flex justify-between items-center mb-4">
+            <h4 class="heading4">Job Applicants</h4>
+        </div>
+
+        {% if applicants %}
+        <div class="bg-white p-6 rounded-lg shadow-sm overflow-x-auto">
+            <table class="min-w-full border">
+                <thead>
+                    <tr class="bg-gray-200 text-left">
+                        <th class="px-4 py-2">#</th>
+                        <th class="px-4 py-2">Job</th>
+                        <th class="px-4 py-2">Client Name</th>
+                        <th class="px-4 py-2">Email</th>
+                        <th class="px-4 py-2">Phone</th>
+                        <th class="px-4 py-2">Qualification</th>
+                        <th class="px-4 py-2">CV</th>
+                        {% comment %} <th class="px-4 py-2">Status</th> {% endcomment %}
+                        <th class="px-4 py-2">Meet Link</th>
+                        <th class="px-4 py-2">Applied On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in applicants %}
+                    <tr class="border-b hover:bg-gray-100">
+                        <td class="px-4 py-2">{{ forloop.counter }}</td>
+                        <td class="px-4 py-2">{{ a.job.name }}</td>
+                        <td class="px-4 py-2">{{ a.name }}</td>
+                        <td class="px-4 py-2">{{ a.email }}</td>
+                        <td class="px-4 py-2">{{ a.phone }}</td>
+                        <td class="px-4 py-2">{{ a.qualification }}</td>
+                        <td class="px-4 py-2">
+                            <a href="/static/media/{{ a.cv }}" target="_blank"
+                               class="text-blue-600 underline">
+                                View CV
+                            </a>
+                        </td>
+                        <td class="px-4 py-2">
+                            {% if a.meet_link %}
+                                <a href="{{ a.meet_link }}" target="_blank"
+                                   class="text-green-600 underline">
+                                    Join Meet
+                                </a>
+                            {% else %}
+                                <span class="text-gray-500">N/A</span>
+                            {% endif %}
+                        </td>
+                        {% comment %} <td class="px-4 py-2">
+                            <span class="px-3 py-1 rounded bg-green-600 text-white text-sm">
+                                {{ a.status }}
+                            </span>
+                        </td> {% endcomment %}
+                        <td class="px-4 py-2">
+                            {{ a.applied_at|date:"d M Y" }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <p class="text-center mt-10 text-gray-500">
+                No applicants found.
+            </p>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

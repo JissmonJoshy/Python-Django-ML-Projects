@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body{
+            background-color: #f0f2f5;
+        }
+
+        .main-container{
+            max-width: 1000px;
+            margin: 30px auto;
+            height: 80vh;
+            display: flex;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        /* LEFT SIDE */
+        .client-list{
+            width: 30%;
+            border-right: 1px solid #ccc;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .client-item{
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .client-item:hover{
+            background: #e9ecef;
+        }
+
+        /* RIGHT SIDE */
+        .chat-section{
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header{
+            background: #0d6efd;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+        }
+
+        .chat-body{
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: #e5ddd5;
+        }
+
+        .msg{
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            max-width: 70%;
+        }
+
+        .sent{
+            background: #0d6efd;
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .received{
+            background: white;
+            border: 1px solid #ccc;
+        }
+
+        .chat-footer{
+            padding: 10px;
+            background: #f8f9fa;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-footer input{
+            flex: 1;
+            border-radius: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .chat-footer button{
+            border-radius: 20px;
+        }
+
+        @media(max-width:768px){
+            .client-list{
+                width: 40%;
+            }
+            .chat-section{
+                width: 60%;
+            }
+        }
+
+        @media(max-width:576px){
+            .main-container{
+                flex-direction: column;
+                height: auto;
+            }
+            .client-list{
+                width: 100%;
+                height: 200px;
+            }
+            .chat-section{
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<a href="{% url 'tutorhome' %}" class="btn btn-secondary m-3">Back to Dashboard</a>
+<div class="main-container">
+  
+    <!-- LEFT: CLIENT LIST -->
+    <div class="client-list">
+        <h5 class="p-3">Clients</h5>
+
+        {% for i in clients %}
+            <a href="/reply/?id={{ i.id }}" class="text-decoration-none text-dark">
+                <div class="client-item">
+                    {{ i.name }}
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <!-- RIGHT: CHAT -->
+    <div class="chat-section">
+
+        {% if selected_client %}
+
+        <!-- Header -->
+        <div class="chat-header">
+            Chat with {{ selected_client.name }}
+        </div>
+
+        <!-- Messages -->
+        <div class="chat-body" id="chatBox">
+            {% for i in chats %}
+                {% if i.sender_id == request.session.uid %}
+                    <div class="msg sent">
+                        {{ i.message }}
+                    </div>
+                {% else %}
+                    <div class="msg received">
+                        {{ i.message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Input -->
+        <form method="POST" class="chat-footer">
+            {% csrf_token %}
+            <input type="text" name="message" placeholder="Type a message..." required>
+            <button class="btn btn-primary">Send</button>
+        </form>
+
+        {% else %}
+
+        <!-- No chat selected -->
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <h5>Select a client to start chat</h5>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<script>
+    var chatBox = document.getElementById("chatBox");
+    if(chatBox){
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+</script>
+
+</body>
+</html>

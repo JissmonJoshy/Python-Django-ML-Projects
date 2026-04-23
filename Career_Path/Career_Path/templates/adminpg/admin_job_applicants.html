@@ -1,0 +1,63 @@
+{% extends 'adminpg/common.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mx-auto p-6 bg-white shadow-md rounded-md mt-5">
+    <h2 class="text-2xl font-semibold mb-4">Course Enrollments</h2>
+
+    {% if enrollments %}
+    <div class="overflow-x-auto">
+        <table class="min-w-full border text-sm">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="border px-4 py-2">#</th>
+                    <th class="border px-4 py-2">Client</th>
+                    <th class="border px-4 py-2">Course</th>
+                    <th class="border px-4 py-2">Status</th>
+                    <th class="border px-4 py-2">Meet</th>
+                    <th class="border px-4 py-2">Notes</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for en in enrollments %}
+                <tr class="hover:bg-gray-50">
+                    <td class="border px-4 py-2">{{ forloop.counter }}</td>
+                    <td class="border px-4 py-2">{{ en.client.name }}</td>
+                    <td class="border px-4 py-2">{{ en.course.name }}</td>
+                    <td class="border px-4 py-2">{{ en.status }}</td>
+
+                    <td class="border px-4 py-2">
+                        {% if en.meet_link %}
+                            <a href="{{ en.meet_link }}" target="_blank" class="text-green-600">Join</a>
+                        {% else %}
+                            Not Set
+                        {% endif %}
+                    </td>
+
+                    <td class="border px-4 py-2">
+                        {% for note in notes %}
+                            {% if note.course.id == en.course.id %}
+                                <div>
+                                    <a href="/media/{{ note.file }}" target="_blank" class="text-blue-600 underline">
+                                        {{ note.title }}
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% empty %}
+                            No Notes
+                        {% endfor %}
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+    {% else %}
+        <p>No enrollments found.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends 'client/common.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+    .star-rating {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .star-rating input {
+        display: none;
+    }
+
+    .star-rating label {
+        font-size: 30px;
+        color: #e5e7eb;
+        cursor: pointer;
+        transition: transform 0.2s, color 0.3s;
+    }
+
+    .star-rating label:hover {
+        transform: scale(1.15);
+    }
+
+    .star-rating input:checked ~ label,
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+        color: #fbbf24;
+    }
+</style>
+
+<!-- Main Content Area -->
+<div class="w-full min-h-[calc(100vh-80px)] flex items-center justify-center bg-white px-4">
+
+    <!-- Feedback Card -->
+    <div class="w-full max-w-md bg-white rounded-xl shadow-lg border border-gray-100">
+
+        <!-- Top Accent -->
+        <div class="h-2 bg-indigo-600 rounded-t-xl"></div>
+
+        <div class="p-7">
+
+            <h2 class="text-2xl font-bold text-gray-800 text-center">
+                Course Feedback
+            </h2>
+            <p class="text-sm text-gray-500 text-center mb-6">
+                Tell us about your learning experience
+            </p>
+
+            <form method="POST" class="space-y-5">
+                {% csrf_token %}
+
+                <!-- Course -->
+                <div>
+                    <label class="text-sm font-medium text-gray-700">Course</label>
+                    <select name="course_id"
+                        class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                        <option value="">Select Course</option>
+                        {% for c in courses %}
+                        <option value="{{ c.id }}"
+                            {% if selected_course_id == c.id|stringformat:"s" %} selected {% endif %}>
+                            {{ c.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Feedback -->
+                <div>
+                    <label class="text-sm font-medium text-gray-700">Feedback</label>
+                    <textarea name="feedback" rows="4"
+                        class="mt-1 w-full rounded-lg border border-gray-300 p-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none resize-none"
+                        placeholder="Write your feedback..." required></textarea>
+                </div>
+
+                <!-- Rating -->
+                <div class="text-center">
+                    <label class="text-sm font-medium text-gray-700 block mb-2">
+                        Rate this course
+                    </label>
+
+                    <div class="star-rating">
+                        <input type="radio" name="rating" id="star5" value="5"><label for="star5">★</label>
+                        <input type="radio" name="rating" id="star4" value="4"><label for="star4">★</label>
+                        <input type="radio" name="rating" id="star3" value="3"><label for="star3">★</label>
+                        <input type="radio" name="rating" id="star2" value="2"><label for="star2">★</label>
+                        <input type="radio" name="rating" id="star1" value="1"><label for="star1">★</label>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit"
+                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-black font-semibold py-3 rounded-lg transition">
+                    Submit Feedback
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

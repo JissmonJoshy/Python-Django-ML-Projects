@@ -1,0 +1,114 @@
+<style>
+.slider_bg{
+    background-color:#386fa1;
+}
+</style>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Mirrored from freelanhub.vercel.app/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Feb 2025 09:40:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+      {%for i in messages%}
+  <script>
+    alert("{{i}}");
+  </script>
+  {%endfor%}
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="FreelanHub - Job Board & Freelance Marketplace" />
+        <title>FreelanHub - Job Board & Freelance Marketplace</title>
+        <link rel="shortcut icon" href="{% static 'assets/images/fav.png' %} " type="image/x-icon" />
+        <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/leaflet.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'dist/output-tailwind.css' %}" />
+        <link rel="stylesheet" href="{% static 'dist/output-scss.css' %}" />
+         <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    </head>
+
+    <body>
+        <!-- Header -->
+        <header id="header" class="header relative">
+            <div class="header_inner absolute flex items-center justify-between top-0 left-0 right-0 z-[1] w-full sm:h-20 h-16 min-[1600px]:px-15 lg:px-9 px-4 border-b border-light">
+                <div class="left flex items-center gap-15 max-[1600px]:gap-6 h-full px-4 md:px-8 bg-gray-900 text-white">
+                    <h1 class="text-6xl md:text-3xl font-bold">
+                        Career <span class="text-indigo-400">Path</span>
+                        {% comment %} <img src="{% static 'assets/images/logo-white.png' %}" alt="logo-white"> {% endcomment %}
+                    </h1>
+                
+                    <!-- Optional Logo (Uncomment if needed) -->
+                    <!--
+                    <img src="{% static 'assets/images/logo-white.png' %}" alt="logo-white"
+                        class="logo-white md:h-[42px] h-8 w-auto ml-4" />
+                    -->
+                    <!--
+                    <img src="{% static 'assets/images/logo.png' %}" alt="logo"
+                        class="logo-black md:h-[42px] h-8 w-auto hidden ml-4" />
+                    -->
+                </div>
+                
+                <div class="right flex items-center gap-6 h-full">
+                    <div class="navigator h-full max-[1400px]:hidden">
+                        <ul class="list flex items-center gap-5 h-full">
+                            <li class="h-full relative">
+                                <a href="/" class="flex items-center gap-1 h-full text-white duration-300 active">
+                                    <span class="text-title relative">Home</span>
+                                </a>
+                            </li>
+                        <div class="list_icon flex items-center gap-3">
+                            <a href="/login" class="flex items-center gap-1 text-title text-white duration-300 hover:text-primary">
+                                <span class="ph-bold ph-user"></span>
+                                <span>Login</span>
+                            </a>
+                            <a href="{% url 'client_reg' %}" class="flex items-center gap-1 text-title text-white duration-300 hover:text-primary">
+                                <span class="ph-bold ph-plus-circle"></span>
+                                <span>Client </span>
+                            </a>
+
+                            
+                            <a href="{% url 'company_reg' %}" class="flex items-center gap-1 text-title text-white duration-300 hover:text-primary">
+                                <span class="ph-bold ph-plus-circle"></span>
+                                <span>Company</span>
+                            </a>
+
+                            <a href="{% url 'tutor_register' %}" class="flex items-center gap-1 text-title text-white duration-300 hover:text-primary">
+                                <span class="ph-bold ph-plus-circle"></span>
+                                <span>Tutor</span>
+                            </a>
+                            
+
+                        </div>
+                        <button class="humburger_btn min-[1400px]:hidden">
+                            <span class="ph-bold ph-list text-white text-2xl block">
+                                <span class="blind">button open menu mobile</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+         <div class="slider_bg absolute top-0 left-0 w-full h-full z-[-1]" aria-hidden="true">
+                    <img src="{% static 'assets/images/slider/slider1.webp' %}" alt="slider1" class="w-full h-full object-cover"  />
+                </div>
+
+{% block content %} {% endblock content %}
+
+        <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/js/phosphor-icons.js' %}"></script>
+        <script src="{% static 'assets/js/slick.min.js' %}"></script>
+        <script src="{% static 'assets/js/leaflet.js' %}"></script>
+        <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>
+    </body>
+
+<!-- Mirrored from freelanhub.vercel.app/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Feb 2025 09:40:45 GMT -->
+</html>

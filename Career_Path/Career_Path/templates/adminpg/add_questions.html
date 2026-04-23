@@ -1,0 +1,73 @@
+{% extends 'adminpg/common.html' %}
+{% block content %}
+{% load static %}
+
+<div class="dashboard_project scrollbar_custom w-full bg-surface">
+    <form method="POST" class="container h-fit lg:pt-15 lg:pb-30 max-lg:py-12 max-sm:py-8">
+        {% csrf_token %}
+
+        <div class="flex flex-wrap items-center justify-between gap-4">
+            <h4 class="heading4 max-lg:mt-3">Add Question</h4>
+            <button class="button-main" type="submit">Save</button>
+        </div>
+
+        <div class="infomation p-8 mt-7.5 rounded-lg bg-white">
+            <h5 class="heading5">Question Information</h5>
+
+            <div class="form grid sm:grid-cols-2 gap-5 mt-5">
+
+                <div>
+                    <label>Course <span class="text-red">*</span></label>
+                    <select name="course" class="w-full h-12 px-4 mt-2 border-line rounded-lg" required>
+                        <option value="">Select Course</option>
+                        {% for c in courses %}
+                        <option value="{{ c.id }}">{{ c.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <label>Question <span class="text-red">*</span></label>
+                    <input type="text" name="question"
+                        class="w-full h-12 px-4 mt-2 border-line rounded-lg" required>
+                </div>
+
+                <div>
+                    <label>Option 1</label>
+                    <input type="text" name="option1" class="w-full h-12 px-4 mt-2 border-line rounded-lg" required>
+                </div>
+
+                <div>
+                    <label>Option 2</label>
+                    <input type="text" name="option2" class="w-full h-12 px-4 mt-2 border-line rounded-lg" required>
+                </div>
+
+                <div>
+                    <label>Option 3</label>
+                    <input type="text" name="option3" class="w-full h-12 px-4 mt-2 border-line rounded-lg" required>
+                </div>
+
+                <div>
+                    <label>Option 4</label>
+                    <input type="text" name="option4" class="w-full h-12 px-4 mt-2 border-line rounded-lg" required>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <label>Correct Answer <span class="text-red">*</span></label>
+                    <select name="correct_answer"
+                        class="w-full h-12 px-4 mt-2 border-line rounded-lg" required>
+                        <option value="">Select Correct Answer</option>
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                        <option value="option4">Option 4</option>
+                    </select>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'company/common.html' %}
+{% block content %}
+{% load static %}
+
+<div class="dashboard_profile w-full bg-surface">
+    <div class="container mx-auto lg:pt-16 lg:pb-28 max-lg:py-12 px-4">
+
+        <!-- Heading -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <h4 class="heading4 text-center sm:text-left">My Company Profile</h4>
+            <a href="{% url 'edit_company_profile' %}" class="button-main">
+                Edit Profile
+            </a>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="flex justify-center mt-10">
+            <div class="profile_block grid grid-cols-1 lg:grid-cols-3 gap-8 w-full max-w-6xl">
+
+                <!-- Left Card -->
+                <div class="bg-white rounded-xl shadow-sm p-8 text-center flex flex-col items-center">
+                    <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-surface mb-4">
+                        <img src="/static/media/{{company.img}}" class="w-full h-full object-cover">
+                    </div>
+
+                    <h5 class="heading5 mt-2">{{company.name}}</h5>
+                    <p class="text-secondary mt-1 break-all">{{company.email}}</p>
+                </div>
+
+                <!-- Right Card -->
+                <div class="bg-white rounded-xl shadow-sm p-8 lg:col-span-2">
+                    <h5 class="heading5 mb-6 text-center lg:text-left">
+                        Company Details
+                    </h5>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-secondary text-sm">Address</p>
+                            <p class="font-semibold mt-1">{{company.address}}</p>
+                        </div>
+
+                        <div>
+                            <p class="text-secondary text-sm">Phone</p>
+                            <p class="font-semibold mt-1">{{company.phone}}</p>
+                        </div>
+
+                        <div>
+                            <p class="text-secondary text-sm">Email</p>
+                            <p class="font-semibold mt-1 break-all">{{company.email}}</p>
+                        </div>
+
+                        <div>
+                            <p class="text-secondary text-sm">Joined On</p>
+                            <p class="font-semibold mt-1">
+                                {{company.created_at|date:"d M Y"}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

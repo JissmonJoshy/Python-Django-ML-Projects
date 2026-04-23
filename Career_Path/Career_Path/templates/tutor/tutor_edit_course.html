@@ -1,0 +1,101 @@
+{% extends 'tutor/common.html' %}
+{% block content %}
+
+<style>
+.form-card{
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+}
+.form-label{
+    font-weight: 600;
+    font-size: 14px;
+    color: #374151;
+}
+.form-input{
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+}
+.form-input:focus{
+    border-color: #2563eb;
+}
+.save-btn{
+    background: linear-gradient(135deg,#2563eb,#1e40af);
+    color: white;
+    padding: 10px 22px;
+    border-radius: 8px;
+}
+.back-btn{
+    border: 1px solid #d1d5db;
+    padding: 10px 22px;
+    border-radius: 8px;
+}
+.course-img{
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+</style>
+
+<div class="container py-10 px-4">
+    <div class="max-w-3xl mx-auto form-card p-6 md:p-8">
+
+        <h4 class="heading4 mb-6 text-center">Edit Course Details</h4>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Image Preview -->
+            {% if course.img %}
+            <div class="mb-6">
+                <img src="{{ course.img.url }}" class="course-img">
+            </div>
+            {% endif %}
+
+            <!-- Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                <div>
+                    <label class="form-label">Course Name</label>
+                    <input type="text" name="name" value="{{ course.name }}" class="form-input">
+                </div>
+
+                <div>
+                    <label class="form-label">Duration</label>
+                    <input type="text" name="duration" value="{{ course.duration }}" class="form-input">
+                </div>
+
+                <div>
+                    <label class="form-label">Fees</label>
+                    <input type="number" name="fees" value="{{ course.fees }}" class="form-input">
+                </div>
+
+                <div>
+                    <label class="form-label">Change Image</label>
+                    <input type="file" name="img" class="form-input">
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" rows="3" class="form-input">{{ course.description }}</textarea>
+                </div>
+
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                <button type="submit" class="save-btn">Update Course</button>
+                <a href="/tutor_view_courses" class="back-btn text-center">Back</a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

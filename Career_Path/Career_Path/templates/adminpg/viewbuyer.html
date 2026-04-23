@@ -1,0 +1,60 @@
+<style>
+    .heading5 {
+        margin-top: 100px;
+    }
+</style>
+{% extends 'Admin/common.html' %}
+{% block content %}
+{% load static %}
+<div class="active_work p-6 mt-7.5 rounded-lg bg-white">
+     <h4 class="heading4 max-lg:mt-3">Buyers</h4>
+    <div class="list overflow-x-auto w-full p-5 rounded-xl">
+
+        <table class="w-full max-[1400px]:w-[1200px] max-md:w-[1000px]">
+            <thead class="border-b border-line">
+
+                <tr>
+                    <th scope="col"
+                        class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">Buyer
+                    </th>
+                    <th scope="col"
+                        class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">
+                        Full Name</th>
+                    <th scope="col"
+                        class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">
+                        Role</th>
+                    <th scope="col"
+                        class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">Email
+                    </th>
+                    <th scope="col"
+                        class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">Mobile
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in buyerregister %}
+                <tr class="item duration-300 hover:bg-background">
+                    <th scope="row" class="p-5 text-left">
+                        <div class="info">
+                              <img name="coderimage" class="card-img-top" src="../static/media/{{i.photo}}" alt="static/media/{{i.photo}}" style="max-width: 30px; height: auto;">
+                        </div>
+                    </th>
+                    <td class="p-5">{{i.fullname}}</td>
+                    <td class="p-5">{{i.role}}</td>
+                    <td class="p-5 whitespace-nowrap">{{i.username}}</td>
+                    <td class="p-5 whitespace-nowrap">{{i.mobile}}</td>
+
+
+
+                    
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+
+{% endblock %}

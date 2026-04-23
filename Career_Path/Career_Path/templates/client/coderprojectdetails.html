@@ -1,0 +1,124 @@
+{% extends 'Coder/common.html' %}
+{% block content %}
+{% load static %}
+<div class="dashboard_main lg:w-screen lg:h-screen sm:pt-20 pt-16 overflow-auto" style="padding-top: 0;">
+    <div class="inner scrollbar_custom max-h-full h-full py-10 px-10 overflow-y-auto" style="padding-top: 0;">
+
+            <section class="breadcrumb bg-[#04b2b2] sm:pt-35 pt-30 py-15" style="background-color:#04b2b2 ;">
+                <div class="container flex max-lg:flex-col lg:items-center justify-between gap-5 gap-y-3">
+                    <div class="breadcrumb_info">
+                        <h3 class="heading3">{{projects.title}}</h3>
+                        <ul class="list flex flex-wrap items-center gap-4 mt-3">
+                            <li class="time_area flex items-center gap-1 pr-4 border-r border-line">
+                                <span class="ph ph-calendar-blank text-xl text-secondary"></span>
+                                <span class="time body2"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="breadcrumb_action flex flex-col max-lg:flex-col-reverse lg:items-end lg:gap-5 gap-3">
+                        <div class="flex gap-3">
+                            <button
+                                class="button_share flex items-center justify-center w-12 h-12 border border-line rounded-full bg-white duration-300 hover:border-black">
+                                <span class="ph ph-share-network text-2xl"></span>
+                                <ul class="social">
+                                    <li class="social_item">
+                                        <a href="https://www.facebook.com/" target="_blank"
+                                            class="social_link w-9 h-9 flex items-center justify-center border border-line text-white rounded-full duration-300 hover:bg-white hover:text-black">
+                                            <span class="icon-facebook"></span>
+                                        </a>
+                                    </li>
+                                    <li class="social_item">
+                                        <a href="https://www.linkedin.com/" target="_blank"
+                                            class="social_link w-9 h-9 flex items-center justify-center border border-line text-white rounded-full duration-300 hover:bg-white hover:text-black">
+                                            <span class="icon-linkedin"></span>
+                                        </a>
+                                    </li>
+                                    <li class="social_item">
+                                        <a href="https://www.twitter.com/" target="_blank"
+                                            class="social_link w-9 h-9 flex items-center justify-center border border-line text-white rounded-full duration-300 hover:bg-white hover:text-black">
+                                            <span class="icon-twitter"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </button>
+                            <button class="add_wishlist_btn -relative -border w-12">
+                                <span class="ph ph-heart text-2xl"></span>
+                                <span class="ph-fill ph-heart text-2xl"></span>
+                            </button>
+                        </div>
+                        <div class="price_area whitespace-nowrap">
+                            <span class="body2 text-secondary">Budget</span>
+                            <strong class="heading5 ml-0.5">${{projects.salary}}</strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project_detail lg:py-20 sm:py-14 py-10">
+                <div class="container flex max-lg:flex-col gap-y-10">
+                    <div class="project_info w-full lg:pr-15">
+                        <div class="overview">
+                            <h6 class="heading6">Projects Overview</h6>
+                            <ul class="list_overview grid sm:grid-cols-3 grid-cols-2 gap-6 w-full mt-4">
+                                <li class="flex items-center gap-3">
+                                    <span class="ph ph-calendar-blank flex-shrink-0 text-4xl"></span>
+                                    <div>
+                                        <span class="block text-secondary">Date Posted:</span>
+                                        <strong class="text-button">{{projects.today}}</strong>
+                                    </div>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="ph ph-suitcase-simple flex-shrink-0 text-4xl"></span>
+                                    <div>
+                                        <span class="block text-secondary">Project Type:</span>
+                                        <strong class="text-button">{{projects.jobtype}}</strong>
+                                    </div>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="ph ph-clock-countdown flex-shrink-0 text-4xl"></span>
+                                    <div>
+                                        <span class="block text-secondary">Project Duration:</span>
+                                        <strong class="text-button">{{projects.duration}}</strong>
+                                    </div>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="ph ph-chart-bar flex-shrink-0 text-4xl"></span>
+                                    <div>
+                                        <span class="block text-secondary">Experience:</span>
+                                        <strong class="text-button">{{projects.experience}}</strong>
+                                    </div>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="ph ph-translate flex-shrink-0 text-4xl"></span>
+                                    <div>
+                                        <span class="block text-secondary">Project Level:</span>
+                                        <strong class="text-button">{{projects.careerlevel}}</strong>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="description md:mt-10 mt-7">
+                            <h6 class="heading6">Projects description</h6>
+                            <div class="flex flex-col gap-4 mt-4 body2 text-secondary">
+                                <p>{{projects.description}}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="attachments md:mt-10 mt-7">
+                            <h6 class="heading6">Attachments:</h6>
+                            <ul class="list_attachments flex flex-wrap gap-7.5 gap-y-5 mt-4">
+                                <li>
+                                     <div class="bg_img flex-shrink-0 relative w-[7.5rem] h-[7.5rem] rounded-md overflow-hidden border border-dashed border-line bg-surface">
+                                <img src="../static/media/{{projects.attachment}}" alt="../static/media/{{projects.attachment}}" class="upload_img relative z-[1] w-full h-full object-cover" />
+                            </div>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <a href="/applyproject?id={{projects.id}}">
+                        <button style="margin-top: 100px;" class="apply_btn button-main sm:pt-35 py-15 text-center" >Apply Now</button></a>
+                    </div>
+                </div>
+
+
+        {% endblock %}

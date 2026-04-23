@@ -1,0 +1,82 @@
+{% extends 'company/common.html' %}
+{% block content %}
+{% load static %}
+
+<div class="dashboard_profile w-full bg-surface">
+    <div class="container lg:pt-15 lg:pb-30 max-lg:py-12 max-w-5xl mx-auto">
+
+        <h4 class="heading4 mb-8 text-center">Edit Company Profile</h4>
+
+        <form method="POST" enctype="multipart/form-data"
+              class="bg-white p-10 rounded-xl shadow-md">
+
+            {% csrf_token %}
+
+            <!-- Profile Image Preview -->
+            <div class="flex flex-col items-center mb-10">
+                {% if company.img %}
+                    <img src="/static/media/{{company.img}}"
+     class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 
+            rounded-full object-cover border border-line mb-4">
+
+                {% else %}
+                    <img src="{% static 'assets/images/default-company.png' %}"
+                         class="w-28 h-28 rounded-full object-cover border mb-4">
+                {% endif %}
+                <label class="text-sm text-secondary">Current Company Logo</label>
+            </div>
+
+            <!-- Form Grid -->
+            <div class="grid grid-cols-2 gap-8 max-md:grid-cols-1">
+
+                <div>
+                    <label class="block mb-1 text-sm font-medium">Company Name</label>
+                    <input type="text" name="name"
+                           value="{{company.name}}"
+                           class="form-control w-full" required>
+                </div>
+
+                <div>
+                    <label class="block mb-1 text-sm font-medium">Email</label>
+                    <input type="email"
+                           value="{{company.email}}"
+                           class="form-control w-full bg-gray-100 cursor-not-allowed"
+                           readonly>
+                </div>
+
+                <div>
+                    <label class="block mb-1 text-sm font-medium">Phone</label>
+                    <input type="text" name="phone"
+                           value="{{company.phone}}"
+                           pattern="[6789][0-9]{9}"
+                           maxlength="10"
+                           class="form-control w-full" required>
+                </div>
+
+                <div>
+                    <label class="block mb-1 text-sm font-medium">Address</label>
+                    <input type="text" name="address"
+                           value="{{company.address}}"
+                           class="form-control w-full" required>
+                </div>
+
+                <div class="col-span-2">
+                    <label class="block mb-1 text-sm font-medium">Change Logo</label>
+                    <input type="file" name="img"
+                           class="form-control w-full">
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-end gap-4 mt-10">
+               
+                <button type="submit" class="button-main">
+                    Update Profile
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

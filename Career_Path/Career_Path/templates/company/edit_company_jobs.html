@@ -1,0 +1,84 @@
+{% extends 'company/common.html' %}
+{% block content %}
+{% load static %}
+<div class="dashboard_project scrollbar_custom w-full bg-surface">
+    <form method="POST" enctype="multipart/form-data"
+        class="container h-fit lg:pt-15 lg:pb-30 max-lg:py-12 max-sm:py-8">
+        {% csrf_token %}
+
+        <div class="flex flex-wrap items-center justify-between gap-4">
+            <h4 class="heading4 max-lg:mt-3">Edit Job</h4>
+            <button class="button-main" type="submit">Update Job</button>
+        </div>
+
+        <div class="infomation p-8 mt-7.5 rounded-lg bg-white">
+            <h5 class="heading5">Job Information</h5>
+
+            <div class="form grid sm:grid-cols-2 gap-5 mt-5">
+
+                <div class="title">
+                    <label for="title">Title: <span class="text-red">*</span></label>
+                    <input
+                        class="w-full h-12 px-4 mt-2 border-line rounded-lg"
+                        name="title"
+                        id="title"
+                        type="text"
+                        value="{{ job.name }}"
+                        required />
+                </div>
+
+                <div class="description">
+                    <label for="description">Description: <span class="text-red">*</span></label>
+                    <input
+                        class="w-full h-12 px-4 mt-2 border-line rounded-lg"
+                        name="description"
+                        id="description"
+                        type="text"
+                        value="{{ job.description }}"
+                        required />
+                </div>
+
+                <div class="location">
+                    <label for="location">Location: <span class="text-red">*</span></label>
+                    <input
+                        class="w-full h-12 px-4 mt-2 border-line rounded-lg"
+                        name="location"
+                        id="location"
+                        type="text"
+                        value="{{ job.location }}"
+                        required />
+                </div>
+
+                <div class="salary">
+                    <label for="salary">Salary: <span class="text-red">*</span></label>
+                    <input
+                        class="w-full h-12 px-4 mt-2 border-line rounded-lg"
+                        name="salary"
+                        id="salary"
+                        type="text"
+                        value="{{ job.salary }}"
+                        required />
+                </div>
+
+                <div class="img sm:col-span-2">
+                    <label for="img">Upload Image</label>
+
+                    {% if job.img %}
+                        <div class="mb-3">
+                            <img src="{{ job.img.url }}" class="h-20 rounded">
+                        </div>
+                    {% endif %}
+
+                    <input
+                        class="w-full h-12 px-4 mt-2 border-line rounded-lg"
+                        name="img"
+                        id="img"
+                        type="file" />
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

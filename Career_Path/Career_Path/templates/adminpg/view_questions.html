@@ -1,0 +1,57 @@
+{% extends 'adminpg/common.html' %}
+{% block content %}
+
+<div class="dashboard_project w-full bg-surface p-8">
+
+    <h4 class="heading4 mb-6">View Questions</h4>
+
+    <!-- Select Course -->
+    <form method="GET" class="mb-6">
+        <select name="course" class="h-12 px-4 border-line rounded-lg" required>
+            <option value="">Select Course</option>
+            {% for c in courses %}
+                <option value="{{ c.id }}" {% if selected_course == c.id|stringformat:"s" %}selected{% endif %}>
+                    {{ c.name }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="button-main ml-4">View</button>
+    </form>
+
+    {% if questions %}
+    <div class="overflow-x-auto bg-white rounded-lg p-6">
+        <table class="w-full border-collapse">
+            <thead>
+                <tr class="border-b">
+                    <th class="text-left p-3">#</th>
+                    <th class="text-left p-3">Question</th>
+                    <th class="text-left p-3">Options</th>
+                    <th class="text-left p-3">Correct Answer</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for q in questions %}
+                <tr class="border-b">
+                    <td class="p-3">{{ forloop.counter }}</td>
+                    <td class="p-3">{{ q.question }}</td>
+                    <td class="p-3">
+                        A. {{ q.option1 }} <br>
+                        B. {{ q.option2 }} <br>
+                        C. {{ q.option3 }} <br>
+                        D. {{ q.option4 }}
+                    </td>
+                    <td class="p-3 text-green">{{ q.correct_answer }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        {% if selected_course %}
+            <p class="text-red mt-5">No questions found for this course.</p>
+        {% endif %}
+    {% endif %}
+
+</div>
+
+{% endblock %}

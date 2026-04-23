@@ -1,0 +1,68 @@
+{% extends 'client/common.html' %}
+{% load static %}
+{% block title %}Approved Courses{% endblock title %}
+
+{% block content %}
+<style>
+    .tab_list {
+        margin-top: 50px;
+    }
+
+    .heading3 {
+        margin-top: 50px;
+        color: white;
+    }
+
+    .form_register {
+        background-color: #386fa1;
+    }
+</style>
+
+<div class="p-8 w-full">
+    <h2 class="text-3xl font-bold text-indigo-700 mb-6">My Approved Courses</h2>
+
+    {% if approved_courses %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for course in approved_courses %}
+            <div class="bg-white shadow-md rounded-xl overflow-hidden transition hover:shadow-lg">
+        
+                <div class="p-5">
+                    <h3 class="text-xl font-semibold text-indigo-700">{{ course.name }}</h3>
+                    <p class="text-dark-600 mt-2">{{ course.description }}</p>
+                    <div class="mt-3 text-sm text-gray-500 space-y-1">
+                        <p><strong>Duration:</strong> {{ course.duration }}</p>
+                        <p><strong>Fees:</strong> ₹{{ course.fees }}</p>
+                    </div>
+
+                    <div class="mt-4">
+                        <span class="inline-block text-xs font-semibold px-3 py-1 bg-green-100 text-green-700 rounded-full">
+                            Status: {{ course.status }}
+                        </span>
+                    </div>
+
+                    <div class="mt-4">
+                        {% if course.payment_status != 'paid' %}
+                            <a href="/payment/{{ course.id }}">
+                                <button class="button-main w-full inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+                                    Make Payment
+                                </button>
+                            </a>
+                        {% else %}
+                            <a href="/attempt_quiz/{{ course.id }}">
+                                <button class="button-main w-full inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+                                    Attempt Quiz
+                                </button>
+                            </a>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-gray-600 mt-6">No approved courses found.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'Admin/common.html' %}
+{% block content %}
+{% load static %}
+        
+                    <button class="btn_open_popup btn_menu_dashboard flex items-center gap-2 lg:hidden" data-type="menu_dashboard">
+                        <span class="ph ph-squares-four text-xl"></span>
+                        
+                        <strong class="text-button">Menu</strong>
+                    </button>
+                    <h4 class="heading4 max-lg:mt-3">Projects</h4>
+                    <div class="applied_block mt-7.5 rounded-lg bg-white">
+                        <div class="list overflow-x-auto w-full py-5 px-6 rounded-xl">
+                            <table class="w-full max-[1400px]:w-[1200px] max-md:w-[1000px]">
+                                <thead class="border-b border-line">
+                               
+                                    <tr>
+                                        <th scope="col" class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">Project</th>
+                                        <th scope="col" class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">Buyer</th>
+                                        <th scope="col" class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">Pricing</th>
+                                        <th scope="col" class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">Date</th>
+                                        <th scope="col" class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">Status</th>
+                                        <th scope="col" class="px-5 py-4 text-right text-sm font-bold uppercase text-secondary whitespace-nowrap">Coder</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                 {% for i in projects %}
+                                    <tr class="item duration-300 hover:bg-background">
+                                        <th scope="row" class="p-5 text-left">
+                                            <div class="info">
+                                                <a href="" class="title heading6 duration-300 hover:underline">{{i.title}}</a>
+                                            </div>
+                                        </th>
+                                        <td class="p-5 whitespace-nowrap">{{i.buyerid.fullname}}</td>
+                                        <td class="p-5">$ {{i.salary}}</td>
+                                        <td class="p-5 whitespace-nowrap">{{i.today}}</td>
+                                        <td class="p-5">
+                                            {% if i.projectstatus == "Completed" %} <span class="tag bg-opacity-10 bg-success text-success text-button"> Completed
+                  {% elif i.doneby_id is none %} <span class="tag bg-opacity-10 bg-primary text-primary text-button">Pending
+                    {% else %} <span class="tag bg-danger text-dark text-button">Doing
+                {% endif %}</span>
+                                        </td>
+                                         <td class="p-5 whitespace-nowrap">{{i.doneby.fullname}}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="lg:fixed bottom-0 left-0 z-[1] lg:pl-[280px] flex items-center justify-center w-full h-15 bg-white duration-300 shadow-md">
+                    <span class="copyright caption1 text-secondary">©2024 FreelanHub. All Rights Reserved</span>
+                </div>
+            </div>
+        </div>
+
+
+        
+        </div>
+
+{% endblock %} 

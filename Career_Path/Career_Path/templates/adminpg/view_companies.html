@@ -1,0 +1,70 @@
+{% extends 'adminpg/common.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+    .heading5 {
+        margin-top: 100px;
+    }
+</style>
+
+<div class="active_work p-6 mt-7.5 rounded-lg bg-white">
+    <h4 class="heading4 max-lg:mt-3">Companies</h4>
+
+    <div class="list overflow-x-auto w-full p-5 rounded-xl">
+        <table class="w-full max-[1400px]:w-[1200px] max-md:w-[1000px]">
+            <thead class="border-b border-line">
+                <tr>
+                    <th class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary">Logo</th>
+                    <th class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary">Company Name</th>
+                    <th class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary">Address</th>
+                    <th class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary">Email</th>
+                    <th class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary">Mobile</th>
+                    <th class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary">Proof</th>
+                    <th class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary">Certification</th>
+                    <th class="px-5 py-4 text-left text-sm font-bold uppercase text-secondary">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for i in companies %}
+                <tr class="item duration-300 hover:bg-background">
+                    <td class="p-5">
+                        <img src="../static/media/{{i.img}}" style="max-width:30px;">
+                    </td>
+                    <td class="p-5">{{i.name}}</td>
+                    <td class="p-5">{{i.address}}</td>
+                    <td class="p-5">{{i.email}}</td>
+                    <td class="p-5">{{i.phone}}</td>
+                    <td class="p-5">
+                        {% if i.proof %}
+                            <a href="{{ i.proof.url }}" download class="btn btn-info">Download</a>
+                        {% else %}
+                            No File
+                        {% endif %}
+                    </td>
+
+                    <td class="p-5">
+                        {% if i.certification %}
+                            <a href="{{ i.certification.url }}" download class="btn btn-primary">Download</a>
+                        {% else %}
+                            No File
+                        {% endif %}
+                    </td>
+
+                    <td class="p-5 whitespace-nowrap">
+                        {% if i.loginid.is_active == 0 %}
+                            <a href="/approve_company?id={{i.id}}" class="btn btn-success">Approve</a>
+                            <a href="/delete_company?id={{i.id}}" class="btn btn-danger">Delete</a>
+                        {% else %}
+                            <a href="/delete_company?id={{i.id}}" class="btn btn-danger">Delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

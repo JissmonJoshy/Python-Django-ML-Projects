@@ -1,0 +1,46 @@
+{% extends 'tutor/common.html' %}
+{% block content %}
+
+<div class="max-w-5xl mx-auto mt-10 bg-white shadow-lg rounded-xl p-6">
+
+    <h2 class="text-2xl font-semibold mb-6 text-center text-gray-700">
+        Uploaded Notes
+    </h2>
+
+    <table class="w-full border">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="p-3 border">Course</th>
+                <th class="p-3 border">Title</th>
+                <th class="p-3 border">File</th>
+                <th class="p-3 border">Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for n in notes %}
+            <tr class="text-center">
+                <td class="p-3 border">{{ n.course.name }}</td>
+                <td class="p-3 border">{{ n.title }}</td>
+                <td class="p-3 border">
+                    <a href="{{ n.file.url }}" target="_blank"
+                       class="text-blue-600 underline">View PDF</a>
+                </td>
+                <td class="p-3 border">
+                    <a href="/delete-note/{{ n.id }}"
+                       class="bg-red-500 text-black px-3 py-1 rounded-lg">
+                       Delete
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center p-4">No notes uploaded</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

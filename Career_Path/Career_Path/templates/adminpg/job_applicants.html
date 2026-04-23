@@ -1,0 +1,61 @@
+{% extends 'adminpg/common.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mx-auto p-6 bg-white shadow-md rounded-md mt-5">
+    <h2 class="text-2xl font-semibold mb-4">Job Applicants</h2>
+
+    {% if applications %}
+    <div class="overflow-x-auto">
+        <table class="min-w-full border text-sm">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="border px-4 py-2">#</th>
+                    <th class="border px-4 py-2">Job</th>
+                    <th class="border px-4 py-2">Client</th>
+                    <th class="border px-4 py-2">Email</th>
+                    <th class="border px-4 py-2">Phone</th>
+                    <th class="border px-4 py-2">Qualification</th>
+                    <th class="border px-4 py-2">CV</th>
+                    <th class="border px-4 py-2">Status</th>
+                    <th class="border px-4 py-2">Meet</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for app in applications %}
+                <tr class="hover:bg-gray-50">
+                    <td class="border px-4 py-2">{{ forloop.counter }}</td>
+                    <td class="border px-4 py-2">{{ app.job.name }}</td>
+                    <td class="border px-4 py-2">{{ app.client.name }}</td>
+                    <td class="border px-4 py-2">{{ app.email }}</td>
+                    <td class="border px-4 py-2">{{ app.phone }}</td>
+                    <td class="border px-4 py-2">{{ app.qualification }}</td>
+
+                    <td class="border px-4 py-2">
+                        <a href="/media/{{ app.cv }}" target="_blank" class="text-blue-600 underline">
+                            View CV
+                        </a>
+                    </td>
+
+                    <td class="border px-4 py-2">{{ app.status }}</td>
+
+                    <td class="border px-4 py-2">
+                        {% if app.meet_link %}
+                            <a href="{{ app.meet_link }}" target="_blank" class="text-green-600">Join</a>
+                        {% else %}
+                            Not Set
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+    {% else %}
+        <p>No applicants found.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,154 @@
+{% extends 'client/common.html' %}
+{% block content %}
+{% load static %}
+
+<div class="dashboard_project scrollbar_custom w-full bg-surface">
+<form method="POST" class="container h-fit lg:pt-15 lg:pb-30 max-lg:py-12 max-sm:py-8">
+    {% csrf_token %}
+
+    <div class="flex flex-wrap items-center justify-between gap-4">
+        <h4 class="heading4 max-lg:mt-3">Suggest a career !</h4>
+        <button class="button-main" type="submit">Save & Submit</button>
+    </div>
+
+    <div class="infomation p-8 mt-7.5 rounded-lg bg-white">
+        <h5 class="heading5">Interest Information</h5>
+
+        <div class="form grid sm:grid-cols-2 gap-5 mt-5">
+
+            <!-- Interest -->
+            <div class="title">
+                <label for="interest">Interest <span class="text-red">*</span></label>
+                <select class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="interest" id="interest" required>
+                    <option value="">-- Select Interest --</option>
+                    <option>Teaching</option>
+                    <option>Agriculture</option>
+                    <option>Finance</option>
+                    <option>Crafts</option>
+                    <option>Politics</option>
+                    <option>Coding</option>
+                    <option>Design</option>
+                    <option>Healthcare</option>
+                    <option>Sports</option>
+                    <option>Writing</option>
+                </select>
+            </div>
+
+            <!-- Age -->
+            <div class="age">
+                <label for="Age">Age <span class="text-red">*</span></label>
+                <input class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="Age" id="Age" type="text" placeholder="Age..." required />
+            </div>
+
+            <!-- Stream -->
+            <div class="qualification">
+                <label for="qualification">Stream <span class="text-red">*</span></label>
+                <select class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="qualification" id="qualification" required>
+                    <option value="">-- Select Stream --</option>
+                    <option>Science</option>
+                    <option>Commerce</option>
+                    <option>Arts</option>
+                    <option>Vocational</option>
+                </select>
+            </div>
+
+            <!-- Hobbies (Multi-select) -->
+            <div class="hobbies">
+                <label for="hobbies">Hobbies</label>
+                <select class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="hobbies" id="hobbies" multiple>
+                    <option>Drawing</option>
+                    <option>Reading</option>
+                    <option>Volunteering</option>
+                    <option>Singing</option>
+                    <option>Dancing</option>
+                    <option>Gardening</option>
+                    <option>Sketching</option>
+                    <option>Storytelling</option>
+                    <option>Yoga</option>
+                    <option>Cooking</option>
+                </select>
+            </div>
+
+            <!-- Favorite Subject -->
+            <div class="fav_subject">
+                <label for="fav_subject">Favorite Subject</label>
+                <select class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="fav_subject" id="fav_subject">
+                    <option value="">-- Select Subject --</option>
+                    <option>Maths</option>
+                    <option>Biology</option>
+                    <option>Physics</option>
+                    <option>Chemistry</option>
+                    <option>Accountancy</option>
+                    <option>History</option>
+                    <option>Geography</option>
+                    <option>English</option>
+                    <option>Hindi</option>
+                    <option>Political Science</option>
+                </select>
+            </div>
+
+            <!-- 10th Mark -->
+            <div class="ten_mark">
+                <label for="ten_mark">10th Mark</label>
+                <input class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="ten_mark" id="ten_mark" type="text" placeholder="10th Mark..." />
+            </div>
+
+            <!-- 12th/Degree Mark -->
+            <div class="mark">
+                <label for="mark">12th/Degree Mark</label>
+                <input class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="mark" id="mark" type="text" placeholder="12th/Degree Mark..." />
+            </div>
+
+            <!-- Technical Skills (Multi-select) -->
+            <div class="tech_skills">
+                <label for="tech_skills">Technical Skills</label>
+                <select class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="tech_skills" id="tech_skills" multiple>
+                    <option>Python</option>
+                    <option>Java</option>
+                    <option>C</option>
+                    <option>HTML</option>
+                    <option>Excel</option>
+                    <option>AutoCAD</option>
+                    <option>MS Office</option>
+                    <option>Tally</option>
+                    <option>Photoshop</option>
+                </select>
+            </div>
+
+            <!-- Soft Skills (Multi-select) -->
+            <div class="soft_skills">
+                <label for="soft_skills">Soft Skills</label>
+                <select class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="soft_skills" id="soft_skills" multiple>
+                    <option>Communication</option>
+                    <option>Teamwork</option>
+                    <option>Leadership</option>
+                    <option>Problem Solving</option>
+                    <option>Creativity</option>
+                    <option>Discipline</option>
+                </select>
+            </div>
+
+            <!-- Languages Known (Multi-select) -->
+            <div class="languages_known">
+                <label for="languages_known">Languages Known</label>
+                <select class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="languages_known" id="languages_known" multiple>
+                    <option>Hindi</option>
+                    <option>Tamil</option>
+                    <option>Telugu</option>
+                    <option>Bengali</option>
+                    <option>Marathi</option>
+                    <option>Kannada</option>
+                    <option>Gujarati</option>
+                    <option>Malayalam</option>
+                    <option>Punjabi</option>
+                    <option>English</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+</div>
+
+{% endblock %}

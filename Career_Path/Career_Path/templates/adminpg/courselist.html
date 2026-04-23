@@ -1,0 +1,28 @@
+{% extends 'adminpg/common.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mx-auto py-10 px-5">
+    <h2 class="text-3xl font-semibold mb-8">Courses</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {% for course in courses %}
+        <a href="/adm_viewCourses?id={{course.id}}" class="block bg-white border border-gray-200 rounded-lg overflow-hidden shadow hover:shadow-lg transition">
+            <div style="width: 100%; height: 200px; overflow: hidden;">
+                {% if course.img %}
+                <img src="/static/media/{{ course.img}}" alt="{{ course.name }}"
+                     style="width: 100%; height: 100%; object-fit: cover;" />
+                {% else %}
+                <img src="{% static 'default-course.jpg' %}" alt="No Image"
+                     style="width: 100%; height: 100%; object-fit: cover;" />
+                {% endif %}
+            </div>
+            <div class="p-4">
+                <h4 class="text-xl font-medium text-center">{{ course.name }}</h4>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

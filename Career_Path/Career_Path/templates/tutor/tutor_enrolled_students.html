@@ -1,0 +1,43 @@
+{% extends 'tutor/common.html' %}
+{% block content %}
+
+<div class="container mx-auto py-10 px-5">
+    <h2 class="text-2xl font-semibold mb-6">Enrolled Students</h2>
+
+    <div class="overflow-x-auto bg-white shadow rounded-lg">
+        <table class="w-full border-collapse">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="p-3 text-left">Course</th>
+                    <th class="p-3 text-left">Student Name</th>
+                    <th class="p-3 text-left">Email</th>
+                    <th class="p-3 text-left">Phone</th>
+                    <th class="p-3 text-left">Meet Link</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for e in enrollments %}
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="p-3">{{ e.course.name }}</td>
+                    <td class="p-3">{{ e.client.name }}</td>
+                    <td class="p-3">{{ e.client.email }}</td>
+                    <td class="p-3">{{ e.client.phone }}</td>
+
+                    <td class="p-3">
+                        {% if e.meet_link %}
+                            <a href="{{ e.meet_link }}" target="_blank" class="text-blue-600 underline">
+                                Join Meet
+                            </a>
+                        {% else %}
+                            <span class="text-gray-400">Not set</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

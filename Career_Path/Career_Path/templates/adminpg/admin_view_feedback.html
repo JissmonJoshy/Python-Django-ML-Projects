@@ -1,0 +1,45 @@
+{% extends 'adminpg/common.html' %}
+{% block content %}
+
+<div class="dashboard_main lg:w-screen lg:h-screen sm:pt-20 pt-16 overflow-auto">
+    <div class="inner py-10 px-10">
+
+        <h4 class="heading4 mb-6">All Company Feedback</h4>
+
+        {% if feedbacks %}
+        <div class="bg-white p-6 rounded-lg shadow-sm overflow-x-auto">
+            <table class="min-w-full border">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="px-4 py-2">#</th>
+                        <th class="px-4 py-2">Company</th>
+                        <th class="px-4 py-2">Job</th>
+                        <th class="px-4 py-2">Client</th>
+                        <th class="px-4 py-2">Rating</th>
+                        <th class="px-4 py-2">Feedback</th>
+                        <th class="px-4 py-2">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for f in feedbacks %}
+                    <tr class="border-b">
+                        <td class="px-4 py-2">{{ forloop.counter }}</td>
+                        <td class="px-4 py-2">{{ f.company.name }}</td>
+                        <td class="px-4 py-2">{{ f.job.name }}</td>
+                        <td class="px-4 py-2">{{ f.client.name }}</td>
+                        <td class="px-4 py-2">⭐ {{ f.rating }}/5</td>
+                        <td class="px-4 py-2">{{ f.feedback }}</td>
+                        <td class="px-4 py-2">{{ f.created_at|date:"d M Y" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <p>No feedback available</p>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

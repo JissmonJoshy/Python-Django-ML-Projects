@@ -1,0 +1,71 @@
+{% extends 'client/common.html' %}
+{% block content %}
+{% load static %}
+<div class="dashboard_main lg:w-screen lg:h-screen sm:pt-20 pt-16 overflow-auto">
+    <div class="inner scrollbar_custom max-h-full h-full py-10 px-10 overflow-y-auto">
+        <div class="heading items-center justify-between flex mb-4">
+            <h4 class="heading4">Edit profile</h4>
+        </div>
+
+        <form  method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="information p-8 mt-4 rounded-lg bg-white shadow-sm">
+                <h5 class="heading5">Information</h5>
+                <div class="grid sm:grid-cols-2 gap-5 mt-5">
+                    <div class="upload_image col-span-full">
+                        <label for="uploadImage" name="photo" id="photo">Photo: </label>
+                        <div class="flex flex-wrap items-center gap-5 mt-3">
+                            <div class="bg_img flex-shrink-0 relative w-[7.5rem] h-[7.5rem] rounded-md overflow-hidden border border-dashed border-line bg-surface">
+                                <img src="../static/media/{{.photo}}" alt="../static/media/{{coder.photo}}" class="upload_img relative z-[1] w-full h-full object-cover" />
+                            </div>
+                            <div>
+                                <strong class="text-button">Upload New</strong>
+                                <p class="caption1 text-secondary mt-1">JPG 320x240px</p>
+                                <div class="upload_file flex items-center gap-3 w-[220px] mt-3 px-3 py-2 border border-line rounded">
+                                    <label for="photo" class="caption2 py-1 px-3 rounded bg-line whitespace-nowrap cursor-pointer">Choose File</label>
+                                    <input type="file" name="photo" id="photo" class="caption2 cursor-pointer" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="full_name">
+                        <label for="fullname">Full Name:</label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg capitalize" name="fullname" id="fullname" type="text" value="{{coder.fullname}}" />
+                    </div>
+                    <div class="birth">
+                        <label for="dob">Date of birth: </label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="dob" id="dob" type="text"  value="{{coder.dob|date:'Y-m-d' }}"  />
+                    </div>
+                    <div class="phone_number">
+                        <label for="mobile">Phone number:</label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="mobile" id="mobile" type="text"  value="{{coder.mobile}}"  />
+                    </div>
+                    <div class="email_address">
+                        <label for="username">Email address: </label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="username" id="username" type="email"  value="{{coder.username}}"  />
+                    </div>
+                    <div class="email_address">
+                        <label for="address">Address:</label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg" id="address" name="address" type="text" value="{{coder.address}}"  />
+                    </div>
+                    <div class="email_address">
+                        <label for="role">Role: </label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="role" id="role" type="text"  value="{{coder.role}}"  />
+                    </div>
+                    <div >
+                        <label for="intro">Intro: </label>
+                        <input class="w-full border-line rounded-lg" name="intro" id="intro" type="text" value="{{coder.intro}}" style="height: 200px;" />
+                    </div>
+                </div>
+            </div>
+            <button class="button-main mt-4" type="submit">Save & Publish</button>
+        </form>
+        
+
+        
+        <div class="bottom-0 left-0 z-[1] lg:pl-[280px] flex items-center justify-center w-full h-15 bg-white duration-300 shadow-md">
+            <span class="copyright caption1 text-secondary">©2024 FreelanHub. All Rights Reserved</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

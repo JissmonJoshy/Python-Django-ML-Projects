@@ -1,0 +1,60 @@
+{% extends 'tutor/common.html' %}
+{% block content %}
+
+<div class="container py-10">
+    <h4 class="heading4 mb-6">My Courses</h4>
+
+    <div class="overflow-x-auto bg-white rounded-lg shadow">
+        <table class="w-full text-left">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="p-3">Image</th>
+                    <th class="p-3">Title</th>
+                    <th class="p-3">Duration</th>
+                    <th class="p-3">Fees</th>
+                    <th class="p-3">Status</th>
+                    <th class="p-3">Add Notes</th>
+                    <th class="p-3">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in courses %}
+                <tr class="border-b">
+                    <td class="p-3">
+                        <img src="{{ c.img.url }}" class="h-14 w-20 rounded">
+                    </td>
+                    <td class="p-3">{{ c.name }}</td>
+                    <td class="p-3">{{ c.duration }}</td>
+                    <td class="p-3">{{ c.fees }}</td>
+                    <td class="p-3">
+                        {% if c.status == 'approved' %}
+                            <span class="text-green-600">Approved</span>
+                        {% elif c.status == 'rejected' %}
+                            <span class="text-red-600">Rejected</span>
+                        {% else %}
+                            <span class="text-orange-500">Pending</span>
+                        {% endif %}
+                    </td>
+                    <td class="p-3">
+                        <a href="/add-notes/?course_id={{ c.id }}" class="button-blue-sm">
+                            Add Notes
+                        </a>
+                    </td>
+                    <td class="p-3 flex gap-2">
+                        <a href="/tutor_edit_course/{{ c.id }}" class="button-main-sm">Edit</a>
+                        <a href="/tutor_delete_course/{{ c.id }}" class="button-red-sm"
+                           onclick="return confirm('Delete this course?')">Delete</a>
+                    </td>
+                    
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="p-4 text-center">No courses added</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,231 @@
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    
+<!-- Mirrored from freelanhub.vercel.app/candidates-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Feb 2025 09:41:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+  {%for i in messages%}
+  <script>
+    alert("{{i}}");
+  </script>
+  {%endfor%}
+<head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="FreelanHub - Job Board & Freelance Marketplace" />
+        <title>FreelanHub - Job Board & Freelance Marketplace</title>
+        <link rel="shortcut icon" href="{% static 'assets/images/fav.png' %}" type="image/x-icon" />
+        <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/leaflet.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/apexcharts.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'dist/output-tailwind.css' %}" />
+        <link rel="stylesheet" href="{% static 'dist/output-scss.css' %}" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    </head>
+
+    <body class="lg:overflow-hidden">
+        <!-- Header -->
+        <header id="header" class="header -style-white relative">
+            <div class="header_inner absolute flex items-center justify-between top-0 left-0 right-0 z-[1] w-full sm:h-20 h-16 min-[1600px]:px-15 lg:px-9 px-4 border-b border-line">
+                <div class="left flex items-center gap-15 max-[1600px]:gap-6 h-full px-4 md:px-8 bg-gray-900 text-white">
+                    <h1 class="text-2xl md:text-3xl font-bold">
+                        Career <span class="text-indigo-400">Path</span>
+                    </h1>
+                
+                    <!-- Optional Logo (Uncomment if needed) -->
+                    <!--
+                    <img src="{% static 'assets/images/logo-white.png' %}" alt="logo-white"
+                        class="logo-white md:h-[42px] h-8 w-auto ml-4" />
+                    -->
+                    <!--
+                    <img src="{% static 'assets/images/logo.png' %}" alt="logo"
+                        class="logo-black md:h-[42px] h-8 w-auto hidden ml-4" />
+                    -->
+                </div>
+                
+                
+                <div class="list_action flex items-center gap-5">
+                   
+                    
+                    <div class="user_block relative max-sm:hidden">
+  
+                        <button class="user_infor flex items-center gap-2 text-white">
+                            <img src="{% static 'media/Image/50426.jpg' %}" alt="IMG-7" class="user_avatar flex-shrink-0 w-9 h-9 rounded-full" />
+                            <strong class="user_name text-title">Admin</strong>
+                            <span class="ph ph-caret-down"></span>
+                        </button>
+                        <ul class="list_action_user absolute w-[240px] p-3 top-14 right-0 bg-white rounded-lg">
+                            {% comment %} <li class="action_item">
+                                <a href="employers-profile.html" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph ph-user-circle text-2xl text-secondary"></span>
+                                    <strong class="text-title">My Profile</strong>
+                                </a>
+                            </li> {% endcomment %}
+                            <li class="action_item">
+                                <a href="/login" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph ph-sign-out text-2xl text-secondary"></span>
+                                    <strong class="text-title">Log Out</strong>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <button class="humburger_btn min-[1400px]:hidden">
+                        <span class="ph-bold ph-list text-white text-2xl block"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+<div class="dashboard_main overflow-hidden lg:w-screen lg:h-screen flex sm:pt-20 pt-16">
+            <div class="menu_dashboard overflow-hidden flex-shrink-0 min-[320px]:w-[280px] w-[80vw] h-full bg-white relative z-[2] max-lg:hidden">
+                <div class="inner scrollbar_custom max-h-full py-6 px-3">
+                    <div class="area">
+                        <span class="px-6 text-xs font-semibold text-secondary uppercase">Overviews</span>
+                        <ul class="list_link flex flex-col gap-2 mt-2">
+
+                            <li>
+                                <a href="/adminhome" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph-duotone ph-house text-2xl text-secondary"></span>
+                                    <strong class="text-title">Home</strong>
+                                </a>
+                            </li>
+
+                            
+
+                            <li>
+                                <a href="/admin_viewClients" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph-duotone ph-users text-2xl text-secondary"></span>
+                                    <strong class="text-title">View Client</strong>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'view_companies' %}" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph-duotone ph-buildings text-2xl text-secondary"></span>
+                                    <strong class="text-title">View Company</strong>
+                                </a>
+                            </li>
+
+                            
+                            
+
+                            <li>
+                                <a href="/view_tutors" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph-duotone ph-chalkboard-teacher text-2xl text-secondary"></span>
+                                    <span class="text-title relative">View Tutors</span>
+                                </a>
+
+                            </li>
+
+                            <li>
+                                <a href="/adm_viewJobs" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph-duotone ph-briefcase text-2xl text-secondary"></span>
+                                    <span class="text-title relative">View Jobs</span>
+                                </a>
+                            </li>
+
+                            
+
+
+                            <li>
+                                <a href="/admin_view_courses" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph-duotone ph-briefcase text-2xl text-secondary"></span>
+                                    <span class="text-title relative">View Courses</span>
+                                </a>
+                            </li>
+
+                            
+
+                            <li >
+                                <a href="/admin_course_enrollments" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph-duotone ph-briefcase text-2xl text-secondary"></span>
+                                    <span class="text-title relative">Course Enrollments</span>
+                                </a>
+                            </li>
+
+                       
+
+                            <li>
+                                <a href="/admin_job_applicants" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph-duotone ph-briefcase text-2xl text-secondary"></span>
+                                    <span class="text-title relative">Job Applicants</span>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="{% url 'admin_view_feedback' %}" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph-duotone ph-star text-2xl text-secondary"></span>
+                                    <span class="text-title relative">Company Feedback</span>
+                                </a>
+                            </li>
+
+
+                            <li>
+                                <a href="/view_feedbacks" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph-duotone ph-chat-centered-text text-2xl text-secondary"></span>
+                                    <span class="text-title relative">Course Feedback</span>
+                                </a>
+                            </li>
+
+                            
+                            {% comment %} <li>
+                                <a href="/add_question" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph-duotone ph-question text-2xl text-secondary"></span>
+                                    <strong class="text-title">Add Question</strong>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/view_questions" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph-duotone ph-clipboard-text text-2xl text-secondary"></span>
+                                    <strong class="text-title">View Questions</strong>
+                                </a>
+                            </li> {% endcomment %}
+
+                            {% comment %} <li>
+                                <a href="/adm_viewapplycourse" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph-duotone ph-bookmark-simple text-2xl text-secondary"></span>
+                                    <strong class="text-title">Course Applied</strong>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/adm_addCourse" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph-duotone ph-book-open text-2xl text-secondary"></span>
+                                    <strong class="text-title">Add Course</strong>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/course_list" class="link flex items-center gap-3 w-full py-3 px-6 rounded-lg duration-300 hover:bg-background">
+                                    <span class="ph-duotone ph-books text-2xl text-secondary"></span>
+                                    <strong class="text-title">View Course</strong>
+                                </a>
+                            </li> {% endcomment %}
+
+                        </ul>
+
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="dashboard_applied scrollbar_custom w-full bg-surface">
+                <div class="container h-fit lg:pt-15 lg:pb-30 max-lg:py-12 max-sm:py-8">    
+{% block content %} {% endblock content %}
+        <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/js/phosphor-icons.js' %}"></script>
+        <script src="{% static 'assets/js/slick.min.js' %}"></script>
+        <script src="{% static 'assets/js/leaflet.js' %}"></script>
+        <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
+        <script src="{% static 'assets/js/apexcharts.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>
+    </body>
+
+<!-- Mirrored from freelanhub.vercel.app/candidates-active-work.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Feb 2025 09:41:46 GMT -->
+</html>

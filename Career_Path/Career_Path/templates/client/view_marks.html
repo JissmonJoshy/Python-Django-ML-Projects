@@ -1,0 +1,50 @@
+{% extends 'client/common.html' %}
+{% block title %}My Quiz Marks{% endblock title %}
+{% block content %}
+
+<div class="p-6 w-full">
+    <h2 class="text-2xl font-bold text-indigo-700 mb-6">
+        My Quiz Results
+    </h2>
+
+    {% if attempts %}
+    <div class="overflow-x-auto bg-white rounded-lg shadow">
+        <table class="w-full border-collapse">
+            <thead class="bg-indigo-100">
+                <tr>
+                    <th class="p-3 text-left">#</th>
+                    <th class="p-3 text-left">Course</th>
+                    <th class="p-3 text-left">Score</th>
+                    <th class="p-3 text-left">Total</th>
+                    <th class="p-3 text-left">Result</th>
+                    <th class="p-3 text-left">Attempted On</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in attempts %}
+                <tr class="border-b">
+                    <td class="p-3">{{ forloop.counter }}</td>
+                    <td class="p-3 font-semibold">{{ a.course.name }}</td>
+                    <td class="p-3">{{ a.score }}</td>
+                    <td class="p-3">{{ a.total_questions }}</td>
+                    <td class="p-3">
+                        {% if a.score >= 3 %}
+                            <span class="text-green-600 font-semibold">Pass</span>
+                        {% else %}
+                            <span class="text-red-600 font-semibold">Fail</span>
+                        {% endif %}
+                    </td>
+                    <td class="p-3 text-sm text-gray-500">
+                        {{ a.created_at|date:"d M Y, h:i A" }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p class="text-gray-600">You have not attempted any quizzes yet.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

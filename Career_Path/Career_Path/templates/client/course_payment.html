@@ -1,0 +1,87 @@
+{% extends 'client/common.html' %}
+{% block content %}
+
+<style>
+.payment-card{
+    max-width: 520px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+.input-box{
+    width: 100%;
+    height: 45px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 0 14px;
+    font-size: 14px;
+}
+.input-box:focus{
+    outline: none;
+    border-color: #386fa1;
+}
+.pay-btn{
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    background: #386fa1;
+    color: white;
+    font-weight: 600;
+    border: none;
+}
+.pay-btn:hover{
+    background: #2e5b8a;
+}
+</style>
+
+<div class="container py-16 px-4">
+
+    <div class="payment-card">
+
+        <h3 class="text-xl font-semibold mb-4 text-center">
+            Course Payment
+        </h3>
+
+        <div class="mb-5 text-center">
+            <p class="font-medium">{{ course.name }}</p>
+            <p class="text-lg font-bold mt-1">₹{{ course.fees }}</p>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-4">
+                <label>Card Holder Name</label>
+                <input type="text" class="input-box" required>
+            </div>
+
+            <div class="mb-4">
+                <label>Card Number</label>
+                <input type="text" maxlength="16" class="input-box"
+                       placeholder="1234 5678 9012 3456" required>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label>Expiry Date</label>
+                    <input type="month" class="input-box" required>
+                </div>
+                <div>
+                    <label>CVV</label>
+                    <input type="password" maxlength="3" class="input-box" required>
+                </div>
+            </div>
+
+            <button type="submit" class="pay-btn">
+                Pay ₹{{ course.fees }}
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

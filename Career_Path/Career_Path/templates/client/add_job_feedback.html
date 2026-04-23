@@ -1,0 +1,52 @@
+{% extends 'client/common.html' %}
+{% block content %}
+
+<div class="dashboard_main lg:w-screen lg:h-screen sm:pt-20 pt-16 overflow-auto">
+    <div class="inner py-10 px-10">
+
+        <div class="heading mb-4">
+            <h4 class="heading4">Give Feedback</h4>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="bg-white p-8 rounded-lg shadow-sm">
+
+                <p class="mb-2"><b>Job:</b> {{ job.name }}</p>
+                <p class="mb-5"><b>Company:</b> {{ company.name }}</p>
+
+                <!-- Rating -->
+                <label class="block mb-2 font-semibold">Rating</label>
+                <select name="rating"
+                        class="w-full h-12 px-4 border-line rounded-lg mb-4"
+                        required>
+                    <option value="">Select Rating</option>
+                    <option value="5">★★★★★ Excellent</option>
+                    <option value="4">★★★★ Very Good</option>
+                    <option value="3">★★★ Good</option>
+                    <option value="2">★★ Fair</option>
+                    <option value="1">★ Poor</option>
+                </select>
+
+                <!-- Feedback -->
+                <label class="block mb-2 font-semibold">Feedback</label>
+                <textarea name="feedback"
+                          rows="5"
+                          class="w-full border p-3 rounded-lg"
+                          placeholder="Write your feedback..."
+                          required></textarea>
+
+                <div class="mt-6">
+                    <button type="submit"
+                            class="button-main bg-primary w-full">
+                        Submit Feedback
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'client/common.html' %}
+{% block content %}
+{% load static %}
+<style>
+    .tab_list {
+        margin-top: 50px;
+    }
+
+    .heading3 {
+        margin-top: 50px;
+        color: white;
+    }
+
+    .form_register {
+        background-color: #386fa1;
+    }
+</style>
+<div class="dashboard_main lg:w-screen lg:h-screen sm:pt-20 pt-16 overflow-auto">
+    <div class="inner scrollbar_custom max-h-full h-full py-10 px-10 overflow-y-auto">
+        <div class="heading items-center justify-between flex mb-4">
+            <h4 class="heading4">Edit Profile</h4>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="information p-8 mt-4 rounded-lg bg-white shadow-sm">
+                <h5 class="heading5">Information</h5>
+                <div class="grid sm:grid-cols-2 gap-5 mt-5">
+
+                    <div class="col-span-full">
+                        <label for="img">Photo:</label><br>
+                        {% if client.img %}
+                        <img src="/static/media/{{ client.img }}" width="120" class="rounded mb-2" />
+                        {% endif %}
+                        <input type="file" name="img" class="form-control" />
+                    </div>
+
+                    <div>
+                        <label for="name">Full Name:</label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg capitalize" name="name" type="text" value="{{ client.name }}" required />
+                    </div>
+
+                    <div>
+                        <label for="dob">Date of Birth:</label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="dob" type="date" value="{{ client.dob|date:'Y-m-d' }}" />
+                    </div>
+
+                    <div>
+                        <label for="phone">Phone:</label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="phone" type="text" value="{{ client.phone }}" />
+                    </div>
+
+                    <div>
+                        <label for="email">Email:</label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="email" type="email" value="{{ client.email }}" />
+                    </div>
+
+                    <div>
+                        <label for="address">Address:</label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="address" type="text" value="{{ client.address }}" />
+                    </div>
+
+                    <div>
+                        <label for="qualification">Qualification:</label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg" name="qualification" type="text" value="{{ client.qualification }}" />
+                    </div>
+                </div>
+            </div>
+ <div class="block-button mt-6">
+                    <button class="button-main bg-primary w-full text-center">Save </button>
+                </div>
+            <button class="button-main mt-4" type="submit"></button>
+        </form>
+
+        <div class="bottom-0 left-0 z-[1] lg:pl-[280px] flex items-center justify-center w-full h-15 bg-white duration-300 shadow-md">
+            <span class="caption1 text-secondary">©2024 FreelanHub. All Rights Reserved</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'client/common.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+    .tab_list {
+        margin-top: 50px;
+    }
+    .heading3 {
+        margin-top: 50px;
+        color: white;
+    }
+    .form_register {
+        background-color: #386fa1;
+    }
+</style>
+
+<div class="dashboard_main lg:w-screen lg:h-screen sm:pt-20 pt-16 overflow-auto">
+    <div class="inner scrollbar_custom max-h-full h-full py-10 px-10 overflow-y-auto">
+
+        <div class="heading items-center justify-between flex mb-4">
+            <h4 class="heading4">Apply Job</h4>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="information p-8 mt-4 rounded-lg bg-white shadow-sm">
+                <h5 class="heading5 mb-4">
+                    Job Application – {{ job.name }}
+                </h5>
+
+                <div class="grid sm:grid-cols-2 gap-5 mt-5">
+
+                    <div>
+                        <label>Full Name:</label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg bg-gray-100"
+                               type="text" value="{{ client.name }}" readonly>
+                    </div>
+
+                    <div>
+                        <label>Email:</label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg bg-gray-100"
+                               type="email" value="{{ client.email }}" readonly>
+                    </div>
+
+                    <div>
+                        <label>Phone:</label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg bg-gray-100"
+                               type="text" value="{{ client.phone }}" readonly>
+                    </div>
+
+                    <div>
+                        <label>Qualification:</label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg bg-gray-100"
+                               type="text" value="{{ client.qualification }}" readonly>
+                    </div>
+
+                    <div class="col-span-full">
+                        <label>Upload CV:</label>
+                        <input class="w-full h-12 px-4 mt-2 border-line rounded-lg bg-white"
+                               type="file" name="cv" required>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="block-button mt-6">
+                <button type="submit"
+                        class="button-main bg-primary w-full text-center">
+                    Apply Job
+                </button>
+            </div>
+
+        </form>
+
+        <div class="bottom-0 left-0 z-[1] lg:pl-[280px] flex items-center justify-center w-full h-15 bg-white duration-300 shadow-md mt-10">
+            <span class="caption1 text-secondary">
+                ©2024 FreelanHub. All Rights Reserved
+            </span>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

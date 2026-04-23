@@ -1,0 +1,67 @@
+{% extends 'adminpg/common.html' %}
+{% block content %}
+{% load static %}
+
+<div class="dashboard_home w-full bg-gray-50">
+  <div class="container h-fit py-10">
+    <div class="heading flex flex-wrap items-center justify-between gap-4">
+      <h4 class="text-3xl font-semibold text-gray-800">Welcome Admin</h4>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+      <!-- Card: Total Clients -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h5 class="text-lg font-semibold text-gray-700">Total Clients</h5>
+        <p class="text-4xl font-bold text-indigo-600 mt-2">{{ total_clients }}</p>
+      </div>
+
+      <!-- Card: Total Courses -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h5 class="text-lg font-semibold text-gray-700">Total Courses</h5>
+        <p class="text-4xl font-bold text-indigo-600 mt-2">{{ total_courses }}</p>
+      </div>
+
+      <!-- Card: Jobs Posted -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h5 class="text-lg font-semibold text-gray-700">Jobs Posted</h5>
+        <p class="text-4xl font-bold text-indigo-600 mt-2">{{ total_jobs }}</p>
+      </div>
+    </div>
+
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Recent Clients -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h5 class="text-lg font-semibold text-gray-700 mb-4">Recent Clients</h5>
+        <ul class="space-y-3">
+          {% for client in recent_clients %}
+          <li class="flex items-center justify-between">
+            <div>
+              <p class="font-medium text-gray-800">{{ client.name }}</p>
+              <p class="text-sm text-gray-500">{{ client.email }}</p>
+            </div>
+            <span class="text-sm text-indigo-500">{{ client.phone }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Recent Jobs -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h5 class="text-lg font-semibold text-gray-700 mb-4">Recent Jobs</h5>
+        <ul class="space-y-3">
+          {% for job in recent_jobs %}
+          <li class="flex items-center justify-between">
+            <div>
+              <p class="font-medium text-gray-800">{{ job.title }}</p>
+              <p class="text-sm text-gray-500">{{ job.company }}</p>
+            </div>
+            <span class="text-sm text-green-600">{{ job.salary }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

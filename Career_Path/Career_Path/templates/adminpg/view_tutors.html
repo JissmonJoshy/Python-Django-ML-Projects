@@ -1,0 +1,110 @@
+{% extends 'adminpg/common.html' %}
+{% block content %}
+
+<style>
+.table-wrap{
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+th, td{
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+th{
+    background: #203a43;
+    color: white;
+}
+.status{
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: white;
+}
+.active{ background: green; }
+.inactive{ background: red; }
+.btn{
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-size: 13px;
+}
+.approve{ background: green; }
+.reject{ background: red; }
+img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+</style>
+
+<div class="table-wrap">
+    <h3 style="margin-bottom:15px;">Tutor Applications</h3>
+
+    <table>
+        <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Qualification</th>
+            <th>Proof</th>
+            <th>Certification</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+
+        {% for t in tutors %}
+        <tr>
+            <td>
+                {% if t.img %}
+                <img src="{{ t.img.url }}">
+                {% endif %}
+            </td>
+            <td>{{ t.name }}</td>
+            <td>{{ t.email }}</td>
+            <td>{{ t.phone }}</td>
+            <td>{{ t.qualification }}</td>
+            <td>
+                {% if t.proof %}
+                    <a href="{{ t.proof.url }}" download class="btn approve">Download</a>
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+
+            <td>
+                {% if t.certification %}
+                    <a href="{{ t.certification.url }}" download class="btn approve">Download</a>
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+            <td>
+                {% if t.loginid.is_active %}
+                <span class="status active">Approved</span>
+                {% else %}
+                <span class="status inactive">Pending</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if t.loginid.is_active %}
+                    <a href="{% url 'reject_tutor' t.id %}" class="btn reject">Delete</a>
+                {% else %}
+                    <a href="{% url 'approve_tutor' t.id %}" class="btn approve">Approve</a>
+                    <a href="{% url 'reject_tutor' t.id %}" class="btn reject">Reject</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends 'client/common.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+.heading3{
+    color:#111;
+}
+.course-card{
+    background:white;
+    border-radius:14px;
+    padding:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+.apply-btn{
+    background:#386fa1;
+    color:white;
+    padding:14px 40px;
+    border-radius:10px;
+    font-weight:600;
+}
+.apply-btn:hover{
+    background:#2e5b8a;
+}
+</style>
+
+<!-- Header -->
+<section class="bg-[#04b2b2] py-12">
+    <div class="container text-center"><br>
+        <h3 class="heading3 text-2xl font-semibold">{{ courses.name }}</h3>
+        <p class="mt-2 text-sm text-gray-700">
+            Created on {{ courses.created_at|date:"d M Y" }}
+        </p>
+    </div>
+</section>
+
+<!-- Content -->
+<div class="container py-14 px-4">
+    <div class="course-card max-w-4xl mx-auto">
+
+        <!-- Overview -->
+        <h6 class="heading6 mb-4">Course Overview</h6>
+        <div class="grid sm:grid-cols-2 gap-6 mb-8">
+
+            <div class="flex items-center gap-3">
+                <span class="ph ph-clock-countdown text-3xl text-secondary"></span>
+                <div>
+                    <p class="text-sm text-gray-500">Duration</p>
+                    <p class="font-semibold">{{ courses.duration }}</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <span class="ph ph-currency-inr text-3xl text-secondary"></span>
+                <div>
+                    <p class="text-sm text-gray-500">Fees</p>
+                    <p class="font-semibold">₹{{ courses.fees }}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Description -->
+        <h6 class="heading6 mb-3">Description</h6>
+        <p class="text-gray-600 leading-relaxed mb-10">
+            {{ courses.description }}
+        </p>
+
+        <!-- Image -->
+        {% if courses.img %}
+<div class="attachments md:mt-8 mt-6">
+    <h6 class="heading6 mb-3">Course Image</h6>
+
+    <div class="border border-gray-300 rounded-md overflow-hidden"
+         style="width: 120px; height: 120px;">
+        <img src="/static/media/{{ courses.img }}"
+             alt="Course Image"
+             style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+</div>
+{% endif %}
+
+
+        <!-- Apply Button -->
+        <div class="text-center">
+            <a href="{% url 'course_payment' %}?id={{ courses.id }}">
+                <button class="apply-btn">
+                    {% if courses.status == 'paid' %}
+                        Applied
+                    {% else %}
+                        Apply & Pay Now
+                    {% endif %}
+                </button>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
