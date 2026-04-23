@@ -1,0 +1,156 @@
+{% extends "Doctor/common.html" %}
+{% block content %}
+{% load static %}
+
+<!-- ALERT -->
+{% for message in messages %}
+<script>
+    alert("{{ message }}")
+</script>
+{% endfor %}
+
+<section class="bg-light py-5" style="min-height:100vh;">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+
+                <div class="card shadow-lg border-0 rounded-4">
+
+                    <!-- HEADER -->
+                    <div class="card-header bg-primary text-white text-center rounded-top-4">
+                        <h4 class="mb-0">Update Doctor Profile</h4>
+                    </div>
+
+                    <div class="card-body p-4">
+
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            {% for i in data %}
+
+                            <!-- NAME -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Full Name</label>
+                                <input type="text"
+                                       name="name"
+                                       value="{{ i.name }}"
+                                       class="form-control"
+                                       required
+                                       pattern="[A-Za-z ]{3,50}"
+                                       title="Only letters allowed (3–50 characters)">
+                            </div>
+
+                            <!-- PHONE -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Phone Number</label>
+                                <input type="text"
+                                       name="phone"
+                                       value="{{ i.phone }}"
+                                       class="form-control"
+                                       required
+                                       maxlength="10"
+                                       pattern="[0-9]{10}"
+                                       oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                                       title="Enter 10 digit number">
+                            </div>
+
+                            <!-- ADDRESS -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Address</label>
+                                <input type="text"
+                                       name="address"
+                                       value="{{ i.address }}"
+                                       class="form-control"
+                                       required
+                                       minlength="5"
+                                       maxlength="150"
+                                       title="Address must be 5–150 characters">
+                            </div>
+
+                            <!-- SPECIALIZATION -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Specialization</label>
+                                <input type="text"
+                                       name="specialization"
+                                       value="{{ i.specialization }}"
+                                       class="form-control"
+                                       required
+                                       minlength="3"
+                                       maxlength="50">
+                            </div>
+
+                            <!-- LICENSE -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Medical License Number</label>
+                                <input type="text"
+                                       name="medical_license_number"
+                                       value="{{ i.medical_license_number }}"
+                                       class="form-control"
+                                       required
+                                       minlength="5"
+                                       maxlength="30">
+                            </div>
+
+                            <!-- IMAGE PREVIEW -->
+                            <div class="text-center mb-3">
+                                {% if i.image %}
+                                    <img src="{{ i.image.url }}"
+                                         class="rounded-circle mb-2"
+                                         width="100" height="100"
+                                         style="object-fit:cover;">
+                                {% else %}
+                                    <img src="{% static 'assets/images/default-user.png' %}"
+                                         class="rounded-circle mb-2"
+                                         width="100">
+                                {% endif %}
+                            </div>
+
+                            <!-- IMAGE UPLOAD -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Profile Image</label>
+                                <input type="file"
+                                       name="image"
+                                       class="form-control"
+                                       accept="image/*"
+                                       onchange="previewImage(event)">
+                            </div>
+
+                            <!-- LIVE PREVIEW -->
+                            <div class="text-center mb-3">
+                                <img id="preview" style="display:none;" width="100" class="rounded-circle"/>
+                            </div>
+
+                            <!-- BUTTON -->
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg rounded-3">
+                                    Update Profile
+                                </button>
+                            </div>
+
+                            {% endfor %}
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- IMAGE PREVIEW SCRIPT -->
+<script>
+function previewImage(event) {
+    const reader = new FileReader();
+    reader.onload = function(){
+        const output = document.getElementById('preview');
+        output.src = reader.result;
+        output.style.display = "block";
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
+</script>
+
+{% endblock %}

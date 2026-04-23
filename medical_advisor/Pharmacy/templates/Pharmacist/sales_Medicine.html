@@ -1,0 +1,52 @@
+{% extends 'Pharmacist/common.html' %}
+{% block content %}
+
+<div class="container mt-4">
+    <div class="card shadow p-4">
+        <h2 class="text-center text-primary">Sell Medicine</h2>
+        <hr>
+
+        <!-- Patient & Prescription Details -->
+        <div class="mb-4">
+            <h4 class="text-secondary">Patient Details</h4>
+            <p><strong>Name:</strong> {{ user.name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Phone:</strong> {{ user.phone }}</p>
+            <p><strong>Address:</strong> {{ user.address }}</p>
+        </div>
+
+        <div class="mb-4">
+            <h4 class="text-secondary">Prescription Details</h4>
+            <p><strong>Doctor:</strong> {{ prescription.doctor.name }}</p>
+            <p><strong>Date:</strong> {{ prescription.date|date:"d M Y" }}</p>
+            <p><strong>Instructions:</strong> {{ prescription.instructions }}</p>
+        </div>
+
+        <!-- Medicine Sale Form -->
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label"><strong>Medicine Name:</strong></label>
+                <input type="text" class="form-control" value="{{ medicine.name }}" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"><strong>Prescribed Quantity:</strong></label>
+                <input type="text" class="form-control" value="{{ prescription.quantity }}" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"><strong>Available Stock:</strong></label>
+                <input type="text" class="form-control" value="{{ medicine.qty }}" readonly>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">Confirm Sale</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="/ph_view_prescription" class="btn btn-secondary">Back to Prescriptions</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

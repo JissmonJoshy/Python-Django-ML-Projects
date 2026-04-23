@@ -1,0 +1,78 @@
+{% extends 'Doctor/common.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+/* Fix image size */
+.blog-post-image img {
+    width: 100%;
+    height: 220px;          /* fixed height */
+    object-fit: cover;      /* crop nicely */
+    border-radius: 10px;
+}
+
+/* Optional: make card equal height */
+.blog-post {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+</style>
+<br><br><br><br>
+
+<section class="space-ptb">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="section-title center-divider text-center">
+                    <span>Check out our</span>
+                    <h2>Latest Appointments</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            {% for i in view %}
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-post blog-post-01">
+
+                    <div class="blog-post-image mb-4">
+                        <img class="img-fluid" src="/static/assets/{{i.uid.image}}" alt="">
+                    </div>
+
+                    <div class="blog-post-content py-0">
+                        <div class="blog-post-details">
+                            <center>
+
+                                <h6>{{i.uid.name}}</h6>
+
+                                <p>Time: {{i.time}}</p>
+                                <p>Date: {{i.date}}</p>
+
+                                <p>Issue: {{i.desc}}</p>
+
+                                <!-- ✅ STATUS BASED BUTTONS -->
+                                {% if i.status == "Booked" %}
+                                    <a href="/accept_appointment?id={{i.id}}" class="btn btn-success">Accept</a>
+                                    <a href="/reject_appointment?id={{i.id}}" class="btn btn-danger">Reject</a>
+
+                                {% elif i.status == "Accepted" %}
+                                    <span class="btn btn-primary">Accepted</span>
+
+                                {% endif %}
+
+                            </center>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+<br><br>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'Doctor/common.html' %}
+{% load static %}
+{% block content %}
+
+<h2 class="mt-4">Create Prescription</h2>
+
+<div class="card mt-4">
+  <div class="card-body">
+   
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Patient Details -->
+        <div class="mb-3">
+            <label for="patient" class="form-label"><strong>Patient Name</strong></label>
+            <input type="text" id="patient" class="form-control" value="{{ appointment.uid.name }}" readonly>
+        </div>
+
+        <!-- Pharmacist Selection -->
+        <div class="mb-3">
+            <label for="pharmacist" class="form-label"><strong>Select Pharmacist</strong></label>
+            <!-- Pharmacist Selection -->
+            <select name="pharmacist" id="pharmacist" class="form-select" required>
+                <option value="">Select Pharmacist</option>
+                {% for pharmacist in pharmacists %}
+                <option value="{{ pharmacist.id }}">{{ pharmacist.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Medicine Name -->
+        <div class="mb-3">
+            <select name="medicine" id="medicine" class="form-control" required>
+                <option value="">Select Medicine</option>
+            </select>
+        </div>
+
+        <!-- Quantity -->
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" name="quantity" class="form-control" id="quantity" min="1" required>
+        </div>
+
+        <!-- Dosage -->
+        <div class="mb-3">
+            <label for="dosage" class="form-label">Dosage</label>
+            <input type="text" name="dosage" class="form-control" id="dosage" required>
+        </div>
+
+        <!-- Instructions -->
+        <div class="mb-3">
+            <label for="instructions" class="form-label">Additional Instructions</label>
+            <textarea name="instructions" class="form-control" id="instructions" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Prescription</button>
+
+    </form>
+  </div>
+</div>
+<script>
+document.getElementById("pharmacist").addEventListener("change", function(){
+
+    let pharmaId = this.value;
+
+    fetch(`/get_medicines/?pharma_id=${pharmaId}`)
+    .then(response => response.json())
+    .then(data => {
+
+        let medicineDropdown = document.getElementById("medicine");
+        medicineDropdown.innerHTML = '<option value="">Select Medicine</option>';
+
+        data.medicines.forEach(function(m){
+            medicineDropdown.innerHTML += 
+                `<option value="${m.id}">${m.name} (Stock: ${m.qty})</option>`;
+        });
+
+    });
+
+});
+</script>
+{% endblock %}

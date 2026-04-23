@@ -1,0 +1,257 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Secure Payment</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Card */
+.payment-card{
+    border-radius: 20px;
+    padding: 30px;
+    background: #fff;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+/* Title */
+.payment-title{
+    font-weight: 700;
+    color: #2a5298;
+}
+
+/* Payment Options */
+.option-box{
+    border: 2px solid #eaeaea;
+    border-radius: 12px;
+    padding: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.option-box i{
+    font-size: 20px;
+}
+
+.option-box:hover{
+    border-color: #0d6efd;
+    background: #f0f7ff;
+}
+
+.option-box.active{
+    border-color: #0d6efd;
+    background: #e7f1ff;
+}
+
+/* Hidden Sections */
+.hidden{
+    display: none;
+}
+
+/* Button */
+.btn-pay{
+    background: linear-gradient(45deg, #0d6efd, #00c6ff);
+    border: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-pay:hover{
+    background: linear-gradient(45deg, #0056d2, #0096c7);
+}
+
+/* Input focus */
+.form-control:focus{
+    border-color: #0d6efd;
+    box-shadow: none;
+}
+
+/* Mobile */
+@media(max-width:576px){
+    .payment-card{
+        padding:20px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container d-flex justify-content-center align-items-center py-5">
+    <div class="col-lg-5 col-md-7 col-sm-10">
+
+        <div class="payment-card">
+
+            <!-- MESSAGES -->
+            {% for message in messages %}
+            <div class="alert alert-info text-center">
+                {{ message }}
+            </div>
+            {% endfor %}
+
+            <!-- TITLE -->
+            <h3 class="text-center payment-title mb-4">
+                <i class="fas fa-lock"></i> Secure Payment
+            </h3>
+
+            <form method="POST" onsubmit="return validatePayment()">
+                {% csrf_token %}
+
+                <!-- AMOUNT -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Amount</label>
+                    <input type="text" class="form-control text-center fw-bold fs-5" value="₹ {{ app.amount|default:'1000' }}" readonly>
+                </div>
+
+                <!-- PAYMENT OPTIONS -->
+                <div class="mb-4">
+
+                    <div class="option-box mb-2" onclick="selectOption(this,'upi')">
+                        <input type="radio" name="payment_method" value="upi" hidden>
+                        <i class="fas fa-mobile-alt text-primary"></i>
+                        <span>UPI (GPay / PhonePe / Paytm)</span>
+                    </div>
+
+                    <div class="option-box mb-2" onclick="selectOption(this,'card')">
+                        <input type="radio" name="payment_method" value="card" hidden>
+                        <i class="fas fa-credit-card text-success"></i>
+                        <span>Credit / Debit Card</span>
+                    </div>
+
+                    <div class="option-box" onclick="selectOption(this,'cod')">
+                        <input type="radio" name="payment_method" value="cod" hidden>
+                        <i class="fas fa-money-bill-wave text-warning"></i>
+                        <span>Cash on Delivery</span>
+                    </div>
+
+                </div>
+
+                <!-- UPI SECTION -->
+                <div id="upiSection" class="hidden mb-3">
+                    <label class="form-label">Enter UPI ID</label>
+                    <input type="text" class="form-control" name="upi_id" placeholder="example@upi">
+                </div>
+
+                <!-- CARD SECTION -->
+                <div id="cardSection" class="hidden">
+
+                    <div class="mb-2">
+                        <label class="form-label">Card Holder Name</label>
+                        <input type="text" class="form-control" name="name">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Card Number</label>
+                        <input type="text" class="form-control" name="card" maxlength="16" placeholder="1234567812345678">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="form-label">Expiry</label>
+                            <input type="month" class="form-control" name="expiry">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">CVV</label>
+                            <input type="password" class="form-control" name="cvv" maxlength="3">
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- BUTTON -->
+                <button type="submit" class="btn btn-pay w-100 mt-4 py-2">
+                    <i class="fas fa-check-circle"></i> Pay Now
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+/* SELECT PAYMENT OPTION */
+function selectOption(el, type){
+    document.querySelectorAll('.option-box').forEach(x => x.classList.remove('active'));
+    el.classList.add('active');
+    el.querySelector('input').checked = true;
+
+    document.getElementById("upiSection").style.display = "none";
+    document.getElementById("cardSection").style.display = "none";
+
+    if(type === 'upi'){
+        document.getElementById("upiSection").style.display = "block";
+    }
+    else if(type === 'card'){
+        document.getElementById("cardSection").style.display = "block";
+    }
+}
+
+/* AUTO SELECT UPI */
+window.onload = function(){
+    let first = document.querySelector('.option-box');
+    if(first){
+        selectOption(first, 'upi');
+    }
+}
+
+/* VALIDATION */
+function validatePayment(){
+    let method = document.querySelector('input[name="payment_method"]:checked');
+
+    if(!method){
+        alert("Please select payment method");
+        return false;
+    }
+
+    if(method.value === "upi"){
+        let upi = document.querySelector('[name="upi_id"]').value;
+        if(upi === ""){
+            alert("Enter UPI ID");
+            return false;
+        }
+    }
+
+    if(method.value === "card"){
+        let card = document.querySelector('[name="card"]').value;
+        let cvv = document.querySelector('[name="cvv"]').value;
+
+        if(!/^\d{16}$/.test(card)){
+            alert("Invalid card number");
+            return false;
+        }
+
+        if(!/^\d{3}$/.test(cvv)){
+            alert("Invalid CVV");
+            return false;
+        }
+    }
+
+    return true;
+}
+
+</script>
+
+</body>
+</html>
