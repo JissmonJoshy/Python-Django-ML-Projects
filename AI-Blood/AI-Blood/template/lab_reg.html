@@ -1,0 +1,306 @@
+{% extends "login.html" %}
+{% block content %}
+    <!-- inner banner -->
+    <section class="inner-banner py-5">
+        <div class="w3l-breadcrumb py-lg-5">
+            <div class="container pt-5 pb-sm-4 pb-2">
+                <h4 class="inner-text-title font-weight-bold pt-5">Join Us</h4>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>Lab registration</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- //inner banner -->
+
+    <!-- contact -->
+    <section class="w3l-w3l-contacts-12 py-5">
+        <div class="contact-top py-lg-5 py-md-4 py-2">
+            <div class="container">
+                <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
+                    <h5 class="sub-title">Get In Touch</h5>
+                    <h3 class="title-style">Labs</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 contacts12-main">
+                        <form method="post" class="main-input">
+                            {% csrf_token %}
+                            <div class="row top-inputs">
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="Lab name" name="fname" id="w3lName" required="">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="loc" placeholder="Location" id="w3lSender" required="">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" placeholder="Username" name="username" id="w3lName" required="">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="password" name="password" placeholder="Password" id="w3lSender" required="">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" placeholder="Email" name="email" id="w3lName" required="">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="number" name="phone" placeholder="Phone" id="w3lSender" required="">
+                                </div>
+                            </div>
+                            <!-- <input type="text" placeholder="Phone Number" name="w3lName" id="w3lName" required=""> -->
+                            <textarea placeholder="Address" name="address" id="w3lMessage" required=""></textarea>
+                            
+                            Select location from map
+                            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                        
+                             <div id="map"></div>
+                             <input onclick="deleteMarkers();" type=button value="Refresh location">
+
+                            <div class="text-end">
+                            <button type="submit" class="btn btn-style">Register</button>
+                            </div>
+                            <input type="text" id="l1" style="visibility: hidden;" required name="l1">
+                            <input type="text" id="l2" style="visibility: hidden;" required name="l2">
+                        </form>
+                    </div>
+                    <div class="col-md-4 ps-lg-5 mt-md-0 mt-4">
+                        <h3 class="title-style mb-4">Contact Info</h3>
+                        <div class="contact">
+                            <a href="mailto:hello@example.com">
+                                <p class="contact-text-sub">hello@example.com</p>
+                            </a>
+                            <a href="tel:+7-800-999-800">
+                                <p class="contact-text-sub">+7-800-999-800</p>
+                            </a>
+                            <p class="contact-text-sub">76 West Rock, Maple Building, <br>London.</p>
+                            <div class="buttons-teams">
+                                <a href="#team"><span class="fab fa-facebook-square" aria-hidden="true"></span></a>
+                                <a href="#team"><span class="fab fa-twitter-square" aria-hidden="true"></span></a>
+                                <a href="#team"><span class="fab fa-google-plus-square" aria-hidden="true"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- contact map -->
+    <section class="w3l-contacts-1">
+        <div class="contacts">
+            <div class="contacts-content">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d158858.47340002653!2d-0.24168120642536509!3d51.52855824164916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C+UK!5e0!3m2!1sen!2sin!4v1562822037850!5m2!1sen!2sin"
+                    width="100%" height="650" frameborder="0" style="border:0" allowfullscreen></iframe>
+                <address>
+                    <h4>London</h4>
+                    <a href="mailto:hello@w3layouts.com">Email: hello@w3layouts.com</a>
+                    <a href="tel:8-800-999-800">Tel: 8-800-999-800</a>
+                </address>
+            </div>
+        </div>
+    </section>
+    <!-- //contact -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+       
+        // This example adds a search box to a map, using the Google Place Autocomplete
+                         // feature. People can enter geographical searches. The search box will return a
+                         // pick list containing a mix of places and predicted search terms.
+                
+                         // This example requires the Places library. Include the libraries=places
+                         // parameter when you first load the API. For example:
+                         // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+                
+                            function initAutocomplete() {
+                             var map = new google.maps.Map(document.getElementById('map'), {
+                                 center: { lat: 10.1076, lng: 76.3457 },
+                                 zoom: 13,
+                                 mapTypeId: 'roadmap'
+                             });
+                
+                             google.maps.event.addListener(map, "click", function (event) {
+                                 // get lat/lon of click
+                                 var clickLat = event.latLng.lat();
+                                 var clickLon = event.latLng.lng();
+                
+                                 // show in input box
+                                 document.getElementById('l1').value = clickLat.toFixed(5);
+                                 document.getElementById('l2').value = clickLon.toFixed(5);
+                                
+                        var somefunction = function () {
+                            var hdnfldVariable = document.getElementById('hdnfldVariable');
+                            hdnfldVariable.value = clickLat.toFixed(5);
+                        }
+                   
+                
+                
+                                 var marker = new google.maps.Marker({
+                                     position: new google.maps.LatLng(clickLat, clickLon),
+                                     map: map,
+                                     draggable:true
+                                 });
+                             });
+                
+                
+                             // Create the search box and link it to the UI element.
+                             var input = document.getElementById('pac-input');
+                             var searchBox = new google.maps.places.SearchBox(input);
+                             map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+                
+                             // Bias the SearchBox results towards current map's viewport.
+                             map.addListener('bounds_changed', function () {
+                                 searchBox.setBounds(map.getBounds());
+                             });
+                
+                             var markers = [];
+                             // Listen for the event fired when the user selects a prediction and retrieve
+                             // more details for that place.
+                             searchBox.addListener('places_changed', function () {
+                                 var places = searchBox.getPlaces();
+                
+                                 if (places.length == 0) {
+                                     return;
+                                 }
+                
+                                 // Clear out the old markers.
+                                
+                                 markers.forEach(function (marker) {
+                                    debugger;
+                                     marker.setMap(null);
+                                     
+                                    
+                                 });
+                                 markers = [];
+                 
+    
+                                 // For each place, get the icon, name and location.
+                                 var bounds = new google.maps.LatLngBounds();
+                                 places.forEach(function (place) {
+                                     if (!place.geometry) {
+                                         console.log("Returned place contains no geometry");
+                                         return;
+                                     }
+                                     var icon = {
+                                         url: place.icon,
+                                         size: new google.maps.Size(71, 71),
+                                         origin: new google.maps.Point(0, 0),
+                                         anchor: new google.maps.Point(17, 34),
+                                         scaledSize: new google.maps.Size(25, 25)
+                                     };
+                
+                                     // Create a marker for each place.
+                                     markers.push(new google.maps.Marker({
+                                         map: map,
+                                         icon: icon,
+                                         title: place.name,
+                                         position: place.geometry.location
+                                     }));
+                
+                                     if (place.geometry.viewport) {
+                                         // Only geocodes have viewport.
+                                         bounds.union(place.geometry.viewport);
+                                     } else {
+                                         bounds.extend(place.geometry.location);
+                                     }
+                                 });
+                                 map.fitBounds(bounds);
+                             });
+                         }
+                
+                    </script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRhhnbNUXPX9_JYKnroSAex2-1KFaSmwQ&libraries=places&callback=initAutocomplete"></script>
+    <style>
+        td,th{
+            padding: 5px;
+        }
+        /* Always set the map height explicitly to define the size of the div
+             * element that contains the map. */
+             #map {
+              height: 400px;
+              width:500px;
+              border-style:groove;
+              border-width:thick;
+              /*margin-left:300px;
+              margin-top:30px;
+              margin-bottom:30px;*/
+            }
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+              height: 100%;
+              margin: 0;
+              padding: 0;
+            }
+            #description {
+              font-family: Roboto;
+              font-size: 15px;
+              font-weight: 300;
+            }
+      
+            #infowindow-content .title {
+              font-weight: bold;
+            }
+      
+            #infowindow-content {
+              display: none;
+            }
+      
+            #map #infowindow-content {
+              display: inline;
+            }
+      
+            .pac-card {
+              margin: 10px 10px 0 0;
+              border-radius: 2px 0 0 2px;
+              box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              outline: none;
+              box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+              background-color: #fff;
+              font-family: Roboto;
+            }
+      
+            #pac-container {
+              padding-bottom: 12px;
+              margin-right: 12px;
+            }
+      
+            .pac-controls {
+              display: inline-block;
+              padding: 5px 11px;
+            }
+      
+            .pac-controls label {
+              font-family: Roboto;
+              font-size: 13px;
+              font-weight: 300;
+            }
+      
+            #pac-input {
+              background-color: #fff;
+              font-family: Roboto;
+              font-size: 15px;
+              font-weight: 300;
+              margin-left: 12px;
+              padding: 0 11px 0 13px;
+              text-overflow: ellipsis;
+              width: 400px;
+            }
+      
+            #pac-input:focus {
+              border-color: #4d90fe;
+            }
+      
+            #title {
+              color: #fff;
+              background-color: #4d90fe;
+              font-size: 25px;
+              font-weight: 500;
+              padding: 6px 12px;
+            }
+            #target {
+              width: 345px;
+            }
+    </style>
+    
+
+{% endblock %}
