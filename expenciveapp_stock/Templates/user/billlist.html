@@ -1,0 +1,11 @@
+{% if extracted_text %}
+        <h2>Extracted Text</h2>
+        <pre>{{ extracted_text }}</pre>
+
+        <h2>Parsed Invoice Data</h2>
+        <ul>
+            {% for key, value in parsed_data.items %}
+                <li>{{ key|capfirst }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}

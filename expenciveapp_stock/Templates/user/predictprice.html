@@ -1,0 +1,60 @@
+{% extends "user/common_base.html" %}
+{% block content %}
+<form name="form1" method="post">
+    {% csrf_token %}
+    <div align="center">
+        <h4>PREDICT PRICE </h4> 
+        
+        
+        <CENter>
+        <table border="0" class="table"  style="color:rgb(0, 0, 0); " width="300" height="125">
+
+            <tr>
+                <th><span class="style1">Select Stock</span></th>
+                <td style="padding-left:150px">
+                    <!-- <select name="stock">
+                        {% for d in datas %}
+                        <option value="{{d.2}}">{{d.1}}</option>
+                        {% endfor %}
+                    </select> -->
+                    <input type="text" name="stock" id="">
+                </td>
+            </tr>
+            <tr><td>Date</td><td  style="padding-left:150px"><input type="date" name="t1" id=""></td></tr>
+            <tr>
+                <td colspan="2" style="">
+                    <center>
+                    <input align="center" width="50px"  style="width: 100px;background-color: violet" type="submit" name="b1" value="Submit"></center>
+                </td>
+            </tr>
+            <tr>
+                <th>
+Predicted Price
+                </th>
+                <th  style="padding-left:150px">
+<input type="text" name="t3" value="{{price}}" id="">
+                </th>
+            </tr>
+            <tr>
+                <th>
+Start Price
+                </th>
+                <th  style="padding-left:150px">
+<input type="text" name="t3" value="{{start}}" id="">
+                </th>
+            </tr>
+            <tr>
+                <th>
+End Price
+                </th>
+                <th  style="padding-left:150px">
+<input type="text" name="t3" value="{{ends}}" id="">
+                </th>
+            </tr>
+            
+        </table>
+    </CENter>
+    </div>
+</form>
+
+{% endblock %}

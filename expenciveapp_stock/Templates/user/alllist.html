@@ -1,0 +1,241 @@
+{% extends "user/common_base.html" %}
+
+
+{% block content %}
+<style>
+    h3,h2{
+        text-align: center;
+    }
+    table {
+        table-layout: fixed;
+        width: 100%;
+    }
+    
+    th, td {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px; /* Adjust font size for better readability */
+    }
+    
+    h1.display-4 {
+        font-size: 2rem; /* Reduce the font size for large numbers */
+    }
+    
+</style>
+
+<br>
+<br>
+<h3>Your Fixed Incomes</h3>
+<br>
+<table class="table" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Source</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Frequency</th>
+            {% comment %} <th>Actions</th> {% endcomment %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for income in infixed %}
+            <tr>
+                <td>{{ income.source }}</td>
+                <td>{{ income.amount }}</td>
+                <td>{{ income.date }}</td>
+                <td>{{ income.frequency }}</td>
+                {% comment %} <td>
+                    <a href="/update?id={{income.id}}">Edit</a> | 
+                    <a href="/delete?id={{income.id}}">Delete</a>
+                </td> {% endcomment %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<h3>Your Other Incomes</h3>
+<br>
+<table class="table" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Source</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Frequency</th>
+            {% comment %} <th>Actions</th> {% endcomment %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in otheri %}
+            <tr>
+                <td>{{ i.source }}</td>
+                <td>{{ i.amount }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.frequency }}</td>
+                {% comment %} <td>
+                    <a href="/updateother?id={{i.id}}">Edit</a> | 
+                    <a href="/deleteother?id={{i.id}}">Delete</a>
+                </td> {% endcomment %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<h3>Fixed Expense</h3>
+<br>
+<table class="table" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Source</th>
+            <th>Date</th>
+            <th>year</th>
+            <th>amount</th>
+            <th>Frequency</th>
+            {% comment %} <th>Actions</th> {% endcomment %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in exp %}
+            <tr>
+                <td>{{ i.source }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.year }}</td>
+                <td>{{ i.amount }}</td>
+                <td>{{ i.frequency }}</td>
+                {% comment %} <td>
+                    <a href="/updateexpense?id={{i.id}}">Edit</a> | 
+                    <a href="/deleteexpense?id={{i.id}}">Delete</a>
+                </td> {% endcomment %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<h3>Other Expense</h3>
+<br>
+<table class="table" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Source</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Frequency</th>
+            {% comment %} <th>Actions</th> {% endcomment %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in other %}
+            <tr>
+                <td>{{ i.source }}</td>
+                <td>{{ i.amount }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.frequency }}</td>
+                {% comment %} <td>
+                    <a href="/updaexp?id={{i.id}}">Edit</a> | 
+                    <a href="/delexpense?id={{i.id}}">Delete</a>
+                </td> {% endcomment %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<br>
+<h2>Total Incomes Monthly</h2>
+
+<div class="container-xxl bg-light py-5 my-5">
+    <div class="container py-5">
+        <div class="row g-5">
+            <!-- Monthly Income -->
+            <div class="col-lg-4 col-md-6 text-center wow fadeIn" data-wow-delay="0.1s">
+                <img class="img-fluid mb-4" src="/static/img/icon-9.png" alt="Monthly Income Icon">
+                <h1 class="display-4" data-toggle="counter-up">{{ total_monthly_income }}</h1>
+                <p class="fs-5 text-primary mb-0">Monthly Income</p>
+            </div>
+
+            <!-- Monthly Expenses -->
+            <div class="col-lg-4 col-md-6 text-center wow fadeIn" data-wow-delay="0.3s">
+                <img class="img-fluid mb-4" src="/static/img/icon-10.png" alt="Monthly Expenses Icon">
+                <h1 class="display-4" data-toggle="counter-up">{{ total_monthly_expenses }}</h1>
+                <p class="fs-5 text-primary mb-0">Monthly Expenses</p>
+            </div>
+
+            <!-- Net Monthly Income -->
+            <div class="col-lg-4 col-md-6 text-center wow fadeIn" data-wow-delay="0.5s">
+                <img class="img-fluid mb-4" src="/static/img/icon-2.png" alt="Net Monthly Income Icon">
+                <h1 class="display-4" data-toggle="counter-up">{{ net_monthly_income }}</h1>
+                <p class="fs-5 text-primary mb-0">Net Monthly Income</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2>Total Incomes Annually</h2>
+
+<div class="container-xxl bg-light py-5 my-5">
+    <div class="container py-5">
+        <div class="row g-5">
+            <!-- Annual Income -->
+            <div class="col-lg-4 col-md-6 text-center wow fadeIn" data-wow-delay="0.1s">
+                <img class="img-fluid mb-4" src="/static/img/icon-9.png" alt="Annual Income Icon">
+                <h1 class="display-4" data-toggle="counter-up">{{ total_annual_income }}</h1>
+                <p class="fs-5 text-primary mb-0">Annual Income</p>
+            </div>
+
+            <!-- Annual Expenses -->
+            <div class="col-lg-4 col-md-6 text-center wow fadeIn" data-wow-delay="0.3s">
+                <img class="img-fluid mb-4" src="/static/img/icon-10.png" alt="Annual Expenses Icon">
+                <h1 class="display-4" data-toggle="counter-up">{{ total_annual_expenses }}</h1>
+                <p class="fs-5 text-primary mb-0">Annual Expenses</p>
+            </div>
+
+           
+
+            <!-- Net Annual Income -->
+            <div class="col-lg-4 col-md-6 text-center wow fadeIn" data-wow-delay="0.5s">
+                <img class="img-fluid mb-4" src="/static/img/icon-2.png" alt="Net Annual Income Icon">
+                <h1 class="display-4" data-toggle="counter-up">{{ net_annual_income }}</h1>
+                <p class="fs-5 text-primary mb-0">Net Annual Income</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<h2> Tax Details </h2>
+
+<div class="container-xxl bg-light py-5 my-5">
+    <div class="container py-5">
+        <div class="row g-5">
+            <!-- Annual Income -->
+            <div class="col-lg-4 col-md-6 text-center wow fadeIn" data-wow-delay="0.1s">
+                <img class="img-fluid mb-4" src="/static/img/icon-9.png" alt="Annual Income Icon">
+                <h1 class="display-4" data-toggle="counter-up">{{ total_annual_income }}</h1>
+                <p class="fs-5 text-primary mb-0">Annual Income</p>
+            </div>
+
+            <!-- Tax Amount (If applicable) -->
+            {% if tax_amount > 0 %}
+            <div class="col-lg-4 col-md-6 text-center wow fadeIn" data-wow-delay="0.4s">
+                <img class="img-fluid mb-4" src="/static/img/icon-4.png" alt="Tax Amount Icon">
+                <h1 class="display-4 text-danger" data-toggle="counter-up">{{ tax_amount }}</h1>
+                <p class="fs-5 text-danger mb-0">Income Tax (7%)</p>
+            </div>
+            {% endif %}
+
+            <!-- Net Annual Income Before Expenses But After Tax -->
+            <div class="col-lg-4 col-md-6 text-center wow fadeIn" data-wow-delay="0.5s">
+                <img class="img-fluid mb-4" src="/static/img/icon-2.png" alt="Net Annual Income Icon">
+                <h1 class="display-4" data-toggle="counter-up">{{ net_annual_income_after_tax}}</h1>
+                <p class="fs-5 text-primary mb-0">Net Annual Income After Tax (Before Expenses)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

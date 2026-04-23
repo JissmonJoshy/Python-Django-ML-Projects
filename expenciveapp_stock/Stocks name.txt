@@ -1,0 +1,23 @@
+AAPL
+MSFT
+GOOGL
+AMZN
+TSLA
+META
+NVDA
+NFLX
+INTC
+IBM
+ORCL
+AMD
+GLD      (Best for gold ✅)
+SLV      (Silver)
+USO      (Oil)
+XAUUSD   (Gold price – may or may not work)
+TSLA
+F
+GM
+JPM
+BAC
+C
+WFC

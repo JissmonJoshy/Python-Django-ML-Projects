@@ -1,0 +1,100 @@
+{% extends "user/common_login.html" %}
+
+{% block content %}
+<style>
+    .video-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -1;
+    }
+    
+    .video-background video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+    }
+    .login-text {
+        color: black; /* Makes text white */
+        font-family: 'Arial', sans-serif; /* Changes the font style */
+        letter-spacing: 2px; /* Adds spacing between letters */
+        text-transform: uppercase; /* Converts text to uppercase */
+        font-weight: bold; /* Makes text bold */
+        text-shadow: 3px 3px 5px rgba(243, 242, 242, 0.6); /* Adds a shadow for better visibility */
+    }
+</style>
+<br>
+{% if messages %}
+<div id="popupMessage" class="alert alert-dismissible fade show text-center mx-auto w-25 shadow-lg"
+    style="z-index: 1050; background: linear-gradient(45deg,rgb(218, 65, 80), #ff9a8b); color: white; font-size: 18px; font-weight: bold; padding: 15px; border-radius: 10px; display: none;">
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
+<div class="video-background">
+    <video autoplay muted loop>
+        <source src="/static/img/videoplayback_4.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+</div>
+
+    <!-- Login Form Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5 mb-2 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="col-lg-6" style="margin-left: 560px;">
+                    <br>
+                   <h1 class="display-6 login-text">LOGIN</h1>
+                </div>
+            </div>
+            <div class="row g-5" style="margin-left: 100px;">
+                {% comment %} <div class="col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                </div> {% endcomment %}
+                <div class="col-lg-7 col-md-6 wow fadeInUp" data-wow-delay="0.5s" style="margin-left: 300px;">
+                    <form method="POST" action="#" style="padding: 10px; margin-right: 40%;">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                                    <label for="email">Your Email</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Your Password" required>
+                                    <label for="password">Your Password</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary py-3 px-4" type="submit">Login</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login Form End -->
+
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var popup = document.getElementById("popupMessage");
+            if (popup) {
+                popup.style.display = "block";
+                popup.style.opacity = "1";
+                setTimeout(function () {
+                    popup.style.transition = "opacity 0.5s ease-out";
+                    popup.style.opacity = "0";
+                    setTimeout(() => popup.style.display = "none", 500);
+                }, 3000); // Auto-hide after 3 seconds
+            }
+        });
+    </script>
+{% endblock %}

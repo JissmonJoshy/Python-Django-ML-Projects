@@ -1,0 +1,25 @@
+{% extends "user/admin_base.html" %}
+
+{% block content %}
+<h2>User Information</h2><br><br>
+<table class="table" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in infixed %}
+            <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.name }}</td>
+                <td>{{ i.email }}</td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock  %}

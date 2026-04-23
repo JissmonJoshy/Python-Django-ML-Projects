@@ -1,0 +1,73 @@
+{% extends "user/common_base.html" %}
+
+{% block content %}
+<h2>Your Other Incomes</h2>
+<br>
+{% if messages %}
+<div id="popupMessage" class="alert alert-dismissible fade show text-center mx-auto w-25 shadow-lg"
+    style="z-index: 1050; background: linear-gradient(45deg,rgb(218, 65, 80), #ff9a8b); color: white; font-size: 18px; font-weight: bold; padding: 15px; border-radius: 10px; display: none;">
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
+<div>
+    <div class="container text-center my-4">
+        <div class="row justify-content-center">
+            <div class="col-md-2 mb-2">
+                <a href="/fixed_list" class="btn btn-outline-secondary w-100 py-2">Fixed Income</a>
+            </div>
+            <div class="col-md-2 mb-2">
+                <a href="/other_list" class="btn btn-outline-primary w-100 py-2">Other Income</a>
+            </div>
+            <div class="col-md-2 mb-2">
+                <a href="/expenselist" class="btn btn-outline-danger w-100 py-2">Fixed Expense</a>
+            </div>
+            <div class="col-md-2 mb-2">
+                <a href="/otherexplist" class="btn btn-outline-warning w-100 py-2">Other Expense</a>
+            </div>
+            {% comment %} <div class="col-md-2 mb-2">
+                <a href="/billrecipt" class="btn btn-outline-success w-100 py-2">Upload Bill</a>
+            </div> {% endcomment %}
+        </div>
+    </div>
+<table class="table" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Source</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Frequency</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in otheri %}
+            <tr>
+                <td>{{ i.source }}</td>
+                <td>{{ i.amount }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.frequency }}</td>
+                <td>
+                    <a href="/updateother?id={{i.id}}">Edit</a> | 
+                    <a href="/deleteother?id={{i.id}}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var popup = document.getElementById("popupMessage");
+        if (popup) {
+            popup.style.display = "block";
+            popup.style.opacity = "1";
+            setTimeout(function () {
+                popup.style.transition = "opacity 0.5s ease-out";
+                popup.style.opacity = "0";
+                setTimeout(() => popup.style.display = "none", 500);
+            }, 3000); // Auto-hide after 3 seconds
+        }
+    });
+</script>
+{% endblock  %}

@@ -1,0 +1,108 @@
+{% extends "user/common_base.html" %}
+
+{% block content %}
+    <!-- Header Start -->
+    <div class="container-fluid hero-header py-5 mb-8" style="background-image: url(/static/img/back1.jpg); background-repeat: no-repeat; background-size: cover; align-items: center;">
+        <div class="container py-5">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 mb-3 animated slideInDown">ADD OTHER EXPENSE</h1>
+                    <nav aria-label="breadcrumb animated slideInDown">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="/userhome">Home</a></li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 animated fadeIn">
+                    <img class="img-fluid animated pulse infinite" style="animation-duration: 3s;">
+                </div>
+            </div>
+
+            <div class="container text-center my-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-2 mb-2">
+                        <a href="/fixedincome" class="btn btn-outline-secondary w-100 py-2">Fixed Income</a>
+                    </div>
+                    <div class="col-md-2 mb-2">
+                        <a href="/otherincome" class="btn btn-outline-primary w-100 py-2">Other Income</a>
+                    </div>
+                    <div class="col-md-2 mb-2">
+                        <a href="/fixedexpense" class="btn btn-outline-danger w-100 py-2">Fixed Expense</a>
+                    </div>
+                    <div class="col-md-2 mb-2">
+                        <a href="/otherexpense" class="btn btn-outline-warning w-100 py-2">Other Expense</a>
+                    </div>
+                    {% comment %} <div class="col-md-2 mb-2">
+                        <a href="/billrecipt" class="btn btn-outline-success w-100 py-2">Upload Bill</a>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Other Expense Form Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5 mb-5 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="col-lg-6" style="margin-left: 400px;">
+                    {% comment %} <h1 class="display-6">Add Fixed Income</h1> {% endcomment %}
+                </div>
+            </div>
+
+
+            <div class="row g-5">
+                <div class="col-lg-7 col-md-6 wow fadeInUp" data-wow-delay="0.5s" style="margin-left: 300px;">
+                    <form method="POST" action="#" style="padding: 10px; margin-right: 40%;">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                            
+                            <input type="text" class="form-control" id="source" name="source" value="{{ other.source }}" required>
+                            <label for="source" class="form-label">Expense Source</label>
+                        </div>
+                    </div>
+                    
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                            
+                            <input type="number" step="0.01" class="form-control" id="amount" name="amount" value="{{ other.amount }}" required min="0">
+                            <label for="amount" class="form-label">Amount</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            
+                            <input type="date" class="form-control" id="date" name="date" value="{{ other.date|date:'Y-m-d' }}" required>
+                            <label for="date" class="form-label">Date</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            
+                            <select class="form-control" id="frequency" name="frequency" required>
+                                <option value="one-time" {% if other.frequency == "one-time" %}selected{% endif %}>One-time</option>
+                                <option value="weekly" {% if other.frequency == "weekly" %}selected{% endif %}>Weekly</option>
+                                <option value="monthly" {% if other.frequency == "monthly" %}selected{% endif %}>Monthly</option>
+                                <option value="quarterly" {% if other.frequency == "quarterly" %}selected{% endif %}>Quarterly</option>
+                                <option value="annually" {% if other.frequency == "annually" %}selected{% endif %}>Annually</option>
+                            </select>
+                            <label for="frequency" class="form-label">Frequency</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary w-100">Update</button>
+                    </div>
+                </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Other Expense Form End -->
+
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+{% endblock %}
