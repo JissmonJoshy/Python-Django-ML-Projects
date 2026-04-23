@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+    <input type="text" name="mark1" placeholder="mark1" id=""><br>
+    <input type="text" name="mark2" placeholder="mark2" id=""><br>
+    <input type="text" name="mark3" id="">male<br>
+    <input type="text" name="mark4"id="">female<br>
+    <input type="submit" name="submit">
+</form>
+
+{% for i in mark %} 
+{{i.studid.fname}}
+{{i.mark1}}
+<br>
+{% endfor %}
+<br>
+
+
+<br>
+
+</html>

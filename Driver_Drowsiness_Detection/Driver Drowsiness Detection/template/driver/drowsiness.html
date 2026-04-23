@@ -1,0 +1,23 @@
+{% extends 'driver/base.html' %}
+
+{% block header %}
+
+<h2 style="text-align:center;">Driver Drowsiness Detection</h2>
+
+<div style="text-align:center; margin-top:50px;">
+    <button onclick="startDetection()" 
+            style="padding:15px 30px; font-size:18px; background:green; color:white;">
+        Start Detection
+    </button>
+</div>
+
+<script>
+function startDetection() {
+    fetch('/start-drowsiness/')
+    .then(response => response.text())
+    .then(data => alert(data))
+    .catch(error => alert("Error starting detection"));
+}
+</script>
+
+{% endblock %}

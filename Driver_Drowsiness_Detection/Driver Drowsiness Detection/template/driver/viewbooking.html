@@ -1,0 +1,141 @@
+{% extends 'driver/base.html' %}
+{% load static %}
+{% block header %}
+
+{% if messages %}
+<script>
+{% for message in messages %}
+    alert("{{ message }}");
+{% endfor %}
+</script>
+{% endif %}
+
+<style>
+    #grid {
+        margin: 40px 0 100px 0;
+        text-align: center;
+    }
+
+    #grid table {
+        width: 900px;
+        margin: auto;
+        border-collapse: collapse;
+        font-size: 16px;
+    }
+
+    #grid th, #grid td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    #grid th {
+        background-color: #00e0c3;
+        color: white;
+    }
+
+    .approve-btn {
+        background-color: #28a745;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        border: none;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+        background: white;
+        width: 350px;
+        margin: 150px auto;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .modal input {
+        width: 90%;
+        padding: 8px;
+        margin: 10px 0;
+    }
+</style>
+
+<div id="grid">
+    <h2>Booking Requests</h2>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>User Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Charge</th>
+            <th>Action</th>
+        </tr>
+
+        {% for i in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.uid.uname }}</td>
+            <td>{{ i.uid.uaddress }}</td>
+            <td>{{ i.uid.ucontact }}</td>
+            <td>{{ i.uid.uemail }}</td>
+            <td>{{ i.status }}</td>
+            <td>
+                {% if i.charge %}
+                    ₹ {{ i.charge }}
+                {% else %}
+                    ---
+                {% endif %}
+            </td>
+            <td>
+                {% if i.status == "requested" %}
+                <button class="approve-btn" onclick="openModal({{ i.id }})">
+                    Approve
+                </button>
+                {% else %}
+                    ---
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<!-- Modal -->
+<div id="chargeModal" class="modal">
+    <div class="modal-content">
+        <h3>Enter Booking Charge</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="booking_id" id="booking_id">
+            <input type="number" name="charge" placeholder="Enter Amount" required>
+            <br>
+            <button type="submit" class="approve-btn">Submit</button>
+            <br><br>
+            <button type="button" onclick="closeModal()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<script>
+function openModal(id) {
+    document.getElementById("booking_id").value = id;
+    document.getElementById("chargeModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("chargeModal").style.display = "none";
+}
+</script>
+
+{% endblock %}

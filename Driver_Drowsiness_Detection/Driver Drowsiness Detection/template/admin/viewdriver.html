@@ -1,0 +1,70 @@
+{% extends 'admin/base.html' %}
+{% block header %}
+
+{% if messages %}
+<script>
+{% for message in messages %}
+    alert("{{ message }}");
+{% endfor %}
+</script>
+{% endif %}
+
+<h2 style="text-align:center;">Requested Drivers</h2>
+<table border="1" align="center" width="900">
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Contact</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+
+    {% for i in requested %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{ i.dname }}</td>
+        <td>{{ i.daddress }}</td>
+        <td>{{ i.dcontact }}</td>
+        <td>{{ i.demail }}</td>
+        <td>
+            <a href="?approve_id={{i.id}}">Approve</a> |
+            <a href="?reject_id={{i.id}}">Reject</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6" align="center">No Requested Drivers</td></tr>
+    {% endfor %}
+</table>
+
+
+<br><br>
+
+<h2 style="text-align:center;">Approved Drivers</h2>
+<table border="1" align="center" width="900">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Contact</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+
+    {% for i in approved %}
+    <tr>
+        <td>{{ i.id }}</td>
+        <td>{{ i.dname }}</td>
+        <td>{{ i.daddress }}</td>
+        <td>{{ i.dcontact }}</td>
+        <td>{{ i.demail }}</td>
+        <td>
+            <a href="?reject_id={{i.id}}">Reject</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6" align="center">No Approved Drivers</td></tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

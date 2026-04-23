@@ -1,0 +1,97 @@
+{% extends 'user/base.html' %}
+
+{% block header %}
+
+{% if messages %}
+<script>
+{% for message in messages %}
+    alert("{{ message }}");
+{% endfor %}
+</script>
+{% endif %}
+
+<style>
+    .payment-box {
+        width: 400px;
+        margin: 80px auto;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px #ccc;
+        background-color: #ffffff;
+    }
+
+    .payment-box h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .payment-box input {
+        width: 100%;
+        padding: 8px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .btn-pay {
+        width: 100%;
+        background-color: #28a745;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-pay:hover {
+        background-color: #218838;
+    }
+
+    .btn-cancel {
+        width: 100%;
+        margin-top: 10px;
+        background-color: #dc3545;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-cancel:hover {
+        background-color: #c82333;
+    }
+</style>
+
+<div class="payment-box">
+    <h2>Payment Details</h2>
+    <div style="background-color:#f8f9fa; padding:10px; border-radius:6px; margin-bottom:15px; text-align:center;">
+        <strong>Total Amount:</strong> 
+        <span style="color:green; font-size:18px;">
+            ₹ {{ booking.charge }}
+        </span>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Card Number</label>
+        <input type="text" name="cardnumber" placeholder="Enter Card Number" required>
+
+        <label>Card Holder Name</label>
+        <input type="text" name="holdername" placeholder="Enter Holder Name" required>
+
+        <label>Expiry Date</label>
+        <input type="month" name="expiry" required>
+
+        <label>CVV</label>
+        <input type="password" name="cvv" placeholder="Enter CVV" required>
+
+        <button type="submit" class="btn-pay">Pay Now</button>
+    </form>
+
+    <form method="GET" action="/userviewbooking">
+        <button type="submit" class="btn-cancel">Cancel</button>
+    </form>
+</div>
+
+{% endblock %}

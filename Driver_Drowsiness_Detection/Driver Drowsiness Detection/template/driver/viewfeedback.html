@@ -1,0 +1,67 @@
+{% extends 'driver/base.html' %}
+{% block header %}
+
+<style>
+    #grid {
+        margin: 40px 0 100px 0;
+        text-align: center;
+    }
+
+    #grid table {
+        width: 900px;
+        margin: auto;
+        border-collapse: collapse;
+        font-size: 16px;
+        background-color: white;
+    }
+
+    #grid th, #grid td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    #grid th {
+        background-color: #00e0c3;
+        color: white;
+    }
+
+    #grid tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .rating {
+        color: #ff9800;
+        font-weight: bold;
+    }
+</style>
+
+<div id="grid">
+    <h2>Customer Feedback</h2>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>User Name</th>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>Date</th>
+        </tr>
+
+        {% for i in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.user.uname }}</td>
+            <td class="rating">⭐ {{ i.rating }}/5</td>
+            <td>{{ i.comment }}</td>
+            <td>{{ i.date|date:"d-m-Y H:i" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No Feedback Available</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block header %}
+
+{% if messages %}
+<script>
+{% for message in messages %}
+    alert("{{ message }}");
+{% endfor %}
+</script>
+{% endif %}
+
+<style>
+    #grid {
+        margin: 40px 0 100px 0;
+        text-align: center;
+    }
+
+    #grid table {
+        width: 850px;
+        margin: auto;
+        border-collapse: collapse;
+        font-size: 16px;
+        background-color: #ffffff;
+    }
+
+    #grid th, #grid td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    #grid th {
+        background-color: #00e0c3;
+        color: white;
+    }
+
+    #grid tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #grid tr:hover {
+        background-color: #e6f7f5;
+    }
+
+    .cancel-btn {
+        text-decoration: none;
+        background-color: #ff4d4d;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 4px;
+    }
+
+    .cancel-btn:hover {
+        background-color: #cc0000;
+    }
+
+    .status-requested {
+        color: orange;
+        font-weight: bold;
+    }
+
+    .status-approved {
+        color: green;
+        font-weight: bold;
+    }
+
+    .status-rejected {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+
+<div id="grid">
+    <h2>My Bookings</h2>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Driver Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Charge</th>
+            <th>Status</th>
+
+            <th>Action</th>
+        </tr>
+
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{ i.did.dname }}</td>
+            <td>{{ i.did.daddress }}</td>
+            <td>{{ i.did.dcontact }}</td>
+            <td>{{ i.did.demail }}</td>
+            
+            <td>{{ i.charge }}</td>
+            <td class="status-{{ i.status }}">
+                {{ i.status }}
+            </td>
+            <td>
+                {% if i.status == "approved" %}
+                    <a href="/userpayment?id={{ i.id }}" 
+                    class="cancel-btn" 
+                    style="background-color:#28a745;">
+                        Pay Now
+                    </a>
+
+                {% elif i.status == "Paid" %}
+                
+                    {% if i.feedback_set.all %}
+                        <span style="color:green; font-weight:bold;">
+                            Feedback Given ✓
+                        </span>
+                    {% else %}
+                        <a href="/userfeedback?id={{ i.id }}" 
+                        class="cancel-btn" 
+                        style="background-color:#007bff;">
+                            Give Feedback
+                        </a>
+                    {% endif %}
+
+                {% elif i.status != "cancelled" %}
+                    <a href="?cancel_id={{ i.id }}" 
+                    class="cancel-btn"
+                    onclick="return confirm('Are you sure you want to cancel this booking?')">
+                    Cancel
+                    </a>
+                {% else %}
+                    ---
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">No Bookings Found</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

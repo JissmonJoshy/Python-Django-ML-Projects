@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <input type="text" name="fname" placeholder="NAME" id=""><br>
+    <input type="text" name="age" placeholder="AGE" id=""><br>
+    <input type="file" name="img" placeholder="AGE" id=""><br>
+    <input type="radio" name="gender" value="male" id="">male
+    <input type="radio" name="gender" value="female" id="">female<br>
+    <input type="submit" name="submit">
+</form>
+
+{% for i in s %} 
+
+{{i.fname}}
+{% endfor %}
+<br>
+
+{% for i in messages %} 
+<script>
+    alert('{{i}}');
+</script>
+
+{% endfor %}
+
+{% for i in t%} 
+
+{{i.fname}}
+{% endfor %}
+
+<br>
+{{u.fname}}
+</html>

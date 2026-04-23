@@ -1,0 +1,89 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block header %}
+
+{% if messages %}
+<script>
+{% for message in messages %}
+    alert("{{ message }}");
+{% endfor %}
+</script>
+{% endif %}
+
+<style>
+    #grid {
+        margin: 40px 0 100px 0;
+        text-align: center;
+    }
+
+    #grid table {
+        width: 800px;
+        margin: auto;   /* This centers the table */
+        border-collapse: collapse;
+        font-size: 16px;
+        background-color: #ffffff;
+    }
+
+    #grid th, #grid td {
+        padding: 10px;
+        text-align: center;
+    }
+
+    #grid th {
+        background-color: #00e0c3;
+        color: white;
+    }
+
+    #grid tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #grid tr:hover {
+        background-color: #e6f7f5;
+    }
+
+    #grid a {
+        text-decoration: none;
+        background-color: #00e0c3;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 4px;
+    }
+
+    #grid a:hover {
+        background-color: #00bfa5;
+    }
+</style>
+
+<div id="grid">
+    <h2>Available Drivers</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+
+        {% for i in data %}
+        <tr>
+            <td>{{ i.id }}</td>
+            <td>{{ i.dname }}</td>
+            <td>{{ i.daddress }}</td>
+            <td>{{ i.dcontact }}</td>
+            <td>{{ i.demail }}</td>
+            <td>
+                <a href="/userviewdriver?id={{ i.id }}">Book Now</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No Drivers Available</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}
