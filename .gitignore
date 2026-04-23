@@ -1,0 +1,9 @@
+venv/
+env/
+myenv/
+__pycache__/
+*.pyc
+*.pkl
+*.h5
+*.csv
+*.pdf
