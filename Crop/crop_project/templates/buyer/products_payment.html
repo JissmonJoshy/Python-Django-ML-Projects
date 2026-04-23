@@ -1,0 +1,118 @@
+{% extends "buyer/common.html" %}
+{% block content %}
+
+<br><br><br><br><br><br>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="card shadow-lg">
+                <div class="card-header bg-dark text-white text-center">
+                    <h4>Secure Card Payment</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <h5 class="text-center mb-3">
+                        Total Amount: ₹ {{ grand_total }}
+                    </h5>
+
+                    <form method="POST" onsubmit="return validateCard()">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label>Card Number</label>
+                            <input type="text" id="card_no" name="card_no"
+                                   class="form-control"
+                                   maxlength="16"
+                                   placeholder="1234567890123456"
+                                   required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Card Holder Name</label>
+                            <input type="text" id="holder_name" name="holder_name"
+                                   class="form-control"
+                                   placeholder="Card Holder Name"
+                                   required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label>Expiry Date</label>
+                                <input type="month" id="expiry" name="expiry"
+                                       class="form-control"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>CVV</label>
+                                <input type="password" id="cvv" name="cvv"
+                                       class="form-control"
+                                       maxlength="3"
+                                       placeholder="***"
+                                       required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100 mt-2">
+                            Pay Now
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br><br><br>
+
+<script>
+    // Set minimum expiry date to current month
+    let today = new Date();
+    let month = (today.getMonth() + 1).toString().padStart(2, '0');
+    let year = today.getFullYear();
+    document.getElementById("expiry").min = year + "-" + month;
+
+    function validateCard() {
+        let card = document.getElementById("card_no").value;
+        let name = document.getElementById("holder_name").value;
+        let cvv = document.getElementById("cvv").value;
+        let expiry = document.getElementById("expiry").value;
+
+        // Card number validation (16 digits only)
+        if (!/^\d{16}$/.test(card)) {
+            alert("Card number must be 16 digits");
+            return false;
+        }
+
+        // Name validation (only letters & spaces)
+        if (!/^[A-Za-z ]+$/.test(name)) {
+            alert("Enter valid card holder name");
+            return false;
+        }
+
+        // CVV validation (3 digits)
+        if (!/^\d{3}$/.test(cvv)) {
+            alert("CVV must be 3 digits");
+            return false;
+        }
+
+        // Expiry validation (extra safety)
+        let selected = new Date(expiry + "-01");
+        let now = new Date();
+
+        if (selected < new Date(now.getFullYear(), now.getMonth(), 1)) {
+            alert("Card expiry cannot be in the past");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+{% endblock %}

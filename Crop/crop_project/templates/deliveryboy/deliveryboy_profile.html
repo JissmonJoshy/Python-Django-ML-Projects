@@ -1,0 +1,50 @@
+{% extends "deliveryboy/common.html" %}
+{% block content %}
+
+<br><br><br><br><br><br>
+<br><br><br><br>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7 col-sm-12">
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+
+                    <h4 class="mb-4">Delivery Boy Profile</h4>
+
+                    <div class="mb-3 text-start">
+                        <strong>Full Name:</strong><br>
+                        {{ boy.full_name }}
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <strong>Phone:</strong><br>
+                        {{ boy.phone }}
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <strong>Address:</strong><br>
+                        {{ boy.address }}
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <strong>Email:</strong><br>
+                        {{ boy.login.username }}
+                    </div>
+
+                    <a href="{% url 'edit_deliveryboy_profile' %}"
+                       class="btn btn-primary mt-3 w-100">
+                        Edit Profile
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br><br><br><br>
+
+{% endblock %}

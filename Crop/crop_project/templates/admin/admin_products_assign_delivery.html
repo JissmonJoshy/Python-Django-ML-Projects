@@ -1,0 +1,137 @@
+{% extends "admin/common.html" %}
+{% block content %}
+<br><br><br><br>
+<br><br><br><br>
+<br><br>
+<div class="container">
+
+    <h3 class="text-center mb-4">Delivery Assignment</h3>
+
+    <!-- 🔹 UNASSIGNED (PAID) ORDERS -->
+    <h5 class="mb-3 text-primary">Paid Orders (Not Assigned)</h5>
+
+    <table class="table table-bordered text-center mb-5">
+        <thead class="table-dark">
+            <tr>
+                <th>Buyer</th>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Total</th>
+                <th>Assign Delivery</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for c in unassigned_carts %}
+            <tr>
+                <td>{{ c.buyer.full_name }}</td>
+                <td>{{ c.product.product_name }}</td>
+                <td>{{ c.quantity }}</td>
+                <td>₹ {{ c.total_price }}</td>
+                <td>
+                    <form method="POST" class="d-flex">
+                        {% csrf_token %}
+                        <input type="hidden" name="cart_id" value="{{ c.id }}">
+
+                        <select name="delivery_boy" class="form-control me-2" required>
+                            <option value="">Select Delivery Boy</option>
+                            {% for d in delivery_boys %}
+                            <option value="{{ d.id }}">
+                                {{ d.full_name }} ({{ d.phone }})
+                            </option>
+                            {% endfor %}
+                        </select>
+
+                        <button type="submit" class="btn btn-success btn-sm">
+                            Assign
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No paid unassigned orders</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- 🔹 ASSIGNED ORDERS -->
+    <h5 class="mb-3 text-success">Assigned Orders</h5>
+
+    <table class="table table-bordered text-center">
+        <thead class="table-success">
+            <tr>
+                <th>Buyer</th>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Total</th>
+                <th>Delivery Boy</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for a in assigned_carts %}
+            <tr>
+                <td>{{ a.buyer.full_name }}</td>
+                <td>{{ a.product.product_name }}</td>
+                <td>{{ a.quantity }}</td>
+                <td>₹ {{ a.total_price }}</td>
+                <td>{{ a.delivery_boy.full_name }}</td>
+                <td>
+                    <span class="badge bg-success">
+                        {{ a.status|title }}
+                    </span>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No assigned orders</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- 🔹 DELIVERED ORDERS -->
+<h5 class="mb-3 text-info mt-5">Delivered Orders</h5>
+
+<table class="table table-bordered text-center">
+    <thead class="table-info">
+        <tr>
+            <th>Buyer</th>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Total</th>
+            <th>Delivery Boy</th>
+            <th>Status</th>
+            <th>Delivered Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for d in delivered_carts %}
+        <tr>
+            <td>{{ d.buyer.full_name }}</td>
+            <td>{{ d.product.product_name }}</td>
+            <td>{{ d.quantity }}</td>
+            <td>₹ {{ d.total_price }}</td>
+            <td>{{ d.delivery_boy.full_name }}</td>
+            <td>
+                <span class="badge bg-success">Delivered</span>
+            </td>
+            <td>{{ d.created_at|date:"d M Y" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">No delivered orders</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+</div>
+<br><br><br><br>
+
+{% endblock %}

@@ -1,0 +1,177 @@
+{% extends "farmer/common.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+.payment-wrapper{
+    min-height:70vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.payment-card{
+    width:100%;
+    max-width:420px;
+    background:#ffffff;
+    border-radius:12px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.15);
+    padding:25px;
+}
+
+.payment-card h3{
+    text-align:center;
+    margin-bottom:10px;
+    font-weight:600;
+}
+
+.payment-card .amount{
+    text-align:center;
+    font-size:20px;
+    font-weight:600;
+    color:green;
+    margin-bottom:20px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    font-size:14px;
+    font-weight:500;
+    margin-bottom:5px;
+    display:block;
+}
+
+.form-group input{
+    width:100%;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:14px;
+}
+
+.pay-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#28a745;
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.pay-btn:hover{
+    background:#218838;
+}
+
+@media(max-width:480px){
+    .payment-card{
+        padding:20px;
+    }
+}
+</style>
+
+<br><br><br><br><br><br><br><br>
+
+<div class="payment-wrapper">
+    <div class="payment-card">
+
+        <h3>Secure Payment</h3>
+        <div class="amount">₹ {{ total_amount }}</div>
+
+        <form method="POST" onsubmit="return validatePayment()">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Card Number</label>
+                <input type="text" id="card"
+                       placeholder="1234 5678 9012 3456"
+                       maxlength="19"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Expiry Date</label>
+                <input type="month" id="expiry" required>
+            </div>
+
+            <div class="form-group">
+                <label>CVV</label>
+                <input type="password" id="cvv"
+                       placeholder="***"
+                       maxlength="3"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Card Holder Name</label>
+                <input type="text" id="name"
+                       placeholder="Name on card"
+                       required>
+            </div>
+
+            <button type="submit" class="pay-btn">
+                Pay Now
+            </button>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    // Set minimum expiry (no past date)
+    let today = new Date();
+    let month = (today.getMonth() + 1).toString().padStart(2, '0');
+    let year = today.getFullYear();
+    document.getElementById("expiry").min = year + "-" + month;
+
+    // Auto format card number (1234 5678 9012 3456)
+    document.getElementById("card").addEventListener("input", function(e){
+        let value = e.target.value.replace(/\D/g, '').substring(0,16);
+        let formatted = value.match(/.{1,4}/g);
+        e.target.value = formatted ? formatted.join(" ") : value;
+    });
+
+    function validatePayment(){
+        let card = document.getElementById("card").value.replace(/\s/g,'');
+        let cvv = document.getElementById("cvv").value;
+        let name = document.getElementById("name").value;
+        let expiry = document.getElementById("expiry").value;
+
+        // Card validation
+        if(!/^\d{16}$/.test(card)){
+            alert("Card number must be 16 digits");
+            return false;
+        }
+
+        // CVV validation
+        if(!/^\d{3}$/.test(cvv)){
+            alert("CVV must be 3 digits");
+            return false;
+        }
+
+        // Name validation
+        if(!/^[A-Za-z ]+$/.test(name)){
+            alert("Enter valid card holder name");
+            return false;
+        }
+
+        // Expiry validation
+        let selected = new Date(expiry + "-01");
+        let now = new Date();
+
+        if(selected < new Date(now.getFullYear(), now.getMonth(), 1)){
+            alert("Expiry date cannot be in the past");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "admin/common.html" %}
+{% block content %}
+
+<br><br><br><br><br><br>
+<br><br><br><br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+
+                    <h4 class="text-center mb-4">Edit Delivery Boy</h4>
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text"
+                                   class="form-control"
+                                   value="{{boy.login.username}}"
+                                   disabled>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text"
+                                   name="full_name"
+                                   class="form-control"
+                                   value="{{ boy.full_name }}"
+                                   required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="text"
+                                   name="phone"
+                                   class="form-control"
+                                   value="{{ boy.phone }}"
+                                   required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Address</label>
+                            <textarea name="address"
+                                      class="form-control"
+                                      rows="3"
+                                      required>{{ boy.address }}</textarea>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'admin_delivery_boy' %}"
+                               class="btn btn-secondary">
+                                Back
+                            </a>
+
+                            <button type="submit" class="btn btn-primary">
+                                Update
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br><br><br><br>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "admin/common.html" %}
+{% block content %}
+<br><br><br><br><br><br><br>
+<div class="container mt-4">
+    <h3>Buyers List</h3>
+
+    <table class="table table-bordered mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Joined On</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for buyer in buyers %}
+            <tr>
+                <td>{{ buyer.full_name }}</td>
+                <td>{{ buyer.login.email }}</td>
+                <td>{{ buyer.phone }}</td>
+                <td>{{ buyer.created_at|date:"d-m-Y" }}</td>
+                <td>
+                    <a href="{% url 'reject_buyer' buyer.id %}"
+                       onclick="return confirm('Delete this buyer?')"
+                       class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No buyers found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

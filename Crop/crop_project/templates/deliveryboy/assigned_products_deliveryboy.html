@@ -1,0 +1,111 @@
+{% extends "deliveryboy/common.html" %}
+{% block content %}
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+<div class="container">
+    <h3 class="text-center mb-4">Assigned Orders Dashboard</h3>
+
+    <!-- ACTIVE ORDERS -->
+    <h5 class="mb-3 text-primary">Active Orders</h5>
+
+    <table class="table table-bordered text-center mb-5">
+        <thead class="table-info">
+            <tr>
+                <th>Buyer</th>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Total</th>
+                <th>Current Status</th>
+                <th>Update Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for order in active_orders %}
+            <tr>
+                <td>{{ order.buyer.full_name }}</td>
+                <td>{{ order.product.product_name }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>₹ {{ order.total_price }}</td>
+
+                <td>
+                    {% if order.status == 'assigned' %}
+                        <span class="badge bg-warning">Assigned</span>
+                    {% elif order.status == 'picked' %}
+                        <span class="badge bg-info">Picked</span>
+                    {% elif order.status == 'out_for_delivery' %}
+                        <span class="badge bg-primary">Out for Delivery</span>
+                    {% endif %}
+                </td>
+
+                <td>
+                    <form method="post" action="{% url 'update_delivery_status' order.id %}">
+                        {% csrf_token %}
+                        <select name="status" class="form-select form-select-sm mb-1" required>
+                            <option value="">Select</option>
+
+                            {% if order.status == 'assigned' %}
+                                <option value="picked">Picked</option>
+                            {% endif %}
+
+                            {% if order.status == 'picked' %}
+                                <option value="out_for_delivery">Out for Delivery</option>
+                            {% endif %}
+
+                            {% if order.status == 'out_for_delivery' %}
+                                <option value="delivered">Delivered</option>
+                            {% endif %}
+                        </select>
+
+                        <button class="btn btn-success btn-sm w-100">
+                            Update
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No active orders</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- DELIVERED ORDERS -->
+    <h5 class="mb-3 text-success">Delivered Orders</h5>
+
+    <table class="table table-bordered text-center">
+        <thead class="table-success">
+            <tr>
+                <th>Buyer</th>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Delivered On</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for order in delivered_orders %}
+            <tr>
+                <td>{{ order.buyer.full_name }}</td>
+                <td>{{ order.product.product_name }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>₹ {{ order.total_price }}</td>
+                <td>
+                    <span class="badge bg-success">Delivered</span>
+                </td>
+                <td>{{ order.created_at|date:"d M Y" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No delivered orders</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<br><br><br>
+{% endblock %}

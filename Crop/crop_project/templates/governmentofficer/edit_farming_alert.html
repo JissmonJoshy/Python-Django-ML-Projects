@@ -1,0 +1,56 @@
+{% extends "governmentofficer/common.html" %}
+{% block content %}
+
+<br><br><br><br><br><br><br><br><br><br><br>
+
+<div class="container">
+    <div class="card shadow p-4">
+        <h4 class="mb-4 text-center">Edit Farming Alert</h4>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" name="title" value="{{ alert.title }}"
+                       class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="description" rows="4"
+                          class="form-control" required>{{ alert.description }}</textarea>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Update Image</label>
+                    <input type="file" name="image" class="form-control">
+                    {% if alert.image %}
+                        <img src="{{ alert.image.url }}" class="img-fluid rounded mt-2" height="120">
+                    {% endif %}
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Update Video</label>
+                    <input type="file" name="video" class="form-control">
+                    {% if alert.video %}
+                        <video controls class="w-100 rounded mt-2" height="120">
+                            <source src="{{ alert.video.url }}">
+                        </video>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-success px-4">Update Alert</button>
+                <a href="{% url 'view_farming_alerts' %}"
+                   class="btn btn-secondary px-4 ms-2">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<br><br><br>
+{% endblock %}

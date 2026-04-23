@@ -1,0 +1,127 @@
+{% extends "deliveryboy/common.html" %}
+{% block content %}
+<br><br><br><br><br><br><br><br><br><br>
+
+<div class="container-fluid px-3 px-md-5">
+
+    <!-- ACTIVE ORDERS -->
+    <div class="card shadow border-0 mb-5">
+        <div class="card-body">
+
+            <h4 class="mb-4">Assigned Seeds & Fertilisers Orders</h4>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Farmer</th>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>Update</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for o in active_orders %}
+                        <tr>
+                            <td>{{ o.farmer.full_name }}</td>
+                            <td>{{ o.product.name }}</td>
+                            <td>{{ o.quantity }}</td>
+                            <td>₹ {{ o.total_price }}</td>
+                            <td class="text-start">{{ o.farmer.address }}</td>
+                            <td>{{ o.farmer.phone }}</td>
+
+                            <td>
+                                {% if o.status == 'assigned' %}
+                                    <span class="badge bg-warning">Assigned</span>
+                                {% elif o.status == 'picked' %}
+                                    <span class="badge bg-info">Picked</span>
+                                {% elif o.status == 'out_for_delivery' %}
+                                    <span class="badge bg-primary">Out for Delivery</span>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <form method="post" action="{% url 'update_seed_delivery_status' o.id %}">
+                                    {% csrf_token %}
+                                    <select name="status" class="form-select form-select-sm mb-1" required>
+
+                                        {% if o.status == 'assigned' %}
+                                            <option value="picked">Picked</option>
+                                        {% endif %}
+
+                                        {% if o.status == 'picked' %}
+                                            <option value="out_for_delivery">Out for Delivery</option>
+                                        {% endif %}
+
+                                        {% if o.status == 'out_for_delivery' %}
+                                            <option value="delivered">Delivered</option>
+                                        {% endif %}
+
+                                    </select>
+                                    <button class="btn btn-success btn-sm w-100">
+                                        Update
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8">No active orders</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- DELIVERED ORDERS -->
+    <div class="card shadow border-0">
+        <div class="card-body">
+
+            <h4 class="mb-4 text-success">Delivered Orders</h4>
+
+            <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Farmer</th>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                            <th>Delivered On</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for o in delivered_orders %}
+                        <tr>
+                            <td>{{ o.farmer.full_name }}</td>
+                            <td>{{ o.product.name }}</td>
+                            <td>{{ o.quantity }}</td>
+                            <td>₹ {{ o.total_price }}</td>
+                            <td>{{ o.created_at|date:"d M Y" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5">No delivered orders</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<br><br><br>
+{% endblock %}

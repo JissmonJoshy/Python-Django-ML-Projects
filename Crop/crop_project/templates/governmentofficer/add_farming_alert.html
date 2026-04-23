@@ -1,0 +1,36 @@
+{% extends "governmentofficer/common.html" %}
+{% block content %}
+<br><br><br><br><br><br><br><br><br><br>
+
+<div class="container col-md-6">
+    <h3 class="text-center mb-4">Add Farming Alert</h3>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label>Title</label>
+            <input type="text" name="title" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Description</label>
+            <textarea name="description" class="form-control" rows="4" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label>Image (optional)</label>
+            <input type="file" name="image" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label>Video (optional)</label>
+            <input type="file" name="video" class="form-control">
+        </div>
+
+        <button class="btn btn-success w-100">Publish Alert</button>
+    </form>
+</div>
+
+<br><br><br>
+{% endblock %}

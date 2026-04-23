@@ -1,0 +1,98 @@
+{% extends "farmer/common.html" %}
+{% block content %}
+
+<style>
+.alert-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+    gap:20px;
+}
+
+.alert-card{
+    border-radius:12px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
+
+.alert-media{
+    display:flex;
+    gap:8px;
+    padding:10px;
+    background:#f8f9fa;
+    justify-content:center;
+}
+
+.alert-media img,
+.alert-media video{
+    width:48%;
+    height:160px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.alert-body{
+    padding:15px;
+    flex:1;
+}
+</style>
+
+<br><br><br><br><br><br><br><br><br><br><br>
+
+<div class="container">
+    <h3 class="text-center mb-4">Farming Alerts</h3>
+
+    {% if alerts %}
+    <div class="alert-grid">
+
+        {% for a in alerts %}
+        <div class="card shadow alert-card">
+
+            <!-- IMAGE + VIDEO -->
+            <div class="alert-media">
+
+                {% if a.image %}
+                    <img src="{{ a.image.url }}">
+                {% else %}
+                    <div class="d-flex align-items-center justify-content-center text-muted"
+                         style="width:48%;height:160px;border:1px dashed #ccc;">
+                        No Image
+                    </div>
+                {% endif %}
+
+                {% if a.video %}
+                    <video controls>
+                        <source src="{{ a.video.url }}">
+                    </video>
+                {% else %}
+                    <div class="d-flex align-items-center justify-content-center text-muted"
+                         style="width:48%;height:160px;border:1px dashed #ccc;">
+                        No Video
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <!-- CONTENT -->
+            <div class="alert-body">
+                <h5>{{ a.title }}</h5>
+                <p class="text-muted" style="font-size:14px;">
+                    {{ a.description }}
+                </p>
+                <small class="text-secondary">
+                    Posted on {{ a.created_at|date:"d M Y" }}
+                </small>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+    {% else %}
+        <p class="text-center text-muted">No farming alerts available</p>
+    {% endif %}
+</div>
+
+<br><br><br>
+{% endblock %}

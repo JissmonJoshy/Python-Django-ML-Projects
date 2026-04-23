@@ -1,0 +1,52 @@
+{% extends "governmentofficer/common.html" %}
+{% load static %}
+
+{% block content %}
+<br><br><br><br><br><br><br><br>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">Officer Profile</h4>
+                </div>
+
+                <div class="card-body text-center">
+
+                    <img src="{{ officer.image.url }}"
+                         class="rounded-circle mb-3"
+                         width="120" height="120"
+                         style="object-fit: cover;">
+
+                    <table class="table table-borderless text-start mt-3">
+                        <tr>
+                            <th>Full Name</th>
+                            <td>{{ officer.full_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ officer.login.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Phone</th>
+                            <td>{{ officer.phone }}</td>
+                        </tr>
+                        <tr>
+                            <th>Department</th>
+                            <td>{{ officer.department }}</td>
+                        </tr>
+                    </table>
+
+                    <a href="{% url 'edit_officer_profile' %}" class="btn btn-primary mt-3">
+                        Edit Profile
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

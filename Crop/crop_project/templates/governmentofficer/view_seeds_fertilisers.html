@@ -1,0 +1,82 @@
+{% extends "governmentofficer/common.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:700px;
+}
+
+th,td{
+    padding:10px;
+    border:1px solid #ccc;
+    text-align:center;
+    white-space:nowrap;
+}
+
+img{
+    width:70px;
+    max-width:100%;
+}
+
+a.btn{
+    display:inline-block;
+    padding:6px 10px;
+    color:white;
+    text-decoration:none;
+    margin:3px;
+    border-radius:4px;
+    font-size:14px;
+}
+
+.edit{background:blue;}
+.delete{background:red;}
+
+@media (max-width:768px){
+    h3{
+        text-align:center;
+    }
+    a.btn{
+        display:block;
+        margin-bottom:6px;
+    }
+}
+</style>
+
+<br><br><br><br><br><br><br><br>
+<h3>My Seeds & Fertilisers</h3>
+
+<table>
+    <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Action</th>
+    </tr>
+
+    {% for p in products %}
+    <tr>
+        <td><img src="{{ p.image.url }}"></td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.category }}</td>
+        <td>{{ p.price }}</td>
+        <td>{{ p.quantity }}</td>
+        <td>
+            <a href="{% url 'officer_edit_seeds_fertilisers' p.id %}" class="btn edit">Edit</a>
+            <a href="{% url 'officer_delete_seeds_fertilisers' p.id %}" class="btn delete"
+               onclick="return confirm('Are you sure?')">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br><br><br><br><br>
+{% endblock %}

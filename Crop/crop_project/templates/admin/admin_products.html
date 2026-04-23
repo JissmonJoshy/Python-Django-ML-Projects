@@ -1,0 +1,89 @@
+{% extends "admin/common.html" %}
+{% block content %}
+
+<style>
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+    gap:20px;
+}
+
+.product-card{
+    border-radius:12px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
+
+.product-img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.product-body{
+    padding:15px;
+    flex:1;
+}
+
+.badge-category{
+    background:#198754;
+    color:white;
+    font-size:12px;
+    padding:4px 8px;
+    border-radius:6px;
+}
+</style>
+
+<br><br><br><br><br><br><br><br>
+
+<div class="container">
+    <h3 class="text-center mb-4">Farmer Products</h3>
+
+    {% if products %}
+    <div class="product-grid">
+
+        {% for p in products %}
+        <div class="card shadow product-card">
+
+            <img src="{{ p.image.url }}" class="product-img">
+
+            <div class="product-body">
+                <h5>{{ p.product_name }}</h5>
+
+                <span class="badge-category">{{ p.category }}</span>
+
+                <p class="mt-2 text-muted" style="font-size:14px;">
+                    {{ p.description|default:"No description" }}
+                </p>
+
+                <p class="mb-1"><strong>Price:</strong> ₹{{ p.price }}</p>
+                <p class="mb-1"><strong>Quantity:</strong> {{ p.quantity }}</p>
+
+                <hr>
+
+                <p class="mb-1">
+                    <strong>Farmer:</strong> {{ p.farmer.full_name }}
+                </p>
+
+                <p class="mb-1">
+                    <strong>Phone:</strong> {{ p.farmer.phone }}
+                </p>
+
+                <small class="text-secondary">
+                    Added on {{ p.created_at|date:"d M Y" }}
+                </small>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+    {% else %}
+        <p class="text-center text-muted">No products added by farmers</p>
+    {% endif %}
+</div>
+
+<br><br><br>
+{% endblock %}

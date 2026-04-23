@@ -1,0 +1,61 @@
+{% extends "admin/common.html" %}
+{% block content %}
+<br><br><br><br><br><br><br><br><br>
+<div class="container-fluid px-3 px-md-5 mt-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
+                <h4 class="mb-2 mb-md-0">Delivery Boys</h4>
+                <a href="{% url 'admin_add_delivery_boy' %}" class="btn btn-success">
+                    + Add Delivery Boy
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th style="width: 160px;">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for d in data %}
+                        <tr>
+                            <td>{{ d.full_name }}</td>
+                            <td>{{ d.login.username }}</td>
+                            <td>{{ d.phone }}</td>
+                            <td class="text-start">{{ d.address }}</td>
+                            <td>
+                                <a href="{% url 'edit_delivery_boy' d.id %}" 
+                                   class="btn btn-primary btn-sm mb-1">
+                                    Edit
+                                </a>
+                                <a href="{% url 'delete_delivery_boy' d.id %}"
+                                   class="btn btn-danger btn-sm mb-1"
+                                   onclick="return confirm('Delete this delivery boy?')">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-muted py-4">
+                                No delivery boys added yet
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+<br><br><br><br><br><br>
+{% endblock %}

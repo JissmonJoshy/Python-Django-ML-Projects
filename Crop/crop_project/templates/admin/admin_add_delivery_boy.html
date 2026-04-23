@@ -1,0 +1,60 @@
+{% extends "admin/common.html" %}
+{% block content %}
+<br><br><br><br><br><br><br><br><br>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h4 class="text-center mb-4">Add Delivery Boy</h4>
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" name="full_name" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="text" name="phone" class="form-control"
+                            pattern="[0-9]{10}" maxlength="10"
+                            placeholder="Enter 10 digit phone number" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="username" class="form-control"
+                            pattern="[a-z0-9._%+-]+@gmail\.(com|in)$"
+                            placeholder="Enter gmail.com or gmail.in email" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <textarea name="address" class="form-control" rows="3" required></textarea>
+                        </div>
+
+                        <hr>
+
+                        
+
+                        <div class="mb-4">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">
+                            Add Delivery Boy
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<br><br><br><br><br><br>
+{% endblock %}

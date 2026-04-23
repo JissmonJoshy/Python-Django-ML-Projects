@@ -1,0 +1,92 @@
+{% extends "governmentofficer/common.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+.edit-container{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+.form-box{
+    width:100%;
+    max-width:500px;
+    background:white;
+    padding:20px;
+    border-radius:6px;
+}
+
+.form-box h3{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+input, textarea, select{
+    width:100%;
+    padding:10px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:4px;
+}
+
+textarea{
+    resize:none;
+    height:100px;
+}
+
+img{
+    width:100%;
+    max-height:200px;
+    object-fit:contain;
+    margin-bottom:10px;
+}
+
+button{
+    background:green;
+    color:white;
+    padding:12px;
+    width:100%;
+    border:none;
+    border-radius:4px;
+    font-size:16px;
+}
+
+@media (max-width:480px){
+    .form-box{
+        padding:15px;
+    }
+}
+</style>
+<br><br><br><br><br><br><br><br>
+<div class="edit-container">
+    <div class="form-box">
+        <h3>Edit Seeds / Fertiliser</h3>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <input type="text" name="name" value="{{ product.name }}" required>
+
+            <select name="category">
+                <option value="Seed" {% if product.category == 'Seed' %}selected{% endif %}>Seed</option>
+                <option value="Fertiliser" {% if product.category == 'Fertiliser' %}selected{% endif %}>Fertiliser</option>
+            </select>
+
+            <textarea name="description">{{ product.description }}</textarea>
+
+            <input type="number" step="0.01" name="price" value="{{ product.price }}" required>
+
+            <input type="number" name="quantity" value="{{ product.quantity }}" required>
+
+            <img src="{{ product.image.url }}">
+
+            <input type="file" name="image">
+
+            <button type="submit">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

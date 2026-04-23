@@ -1,0 +1,48 @@
+{% extends "farmer/common.html" %}
+{% block content %}
+<br><br><br><br><br><br><br><br><br>
+
+<div class="container">
+    <h3 class="text-center mb-4">My Products</h3>
+
+    <table class="table table-bordered table-striped text-center">
+        <thead class="table-success">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Qty (Kg)</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for p in products %}
+            <tr>
+                <td>
+                    <img src="{{ p.image.url }}" width="80" height="60">
+                </td>
+                <td>{{ p.product_name }}</td>
+                <td>{{ p.category }}</td>
+                <td>{{ p.quantity }}</td>
+                <td>{{ p.price }}</td>
+                <td>
+                    <a href="/edit_product/{{ p.id }}/" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/delete-product/{{ p.id }}/"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Are you sure?')">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No products added</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

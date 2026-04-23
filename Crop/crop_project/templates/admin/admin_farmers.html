@@ -1,0 +1,61 @@
+{% extends "admin/common.html" %}
+{% block content %}
+<br><br><br><br><br><br><br>
+<div class="container mt-4">
+    <h3>Farmers List</h3>
+
+    <table class="table table-bordered mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Profile</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for farmer in farmers %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>
+                    {% if farmer.profile_pic %}
+                        <img src="{{ farmer.profile_pic.url }}" width="60" height="60" style="border-radius:50%;">
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
+                <td>{{ farmer.full_name }}</td>
+                <td>{{ farmer.login.email }}</td>
+                <td>{{ farmer.phone }}</td>
+                <td>{{ farmer.address }}</td>
+                <td>
+                    {% if farmer.login.is_active %}
+                        <span class="text-success">Approved</span>
+                    {% else %}
+                        <span class="text-warning">Pending</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not farmer.login.is_active %}
+                        <a href="{% url 'approve_farmer' farmer.id %}" class="btn btn-success btn-sm">Approve</a>
+                    {% endif %}
+                    <a href="{% url 'reject_farmer' farmer.id %}"
+                       onclick="return confirm('Reject this farmer?')"
+                       class="btn btn-danger btn-sm">Reject</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">No farmers found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

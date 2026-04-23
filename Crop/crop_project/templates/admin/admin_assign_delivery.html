@@ -1,0 +1,163 @@
+{% extends "admin/common.html" %}
+{% block content %}
+
+<br><br><br><br><br><br>
+<br><br><br><br>
+
+<div class="container-fluid px-3 px-md-5">
+
+    <!-- ================= PAID ORDERS ================= -->
+    <div class="card shadow-sm border-0 mb-5">
+        <div class="card-body">
+
+            <h4 class="mb-4 text-primary">Paid Orders (Not Assigned)</h4>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Farmer</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Amount</th>
+                            <th>Assign Delivery Boy</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for o in orders %}
+                        {% if o.status == 'paid' %}
+                        <tr>
+                            <td>{{ o.farmer.full_name }}</td>
+                            <td>{{ o.product.name }}</td>
+                            <td>{{ o.quantity }}</td>
+                            <td>₹ {{ o.total_price }}</td>
+                            <td>
+                                <form method="post" action="{% url 'assign_delivery_boy' o.id %}">
+                                    {% csrf_token %}
+                                    <div class="d-flex gap-2">
+                                        <select name="delivery_boy" class="form-select" required>
+                                            <option value="">Select</option>
+                                            {% for b in boys %}
+                                            <option value="{{ b.id }}">{{ b.full_name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <button class="btn btn-success btn-sm">
+                                            Assign
+                                        </button>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% empty %}
+                        <tr>
+                            <td colspan="5">No paid orders</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= ASSIGNED ORDERS ================= -->
+    <div class="card shadow-sm border-0 mb-5">
+        <div class="card-body">
+
+            <h4 class="mb-4 text-info">Assigned Orders</h4>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle text-center">
+                    <thead class="table-info">
+                        <tr>
+                            <th>Farmer</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Amount</th>
+                            <th>Delivery Boy</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for o in orders %}
+                        {% if o.status == 'assigned' %}
+                        <tr>
+                            <td>{{ o.farmer.full_name }}</td>
+                            <td>{{ o.product.name }}</td>
+                            <td>{{ o.quantity }}</td>
+                            <td>₹ {{ o.total_price }}</td>
+                            <td>{{ o.delivery_boy.full_name }}</td>
+                            <td>
+                                <span class="badge bg-info">
+                                    Assigned
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% empty %}
+                        <tr>
+                            <td colspan="6">No assigned orders</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= DELIVERED ORDERS ================= -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+
+            <h4 class="mb-4 text-success">Delivered Orders</h4>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle text-center">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Farmer</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Amount</th>
+                            <th>Delivery Boy</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for o in orders %}
+                        {% if o.status == 'delivered' %}
+                        <tr>
+                            <td>{{ o.farmer.full_name }}</td>
+                            <td>{{ o.product.name }}</td>
+                            <td>{{ o.quantity }}</td>
+                            <td>₹ {{ o.total_price }}</td>
+                            <td>{{ o.delivery_boy.full_name }}</td>
+                            <td>
+                                <span class="badge bg-success">
+                                    Delivered
+                                </span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% empty %}
+                        <tr>
+                            <td colspan="6">No delivered orders</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<br><br><br>
+
+{% endblock %}

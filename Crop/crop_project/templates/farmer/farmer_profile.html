@@ -1,0 +1,50 @@
+{% extends "farmer/common.html" %}
+{% load static %}
+
+{% block content %}
+<br><br><br><br><br><br><br><br>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9 col-sm-12">
+
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-success text-white text-center rounded-top-4">
+                    <h4 class="mb-0">Farmer Profile</h4>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <div class="row mb-3">
+                        <div class="col-5 fw-bold">Full Name</div>
+                        <div class="col-7">{{ farmer.full_name }}</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-5 fw-bold">Email</div>
+                        <div class="col-7">{{ farmer.login.email }}</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-5 fw-bold">Phone</div>
+                        <div class="col-7">{{ farmer.phone }}</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-5 fw-bold">Address</div>
+                        <div class="col-7">{{ farmer.address }}</div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer bg-light text-center">
+                    <a href="{% url 'edit_farmer_profile' %}" class="btn btn-success px-4">
+                        Edit Profile
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "admin/common.html" %}
+{% load static %}
+
+{% block content %}
+<br><br><br><br><br><br><br><br>
+<div class="container py-5">
+    <h3 class="mb-4">Government Officers</h3>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Department</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for o in officers %}
+            <tr>
+                <td>
+                    <img src="{{ o.image.url }}" width="60" height="60" class="rounded-circle">
+                </td>
+                <td>{{ o.full_name }}</td>
+                <td>{{ o.login.email }}</td>
+                <td>{{ o.phone }}</td>
+                <td>{{ o.department }}</td>
+                <td>
+                    <a href="{% url 'admin_edit_officer' o.id %}" class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <a href="{% url 'admin_delete_officer' o.id %}" 
+                    class="btn btn-danger btn-sm"
+                    onclick="return confirm('Are you sure?')">
+                        Delete
+                    </a>
+                </td>
+
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">No officers found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

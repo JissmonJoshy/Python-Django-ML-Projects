@@ -1,0 +1,150 @@
+{% extends "farmer/common.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+.order-wrapper{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+.order-card{
+    background:#ffffff;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    padding:20px;
+}
+
+.order-card h3{
+    text-align:center;
+    margin-bottom:20px;
+    font-weight:600;
+}
+
+.table th{
+    background:#f5f5f5;
+    font-weight:600;
+    font-size:14px;
+}
+
+.table td{
+    font-size:14px;
+    vertical-align:middle;
+}
+
+.price{
+    font-weight:600;
+    color:green;
+}
+
+/* Mobile responsive table */
+@media(max-width:768px){
+    table, thead, tbody, th, td, tr{
+        display:block;
+    }
+
+    thead{
+        display:none;
+    }
+
+    tr{
+        margin-bottom:15px;
+        border:1px solid #ddd;
+        border-radius:8px;
+        padding:10px;
+    }
+
+    td{
+        display:flex;
+        justify-content:space-between;
+        padding:8px;
+        border:none;
+        border-bottom:1px solid #eee;
+    }
+
+    td:last-child{
+        border-bottom:none;
+    }
+
+    td::before{
+        content:attr(data-label);
+        font-weight:600;
+        color:#555;
+    }
+}
+</style>
+
+<br><br><br><br><br><br><br>
+
+<div class="order-wrapper">
+    <div class="order-card">
+
+        <h3>Order History</h3>
+
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for o in orders %}
+                <tr>
+                    <td data-label="Product">{{ o.product.name }}</td>
+                    <td data-label="Quantity">{{ o.quantity }}</td>
+                    <td data-label="Amount" class="price">₹ {{ o.total_price }}</td>
+                    
+                    <td data-label="Status">
+                        {% if o.status == 'paid' %}
+                            <span class="badge bg-warning text-dark">On Progress</span>
+
+                        {% elif o.status == 'assigned' %}
+                            <span class="badge bg-info">Shipped</span>
+
+                        {% elif o.status == 'picked' %}
+                            <span class="badge bg-primary">Picked</span>
+
+                        {% elif o.status == 'out_for_delivery' %}
+                            <span class="badge bg-secondary">Out for delivery</span>
+
+                        {% elif o.status == 'delivered' %}
+                            <span class="badge bg-success">Delivered</span>
+                            <br>
+
+                            {% if not o.seedfertiliserfeedback %}
+                                <a href="{% url 'add_seed_feedback' o.id %}"
+                                class="btn btn-sm btn-outline-primary mt-1">
+                                    Give Feedback
+                                </a>
+                            {% else %}
+                                <span class="badge bg-secondary mt-1">Feedback Submitted</span>
+                            {% endif %}
+
+                        {% endif %}
+                    </td>
+
+
+                    <td data-label="Date">{{ o.created_at|date:"d M Y" }}</td>
+
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" style="text-align:center;">
+                        No orders yet
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<br><br><br><br>
+{% endblock %}

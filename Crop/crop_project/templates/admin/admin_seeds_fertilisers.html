@@ -1,0 +1,106 @@
+{% extends "admin/common.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+.container{
+    padding:20px;
+}
+
+.table-wrapper{
+    overflow-x:auto;
+    margin-bottom:40px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:800px;
+}
+
+th,td{
+    padding:10px;
+    border:1px solid #ccc;
+    text-align:center;
+}
+
+img{
+    width:70px;
+}
+
+h3{
+    margin:20px 0;
+    color:#333;
+}
+
+@media(max-width:768px){
+    h3{
+        text-align:center;
+    }
+}
+</style>
+<br><br><br><br><br><br><br><br><br>
+<div class="container">
+
+    <!-- 🌱 SEEDS TABLE -->
+    <h3>Seeds</h3>
+    <div class="table-wrapper">
+        <table>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Officer</th>
+                <th>Department</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+
+            {% for s in seeds %}
+            <tr>
+                <td><img src="{{ s.image.url }}"></td>
+                <td>{{ s.name }}</td>
+                <td>{{ s.officer.full_name }}</td>
+                <td>{{ s.officer.department }}</td>
+                <td>{{ s.price }}</td>
+                <td>{{ s.quantity }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No Seeds Available</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <!-- 🌾 FERTILISERS TABLE -->
+    <h3>Fertilisers</h3>
+    <div class="table-wrapper">
+        <table>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Officer</th>
+                <th>Department</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+
+            {% for f in fertilisers %}
+            <tr>
+                <td><img src="{{ f.image.url }}"></td>
+                <td>{{ f.name }}</td>
+                <td>{{ f.officer.full_name }}</td>
+                <td>{{ f.officer.department }}</td>
+                <td>{{ f.price }}</td>
+                <td>{{ f.quantity }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No Fertilisers Available</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+{% endblock %}

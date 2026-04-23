@@ -1,0 +1,52 @@
+{% extends "buyer/common.html" %}
+{% load static %}
+
+{% block content %}
+<br><br><br><br><br><br><br>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9 col-sm-12">
+
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">Edit Buyer Profile</h4>
+                </div>
+
+                <div class="card-body p-4">
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Full Name</label>
+                            <input type="text" name="full_name" value="{{ buyer.full_name }}" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Email</label>
+                            <input type="email" name="email" value="{{ login_user.email }}" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Phone</label>
+                            <input type="text" name="phone" value="{{ buyer.phone }}" class="form-control" required>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="{% url 'buyer_profile' %}" class="btn btn-outline-secondary px-4">
+                                Back
+                            </a>
+
+                            <button type="submit" class="btn btn-primary px-4">
+                                Update Profile
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

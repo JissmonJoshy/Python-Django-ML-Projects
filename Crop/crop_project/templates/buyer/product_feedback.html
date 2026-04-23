@@ -1,0 +1,54 @@
+{% extends "buyer/common.html" %}
+{% block content %}
+<br><br><br><br><br><br><br><br><br><br><br>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow">
+                <div class="card-header text-center bg-success text-white">
+                    <h5>Product Feedback</h5>
+                </div>
+
+                <div class="card-body">
+                    <p><strong>Product:</strong> {{ cart.product.product_name }}</p>
+                    <p><strong>Farmer:</strong> {{ cart.product.farmer.full_name }}</p>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label>Rating (1–5)</label>
+                            <select name="rating" class="form-control" required>
+                                <option value="">Select Rating</option>
+                                <option value="5">★★★★★ Excellent</option>
+                                <option value="4">★★★★ Good</option>
+                                <option value="3">★★★ Average</option>
+                                <option value="2">★★ Poor</option>
+                                <option value="1">★ Very Bad</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Your Feedback</label>
+                            <textarea name="feedback"
+                                      class="form-control"
+                                      rows="4"
+                                      required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">
+                            Submit Feedback
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br><br><br>
+{% endblock %}

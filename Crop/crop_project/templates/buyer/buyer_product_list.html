@@ -1,0 +1,51 @@
+{% extends "buyer/common.html" %}
+{% block content %}
+<br><br><br><br><br><br><br><br><br>
+
+<div class="container">
+
+    <h3 class="text-center mb-4">Available Products</h3>
+
+    {% comment %} <div class="text-center mb-4">
+        <a href="/buyer-products/" class="btn btn-dark btn-sm">All</a>
+        <a href="/buyer-products/?category=Fruit" class="btn btn-success btn-sm">Fruits</a>
+        <a href="/buyer-products/?category=Vegetable" class="btn btn-success btn-sm">Vegetables</a>
+    </div> {% endcomment %}
+
+    <div class="row">
+
+        {% for p in products %}
+        <div class="col-md-3 mb-4">
+            <div class="card shadow h-100">
+
+                <img src="{{ p.image.url }}" class="card-img-top" height="180">
+
+                <div class="card-body text-center">
+                    <h6>{{ p.product_name }}</h6>
+                    <p class="mb-1">{{ p.category }}</p>
+                    <p class="mb-1">₹ {{ p.price }} / Kg</p>
+                    <p> {{ p.description }}</p>
+                    <p>Quantity: {{ p.quantity }}</p>
+                    <p class="small text-muted">
+                        Farmer: {{ p.farmer.full_name }}
+                    </p>
+                </div>
+
+                <div class="card-footer text-center">
+                    <a href="/add_to_cart/{{ p.id }}/" class="btn btn-primary btn-sm w-100">
+                        Add to Cart
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No products available</p>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

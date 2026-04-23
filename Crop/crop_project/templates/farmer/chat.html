@@ -1,0 +1,61 @@
+{% extends "farmer/common.html" %}
+{% block content %}
+
+<br><br><br><br><br><br><br><br><br>
+
+<div class="container">
+
+    <h4 class="mb-3">Officer Chat</h4>
+
+    <div class="row">
+
+        <!-- Officer List -->
+        <div class="col-md-4">
+            <ul class="list-group">
+                {% for o in officers %}
+                <a href="?id={{ o.id }}" class="list-group-item">
+                    {{ o.full_name }}
+                </a>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="col-md-8">
+
+            <h5>{{ officer_name }}</h5>
+
+            <div class="border p-3 mb-3" style="height:300px; overflow-y:auto;">
+                {% for c in chats %}
+                    {% if c.sender_type == "FARMER" %}
+                        <div class="text-end mb-2">
+                            <span class="badge bg-success">
+                                {{ c.message }}
+                            </span>
+                        </div>
+                    {% else %}
+                        <div class="text-start mb-2">
+                            <span class="badge bg-secondary">
+                                {{ c.message }}
+                            </span>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            {% if oid %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" name="message" class="form-control" required>
+                    <button class="btn btn-success">Send</button>
+                </div>
+            </form>
+            {% endif %}
+
+        </div>
+    </div>
+
+</div>
+<br><br><br><br><br>
+{% endblock %}

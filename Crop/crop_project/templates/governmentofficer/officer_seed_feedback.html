@@ -1,0 +1,51 @@
+{% extends "governmentofficer/common.html" %}
+{% block content %}
+
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+
+<div class="container">
+
+    <h4 class="mb-4 text-center">My Product Feedback</h4>
+
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle text-center">
+            <thead class="table-success">
+                <tr>
+                    <th>Product</th>
+                    <th>Farmer</th>
+                    <th>Rating</th>
+                    <th>Feedback</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for f in feedbacks %}
+                <tr>
+                    <td>{{ f.product.name }}</td>
+                    <td>{{ f.farmer.full_name }}</td>
+                    <td>
+                        <span class="badge bg-success">
+                            {{ f.rating }} ★
+                        </span>
+                    </td>
+                    <td>{{ f.feedback }}</td>
+                    <td>{{ f.created_at|date:"d M Y" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-muted py-3">
+                        No feedback received yet
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<br><br><br>
+
+{% endblock %}
