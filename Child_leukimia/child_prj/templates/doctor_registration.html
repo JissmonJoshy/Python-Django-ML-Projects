@@ -1,0 +1,110 @@
+{% extends 'commonbase.html' %}
+{% block content %}
+
+<style>
+    table {
+        margin: auto;
+        margin-top: 60px;
+        width: 45%;
+    }
+    td {
+        padding: 10px;
+    }
+</style>
+
+<form method="POST">
+    {% csrf_token %}
+    <h3 style="text-align:center;">Doctor Registration</h3>
+
+    <table>
+        <tr>
+            <td>Full Name</td>
+            <td>
+                <input type="text" name="txtName" class="form-control"
+                    pattern="[A-Za-z ]+" required>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Username</td>
+            <td>
+                <input type="text" name="txtUsername" class="form-control"
+                    pattern="[A-Za-z0-9_]{4,}"
+                    title="Minimum 4 characters. Letters, numbers and underscore only."
+                    required>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Address</td>
+            <td>
+                <textarea name="txtAddress" class="form-control" required></textarea>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Phone</td>
+            <td>
+                <input type="text" name="txtContact" class="form-control"
+                    pattern="[6-9][0-9]{9}"
+                    title="Enter valid 10 digit mobile number"
+                    required>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Email</td>
+            <td>
+                <input type="email" name="txtEmail" class="form-control"
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in)$"
+                    title="Email must end with .com or .in"
+                    required>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Experience (Years)</td>
+            <td>
+                <input type="number" name="txtExperience" class="form-control"
+                    min="0" max="60" required>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Qualification</td>
+            <td>
+                <input type="text" name="txtQualification" class="form-control"
+                    pattern="[A-Za-z .]+" required>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Specialization</td>
+            <td>
+                <input type="text" name="txtSpecialization" class="form-control"
+                    pattern="[A-Za-z ]+" required>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Password</td>
+            <td>
+                <input type="password" name="txtPwd" class="form-control"
+                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&]).{8,}$"
+                    title="Minimum 8 characters, 1 letter, 1 number, 1 special character"
+                    required>
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Register" class="btn btn-success w-100">
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'admin/commonbase.html' %}
+{% block content %}
+
+<h3 style="text-align:center; margin-top:20px;">View Doctors</h3>
+
+<table border="1" align="center" cellpadding="10" style="margin-top:20px;">
+    <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Experience</th>
+        <th>Qualification</th>
+        <th>Specialization</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    {% for d in doctors %}
+    <tr>
+        <td>{{ d.full_name }}</td>
+        <td>{{ d.phone }}</td>
+        <td>{{ d.experience }}</td>
+        <td>{{ d.qualification }}</td>
+        <td>{{ d.specialization }}</td>
+        <td>
+            {% if d.login.is_active %}
+                Approved
+            {% else %}
+                Pending
+            {% endif %}
+        </td>
+        <td>
+            {% if not d.login.is_active %}
+                <a href="{% url 'approve_doctor' d.login.id %}">Approve</a> |
+            {% endif %}
+            <a href="{% url 'reject_doctor' d.login.id %}">Reject</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br><br><br><br>
+{% endblock %}

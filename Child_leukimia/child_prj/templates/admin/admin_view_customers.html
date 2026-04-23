@@ -1,0 +1,26 @@
+{% extends 'admin/commonbase.html' %}
+{% block content %}
+
+<h3 style="text-align:center; margin-top:20px;">View Customers</h3>
+
+<table border="1" align="center" cellpadding="10" style="margin-top:20px;">
+    <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Action</th>
+    </tr>
+
+    {% for c in customers %}
+    <tr>
+        <td>{{ c.full_name }}</td>
+        <td>{{ c.phone }}</td>
+        <td>{{ c.address }}</td>
+        <td>
+            <a href="{% url 'reject_customer' c.login.id %}">Reject</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br><br><br><br>
+{% endblock %}

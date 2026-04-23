@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secure Payment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#667eea,#764ba2);
+        }
+
+        .payment-wrapper{
+            width:100%;
+            max-width:420px;
+            padding:20px;
+        }
+
+        .card-preview{
+            background:linear-gradient(135deg,#1e3c72,#2a5298);
+            color:white;
+            padding:20px;
+            border-radius:15px;
+            box-shadow:0 15px 25px rgba(0,0,0,0.3);
+            margin-bottom:25px;
+            position:relative;
+        }
+
+        .card-chip{
+            width:50px;
+            height:35px;
+            background:gold;
+            border-radius:6px;
+            margin-bottom:20px;
+        }
+
+        .card-number{
+            font-size:18px;
+            letter-spacing:2px;
+            margin-bottom:15px;
+        }
+
+        .card-details{
+            display:flex;
+            justify-content:space-between;
+            font-size:14px;
+        }
+
+        .form-box{
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .form-box h3{
+            text-align:center;
+            margin-bottom:20px;
+            color:#333;
+        }
+
+        .input-group{
+            margin-bottom:15px;
+        }
+
+        .input-group input{
+            width:100%;
+            padding:12px;
+            border-radius:8px;
+            border:1px solid #ccc;
+            font-size:14px;
+            transition:0.3s;
+        }
+
+        .input-group input:focus{
+            border-color:#667eea;
+            outline:none;
+            box-shadow:0 0 5px rgba(102,126,234,0.5);
+        }
+
+        .row{
+            display:flex;
+            gap:10px;
+        }
+
+        .row .input-group{
+            flex:1;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:8px;
+            background:#28a745;
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#1e7e34;
+        }
+
+        @media(max-width:480px){
+            .payment-wrapper{
+                padding:15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="payment-wrapper">
+
+    <!-- CARD DESIGN -->
+    <div class="card-preview">
+        <div class="card-chip"></div>
+        <div class="card-number">•••• •••• •••• ••••</div>
+        <div class="card-details">
+            <span>Card Holder</span>
+            <span>MM/YY</span>
+        </div>
+    </div>
+
+    <!-- PAYMENT FORM -->
+    <div class="form-box">
+        <h3>Pay ₹ {{ appointment.consultation_fee }}</h3>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <input type="text" name="card_number" placeholder="Card Number"
+                       maxlength="16" pattern="[0-9]{16}" required>
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="name" placeholder="Card Holder Name" required>
+            </div>
+
+            <div class="row">
+                <div class="input-group">
+                    <input type="text" name="cvv" placeholder="CVV"
+                           maxlength="3" pattern="[0-9]{3}" required>
+                </div>
+
+                <div class="input-group">
+                    <input type="month" name="expiry" required>
+                </div>
+            </div>
+
+            <button type="submit">Secure Payment</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

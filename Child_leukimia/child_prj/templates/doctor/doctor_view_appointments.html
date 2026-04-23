@@ -1,0 +1,59 @@
+{% extends 'doctor/commonbase.html' %}
+{% block content %}
+
+<h3 style="text-align:center;margin-top:20px;">My Appointments</h3>
+
+<table border="1" align="center" cellpadding="10" style="margin-top:20px;">
+<tr>
+    <th>User</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Status</th>
+    <th>Consultation Fee</th>
+    <th>Payment Status</th>
+    <th>Action</th>
+</tr>
+
+{% for a in appointments %}
+<tr>
+    <td>{{ a.user.full_name }}</td>
+    <td>{{ a.date }}</td>
+    <td>{{ a.time }}</td>
+    <td>
+        {% if a.status == "Approved" %}
+            <span style="color:green;">{{ a.status }}</span>
+        {% else %}
+            <span style="color:red;">{{ a.status }}</span>
+        {% endif %}
+    </td>
+
+    <td>
+        {% if a.consultation_fee %}
+            ₹ {{ a.consultation_fee }}
+        {% else %}
+            Not Set
+        {% endif %}
+    </td>
+
+    <td>
+        {% if a.payment_status == "Paid" %}
+            <span style="color:green;">Paid</span>
+        {% else %}
+            <span style="color:orange;">Pending</span>
+        {% endif %}
+    </td>
+
+    <td>
+        {% if a.status == "Pending" %}
+            <a href="{% url 'approve_appointment' a.id %}">Approve</a>
+        {% else %}
+            Approved
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+
+<br><br><br><br>
+{% endblock %}

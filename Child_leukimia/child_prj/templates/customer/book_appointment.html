@@ -1,0 +1,35 @@
+{% extends 'customer/commonbase.html' %}
+{% block content %}
+
+<h3 style="text-align:center;margin-top:30px;">Book Appointment</h3>
+
+<form method="POST" style="width:40%;margin:auto;margin-top:20px;">
+    {% csrf_token %}
+
+    <label>Select Doctor</label>
+    <select name="doctor" class="form-control" required>
+        <option value="">Select</option>
+        {% for d in doctors %}
+        <option value="{{ d.id }}">{{ d.full_name }} ({{ d.specialization }})</option>
+        {% endfor %}
+    </select>
+
+    <br>
+
+    <label>Select Date</label>
+    <input type="date" name="date" class="form-control" required>
+
+    <br>
+
+    <label>Select Time</label>
+    <input type="time" name="time" class="form-control" required>
+
+    <br>
+
+    <input type="submit" value="Book" class="btn btn-success w-100">
+
+</form>
+<br><br><br>
+
+
+{% endblock %}

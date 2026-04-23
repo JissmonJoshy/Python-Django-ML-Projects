@@ -1,0 +1,25 @@
+{% extends 'customer/commonbase.html' %}
+{% block content %}
+
+<h3 style="text-align:center; margin-top:30px;">User Profile</h3>
+
+<table border="1" align="center" cellpadding="10" style="margin-top:20px;">
+    <tr>
+        <th>Name</th>
+        <td>{{ user.full_name }}</td>
+    </tr>
+    <tr>
+        <th>Phone</th>
+        <td>{{ user.phone }}</td>
+    </tr>
+    <tr>
+        <th>Address</th>
+        <td>{{ user.address }}</td>
+    </tr>
+    <tr>
+        <th>Joined On</th>
+        <td>{{ user.created_at }}</td>
+    </tr>
+</table>
+<br><br><br>
+{% endblock %}
