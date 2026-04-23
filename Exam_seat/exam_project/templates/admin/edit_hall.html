@@ -1,0 +1,36 @@
+{% extends "admin/common.html" %}
+{% load static %}
+{% block content %}
+
+<div class="login-area py-120">
+    <div class="container">
+        <div class="col-md-6 mx-auto">
+            <div class="login-form">
+                <div class="login-header">
+                    <p>Edit Hall</p>
+                </div>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <input type="text" name="name" value="{{ hall.name }}" class="form-control mb-2" required>
+                    <input type="number" name="capacity" value="{{ hall.capacity }}" class="form-control mb-2" required>
+                    <input type="text" name="location" value="{{ hall.location }}" class="form-control mb-2" required>
+                    <input type="text" name="floor" value="{{ hall.floor }}" class="form-control mb-2" required>
+
+                    {% if hall.image %}
+                        <div class="mb-3 text-center">
+                            <img src="{{ hall.image.url }}" width="120">
+                        </div>
+                    {% endif %}
+                    <input type="file" name="image" class="form-control mb-3">
+
+                    <button class="theme-btn w-100">Update Hall</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

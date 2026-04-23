@@ -1,0 +1,66 @@
+{% extends "admin/common.html" %}
+{% load static %}
+{% block content %}
+
+<div class="login-area py-120">
+    <div class="container">
+
+        <!-- ADD FORM -->
+        <div class="col-md-6 mx-auto">
+            <div class="login-form">
+                <div class="login-header">
+                    <p>Add Department</p>
+                </div>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" name="name" class="form-control mb-2" placeholder="Department Name" required>
+                    <input type="text" name="code" class="form-control mb-2" placeholder="Department Code" required>
+                    <textarea name="description" class="form-control mb-2" placeholder="Description" required></textarea>
+                    <input type="file" name="image" class="form-control mb-3" required>
+
+                    <button class="theme-btn w-100">Add Department</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- LIST -->
+        <div class="col-md-10 mx-auto mt-5">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for d in departments %}
+                    <tr>
+                        <td>
+                            <img src="{{ d.image.url }}" width="60">
+                        </td>
+                        <td>{{ d.name }}</td>
+                        <td>{{ d.code }}</td>
+                        <td>{{ d.description }}</td>
+                        <td>
+                            <a href="{% url 'edit_department' d.id %}" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="{% url 'delete_department' d.id %}" class="btn btn-sm btn-danger"
+                               onclick="return confirm('Are you sure?')">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5">No departments added</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

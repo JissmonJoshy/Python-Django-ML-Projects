@@ -1,0 +1,254 @@
+{% extends "admin/common.html" %}
+{% block content %}
+
+<div class="container">
+
+```
+<!-- 🔷 HEADER -->
+<div class="header-card">
+    <h2>🎓 Seat Allocation System</h2>
+
+    <div class="exam-info">
+        <p><strong>Subject:</strong> {{ exam.subject.name }}</p>
+        <p><strong>Hall:</strong> {{ exam.hall.name }}</p>
+        <p><strong>Capacity:</strong> {{ exam.hall.capacity }}</p>
+    </div>
+</div>
+
+<!-- 🔷 ACTION BUTTONS -->
+<div class="action-section">
+
+    <!-- Allocate All -->
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-allocate">
+            ⚡ Allocate All Students
+        </button>
+    </form>
+
+    <!-- Optional Reset -->
+    <a href="{% url 'reset_allocations' exam.id %}" class="btn btn-reset">
+        🗑 Reset All
+    </a>
+
+</div>
+
+<!-- 🔷 SEAT GRID -->
+<div class="card">
+    <h3>🪑 Seat Layout</h3>
+
+    <div class="seat-grid">
+        {% for seat in seat_numbers %}
+            {% if seat in allocated_seats %}
+                <div class="seat occupied">{{ seat }}</div>
+            {% else %}
+                <div class="seat available">{{ seat }}</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<!-- 🔷 ALLOCATED TABLE -->
+<div class="card">
+    <h3>📋 Allocated Students</h3>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Register No</th>
+                    <th>Name</th>
+                    <th>Seat</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in allocated %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ a.student.register_no }}</td>
+                    <td>{{ a.student.full_name }}</td>
+                    <td><span class="seat-badge">{{ a.seat_number }}</span></td>
+                    <td>
+                        <a href="{% url 'delete_seat_allocation' a.id %}" class="btn btn-delete">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="empty">
+                        No allocations yet.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+```
+
+</div>
+
+<!-- 🔷 STYLES -->
+
+<style>
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* HEADER */
+.header-card {
+    background: linear-gradient(135deg, #4CAF50, #2e7d32);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.header-card h2 {
+    margin-bottom: 10px;
+}
+
+.exam-info p {
+    margin: 4px 0;
+}
+
+/* ACTION */
+.action-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-allocate {
+    background: #2196F3;
+    color: white;
+}
+
+.btn-reset {
+    background: #f44336;
+    color: white;
+}
+
+/* CARD */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+}
+
+/* SEAT GRID */
+.seat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.seat {
+    padding: 12px;
+    text-align: center;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.available {
+    background: #c8e6c9;
+}
+
+.occupied {
+    background: #e53935;
+    color: white;
+}
+
+/* TABLE */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #4CAF50;
+    color: white;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+tr {
+    border-bottom: 1px solid #ddd;
+}
+
+/* BADGE */
+.seat-badge {
+    background: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* DELETE BUTTON */
+.btn-delete {
+    background: #e53935;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* EMPTY */
+.empty {
+    text-align: center;
+    padding: 15px;
+    color: #777;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .action-section {
+        flex-direction: column;
+    }
+
+    th {
+        display: none;
+    }
+
+    td {
+        display: block;
+        text-align: right;
+        position: relative;
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+    }
+}
+
+</style>
+
+{% endblock %}

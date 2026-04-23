@@ -1,0 +1,40 @@
+{% extends "admin/common.html" %}
+{% load static %}
+{% block content %}
+
+<div class="login-area py-120">
+    <div class="container">
+        <div class="col-md-6 mx-auto">
+            <div class="login-form">
+                <div class="login-header">
+                    <p>Edit Semester</p>
+                </div>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <select name="course" class="form-control mb-2" required>
+                        {% for c in courses %}
+                            <option value="{{ c.id }}" {% if c.id == semester.course.id %}selected{% endif %}>{{ c.name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <input type="text" name="semester_no" value="{{ semester.semester_no }}" class="form-control mb-2" required>
+                    <textarea name="description" class="form-control mb-2" required>{{ semester.description }}</textarea>
+
+                    {% if semester.image %}
+                        <div class="mb-3 text-center">
+                            <img src="{{ semester.image.url }}" width="120">
+                        </div>
+                    {% endif %}
+                    <input type="file" name="image" class="form-control mb-3">
+
+                    <button class="theme-btn w-100">Update Semester</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

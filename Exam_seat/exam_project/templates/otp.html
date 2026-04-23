@@ -1,0 +1,23 @@
+{% extends "common.html" %}
+{% block content %}
+
+<div class="login-area py-120">
+    <div class="container">
+        <div class="col-md-4 mx-auto">
+            <div class="login-form">
+                <div class="login-header">
+                    <p>OTP Verification</p>
+                </div>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="otp" class="form-control mb-3" placeholder="Enter OTP" required>
+                    <button class="theme-btn w-100">Verify OTP</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "student/common.html" %}
+{% load static %}
+{% block content %}
+
+<div class="login-area py-120">
+    <div class="container">
+        <div class="col-md-6 mx-auto">
+            <div class="login-form text-center">
+
+                <img src="{{ student.image.url }}" width="120" class="mb-3">
+
+                <h4>{{ student.full_name }}</h4>
+                <p><b>Register No:</b> {{ student.register_no }}</p>
+                <p><b>Email:</b> {{ student.email }}</p>
+                <p><b>Phone:</b> {{ student.phone }}</p>
+                <p><b>Course:</b> {{ student.course.name }}</p>
+                <p><b>Address:</b> {{ student.address }}</p>
+
+                <a href="{% url 'edit_student_profile' %}" class="theme-btn mt-3">
+                    Edit Profile
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

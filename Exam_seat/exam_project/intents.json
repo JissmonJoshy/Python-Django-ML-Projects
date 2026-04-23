@@ -1,0 +1,1058 @@
+{
+    "intents": [
+        {
+  "tag": "ds_basics",
+  "patterns": [
+    "What is data structure?",
+    "Define data structure",
+    "Explain data structures",
+    "What are data structures used for?",
+    "Types of data structures"
+  ],
+  "responses": [
+    "A data structure is a way of organizing, storing, and managing data so that it can be accessed and modified efficiently.",
+    "Data structures help in efficient data storage, retrieval, and manipulation. Examples include arrays, linked lists, stacks, and queues.",
+    "Data structures are classified into linear (array, linked list, stack, queue) and non-linear (tree, graph)."
+  ]
+},
+{
+  "tag": "stack_queue",
+  "patterns": [
+    "What is stack?",
+    "Explain stack",
+    "What is LIFO?",
+    "What is queue?",
+    "Explain queue",
+    "Difference between stack and queue"
+  ],
+  "responses": [
+    "A stack is a linear data structure that follows LIFO (Last In First Out). Operations include push, pop, and peek.",
+    "A queue is a linear data structure that follows FIFO (First In First Out). Operations include enqueue and dequeue.",
+    "The main difference is that stack works on LIFO principle, while queue works on FIFO principle."
+  ]
+},
+{
+  "tag": "linked_list",
+  "patterns": [
+    "What is linked list?",
+    "Explain linked list",  
+    "Types of linked lists",
+    "Advantages of linked list"
+  ],
+  "responses": [
+    "A linked list is a linear data structure where each element (node) contains a data part and a reference (link) to the next node in the sequence.",
+    "Types of linked lists include singly linked list, doubly linked list, and circular linked list.",
+    "Advantages of linked lists include dynamic size, ease of insertion/deletion, and efficient memory usage compared to arrays.",
+    "Linked lists allow for efficient insertion and deletion of elements as they do not require shifting of elements like arrays.",
+    "Linked lists can grow or shrink in size dynamically, which is useful when the number of elements is unknown beforehand.",
+    "Linked lists can be used to implement other data structures such as stacks, queues, and graphs.",
+    "Linked lists can be used to represent complex data structures like trees and graphs, where each node can have multiple connections."
+  ]
+},
+{
+  "tag": "ds_basics",
+  "patterns": [
+    "What is data structure?",
+    "Define data structure",
+    "Explain data structures",
+    "What are data structures used for?",
+    "Types of data structures"
+  ],
+  "responses": [
+    "A data structure is a way of organizing, storing, and managing data so that it can be accessed and modified efficiently.",
+    "Data structures help in efficient data storage, retrieval, and manipulation. Examples include arrays, linked lists, stacks, and queues.",
+    "Data structures are classified into linear (array, linked list, stack, queue) and non-linear (tree, graph)."
+  ]
+},
+
+{
+  "tag": "linked_list",
+  "patterns": [
+    "What is linked list?",
+    "Explain linked list",
+    "Types of linked list",
+    "Difference between array and linked list"
+  ],
+  "responses": [
+    "A linked list is a linear data structure where elements are stored in nodes, and each node points to the next node.",
+    "Types of linked lists include singly linked list, doubly linked list, and circular linked list.",
+    "Unlike arrays, linked lists do not require contiguous memory and allow dynamic size allocation."
+  ]
+},
+{
+  "tag": "algorithms",
+  "patterns": [
+    "What is algorithm?",
+    "Explain algorithm",
+    "What is time complexity?",
+    "What is space complexity",
+    "Explain Big O notation"
+  ],
+  "responses": [
+    "An algorithm is a step-by-step procedure to solve a specific problem.",
+    "Time complexity measures the amount of time an algorithm takes to run as a function of input size.",
+    "Big O notation describes the upper bound of an algorithm’s time complexity, such as O(n), O(log n), and O(n^2)."
+  ]
+},
+{
+  "tag": "coding_basics",
+  "patterns": [
+    "What is programming?",
+    "What is coding?",
+    "Difference between compiler and interpreter",
+    "What is debugging?",
+    "What is syntax error?"
+  ],
+  "responses": [
+    "Programming is the process of writing instructions for a computer to perform a task.",
+    "A compiler translates the entire program at once, while an interpreter translates code line by line.",
+    "Debugging is the process of identifying and fixing errors in a program."
+  ]
+},
+{
+  "tag": "dbms",
+  "patterns": [
+    "What is DBMS?",
+    "Explain database management system",
+    "What is primary key?",
+    "What is foreign key?",
+    "Difference between DBMS and RDBMS"
+  ],
+  "responses": [
+    "DBMS is software used to store, manage, and retrieve data efficiently.",
+    "A primary key uniquely identifies each record in a table.",
+    "A foreign key is used to link two tables together.",
+    "RDBMS stores data in tabular form and supports relationships between tables."
+  ]
+},
+{
+  "tag": "operating_system",
+  "patterns": [
+    "What is operating system?",
+    "Functions of operating system",
+    "Types of operating system",
+    "What is process?",
+    "What is thread?"
+  ],
+  "responses": [
+    "An operating system is system software that manages hardware and software resources.",
+    "Functions include process management, memory management, file management, and device management.",
+    "A process is a program in execution, while a thread is the smallest unit of a process."
+  ]
+},
+{
+  "tag": "computer_networks",
+  "patterns": [
+    "What is computer network?",
+    "Types of networks",
+    "What is LAN WAN MAN?",
+    "What is IP address?",
+    "What is protocol?"
+  ],
+  "responses": [
+    "A computer network is a collection of devices connected to share resources and information.",
+    "LAN covers a small area, WAN covers a large area, and MAN covers a metropolitan area.",
+    "An IP address uniquely identifies a device on a network.",
+    "A protocol is a set of rules for data communication."
+  ]
+},
+{
+  "tag": "trees",
+  "patterns": [
+    "What is tree data structure?",
+    "Explain tree",
+    "Types of trees",
+    "What is binary tree?",
+    "What is BST?"
+  ],
+  "responses": [
+    "A tree is a non-linear data structure consisting of nodes connected by edges, with a root node at the top.",
+    "A binary tree is a tree where each node has at most two children.",
+    "A Binary Search Tree (BST) is a binary tree where left child values are smaller and right child values are greater than the root."
+  ]
+},
+{
+  "tag": "graphs",
+  "patterns": [
+    "What is graph?",
+    "Explain graph data structure",
+    "Types of graphs",
+    "What is BFS?",
+    "What is DFS?"
+  ],
+  "responses": [
+    "A graph is a non-linear data structure consisting of vertices and edges.",
+    "Graphs are classified as directed, undirected, weighted, and unweighted.",
+    "BFS (Breadth First Search) traverses level by level, while DFS (Depth First Search) traverses depth-wise."
+  ]
+},{
+  "tag": "sorting_algorithms",
+  "patterns": [
+    "What is sorting?",
+    "Types of sorting algorithms",
+    "Explain bubble sort",
+    "Explain quick sort",
+    "Explain merge sort"
+  ],
+  "responses": [
+    "Sorting is the process of arranging data in ascending or descending order.",
+    "Bubble sort repeatedly swaps adjacent elements if they are in wrong order.",
+    "Quick sort uses divide and conquer strategy with a pivot element.",
+    "Merge sort divides the array and merges sorted subarrays."
+  ]
+},
+{
+  "tag": "set_theory",
+  "patterns": [
+    "What is set?",
+    "Types of sets",
+    "What is relation?",
+    "Types of relations"
+  ],
+  "responses": [
+    "A set is a collection of distinct elements.",
+    "Types of sets include finite, infinite, null, and universal sets.",
+    "A relation defines a relationship between elements of two sets.",
+    "Types of relations include reflexive, symmetric, and transitive."
+  ]
+},
+{
+  "tag": "oops_concepts",
+  "patterns": [
+    "What is OOPS?",
+    "Explain object oriented programming",
+    "Four pillars of OOPS",
+    "What is inheritance?",
+    "What is polymorphism?"
+  ],
+  "responses": [
+    "OOPS is a programming paradigm based on objects and classes.",
+    "The four pillars of OOPS are Encapsulation, Abstraction, Inheritance, and Polymorphism.",
+    "Inheritance allows a class to acquire properties of another class.",
+    "Polymorphism allows one function to have multiple forms."
+  ]
+},
+{
+  "tag": "python_basics",
+  "patterns": [
+    "What is Python?",
+    "Features of Python",
+    "What is list?",
+    "What is tuple?",
+    "Difference between list and tuple"
+  ],
+  "responses": [
+    "Python is a high-level, interpreted programming language.",
+    "Python is easy to learn, portable, and supports multiple paradigms.",
+    "A list is mutable, while a tuple is immutable.",
+    "Lists use square brackets and tuples use parentheses."
+  ]
+},
+{
+  "tag": "dbms_advanced",
+  "patterns": [
+    "What is normalization?",
+    "Types of normalization",
+    "What is SQL?",
+    "What is ACID property?",
+    "What is transaction?"
+  ],
+  "responses": [
+    "Normalization is the process of reducing data redundancy.",
+    "Normal forms include 1NF, 2NF, 3NF, and BCNF.",
+    "SQL is used to manage and query relational databases.",
+    "ACID stands for Atomicity, Consistency, Isolation, Durability.",
+    "A transaction is a sequence of database operations."
+  ]
+},
+{
+  "tag": "os_core",
+  "patterns": [
+    "What is deadlock?",
+    "Conditions for deadlock",
+    "What is scheduling?",
+    "Types of scheduling algorithms",
+    "What is memory management?"
+  ],
+  "responses": [
+    "Deadlock occurs when processes wait indefinitely for resources.",
+    "Deadlock conditions include mutual exclusion, hold and wait, no preemption, circular wait.",
+    "Scheduling decides which process gets CPU time.",
+    "Examples include FCFS, SJF, Round Robin.",
+    "Memory management controls allocation of memory to processes."
+  ]
+},
+{
+  "tag": "software_engineering",
+  "patterns": [
+    "What is software engineering?",
+    "SDLC phases",
+    "What is waterfall model?",
+    "What is agile model?"
+  ],
+  "responses": [
+    "Software engineering is the systematic approach to software development.",
+    "SDLC phases include requirement analysis, design, coding, testing, deployment, maintenance.",
+    "Waterfall model follows a sequential development approach.",
+    "Agile model focuses on iterative development and customer feedback."
+  ]
+},
+{
+  "tag": "computer_networks",
+  "patterns": [
+    "What is computer network?",
+    "Types of networks",
+    "LAN vs WAN",
+    "What is OSI model?",
+    "Explain TCP IP model"
+  ],
+  "responses": [
+    "A computer network is a collection of interconnected devices that share data and resources.",
+    "Types of networks include LAN, MAN, and WAN.",
+    "LAN covers a small area while WAN covers a large geographical area.",
+    "OSI model has 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, Application.",
+    "TCP/IP model has 4 layers: Network Access, Internet, Transport, Application."
+  ]
+},
+{
+  "tag": "cyber_security",
+  "patterns": [
+    "What is cyber security?",
+    "Types of cyber attacks",
+    "What is malware?",
+    "What is phishing?",
+    "How to protect data?"
+  ],
+  "responses": [
+    "Cyber security protects systems and data from digital attacks.",
+    "Common cyber attacks include phishing, malware, ransomware, and DDoS attacks.",
+    "Malware is malicious software that damages systems.",
+    "Phishing tricks users into revealing sensitive information.",
+    "Data can be protected using encryption, firewalls, and strong passwords."
+  ]
+},
+{
+  "tag": "artificial_intelligence",
+  "patterns": [
+    "What is artificial intelligence?",
+    "Types of AI",
+    "What is machine learning?",
+    "Applications of AI",
+    "Difference between AI and ML"
+  ],
+  "responses": [
+    "Artificial Intelligence enables machines to mimic human intelligence.",
+    "Types of AI include narrow AI, general AI, and super AI.",
+    "Machine learning is a subset of AI that allows systems to learn from data.",
+    "AI is used in healthcare, robotics, chatbots, and autonomous vehicles.",
+    "AI is broader than ML; ML is a subset of AI."
+  ]
+},
+{
+  "tag": "machine_learning",
+  "patterns": [
+    "What is machine learning?",
+    "Types of machine learning",
+    "Supervised vs unsupervised learning",
+    "What is deep learning?",
+    "Applications of machine learning"
+  ],
+  "responses": [
+    "Machine learning allows systems to learn from data without explicit programming.",
+    "Types include supervised, unsupervised, and reinforcement learning.",
+    "Supervised learning uses labeled data, unsupervised learning uses unlabeled data.",
+    "Deep learning uses neural networks with multiple layers.",
+    "ML is used in recommendation systems, fraud detection, and image recognition."
+  ]
+},
+{
+  "tag": "cloud_computing",
+  "patterns": [
+    "What is cloud computing?",
+    "Types of cloud",
+    "Cloud service models",
+    "Advantages of cloud computing",
+    "Examples of cloud providers"
+  ],
+  "responses": [
+    "Cloud computing delivers computing services over the internet.",
+    "Types include public, private, and hybrid cloud.",
+    "Service models include IaaS, PaaS, and SaaS.",
+    "Advantages include scalability, cost efficiency, and flexibility.",
+    "Examples include AWS, Azure, and Google Cloud."
+  ]
+},
+{
+  "tag": "internet_of_things",
+  "patterns": [
+    "What is IoT?",
+    "Applications of IoT",
+    "Components of IoT",
+    "Advantages of IoT",
+    "Examples of IoT devices"
+  ],
+  "responses": [
+    "IoT connects physical devices to the internet.",
+    "Applications include smart homes, healthcare, and smart cities.",
+    "Components include sensors, connectivity, and cloud platforms.",
+    "Advantages include automation and real-time monitoring.",
+    "Examples include smart watches and smart thermostats."
+  ]
+},
+{
+  "tag": "compiler_design",
+  "patterns": [
+    "What is compiler?",
+    "Phases of compiler",
+    "Difference between compiler and interpreter",
+    "What is lexical analysis?",
+    "What is syntax analysis?"
+  ],
+  "responses": [
+    "A compiler translates high-level code into machine code.",
+    "Compiler phases include lexical, syntax, semantic analysis, optimization, and code generation.",
+    "Compiler translates whole program while interpreter executes line by line.",
+    "Lexical analysis converts code into tokens.",
+    "Syntax analysis checks grammar structure."
+  ]
+},
+{
+  "tag": "computer_architecture",
+  "patterns": [
+    "What is computer architecture?",
+    "CPU components",
+    "What is instruction cycle?",
+    "What is cache memory?",
+    "RISC vs CISC"
+  ],
+  "responses": [
+    "Computer architecture describes the structure and behavior of computer systems.",
+    "CPU components include ALU, Control Unit, and registers.",
+    "Instruction cycle includes fetch, decode, execute.",
+    "Cache memory is high-speed memory between CPU and RAM.",
+    "RISC uses simple instructions; CISC uses complex instructions."
+  ]
+},
+{
+  "tag": "web_technology",
+  "patterns": [
+    "What is HTML?",
+    "What is CSS?",
+    "What is JavaScript?",
+    "Difference between frontend and backend",
+    "What is web server?"
+  ],
+  "responses": [
+    "HTML structures web content.",
+    "CSS styles web pages.",
+    "JavaScript adds interactivity to websites.",
+    "Frontend handles UI; backend handles server logic.",
+    "Web server delivers web pages to clients."
+  ]
+},
+{
+  "tag": "digital_electronics",
+  "patterns": [
+    "What is logic gate?",
+    "Types of logic gates",
+    "What is flip flop?",
+    "What is combinational circuit?",
+    "What is sequential circuit?"
+  ],
+  "responses": [
+    "Logic gates perform basic logical operations.",
+    "Types include AND, OR, NOT, NAND, NOR, XOR.",
+    "Flip-flops are memory elements.",
+    "Combinational circuits depend on inputs only.",
+    "Sequential circuits depend on inputs and previous states."
+  ]
+},
+{
+  "tag": "physics_basics",
+  "patterns": [
+    "What is physics?",
+    "Branches of physics",
+    "What is motion?",
+    "What is force?",
+    "What is energy?"
+  ],
+  "responses": [
+    "Physics is the branch of science that studies matter, energy, and their interactions.",
+    "Branches include mechanics, thermodynamics, optics, electromagnetism, and quantum physics.",
+    "Motion is the change in position of an object with respect to time.",
+    "Force is a push or pull that can change the motion of an object.",
+    "Energy is the capacity to do work."
+  ]
+},
+{
+  "tag": "electricity_magnetism",
+  "patterns": [
+    "What is electric current?",
+    "What is voltage?",
+    "What is resistance?",
+    "Ohms law",
+    "What is magnetism?"
+  ],
+  "responses": [
+    "Electric current is the flow of electric charge.",
+    "Voltage is the potential difference between two points.",
+    "Resistance is the opposition to current flow.",
+    "Ohm's law states V = IR.",
+    "Magnetism is the force exerted by magnets and moving charges."
+  ]
+},
+{
+  "tag": "thermodynamics",
+  "patterns": [
+    "What is thermodynamics?",
+    "Laws of thermodynamics",
+    "What is heat?",
+    "What is temperature?",
+    "Difference between heat and temperature"
+  ],
+  "responses": [
+    "Thermodynamics deals with heat, energy, and work.",
+    "There are four laws of thermodynamics: zeroth, first, second, and third.",
+    "Heat is energy transferred due to temperature difference.",
+    "Temperature measures the degree of hotness or coldness.",
+    "Heat is energy transfer; temperature is a measurement."
+  ]
+},
+{
+  "tag": "optics",
+  "patterns": [
+    "What is optics?",
+    "Reflection of light",
+    "Refraction of light",
+    "What is lens?",
+    "Uses of optics"
+  ],
+  "responses": [
+    "Optics is the study of light and its behavior.",
+    "Reflection is bouncing of light from a surface.",
+    "Refraction is bending of light when it passes through different media.",
+    "A lens is a transparent object that refracts light.",
+    "Optics is used in microscopes, telescopes, and cameras."
+  ]
+},
+{
+  "tag": "chemistry_basics",
+  "patterns": [
+    "What is chemistry?",
+    "Branches of chemistry",
+    "What is atom?",
+    "What is molecule?",
+    "What is chemical reaction?"
+  ],
+  "responses": [
+    "Chemistry studies substances, their properties, and reactions.",
+    "Branches include organic, inorganic, physical, and analytical chemistry.",
+    "An atom is the smallest unit of an element.",
+    "A molecule is formed by two or more atoms bonded together.",
+    "A chemical reaction involves transformation of substances."
+  ]
+},
+{
+  "tag": "acids_bases",
+  "patterns": [
+    "What is acid?",
+    "What is base?",
+    "What is pH scale?",
+    "Examples of acids and bases",
+    "Uses of acids"
+  ],
+  "responses": [
+    "An acid releases hydrogen ions in solution.",
+    "A base releases hydroxide ions.",
+    "pH scale measures acidity or alkalinity.",
+    "Examples include HCl as acid and NaOH as base.",
+    "Acids are used in batteries and fertilizers."
+  ]
+},
+{
+  "tag": "biology_basics",
+  "patterns": [
+    "What is biology?",
+    "Branches of biology",
+    "What is cell?",
+    "Types of cells",
+    "Importance of biology"
+  ],
+  "responses": [
+    "Biology is the study of living organisms.",
+    "Branches include botany, zoology, and microbiology.",
+    "A cell is the basic unit of life.",
+    "Cells are classified as prokaryotic and eukaryotic.",
+    "Biology helps in medicine, agriculture, and biotechnology."
+  ]
+},
+{
+  "tag": "genetics",
+  "patterns": [
+    "What is genetics?",
+    "What is DNA?",
+    "What is gene?",
+    "What is heredity?",
+    "Applications of genetics"
+  ],
+  "responses": [
+    "Genetics is the study of heredity and variation.",
+    "DNA carries genetic information.",
+    "A gene is a unit of heredity.",
+    "Heredity is the transmission of traits from parents to offspring.",
+    "Genetics is used in medicine and biotechnology."
+  ]
+},
+{
+  "tag": "microbiology",
+  "patterns": [
+    "What is microbiology?",
+    "Types of microorganisms",
+    "What are bacteria?",
+    "What are viruses?",
+    "Uses of microorganisms"
+  ],
+  "responses": [
+    "Microbiology studies microscopic organisms.",
+    "Types include bacteria, viruses, fungi, and protozoa.",
+    "Bacteria are single-celled organisms.",
+    "Viruses require a host to reproduce.",
+    "Microorganisms are used in medicine and food production."
+  ]
+},
+{
+  "tag": "environmental_science",
+  "patterns": [
+    "What is environmental science?",
+    "What is ecosystem?",
+    "Types of pollution",
+    "What is global warming?",
+    "Ways to protect environment"
+  ],
+  "responses": [
+    "Environmental science studies interaction between humans and environment.",
+    "An ecosystem includes living and non-living components.",
+    "Types of pollution include air, water, and soil pollution.",
+    "Global warming is the increase in Earth's temperature.",
+    "Environment can be protected by reducing pollution and conserving resources."
+  ]
+},
+{
+  "tag": "scientific_method",
+  "patterns": [
+    "What is scientific method?",
+    "Steps in scientific method",
+    "What is hypothesis?",
+    "What is experiment?",
+    "Importance of scientific method"
+  ],
+  "responses": [
+    "Scientific method is a systematic way of solving problems.",
+    "Steps include observation, hypothesis, experiment, and conclusion.",
+    "A hypothesis is a testable statement.",
+    "An experiment tests the hypothesis.",
+    "Scientific method ensures accurate and reliable results."
+  ]
+},
+{
+      "tag": "cell_biology",
+      "patterns": [
+        "What is a cell?",
+        "Define cell",
+        "Explain cell biology",
+        "What is the basic unit of life?",
+        "Cell meaning"
+      ],
+      "responses": [
+        "A cell is the basic structural and functional unit of life.",
+        "Cells are the smallest units capable of carrying out all vital life functions.",
+        "Cell biology deals with the study of cell structure, function, and behavior."
+      ]
+    },
+
+    {
+      "tag": "cell_organelles",
+      "patterns": [
+        "What are cell organelles?",
+        "Explain mitochondria",
+        "Function of nucleus",
+        "What does ribosome do?",
+        "Cell parts and functions"
+      ],
+      "responses": [
+        "Cell organelles are specialized structures within a cell that perform specific functions.",
+        "Mitochondria is the powerhouse of the cell as it produces energy in the form of ATP.",
+        "The nucleus controls all cellular activities and stores genetic material.",
+        "Ribosomes are responsible for protein synthesis."
+      ]
+    },
+
+    {
+      "tag": "human_anatomy",
+      "patterns": [
+        "Explain human anatomy",
+        "What is anatomy?",
+        "Human body structure",
+        "Basics of anatomy"
+      ],
+      "responses": [
+        "Human anatomy is the study of the structure of the human body.",
+        "It includes the study of organs, tissues, and systems.",
+        "Anatomy helps in understanding how body parts are organized."
+      ]
+    },
+
+    {
+      "tag": "human_physiology",
+      "patterns": [
+        "What is physiology?",
+        "Explain human physiology",
+        "How body systems work?",
+        "Body functions explanation"
+      ],
+      "responses": [
+        "Physiology is the study of how the human body functions.",
+        "It explains how organs and systems work together to maintain life.",
+        "Human physiology focuses on processes like digestion, respiration, and circulation."
+      ]
+    },
+
+    {
+      "tag": "digestive_system",
+      "patterns": [
+        "Explain digestive system",
+        "What is digestion?",
+        "Functions of digestive system",
+        "How food is digested?"
+      ],
+      "responses": [
+        "The digestive system breaks down food into nutrients for absorption.",
+        "Digestion is the process of converting complex food into simpler substances.",
+        "Major organs include mouth, stomach, intestines, liver, and pancreas."
+      ]
+    },
+
+    {
+      "tag": "respiratory_system",
+      "patterns": [
+        "Explain respiratory system",
+        "What is respiration?",
+        "How breathing works?",
+        "Function of lungs"
+      ],
+      "responses": [
+        "The respiratory system helps in breathing and gas exchange.",
+        "It supplies oxygen to the body and removes carbon dioxide.",
+        "Lungs are the main organs of respiration."
+      ]
+    },
+
+    {
+      "tag": "circulatory_system",
+      "patterns": [
+        "Explain circulatory system",
+        "What does heart do?",
+        "Blood circulation process",
+        "Functions of blood"
+      ],
+      "responses": [
+        "The circulatory system transports oxygen, nutrients, and hormones.",
+        "The heart pumps blood throughout the body.",
+        "Blood carries oxygen, removes waste, and helps fight infections."
+      ]
+    },
+
+    {
+      "tag": "nervous_system",
+      "patterns": [
+        "Explain nervous system",
+        "What is neuron?",
+        "Brain and spinal cord functions",
+        "How nerves work?"
+      ],
+      "responses": [
+        "The nervous system controls and coordinates body activities.",
+        "A neuron is the basic functional unit of the nervous system.",
+        "The brain and spinal cord form the central nervous system."
+      ]
+    },
+
+    {
+      "tag": "endocrine_system",
+      "patterns": [
+        "Explain endocrine system",
+        "What are hormones?",
+        "Function of thyroid gland",
+        "Hormonal system explanation"
+      ],
+      "responses": [
+        "The endocrine system regulates body functions using hormones.",
+        "Hormones are chemical messengers secreted by glands.",
+        "The thyroid gland controls metabolism and growth."
+      ]
+    },
+
+    {
+      "tag": "immune_system",
+      "patterns": [
+        "Explain immune system",
+        "How body fights disease?",
+        "What are antibodies?",
+        "Immune response explanation"
+      ],
+      "responses": [
+        "The immune system protects the body from infections.",
+        "Antibodies are proteins that recognize and neutralize pathogens.",
+        "White blood cells play a major role in immunity."
+      ]
+    },
+
+    {
+      "tag": "diseases",
+      "patterns": [
+        "What is disease?",
+        "Types of diseases",
+        "Communicable diseases examples",
+        "Non communicable diseases"
+      ],
+      "responses": [
+        "A disease is a condition that disrupts normal body function.",
+        "Diseases can be communicable or non-communicable.",
+        "Examples include diabetes, tuberculosis, cancer, and malaria."
+      ]
+    },
+
+    {
+      "tag": "infection_control",
+      "patterns": [
+        "How infections spread?",
+        "Modes of transmission",
+        "Prevent infectious diseases",
+        "How to control infection?"
+      ],
+      "responses": [
+        "Infections spread through air, water, food, and direct contact.",
+        "Proper hygiene and vaccination help prevent infections.",
+        "Infection control is essential in healthcare settings."
+      ]
+    },
+
+    {
+      "tag": "medical_terminology",
+      "patterns": [
+        "What is medical terminology?",
+        "Meaning of medical terms",
+        "Why medical terms are important?",
+        "Basics of medical terminology"
+      ],
+      "responses": [
+        "Medical terminology is the language used in healthcare.",
+        "It helps doctors and nurses communicate clearly.",
+        "Most medical terms are derived from Latin and Greek."
+      ]
+    },
+
+    {
+      "tag": "first_aid",
+      "patterns": [
+        "What is first aid?",
+        "Basic first aid steps",
+        "Emergency first aid",
+        "Importance of first aid"
+      ],
+      "responses": [
+        "First aid is the immediate care given to an injured person.",
+        "It helps prevent the condition from worsening.",
+        "First aid can save lives before professional help arrives."
+      ]
+    },
+
+    {
+      "tag": "exam_preparation_biology",
+      "patterns": [
+        "Biology exam tips",
+        "How to study biology?",
+        "Biology preparation advice",
+        "Scoring tips for biology"
+      ],
+      "responses": [
+        "Focus on diagrams and key definitions.",
+        "Revise regularly and practice previous question papers.",
+        "Understanding concepts is more important than memorization."
+      ]
+    },
+        {
+      "tag": "gk_history",
+      "patterns": [
+        "Who was the first president of the USA?",
+        "Tell me about World War II",
+        "When did India gain independence?",
+        "Famous historical events",
+        "Important wars in history"
+      ],
+      "responses": [
+        "George Washington was the first president of the United States.",
+        "World War II occurred from 1939 to 1945 and involved most of the world's nations.",
+        "India gained independence from British rule on August 15, 1947.",
+        "Important historical events include the French Revolution, World Wars, and the Industrial Revolution."
+      ]
+    },
+    {
+      "tag": "gk_science",
+      "patterns": [
+        "What is the speed of light?",
+        "Explain photosynthesis",
+        "Who discovered gravity?",
+        "Science facts",
+        "Interesting science questions"
+      ],
+      "responses": [
+        "The speed of light is approximately 299,792 kilometers per second.",
+        "Photosynthesis is the process by which plants convert sunlight, water, and carbon dioxide into oxygen and glucose.",
+        "Sir Isaac Newton is credited with discovering gravity.",
+        "Science helps us understand the natural world, including physics, chemistry, and biology."
+      ]
+    },
+    {
+      "tag": "gk_geography",
+      "patterns": [
+        "What is the largest country in the world?",
+        "Tell me about Mount Everest",
+        "Which is the longest river?",
+        "Capital cities of countries",
+        "Geography questions"
+      ],
+      "responses": [
+        "Russia is the largest country in the world by land area.",
+        "Mount Everest is the highest mountain on Earth, located in the Himalayas.",
+        "The Nile River is the longest river in the world.",
+        "Geography covers countries, capitals, mountains, rivers, and climates."
+      ]
+    },
+    {
+      "tag": "gk_sports",
+      "patterns": [
+        "Who won the last FIFA World Cup?",
+        "Famous Olympic athletes",
+        "Rules of cricket",
+        "Popular sports",
+        "Sports trivia"
+      ],
+      "responses": [
+        "Argentina won the FIFA World Cup in 2022.",
+        "Famous athletes include Usain Bolt, Michael Phelps, and Serena Williams.",
+        "Cricket is played between two teams with 11 players each. The main goal is to score runs and get the opponent out.",
+        "Sports include football, cricket, tennis, basketball, and many more."
+      ]
+    },
+    {
+      "tag": "gk_current_affairs",
+      "patterns": [
+        "Recent news highlights",
+        "Current world events",
+        "Latest political updates",
+        "Important global issues",
+        "Economy news"
+      ],
+      "responses": [
+        "Keeping up with current affairs helps you stay informed about politics, economy, and global issues.",
+        "You can check recent updates from reliable news sources to stay current on world events.",
+        "Current affairs include international relations, climate change, technology, and scientific discoveries."
+      ]
+    },
+    {
+      "tag": "sports_football",
+      "patterns": [
+        "Who won the last FIFA World Cup?",
+        "Famous football players",
+        "Rules of football",
+        "Which country has the most World Cups?",
+        "Best football teams"
+      ],
+      "responses": [
+        "Argentina won the FIFA World Cup in 2022.",
+        "Famous football players include Lionel Messi, Cristiano Ronaldo, and Neymar Jr.",
+        "Football is played between two teams of 11 players each. The team scoring more goals wins.",
+        "Brazil has won the most FIFA World Cups, with 5 titles.",
+        "Top football clubs include FC Barcelona, Real Madrid, Manchester United, and Liverpool."
+      ]
+    },
+    {
+      "tag": "sports_cricket",
+      "patterns": [
+        "Who won the last Cricket World Cup?",
+        "Rules of cricket",
+        "Famous cricketers",
+        "Types of cricket formats",
+        "Highest run scorer in cricket"
+      ],
+      "responses": [
+        "England won the ICC Cricket World Cup in 2019.",
+        "Cricket is played between two teams of 11 players. The batting team tries to score runs, while the bowling team tries to get them out.",
+        "Famous cricketers include Sachin Tendulkar, Virat Kohli, and Brian Lara.",
+        "Cricket formats include Test, One Day International (ODI), and T20.",
+        "Sachin Tendulkar is the highest run scorer in international cricket."
+      ]
+    },
+    {
+      "tag": "sports_olympics",
+      "patterns": [
+        "When were the first Olympics held?",
+        "Who is the most decorated Olympian?",
+        "Olympic sports",
+        "Winter Olympics vs Summer Olympics",
+        "Olympic records"
+      ],
+      "responses": [
+        "The first modern Olympics were held in Athens, Greece, in 1896.",
+        "Michael Phelps is the most decorated Olympian with 28 medals.",
+        "Olympic sports include athletics, swimming, gymnastics, and many others.",
+        "Summer Olympics are held every 4 years and feature warm-weather sports. Winter Olympics include skiing, ice hockey, and snowboarding.",
+        "Olympic records are updated every Games for various sports like sprinting, swimming, and weightlifting."
+      ]
+    },
+    {
+      "tag": "sports_tennis",
+      "patterns": [
+        "Who has won the most Grand Slams?",
+        "Rules of tennis",
+        "Famous tennis players",
+        "Types of tennis courts",
+        "Olympic tennis winners"
+      ],
+      "responses": [
+        "Margaret Court holds the record for the most Grand Slam singles titles with 24.",
+        "Tennis is played on a rectangular court with a net. Players score points to win games, sets, and matches.",
+        "Famous tennis players include Roger Federer, Serena Williams, and Rafael Nadal.",
+        "Tennis courts can be grass, clay, or hard court.",
+        "Tennis is an Olympic sport, and winners include Andy Murray, Venus Williams, and Novak Djokovic."
+      ]
+    },
+    {
+      "tag": "sports_misc",
+      "patterns": [
+        "Popular sports worldwide",
+        "Extreme sports",
+        "Most watched sports",
+        "Famous athletes",
+        "Sports trivia questions"
+      ],
+      "responses": [
+        "Popular sports include football, cricket, basketball, tennis, and athletics.",
+        "Extreme sports include skydiving, snowboarding, bungee jumping, and rock climbing.",
+        "Football is the most watched sport worldwide, followed by cricket and basketball.",
+        "Famous athletes include Usain Bolt, Michael Jordan, Serena Williams, and Lionel Messi.",
+        "Sports trivia can cover records, famous players, events, and unusual sports facts."
+      ]
+    }
+
+
+
+
+
+
+
+
+
+    ]
+}

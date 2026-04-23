@@ -1,0 +1,43 @@
+{% extends "admin/common.html" %}
+{% load static %}
+{% block content %}
+
+<div class="login-area py-120">
+    <div class="container">
+        <div class="col-md-6 mx-auto">
+            <div class="login-form">
+                <div class="login-header">
+                    <p>Edit Subject</p>
+                </div>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <select name="semester" class="form-control mb-2" required>
+                        {% for s in semesters %}
+                            <option value="{{ s.id }}" {% if s.id == subject.semester.id %}selected{% endif %}>
+                                {{ s.course.name }} - Semester {{ s.semester_no }}
+                            </option>
+                        {% endfor %}
+                    </select>
+
+                    <input type="text" name="name" value="{{ subject.name }}" class="form-control mb-2" required>
+                    <input type="text" name="code" value="{{ subject.code }}" class="form-control mb-2" required>
+                    <textarea name="description" class="form-control mb-2" required>{{ subject.description }}</textarea>
+
+                    {% if subject.image %}
+                        <div class="mb-3 text-center">
+                            <img src="{{ subject.image.url }}" width="120">
+                        </div>
+                    {% endif %}
+                    <input type="file" name="image" class="form-control mb-3">
+
+                    <button class="theme-btn w-100">Update Subject</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

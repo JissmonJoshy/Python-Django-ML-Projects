@@ -1,0 +1,68 @@
+{% extends "admin/common.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid">
+    <h3 class="mb-4">All Staffs</h3>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Image</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for s in staffs %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ s.full_name }}</td>
+                    <td>{{ s.department.name }}</td>
+                    <td>{{ s.email }}</td>
+                    <td>{{ s.phone }}</td>
+                    <td>
+                        <img src="{{ s.image.url }}"
+                             class="rounded-circle"
+                             width="60"
+                             height="60">
+                    </td>
+                    <td>
+                        {% if s.login.is_active %}
+                            <span class="badge bg-success">Approved</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">Pending</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not s.login.is_active %}
+                            <a href="{% url 'approve_staff' s.id %}"
+                               class="btn btn-sm btn-success">
+                                Approve
+                            </a>
+                        {% endif %}
+                        <a href="{% url 'reject_staff' s.id %}"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Reject this staff?')">
+                            Reject
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8">No staffs found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

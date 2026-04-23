@@ -1,0 +1,155 @@
+{% extends "student/common.html" %}
+{% block content %}
+
+<div style="padding:20px; max-width:1200px; margin:auto;">
+    <h2 style="text-align:center; margin-bottom:20px;">My Exam Schedule</h2>
+
+    <div style="overflow-x:auto;">
+        <table class="exam-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Subject</th>
+                    <th>Semester</th>
+                    <th>Hall</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Seat No</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exam in exams %}
+                <tr>
+                    <td data-label="No">{{ forloop.counter }}</td>
+
+                    <td data-label="Subject">
+                        {{ exam.subject.name }}
+                    </td>
+
+                    <td data-label="Semester">
+                        {{ exam.subject.semester.semester_no }}
+                    </td>
+
+                    <td data-label="Hall">
+                        {{ exam.hall.name }}
+                    </td>
+
+                    <td data-label="Date">
+                        {{ exam.exam_date }}
+                    </td>
+
+                    <td data-label="Time">
+                        {{ exam.start_time }} - {{ exam.end_time }}
+                    </td>
+
+                    <td data-label="Seat No">
+                        {% for seat in exam.seatallocation_set.all %}
+                            {% if seat.student.id == student.id %}
+                                <span class="seat-badge">
+                                    {{ seat.seat_number }}
+                                </span>
+                            {% endif %}
+                        {% empty %}
+                            <span class="not-allocated">Pending</span>
+                        {% endfor %}
+                    </td>
+                </tr>
+
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="no-data">
+                        No exams scheduled
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+/* Table Styling */
+.exam-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:800px;
+    background:#fff;
+}
+
+.exam-table thead{
+    background:#4CAF50;
+    color:white;
+}
+
+.exam-table th,
+.exam-table td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+/* Hover */
+.exam-table tbody tr:hover{
+    background:#f9f9f9;
+}
+
+/* Seat badge */
+.seat-badge{
+    background:#2e7d32;
+    color:white;
+    padding:6px 12px;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+/* Not allocated */
+.not-allocated{
+    color:#d32f2f;
+    font-weight:bold;
+}
+
+/* Empty row */
+.no-data{
+    text-align:center;
+    color:red;
+    padding:15px;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width:768px){
+    .exam-table thead{
+        display:none;
+    }
+
+    .exam-table, tbody, tr, td{
+        display:block;
+        width:100%;
+    }
+
+    tr{
+        margin-bottom:15px;
+        border:1px solid #ddd;
+        border-radius:8px;
+        padding:10px;
+        background:#fff;
+    }
+
+    td{
+        text-align:right;
+        padding:8px 10px;
+        position:relative;
+        border:none;
+    }
+
+    td::before{
+        content: attr(data-label);
+        position:absolute;
+        left:10px;
+        font-weight:bold;
+        color:#333;
+        text-align:left;
+    }
+}
+</style>
+
+{% endblock %}

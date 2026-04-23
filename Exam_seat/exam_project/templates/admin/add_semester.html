@@ -1,0 +1,68 @@
+{% extends "admin/common.html" %}
+{% load static %}
+{% block content %}
+
+<div class="login-area py-120">
+    <div class="container">
+
+        <!-- ADD FORM -->
+        <div class="col-md-6 mx-auto">
+            <div class="login-form">
+                <div class="login-header">
+                    <p>Add Semester</p>
+                </div>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <select name="course" class="form-control mb-2" required>
+                        <option value="">Select Course</option>
+                        {% for c in courses %}
+                            <option value="{{ c.id }}">{{ c.name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <input type="text" name="semester_no" class="form-control mb-2" placeholder="Semester No" required>
+                    <textarea name="description" class="form-control mb-2" placeholder="Description" required></textarea>
+                    <input type="file" name="image" class="form-control mb-3">
+
+                    <button class="theme-btn w-100">Add Semester</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- LIST -->
+        <div class="col-md-10 mx-auto mt-5">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Course</th>
+                        <th>Semester No</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in semesters %}
+                    <tr>
+                        <td>{% if s.image %}<img src="{{ s.image.url }}" width="60">{% endif %}</td>
+                        <td>{{ s.course.name }}</td>
+                        <td>{{ s.semester_no }}</td>
+                        <td>{{ s.description }}</td>
+                        <td>
+                            <a href="{% url 'edit_semester' s.id %}" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="{% url 'delete_semester' s.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="5">No semesters added</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

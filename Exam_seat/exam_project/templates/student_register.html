@@ -1,0 +1,109 @@
+{% extends "common.html" %}
+{% load static %}
+{% block content %}
+
+<div class="login-area py-120">
+<div class="container">
+<div class="col-md-6 mx-auto">
+
+<div class="login-form">
+
+<div class="login-header">
+<img src="{% static 'assets/img/logo/logo.png' %}">
+<p>Student Registration</p>
+</div>
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<div class="form-group">
+<input type="text" name="username" class="form-control" placeholder="Username" required>
+</div>
+
+<div class="form-group">
+<input type="email" name="email" class="form-control" placeholder="Email" required>
+</div>
+
+<div class="form-group">
+<input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
+</div>
+
+<div class="form-group">
+<input type="text" name="full_name" class="form-control" placeholder="Full Name" required>
+</div>
+
+<div class="form-group">
+<input type="text" name="register_no" class="form-control" placeholder="Register Number" required>
+</div>
+
+<div class="form-group">
+<textarea name="address" class="form-control" placeholder="Address" required></textarea>
+</div>
+
+<div class="form-group">
+<input type="file" name="image" class="form-control" required>
+</div>
+
+<div class="form-group">
+<select name="course_id" class="form-control" required>
+<option value="">Select Course</option>
+{% for c in courses %}
+<option value="{{ c.id }}">{{ c.name }}</option>
+{% endfor %}
+</select>
+</div>
+
+<!-- CAMERA -->
+<div class="text-center mb-3">
+<video id="video" width="320" height="240" autoplay style="border-radius:10px;"></video>
+</div>
+
+<canvas id="canvas" style="display:none;"></canvas>
+
+<input type="hidden" name="captured_image" id="captured_image">
+
+<button type="submit" class="theme-btn w-100">
+Register
+</button>
+
+</form>
+
+</div>
+</div>
+</div>
+</div>
+
+<script>
+
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const capturedInput = document.getElementById('captured_image');
+
+// Start camera
+navigator.mediaDevices.getUserMedia({video:true})
+.then(stream=>{
+video.srcObject = stream;
+})
+.catch(err=>{
+alert("Camera permission required");
+});
+
+// Capture image before submit
+document.querySelector("form").addEventListener("submit",function(){
+
+const context = canvas.getContext("2d");
+
+canvas.width = video.videoWidth;
+canvas.height = video.videoHeight;
+
+context.drawImage(video,0,0,canvas.width,canvas.height);
+
+const imageData = canvas.toDataURL("image/png");
+
+capturedInput.value = imageData;
+
+});
+
+</script>
+
+{% endblock %}

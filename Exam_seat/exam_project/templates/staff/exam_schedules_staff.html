@@ -1,0 +1,113 @@
+{% extends "staff/common.html" %}
+{% block content %}
+
+<div style="padding:20px; max-width:1200px; margin:auto;">
+    <h2 style="text-align:center; margin-bottom:20px;">My Exam Duties</h2>
+
+    <div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; min-width:700px;">
+            <thead style="background:#4CAF50; color:white;">
+                <tr>
+                    <th>No</th>
+                    <th>Subject</th>
+                    <th>Hall</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Seats</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exam in exams %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>
+                        {{ exam.subject.name }}<br>
+                        <small>(Sem {{ exam.subject.semester.semester_no }})</small>
+                    </td>
+                    <td>{{ exam.hall.name }}</td>
+                    <td>{{ exam.exam_date }}</td>
+                    <td>{{ exam.start_time }} - {{ exam.end_time }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#seatModal{{ exam.id }}">
+                            View Seats
+                        </button>
+                    </td>
+                </tr>
+
+                <!-- MODAL -->
+                <div class="modal fade" id="seatModal{{ exam.id }}" tabindex="-1">
+                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title">
+                                    Seat Allocation – {{ exam.subject.name }}
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <p>
+                                    <strong>Course:</strong> {{ exam.subject.semester.course.name }} |
+                                    <strong>Hall:</strong> {{ exam.hall.name }} |
+                                    <strong>Date:</strong> {{ exam.exam_date }}
+                                </p>
+
+                                <table class="table table-bordered table-striped">
+                                    <thead class="table-success">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Register No</th>
+                                            <th>Student Name</th>
+                                            <th>Seat No</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for seat in exam.seatallocation_set.all %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ seat.student.register_no }}</td>
+                                            <td>{{ seat.student.full_name }}</td>
+                                            <td>
+                                                <span class="badge bg-success">
+                                                    {{ seat.seat_number }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="4" class="text-center text-danger">
+                                                No seat allocation done yet
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- END MODAL -->
+
+                {% empty %}
+                <tr>
+                    <td colspan="6" style="text-align:center; color:red;">
+                        No exam duties assigned
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

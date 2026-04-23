@@ -1,0 +1,41 @@
+{% extends "admin/common.html" %}
+{% load static %}
+{% block content %}
+
+<div class="login-area py-120">
+    <div class="container">
+        <div class="col-md-6 mx-auto">
+            <div class="login-form">
+                <div class="login-header">
+                    <p>Edit Course</p>
+                </div>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <select name="department" class="form-control mb-2" required>
+                        {% for d in departments %}
+                            <option value="{{ d.id }}" {% if d.id == course.department.id %}selected{% endif %}>{{ d.name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <input type="text" name="name" value="{{ course.name }}" class="form-control mb-2" required>
+                    <input type="text" name="code" value="{{ course.code }}" class="form-control mb-2" required>
+                    <textarea name="description" class="form-control mb-2" required>{{ course.description }}</textarea>
+
+                    {% if course.image %}
+                        <div class="mb-3 text-center">
+                            <img src="{{ course.image.url }}" width="120">
+                        </div>
+                    {% endif %}
+                    <input type="file" name="image" class="form-control mb-3">
+
+                    <button class="theme-btn w-100">Update Course</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

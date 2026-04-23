@@ -1,0 +1,352 @@
+
+{% extends "student/common.html" %}
+
+{% load static %}
+{% block content %}
+
+
+    <!-- popup search -->
+    <div class="search-popup">
+        <button class="close-search"><span class="far fa-times"></span></button>
+        <form action="#">
+            <div class="form-group">
+                <input type="search" name="search-field" placeholder="Search Here..." required>
+                <button type="submit"><i class="far fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+    <!-- popup search end -->
+
+
+    <main class="main">
+
+        <!-- hero slider -->
+        <div class="hero-section">
+            <div class="hero-slider owl-carousel owl-theme">
+
+                <!-- Slide 1 -->
+                <div class="hero-single" style="background: url('{% static "assets/img/slider/slider-1.jpg" %}')">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-lg-7">
+                                <div class="hero-content">
+                                    <h6 class="hero-sub-title" data-animation="fadeInDown" data-delay=".25s">
+                                        <i class="far fa-calendar-check"></i> Welcome To Exam Seat Allocation
+                                    </h6>
+                                    <h1 class="hero-title" data-animation="fadeInRight" data-delay=".50s">
+                                        Smart & Secure <span>Exam</span> Seat Management
+                                    </h1>
+                                    <p data-animation="fadeInLeft" data-delay=".75s">
+                                        A centralized system to manage exam schedules, hall allocations, staff duties,
+                                        and automatic seat assignment for students with accuracy and transparency.
+                                    </p>
+                                    <div class="hero-btn" data-animation="fadeInUp" data-delay="1s">
+                                        <a href="login.html" class="theme-btn">
+                                            Get Started <i class="fas fa-arrow-right-long"></i>
+                                        </a>
+                                        <a href="about.html" class="theme-btn theme-btn2">
+                                            System Overview <i class="fas fa-arrow-right-long"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="hero-single" style="background: url('{% static "assets/img/slider/slider-2.jpg" %}')">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-lg-7">
+                                <div class="hero-content">
+                                    <h6 class="hero-sub-title" data-animation="fadeInDown" data-delay=".25s">
+                                        <i class="far fa-user-shield"></i> Admin & Staff Dashboard
+                                    </h6>
+                                    <h1 class="hero-title" data-animation="fadeInRight" data-delay=".50s">
+                                        Allocate <span>Halls</span>, Staff & Seats Effortlessly
+                                    </h1>
+                                    <p data-animation="fadeInLeft" data-delay=".75s">
+                                        Admins can schedule exams, assign invigilators, manage hall capacities,
+                                        and automatically allocate seats while avoiding conflicts.
+                                    </p>
+                                    <div class="hero-btn" data-animation="fadeInUp" data-delay="1s">
+                                        <a href="admin_login.html" class="theme-btn">
+                                            Admin Login <i class="fas fa-arrow-right-long"></i>
+                                        </a>
+                                        <a href="staff_login.html" class="theme-btn theme-btn2">
+                                            Staff Login <i class="fas fa-arrow-right-long"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="hero-single" style="background: url('{% static "assets/img/slider/slider-3.jpg" %}')">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-lg-7">
+                                <div class="hero-content">
+                                    <h6 class="hero-sub-title" data-animation="fadeInDown" data-delay=".25s">
+                                        <i class="far fa-id-card"></i> Student Exam Portal
+                                    </h6>
+                                    <h1 class="hero-title" data-animation="fadeInRight" data-delay=".50s">
+                                        View Your <span>Seat</span>, Hall & Schedule Instantly
+                                    </h1>
+                                    <p data-animation="fadeInLeft" data-delay=".75s">
+                                        Students can check exam dates, hall details, invigilator information,
+                                        and their allotted seat number in one secure platform.
+                                    </p>
+                                    <div class="hero-btn" data-animation="fadeInUp" data-delay="1s">
+                                        <a href="student_login.html" class="theme-btn">
+                                            Student Login <i class="fas fa-arrow-right-long"></i>
+                                        </a>
+                                        <a href="contact.html" class="theme-btn theme-btn2">
+                                            Help & Support <i class="fas fa-arrow-right-long"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- hero slider end -->
+
+
+        <!-- feature area -->
+        <div class="feature-area fa-negative">
+    <div class="col-xl-9 ms-auto">
+        <div class="feature-wrapper">
+            <div class="row g-4">
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-item">
+                        <span class="count">01</span>
+                        <div class="feature-icon">
+                            <img src="{% static "assets/img/icon/scholarship.svg" %}" alt="">
+                        </div>
+                        <div class="feature-content">
+                            <h4 class="feature-title">Automated Seat Allocation</h4>
+                            <p>
+                                Seats are automatically assigned to students based on hall capacity,
+                                ensuring fair and error-free allocation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-item">
+                        <span class="count">02</span>
+                        <div class="feature-icon">
+                            <img src="{% static "assets/img/icon/teacher.svg" %}" alt="">
+                        </div>
+                        <div class="feature-content">
+                            <h4 class="feature-title">Staff Duty Management</h4>
+                            <p>
+                                Invigilators are assigned intelligently, avoiding schedule clashes
+                                and ensuring proper exam supervision.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-item">
+                        <span class="count">03</span>
+                        <div class="feature-icon">
+                            <img src="{% static "assets/img/icon/library.svg" %}" alt="">
+                        </div>
+                        <div class="feature-content">
+                            <h4 class="feature-title">Hall & Seat Visualization</h4>
+                            <p>
+                                Admin can visually monitor seat layouts and student placements
+                                for better hall arrangement.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-item">
+                        <span class="count">04</span>
+                        <div class="feature-icon">
+                            <img src="{% static "assets/img/icon/money.svg" %}" alt="">
+                        </div>
+                        <div class="feature-content">
+                            <h4 class="feature-title">Time & Cost Efficient</h4>
+                            <p>
+                                Reduces manual effort, paperwork, and errors while saving
+                                administrative time during examinations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+
+     <!-- cta-area -->
+<div class="cta-area">
+    <div class="container">
+        <div class="cta-wrapper">
+            <div class="row align-items-center">
+                <div class="col-lg-5 ms-lg-auto">
+                    <div class="cta-content">
+                        <h1>Smart Exam Seat Allocation System – Manage Seats Effortlessly</h1>
+                        <p>
+                            Our exam seat allocation system helps administrators assign seats efficiently based on hall
+                            capacity, course, and exam schedules. It ensures fairness, avoids conflicts, and provides
+                            real-time visibility for students and staff.
+                        </p>
+                        <div class="cta-btn">
+                            <a href="application-form.html" class="theme-btn">
+                                Allocate Seats Now<i class="fas fa-arrow-right-long"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- cta-area end -->
+
+
+<!-- blog area -->
+<div class="blog-area py-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="site-heading text-center">
+                    <span class="site-title-tagline">
+                        <i class="far fa-book-open-reader"></i> Exam Management
+                    </span>
+                    <h2 class="site-title">Latest Updates on <span>Exam Seat Allocation</span></h2>
+                    <p>
+                        Stay updated with the latest features, announcements, and improvements in our exam scheduling
+                        and seat allocation system designed for students, staff, and administrators.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <div class="blog-item wow fadeInUp" data-wow-delay=".25s">
+                    <div class="blog-date">
+                        <i class="fal fa-calendar-alt"></i> June 18, 2024
+                    </div>
+                    <div class="blog-item-img">
+                        <img src="{% static "assets/img/blog/01.jpg" %}" alt="Thumb">
+                    </div>
+                    <div class="blog-item-info">
+                        <div class="blog-item-meta">
+                            <ul>
+                                <li><a href="#"><i class="far fa-user-circle"></i> By Exam Admin</a></li>
+                                <li><a href="#"><i class="far fa-comments"></i> 05 Updates</a></li>
+                            </ul>
+                        </div>
+                        <h4 class="blog-title">
+                            <a href="blog-single.html">
+                                Automated Seat Allocation Based on Hall Capacity
+                            </a>
+                        </h4>
+                        <a class="theme-btn" href="blog-single.html">
+                            Read More<i class="fas fa-arrow-right-long"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="blog-item wow fadeInUp" data-wow-delay=".50s">
+                    <div class="blog-date">
+                        <i class="fal fa-calendar-alt"></i> June 18, 2024
+                    </div>
+                    <div class="blog-item-img">
+                        <img src="{% static "assets/img/blog/02.jpg" %}" alt="Thumb">
+                    </div>
+                    <div class="blog-item-info">
+                        <div class="blog-item-meta">
+                            <ul>
+                                <li><a href="#"><i class="far fa-user-circle"></i> By Exam Coordinator</a></li>
+                                <li><a href="#"><i class="far fa-comments"></i> 08 Updates</a></li>
+                            </ul>
+                        </div>
+                        <h4 class="blog-title">
+                            <a href="blog-single.html">
+                                Conflict-Free Staff Assignment for Exam Invigilation
+                            </a>
+                        </h4>
+                        <a class="theme-btn" href="blog-single.html">
+                            Read More<i class="fas fa-arrow-right-long"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="blog-item wow fadeInUp" data-wow-delay=".75s">
+                    <div class="blog-date">
+                        <i class="fal fa-calendar-alt"></i> June 18, 2024
+                    </div>
+                    <div class="blog-item-img">
+                        <img src="{% static "assets/img/blog/03.jpg" %}" alt="Thumb">
+                    </div>
+                    <div class="blog-item-info">
+                        <div class="blog-item-meta">
+                            <ul>
+                                <li><a href="#"><i class="far fa-user-circle"></i> By System Admin</a></li>
+                                <li><a href="#"><i class="far fa-comments"></i> 12 Updates</a></li>
+                            </ul>
+                        </div>
+                        <h4 class="blog-title">
+                            <a href="blog-single.html">
+                                Students Can View Exam Hall and Seat Number Instantly
+                            </a>
+                        </h4>
+                        <a class="theme-btn" href="blog-single.html">
+                            Read More<i class="fas fa-arrow-right-long"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- blog area end -->
+
+
+
+        <!-- partner area -->
+        <div class="partner-area bg pt-50 pb-50">
+            <div class="container">
+                <div class="partner-wrapper partner-slider owl-carousel owl-theme">
+                    <img src="{% static 'assets/img/partner/01.png' %}" alt="thumb">
+                    <img src="{% static 'assets/img/partner/02.png' %}" alt="thumb">
+                    <img src="{% static 'assets/img/partner/03.png' %}" alt="thumb">
+                    <img src="{% static 'assets/img/partner/04.png' %}" alt="thumb">
+                    <img src="{% static 'assets/img/partner/01.png' %}" alt="thumb">
+                    <img src="{% static 'assets/img/partner/02.png' %}" alt="thumb">
+                    <img src="{% static 'assets/img/partner/04.png' %}" alt="thumb">
+                </div>
+            </div>
+        </div>
+        <!-- partner area end -->
+
+    </main>
+
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "admin/common.html" %}
+{% block content %}
+
+<div class="container py-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white text-center">
+            <h5 class="mb-0">Schedule Main Exam</h5>
+        </div>
+
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label class="form-label">Subject</label>
+                        <select name="subject" class="form-select" required>
+                            {% for s in subjects %}
+                            <option value="{{ s.id }}">
+                                {{ s.name }} (Sem {{ s.semester.semester_no }})
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Hall</label>
+                        <select name="hall" class="form-select" required>
+                            {% for h in halls %}
+                            <option value="{{ h.id }}">
+                                {{ h.name }} (Capacity: {{ h.capacity }})
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Exam Date</label>
+                        <input type="date" name="exam_date" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Start Time</label>
+                        <input type="time" name="start_time" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">End Time</label>
+                        <input type="time" name="end_time" class="form-control" required>
+                    </div>
+
+                </div>
+
+                <div class="text-center mt-4">
+                    <button class="btn btn-success px-5">
+                        Schedule Exam
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

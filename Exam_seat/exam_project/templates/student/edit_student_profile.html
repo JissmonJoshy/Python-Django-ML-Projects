@@ -1,0 +1,48 @@
+{% extends "student/common.html" %}
+{% load static %}
+{% block content %}
+
+<div class="login-area py-120">
+    <div class="container">
+        <div class="col-md-6 mx-auto">
+            <div class="login-form">
+
+                <div class="login-header">
+                    <p>Edit Student Profile</p>
+                </div>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    
+                    <input type="text" name="full_name" value="{{ student.full_name }}" class="form-control mb-2" required>
+                    <input type="text" name="phone" value="{{ student.phone }}" class="form-control mb-2" required>
+                    <textarea name="address" class="form-control mb-2" required>{{ student.address }}</textarea>
+
+                    <select name="course_id" class="form-control mb-2" required>
+                        {% for c in courses %}
+                            <option value="{{ c.id }}" {% if student.course_id == c.id %}selected{% endif %}>
+                                {{ c.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+
+                    {% if student.image %}
+                        <div class="text-center mb-3">
+                            <img src="{{ student.image.url }}" width="120">
+                        </div>
+                    {% endif %}
+
+                    <input type="file" name="image" class="form-control mb-3">
+
+                    <button class="theme-btn w-100">
+                        Update Profile
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

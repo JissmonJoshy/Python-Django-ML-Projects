@@ -1,0 +1,72 @@
+{% extends "staff/common.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-xl-8 col-lg-9 col-md-11">
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+
+                    <!-- Profile Header -->
+                    <div class="row align-items-center mb-4">
+                        <div class="col-md-4 text-center">
+                            <img src="{{ staff.image.url }}"
+                                 class="rounded-circle img-fluid mb-3"
+                                 style="width:140px;height:140px;object-fit:cover;">
+                        </div>
+
+                        <div class="col-md-8 text-center text-md-start">
+                            <h3 class="mb-1">{{ staff.full_name }}</h3>
+                            <span class="badge bg-primary mb-2">
+                                {{ staff.department.name }}
+                            </span>
+                            <p class="text-muted mb-0">
+                                Staff Profile
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Details -->
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded">
+                                <small class="text-muted">Email</small>
+                                <div class="fw-semibold">{{ staff.email }}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded">
+                                <small class="text-muted">Phone</small>
+                                <div class="fw-semibold">{{ staff.phone }}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="p-3 bg-light rounded">
+                                <small class="text-muted">Address</small>
+                                <div class="fw-semibold">{{ staff.address }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action -->
+                    <div class="text-center mt-4">
+                        <a href="{% url 'edit_staff_profile' %}"
+                           class="btn btn-outline-primary px-4">
+                            Edit Profile
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

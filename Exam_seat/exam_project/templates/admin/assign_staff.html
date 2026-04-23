@@ -1,0 +1,62 @@
+{% extends "admin/common.html" %}
+{% block content %}
+<div style="padding: 20px;">
+    <h2 style="text-align: center; margin-bottom: 30px;">Exam Staff Assignment</h2>
+
+    <div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse: collapse; min-width: 700px;">
+            <thead>
+                <tr style="background-color: lightgray;">
+                    <th style="padding: 10px; text-align:center;">#</th>
+                    <th style="padding: 10px; text-align:center;">Course</th>
+                    <th style="padding: 10px; text-align:center;">Subject</th>
+                    <th style="padding: 10px; text-align:center;">Hall</th>
+                    <th style="padding: 10px; text-align:center;">Date</th>
+                    <th style="padding: 10px; text-align:center;">Time</th>
+                    <th style="padding: 10px; text-align:center;">Staff Assigned</th>
+                    <th style="padding: 10px; text-align:center;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exam in exams %}
+                <tr style="border-bottom: 1px solid #ccc;">
+                    <td style="padding: 10px; text-align:center;">{{ forloop.counter }}</td>
+                    <td style="padding: 10px; text-align:center;">{{ exam.subject.semester.course.name }}</td>
+                    <td style="padding: 10px; text-align:center;">{{ exam.subject.name }}</td>
+                    <td style="padding: 10px; text-align:center;">{{ exam.hall.name }}</td>
+                    <td style="padding: 10px; text-align:center;">{{ exam.exam_date }}</td>
+                    <td style="padding: 10px; text-align:center;">{{ exam.start_time }} - {{ exam.end_time }}</td>
+                    <td style="padding: 10px; text-align:center;">
+                        {% if exam.staff %}
+                            {{ exam.staff.full_name }}
+                        {% else %}
+                            <span style="color:red;">Not Assigned</span>
+                        {% endif %}
+                    </td>
+                    <td style="padding: 10px; text-align:center;">
+                        <a href="{% url 'assign_staff_action' exam.id %}" style="text-decoration:none; padding:5px 10px; background-color: teal; color:white; border-radius:5px;">
+                            {% if exam.staff %} Reassign {% else %} Assign {% endif %}
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    @media (max-width: 768px) {
+        table, th, td {
+            font-size: 14px;
+        }
+        h2 {
+            font-size: 20px;
+        }
+        a {
+            padding: 4px 8px !important;
+            font-size: 13px;
+        }
+    }
+</style>
+{% endblock %}

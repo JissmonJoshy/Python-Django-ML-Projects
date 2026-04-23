@@ -1,0 +1,41 @@
+{% extends "admin/common.html" %}
+{% block content %}
+<div style="max-width: 600px; margin: auto; padding: 20px;">
+    <h2 style="text-align: center; margin-bottom: 30px;">Assign Staff</h2>
+
+    <div style="background-color: #f9f9f9; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <p><strong>Exam:</strong> {{ exam.subject.name }}</p>
+        <p><strong>Hall:</strong> {{ exam.hall.name }}</p>
+        <p><strong>Date:</strong> {{ exam.exam_date }}</p>
+        <p><strong>Time:</strong> {{ exam.start_time }} - {{ exam.end_time }}</p>
+
+        <form method="post" style="margin-top: 20px;">
+            {% csrf_token %}
+            <label for="staff_id" style="font-weight:bold;">Select Staff:</label>
+            <select name="staff_id" id="staff_id" style="width:100%; padding:10px; margin-top:10px; margin-bottom:20px; border-radius:5px; border:1px solid #ccc;" required>
+                <option value="">-- Select Staff --</option>
+                {% for staff in available_staff %}
+                    <option value="{{ staff.id }}">{{ staff.full_name }} ({{ staff.department.name }})</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit" style="width:100%; padding:10px; background-color: teal; color:white; border:none; border-radius:5px; font-weight:bold;">
+                {% if exam.staff %} Reassign {% else %} Assign {% endif %}
+            </button>
+        </form>
+
+        <a href="{% url 'assign_staff' %}" style="display:block; text-align:center; margin-top:20px; color:teal; text-decoration:none;">Back to Exam List</a>
+    </div>
+</div>
+
+<style>
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 20px;
+        }
+        form select, form button {
+            font-size: 14px;
+        }
+    }
+</style>
+{% endblock %}
