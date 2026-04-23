@@ -1,0 +1,138 @@
+{% extends "user_home.html" %}
+{% block content %}
+
+<style>
+.booking-container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 15px;
+}
+
+.booking-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.booking-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.booking-table th,
+.booking-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.booking-table th {
+    background-color: #f5f5f5;
+}
+
+.status-paid {
+    color: green;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: red;
+    font-weight: bold;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    .booking-table,
+    .booking-table thead,
+    .booking-table tbody,
+    .booking-table th,
+    .booking-table td,
+    .booking-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .booking-table tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+
+    .booking-table th {
+        display: none;
+    }
+
+    .booking-table td {
+        text-align: left;
+        border: none;
+        padding: 6px 0;
+    }
+
+    .booking-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: inline-block;
+        width: 130px;
+    }
+}
+</style>
+<br><br><br><br><br><br>
+<div class="booking-container">
+    <h2 class="booking-title">My Blood Test Bookings</h2>
+
+    {% if bookings %}
+    <table class="booking-table">
+        <thead>
+            <tr>
+                <th>Lab Name</th>
+                <th>Location</th>
+                <th>Contact</th>
+                <th>Test</th>
+                <th>Booking Date</th>
+                <th>Payment Status</th>
+                <th>Report</th>
+            </tr>
+        </thead>
+
+        <tbody>
+{% for b in bookings %}
+<tr>
+    <td data-label="Lab Name">{{ b.lab.name }}</td>
+    <td data-label="Location">{{ b.lab.location }}</td>
+    <td data-label="Contact">{{ b.lab.contact }}</td>
+    <td data-label="Test">{{ b.test_name }}</td>
+    <td data-label="Date">{{ b.booking_date|date:"d-m-Y H:i" }}</td>
+
+    <td data-label="Status">
+        {% if b.payment_status == "Paid" %}
+            <span class="status-paid">Paid</span>
+        {% else %}
+            <span class="status-pending">Pending</span>
+        {% endif %}
+    </td>
+
+    <td data-label="Report">
+        {% if b.pdf_report %}
+            <a href="{{ b.pdf_report.url }}" target="_blank">
+                Download PDF
+            </a>
+        {% elif b.payment_status == "Paid" %}
+            <span style="color: orange; font-weight: bold;">
+                Report not ready
+            </span>
+        {% else %}
+            <span style="color: gray;">
+                Pay first
+            </span>
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+    </table>
+    {% else %}
+        <p style="text-align:center;">No blood test bookings found.</p>
+    {% endif %}
+</div>
+<br><br>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "admin_home.html" %}
+{% block content %}
+
+
+    <!-- inner banner -->
+    <section class="inner-banner py-5">
+        <div class="w3l-breadcrumb py-lg-5">
+            <div class="container pt-5 pb-sm-4 pb-2">
+                <h4 class="inner-text-title font-weight-bold pt-5">User</h4>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>Payments</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- //inner banner -->
+
+    <section class="w3l-w3l-contacts-12 py-5">
+        <div class="contact-top py-lg-5 py-md-4 py-2">
+            <div class="container">
+
+                <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
+                    <h5 class="sub-title">My</h5>
+                    <h3 class="title-style">Payments</h3>
+                </div>
+                <table class="table text-light text-center">
+                    <thead>
+                      <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">From</th>
+                        <th scope="col">To</th>
+                        <th scope="col">For</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {%for d in data%}
+                      <tr>
+                        <td>{{d.date}}</td>
+                        <td>{{d.time}}</td>
+                        <td>{{d.amount}}</td>
+                        <td>{{d.user.first_name}} {{d.user.last_name}}</td>
+                        <td>{{d.slot.lab.name}}</td>
+                        <td>{{d.slot.test.test}}</td>
+                        <td>{{d.status}}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  
+                </div>
+            </div>
+        </section>
+                      
+        <script>
+            function validateDate(inputDate) {
+                // var inputDate = document.getElementById("dateInput").value;
+                var currentDate = new Date();
+                var enteredDate = new Date(inputDate);
+        
+                if (enteredDate < currentDate) {
+                    alert("You have selected a date before today");
+                    document.getElementById("subBtn").disabled = true;
+                } else {
+                    document.getElementById("subBtn").disabled = false;
+        
+                }
+            }
+        </script>
+        
+{% endblock %}
