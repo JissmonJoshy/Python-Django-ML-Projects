@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Melanoma Detection</title>
+		<link rel="stylesheet" href="/static/css/BillCss.css" />
+	</head>
+
+	<body>
+		<table class="body-wrap">
+			<tbody>
+				<tr>
+					<td></td>
+					<td class="container" width="900">
+						<div class="content">
+							<table class="main" width="110%">
+								<tbody>
+									<tr>
+										<td class="content-wrap aligncenter">
+											<table width="100%" cellpadding="0" cellspacing="0">
+												<tbody>
+													<tr>
+														<td class="content-block">
+															<h1 style="text-align: center">
+																Skin Cancer Detection
+															</h1>
+														</td>
+													</tr>
+													<tr>
+														<td class="content-block">
+															<h2 style="text-align: center">Result</h2>
+														</td>
+													</tr>
+													<tr>
+														<td class="content-block">
+															<table class="invoice">
+																<tbody>
+																	<tr>
+																		<td style="width: 300px">
+																			<strong>User:</strong>
+																			{{data.user.name}}<br />
+																		</td>
+																		<td>
+																			<strong>DATE:</strong>
+																			{{data.date}}<br />
+																		</td>
+																	</tr>
+																	<tr>
+																		<td colspan="2" style="text-align: center">
+																			<img
+																				src="/static/media/{{data.image}}"
+																				style="max-width: 250px"
+																				alt=""
+																			/>
+																			<br /><br />
+																		</td>
+																	</tr>
+																	<tr>
+																		<td colspan="2" style="text-align: center">
+																			<p style="font-size: 20px; font-weight: 700;">Prediction: {{data.resultVal}}</p>
+				{% comment %} <p style="font-size: 20px; font-weight: 700;">Inference: {% if data.resultVal in cancer_classes %} The Person is affected by cancer. {% else %} The Person is not affected by cancer. {% endif %} </p> {% endcomment %}
+																		</td>
+																	</tr>
+
+																	<tr>
+																		<td colspan="2">
+																			<table style="margin: auto;">
+																				{% for d in data.result.probs%}
+																				<tr>
+																					<td style="font-weight: 900; font-size: 20px;">{{d.0}}</td>  
+																					<td style="font-weight: 900; font-size: 20px;">{{d.1}}</td>
+																				</tr>
+																				{% endfor %}
+																			</table>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+													</tr>
+													<tr>
+														<td class="content-block">
+															<input
+																type="button"
+																value="Print"
+																onclick="myFun()"
+																id="pt"
+																style="padding: 10px"
+															/>
+														</td>
+													</tr>
+													<tr>
+														<td class="content-block"></td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="footer">
+								<table width="100%">
+									<tbody>
+										<tr></tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<script>
+			function myFun() {
+				document.getElementById('pt').style.display = 'none';
+				window.print();
+				window.location = '/detectImage';
+			}
+		</script>
+	</body>
+</html>

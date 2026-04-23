@@ -1,0 +1,37 @@
+{% extends 'userbase.html' %} {% block content %}
+<style type="text/css">
+	#log {
+		background-color: rgba(0, 150, 220, 0.5);
+		margin: 10px 150px;
+		padding: 50px;
+		color: white;
+		width: 1000px;
+		float: left;
+	}
+
+	/*tr:nth-child(odd) {background-color: silver;}*/
+</style>
+<div style="margin: 100px">
+	<form method="post" class="text-center">
+		{% csrf_token %}
+		<h3 style="margin: 20px">Questions</h3>
+		<table border="0" style="margin: 50px" class="table table-secondary table-striped table-hover text-center">
+			<tr>
+				<th>Sl/No.</th>
+				<th>QUESTIONS</th>
+				<th>OPTION 1</th>
+				<th>OPTION 2</th>
+			</tr>
+			{% for d in data %}
+			<tr>
+				<td>{{forloop.counter}}</td>
+				<td>{{d.question}}</td>
+				<td><input type="radio" value="{{d.o1}}" name="ans{{forloop.counter}}">{{d.o1}}</td>
+				<td><input type="radio" value="{{d.o2}}" name="ans{{forloop.counter}}">{{d.o2}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<input type="submit" value="Submit" class="btn btn-primary">
+	</form>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'adminbase.html' %}
+{% block content %}
+<style type="text/css">
+	#log{
+		background-color: rgba(0, 150, 220, 0.5);
+		margin: 10px 150px;
+		padding: 50px;
+		color: white;
+		width: 1000px;
+		float: left;
+	}
+
+/*tr:nth-child(odd) {background-color: silver;}*/
+</style>
+<div style="margin: 100px;">
+    <form method="POST">
+        {% csrf_token %}
+        <h3 class="text-center">Doctors</h3>
+        {% if data %}
+        <table border="0" id="tb" class="table table-secondary table-striped table-hover text-center">
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>ADDRESS</th>
+                <th>PHONE</th>
+                <th>EMAIL</th>
+                <th>QUALIFICATION</th>
+                <th>SPECIALIZATION</th>
+                <th>EXPERIENCE</th>
+                <th colspan="2">Action</th>
+            </tr>
+            {% for s in data %}
+            <tr>
+                <td>{{s.id}}</td>
+                <td>{{s.name}}</td>
+                <td>{{s.address}}</td>
+                <td>{{s.phone}}</td>
+                <td>{{s.email}}</td>
+                <td>{{s.qualification}}</td>
+                <td>{{s.specialization}}</td>
+                <td>{{s.experience}}</td>
+                <td>
+                    {% if s.user.is_active %}
+                    <a href="/adminUpdateUsers?id={{s.user.id}}" class="btn btn-danger">Make Inactive</a>
+                    {% else %}
+                    <a href="/adminUpdateUsers?id={{s.user.id}}" class="btn btn-success">Make Active</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        </form>
+        </div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'userbase.html' %} {% block content %}
+<style type="text/css">
+	#log {
+		background-color: rgba(0, 150, 220, 0.5);
+		margin: 10px 150px;
+		padding: 50px;
+		color: white;
+		width: 1000px;
+		float: left;
+	}
+	td,
+	th {
+		padding: 10px;
+	}
+	#tbl {
+		width: 900px;
+	}
+	a {
+		color: #ebd231;
+	}
+	table {
+		border-collapse: collapse;
+		border: none;
+	}
+
+	th {
+		background-color: rgba(0, 100, 180, 0.7);
+		color: #ebd231;
+	}
+	/*tr:nth-child(odd) {background-color: silver;}*/
+</style>
+<div class="mt-5 mb-5" style="width: 100%">
+	<form method="POST">
+		{% csrf_token %}
+		<h3 style="text-align: center">Feedback</h3>
+		<table style="margin: auto">
+				<td colspan="2">
+					<textarea class="form-control" name="feedback" required></textarea
+					>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input
+						type="submit"
+						class="btn btn-primary"
+						value="Submit"
+						name="btnSubmit"
+						required
+					/>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<script>
+	var msg = '{{msg}}';
+	if (msg != '') {
+		alert(msg);
+	}
+</script>
+{% endblock %}

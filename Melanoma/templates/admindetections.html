@@ -1,0 +1,52 @@
+{% extends 'adminbase.html' %} {% block content %}
+<style type="text/css">
+	#log {
+		background-color: rgba(0, 150, 220, 0.5);
+		margin: 10px 150px;
+		padding: 50px;
+		color: white;
+		width: 1000px;
+		float: left;
+	}
+
+	/*tr:nth-child(odd) {background-color: silver;}*/
+</style>
+<div style="margin: 100px">
+	<form method="POST">
+		{% csrf_token %}
+		<h3 style="margin: 20px">Detection History</h3>
+		<input type="date" name="sDate" id="" />
+		<input type="date" name="eDate" id="" />
+		<input type="submit" value="Filter" />
+		<table border="0" style="margin: 50px" class="table table-secondary table-striped table-hover text-center">
+			<tr>
+				<th>DATE</th>
+				<th>User</th>
+				<th>Image</th>
+				<th>Detection</th>
+				<th>Result</th>
+			</tr>
+			{% for d in data %}
+			<tr>
+				<td>{{d.date}}</td>
+				<td>{{d.user.name}}</td>
+				<td>
+					<a href="/static/media/{{d.image}}" target="_blank"
+					><img src="/static/media/{{d.image}}" width="200" alt=""
+					/></a>
+				</td>
+				<td>{{d.resultVal}}</td>
+				<td><table style="margin: auto;">
+					{% for i in d.result.probs%}
+					<tr>
+						<td style="font-weight: 900; font-size: 20px;">{{i.0}}</td>  
+						<td style="font-weight: 900; font-size: 20px;">{{i.1}}</td>
+					</tr>
+					{% endfor %}
+				</table></td>
+			</tr>
+			{% endfor %}
+		</table>
+	</form>
+</div>
+{% endblock %}

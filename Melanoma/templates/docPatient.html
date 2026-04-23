@@ -1,0 +1,60 @@
+{% extends 'docbase.html' %} {% block content %}
+<div style="min-height: 60vh;" class="container">
+	<div style="margin: 50px;">
+        <hr>
+        <h2 style="margin: 10px;" class="text-center">Patient details</h2>
+        <hr>
+        {% if booking %}
+        <table class="m-auto">
+
+
+            <tr>
+                <td>Token: {{booking.token}}</td>
+            </tr>
+            <tr>
+                <td>Booking date: {{booking.bookingdate}}</td>
+            </tr>
+            <tr>
+                <td>Patient name: {{booking.uid.name}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input 
+                            type="submit" 
+                            class="btn btn-primary" 
+                            name="btnSubmit"
+                            value="Add prescription">
+                    </form>
+                </td>
+            </tr>
+
+        </table>
+        {% endif %}
+        <br>
+        <hr>
+        {% if pbooking %}
+        <h5>Previous booking</h5>
+        <table class="table table-striped table-secondary table-hover m-auto" >
+            <tr>
+                <th>ID</th>
+                <th>DATE</th>
+                <th>DOCTOR</th>
+                <th>PATIENT</th>
+                <th></th>
+            </tr>
+            {% for s in pbooking %}
+            <tr>
+                <td>{{s.id}}</td>
+                <td>{{s.bookingdate}}</td>
+                <td>{{s.docid.name}}</td>
+                <td>{{s.regid.name}}</td>
+                <td><a href="/doctorviewprescription?id={{s.id}}">View prescription</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

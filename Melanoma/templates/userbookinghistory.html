@@ -1,0 +1,40 @@
+{% extends 'userbase.html' %} {% block content %}
+<div style="min-height: 60vh;" class="container text-center">
+	<div style="margin: 50px;">
+        <hr>
+        <h2 style="margin: 10px;">Doctor Booking History</h2>
+        <hr>
+        {% if booking %}
+            <table class="table table-striped table-secondary table-hover " >
+                <tr>
+                    <th>ID</th>
+                    <th>DATE</th>
+                    <th>BOOKING DATE</th>
+                    <th>DOCTOR</th>
+                    <th>TOKEN</th>
+                    <th>STATUS</th>
+                    <th>PRESCRIPTION</th>
+                </tr>
+                {% for s in booking %}
+                <tr>
+                    <td>{{s.id}}</td>
+                    <td>{{s.bookeddate}}</td>
+                    <td>{{s.bookingdate}}</td>
+                    <td>{{s.docid.name}}</td>
+                    <td>{{s.token}}</td>
+                    <td>{{s.status}}</td>
+                    <td><a href="/userviewpres?id={{s.id}}" class="btn btn-primary">View Prescription</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+    </div>
+</div>
+<script>
+    // Get the current date
+    var today = new Date().toISOString().split('T')[0];
+    
+    // Set the min attribute of the date input field
+    document.getElementById('txtDate').setAttribute('min', today);
+  </script>
+{% endblock %}

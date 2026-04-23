@@ -1,0 +1,47 @@
+{% extends 'userbase.html' %} {% block content %}
+<div style="min-height: 60vh;">
+	<div class="container">
+		<h1 class="text-center my-5">Doctors</h1>
+	<form method="post">
+		{% csrf_token %}
+		<input type="search" name="search" id="" style="background: none; outline: none; border-width:  0 0 1px 0;width: 50%;padding: 5px 20px;" placeholder="Search...">
+		<input type="submit" value="🔍" style="background: none;border: none; outline: none;">
+	</form>
+</div>
+<div class="fea-gd-vv row">
+		{% for i in data %}
+	<div class="col-lg-3" style="margin: 30px;  ">
+		<div class="feature-gd icon-yellow">
+		  
+			<div class="info" style="margin-top: 50px;background-color:lightblue; padding:30px; border-radius:10px;">
+				<h3>{{i.name}}</h3>
+				<p>{{i.address}}</p>
+				<p>{{i.phone}}</p>
+				<p>{{i.email}}</p>
+				<p>Qualification: {{i.qualification}}</p>
+				<p>Specialization: {{i.specialization}}</p>
+				<p>Experience: {{i.experience}}</p>
+				<ul>
+					<li class="cary-li-w3-agileits">
+						<div class="snipcart-details top_brand_home_details">
+							<form action="#" method="post">
+								<fieldset>
+									<a href="/userbookingdate?id={{i.id}}"
+										><input
+											type="button"
+											name="submit"
+											value="Book doctor"
+											class="btn btn-primary"
+									/></a>
+								</fieldset>
+							</form>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+</div>
+{% endblock %}

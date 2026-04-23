@@ -1,0 +1,29 @@
+{% extends 'userbase.html' %} {% block content %}
+<div style="min-height: 60vh;">
+	<div style="margin: 50px;">
+        <hr>
+        <h2 style="margin: 10px;" class="text-center">Prescription details</h2>
+        <hr>
+        {% if booking %}
+        <table border="0" id="tb" class="m-auto" width="20%">
+
+            
+            <tr>
+                <td>Token No.: {{booking.bid.token}}</td>
+            </tr>
+            <tr>
+                <td>Booking date: {{booking.bid.bookingdate}}</td>
+            </tr>
+            <tr>
+                <td>Diagnosis: {{booking.diagnosis}}</td>
+            </tr>
+            <tr>
+                <td>Prescription: <a href="/static/media/{{booking.image}}" target="_blank" class="btn btn-primary">View Prescription</a></td>
+            </tr>
+        </table>
+        {% endif %}
+
+      
+    </div>
+</div>
+{% endblock %}

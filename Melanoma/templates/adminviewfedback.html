@@ -1,0 +1,38 @@
+{% extends 'adminbase.html' %} {% block content %}
+<style type="text/css">
+	#log {
+		background-color: rgba(0, 150, 220, 0.5);
+		margin: 10px 150px;
+		padding: 50px;
+		color: white;
+		width: 1000px;
+		float: left;
+	}
+
+	/*tr:nth-child(odd) {background-color: silver;}*/
+</style>
+<div style="margin: 100px">
+	<form method="POST">
+		{% csrf_token %}
+		<h3 style="margin: 20px">Customer Feedback</h3>
+		<table border="0" style="margin: 50px" class="table table-secondary table-striped table-hover text-center">
+			<tr>
+				<th>DATE</th>
+				<th>NAME</th>
+				<th>CONTACT</th>
+				<th>EMAIL</th>
+				<th>FEEDBACK</th>
+			</tr>
+			{% for d in data %}
+			<tr>
+				<td>{{d.date}}</td>
+				<td>{{d.user.name}}</td>
+				<td>{{d.user.phone}}</td>
+				<td>{{d.user.email}}</td>
+				<td>{{d.feedback}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</form>
+</div>
+{% endblock %}

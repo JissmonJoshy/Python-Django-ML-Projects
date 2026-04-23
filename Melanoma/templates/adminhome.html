@@ -1,0 +1,12 @@
+{% extends 'adminbase.html' %}
+{% block content %}
+<div style="min-height: 60vh">
+    <form method="POST">
+        {% csrf_token %}
+        <br>
+        <br>
+        <br>
+        <h1 class="text-center m-t">Welcome Admin</h1>
+    </form>
+</div>
+{% endblock %}

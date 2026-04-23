@@ -1,0 +1,30 @@
+{% extends 'docbase.html' %} {% block content %}
+<div style="min-height: 60vh;" class="container">
+	<div style="margin: 50px;">
+        <hr>
+        <h2 style="margin: 10px;" class="text-center">Patient Booking History</h2>
+        <hr>
+        <br>
+        {% if pbooking %}
+        <table class="table table-striped table-secondary table-hover m-auto" >
+            <tr>
+                <th>ID</th>
+                <th>DATE</th>
+                <th>DOCTOR</th>
+                <th>PATIENT</th>
+                <th></th>
+            </tr>
+            {% for s in pbooking %}
+            <tr>
+                <td>{{s.id}}</td>
+                <td>{{s.bookingdate}}</td>
+                <td>{{s.docid.name}}</td>
+                <td>{{s.uid.name}}</td>
+                <td><a href="/docViewPrescription?id={{s.id}}" class="btn btn-primary">View prescription</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

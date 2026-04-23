@@ -1,0 +1,54 @@
+{% extends 'userbase.html' %}
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="text-center mb-4">Melanoma Skin Cancer Detection</h2>
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<div class="mb-3">
+<label>Upload Skin Lesion Image</label>
+<input type="file" name="image" class="form-control" required>
+</div>
+
+<button type="submit" class="btn btn-primary">Detect</button>
+
+</form>
+
+{% if result %}
+
+<hr>
+
+<pre style="font-size:16px">
+
+--------------------------------------------------
+          MELANOMA DETECTION REPORT
+--------------------------------------------------
+
+Uploaded Image      : {{result.image}}
+
+Prediction Result   : {{result.class}}
+
+Confidence Score    : {{result.confidence}} %
+
+Risk Level          : {{result.risk}}
+
+Model Used          : Convolutional Neural Network (CNN)
+
+Detection Time      : {{result.time}} seconds
+
+--------------------------------------------------
+Medical Recommendation :
+{{result.recommendation}}
+
+--------------------------------------------------
+
+</pre>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

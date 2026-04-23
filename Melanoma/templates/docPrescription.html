@@ -1,0 +1,25 @@
+{% extends 'docbase.html' %} {% block content %}
+<div style="min-height: 60vh;" class="container">
+	<form method="POST" style="margin: 20px 0px;" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>Diagnosis</h3>
+        <hr>
+        <table style="width: 800px; margin: 20px auto;">
+            <tr>
+                <td>Diagnosis</td>
+                <td><textarea class="form-control" name="txtDiagnosis" required></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Prescription</td>
+                <td><input type="file" class="form-control" name="txtprescription" required/>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" class="btn btn-primary" name="btnSubmit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+{% endblock %}

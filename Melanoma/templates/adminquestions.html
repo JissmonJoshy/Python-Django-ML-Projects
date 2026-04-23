@@ -1,0 +1,42 @@
+{% extends 'adminbase.html' %} {% block content %}
+<style type="text/css">
+	#log {
+		background-color: rgba(0, 150, 220, 0.5);
+		margin: 10px 150px;
+		padding: 50px;
+		color: white;
+		width: 1000px;
+		float: left;
+	}
+
+	/*tr:nth-child(odd) {background-color: silver;}*/
+</style>
+<div style="margin: 100px">
+	<form method="post" class="text-center">
+		{% csrf_token %}
+		<h3 style="margin: 20px">Questions</h3>
+		<textarea name="question" placeholder="Enter Questions Here" class="form-control" id=""></textarea><br>
+		{% comment %} <input type="text" name="o1" placeholder="Enter option 1" class="form-control" id=""><br>
+		<input type="text" name="o2" placeholder="Enter option 2" class="form-control" id=""><br> {% endcomment %}
+		<input type="submit" value="Submit" class="btn btn-primary">
+	</form>
+		<table border="0" style="margin: 50px" class="table table-secondary table-striped table-hover text-center">
+			<tr>
+				<th>Sl/No.</th>
+				<th>QUESTIONS</th>
+				<th>OPTION 1</th>
+				<th>OPTION 2</th>
+				<th>ACTION</th>
+			</tr>
+			{% for d in data %}
+			<tr>
+				<td>{{forloop.counter}}</td>
+				<td>{{d.question}}</td>
+				<td>{{d.o1}}</td>
+				<td>{{d.o2}}</td>
+				<td><a href="/admindeletequestion?id={{d.id}}" class="btn btn-danger">Delete</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+</div>
+{% endblock %}

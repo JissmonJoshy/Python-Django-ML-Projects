@@ -1,0 +1,32 @@
+{% extends 'userbase.html' %} {% block content %}
+<div style="min-height: 60vh;" class="contaner text-center">
+	<div style="margin: 50px;">
+        <hr>
+        <h2 style="margin: 10px;">Book Doctor</h2>
+        <hr>
+        <form method="POST">
+            {% csrf_token %}
+
+            <table style="margin: 0 auto; width: 20%;">
+                <tr>
+                    <td>Booking date</td>
+                    <td><input type="date" id="txtDate" onchange="checkdate()" class="form-control" name="txtDate"
+                            required></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" class="btn btn-primary" style="color: white;" value="Book">
+                    </td>
+                </tr>
+            </table>
+
+        </form>
+    </div>
+</div>
+<script>
+    // Get the current date
+    var today = new Date().toISOString().split('T')[0];
+    
+    // Set the min attribute of the date input field
+    document.getElementById('txtDate').setAttribute('min', today);
+  </script>
+{% endblock %}

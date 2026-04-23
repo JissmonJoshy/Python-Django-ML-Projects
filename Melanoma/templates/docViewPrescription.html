@@ -1,0 +1,29 @@
+{% extends 'docbase.html' %} {% block content %}
+<div style="min-height: 60vh;" class="container">
+	<div style="margin: 50px;">
+        <hr>
+        <h2 style="margin: 10px;" class="text-center">Prescription details</h2>
+        <hr>
+        {% if prescription %}
+        <table border="0" id="tb" class="m-auto" width="20%">
+
+            
+            <tr>
+                <td>Token No.: {{prescription.bid.token}}</td>
+            </tr>
+            <tr>
+                <td>Booking date: {{prescription.bid.bookingdate}}</td>
+            </tr>
+            <tr>
+                <td>Diagnosis: {{prescription.diagnosis}}</td>
+            </tr>
+            <tr>
+                <td>Prescription: <a href="/static/media/{{prescription.image}}" target="_blank" class="btn btn-primary">View Prescription</a></td>
+            </tr>
+        </table>
+        {% endif %}
+
+      
+    </div>
+</div>
+{% endblock %}
