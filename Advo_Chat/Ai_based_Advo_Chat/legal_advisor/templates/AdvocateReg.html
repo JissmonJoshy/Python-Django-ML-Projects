@@ -1,0 +1,117 @@
+{% extends 'common.html' %} 
+{% load static %}
+{% block header %}
+
+{% for i in messages %}
+<script>
+    alert("{{i}}")
+</script>
+{% endfor %}
+
+<style>
+.form-box{
+    background: #e6f0fa;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+</style>
+
+<section class="ftco-section">
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-lg-7">
+
+<form method="post" enctype="multipart/form-data" class="form-box">
+{% csrf_token %}
+
+<h3 class="text-center mb-4"><b>Advocate Registration</b></h3>
+
+<input type="text" name="name" class="form-control mb-3" placeholder="Full Name" required>
+
+<!-- EMAIL -->
+<input type="email" name="email" class="form-control mb-3"
+pattern="^[a-z0-9._%+-]+@gmail\.(com|in)$"
+title="Only gmail.com or gmail.in allowed"
+placeholder="Email (only gmail)" required>
+
+<!-- PASSWORD -->
+<input type="password" name="password" class="form-control mb-3"
+pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+title="Min 8 chars, 1 uppercase, 1 lowercase, 1 number"
+placeholder="Password" required>
+
+<!-- PHONE -->
+<input type="text" name="phone" class="form-control mb-3"
+pattern="[6789][0-9]{9}"
+title="Enter valid 10-digit Indian number"
+maxlength="10"
+placeholder="Phone Number" required>
+
+<!-- DOB -->
+<label>Date of Birth</label>
+<input type="date" name="dob" class="form-control mb-3" required>
+
+<!-- DISTRICT -->
+<select name="district" class="form-control mb-3" required>
+<option disabled selected>Select District</option>
+<option>Ernakulam</option>
+<option>Idukki</option>
+<option>Kottayam</option>
+<option>Kozhikode</option>
+<option>Thrissur</option>
+<option>Palakkad</option>
+<option>Kollam</option>
+<option>Kannur</option>
+<option>Wayanad</option>
+<option>Malappuram</option>
+<option>Alappuzha</option>
+<option>Kasargod</option>
+<option>Pathanamthitta</option>
+<option>Thiruvananthapuram</option>
+</select>
+
+<!-- EDUCATION -->
+<select name="education" class="form-control mb-3" required>
+<option disabled selected>Select Education</option>
+<option value="LLB">LLB</option>
+<option value="BA_LLB">BA LLB</option>
+<option value="BA_LLM">BA LLM</option>
+</select>
+
+<!-- CATEGORY -->
+<select name="cases" class="form-control mb-3" required>
+<option disabled selected>Select Category</option>
+{% for i in view %}
+<option value="{{i.Category}}">{{i.Category}}</option>
+{% endfor %}
+</select>
+
+<!-- GENDER -->
+<div class="mb-3">
+<label>Gender:</label><br>
+<input type="radio" name="gender" value="male" required> Male
+<input type="radio" name="gender" value="female"> Female
+<input type="radio" name="gender" value="others"> Others
+</div>
+
+<!-- FILES -->
+<label>Profile Image</label>
+<input type="file" name="image" class="form-control mb-3" required>
+
+<label>Certificates</label>
+<input type="file" name="files" class="form-control mb-3" required>
+
+<textarea name="address" class="form-control mb-3" placeholder="Address" required></textarea>
+
+<center>
+<button type="submit" class="btn btn-danger px-5">Register</button>
+</center>
+
+</form>
+</div>
+</div>
+</div>
+</section>
+
+{% endblock %}

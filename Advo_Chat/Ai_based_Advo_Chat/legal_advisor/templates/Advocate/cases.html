@@ -1,0 +1,207 @@
+{% extends 'Advocate/common.html' %}
+{% load static %}
+{% block header %}
+
+<style>
+.container-box{
+    max-width:750px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.profile-img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.label{
+    font-weight:600;
+    margin-top:10px;
+}
+
+.value-box{
+    background:#f7f7f7;
+    padding:10px;
+    border-radius:6px;
+    margin-bottom:10px;
+}
+
+button{
+    height:45px;
+}
+</style>
+
+<div class="container-box">
+
+<h3 class="text-center mb-4"><b>Case Management</b></h3>
+
+{% for i in view %}
+
+<!-- USER INFO -->
+<div class="text-center mb-3">
+    <img src="{{i.user.image.url}}" class="profile-img">
+    <h5 class="mt-2">{{i.user.name}}</h5>
+</div>
+
+<hr>
+
+<!-- ================= COMPLETED ================= -->
+{% if i.status == "Completed" %}
+
+<h5 class="text-success text-center mb-3">✅ Case Completed</h5>
+
+{% for d in i.case_details_set.all %}
+<div class="label">Fees</div>
+<div class="value-box">₹ {{d.fees}}</div>
+
+<div class="label">Description</div>
+<div class="value-box">{{d.desc}}</div>
+
+<div class="label">File</div>
+<div class="value-box">
+    <a href="{{d.file.url}}" target="_blank" class="btn btn-success btn-sm">
+        View File
+    </a>
+</div>
+{% endfor %}
+
+{% endif %}
+
+<!-- ================= FAILED ================= -->
+{% if i.status == "Failed" %}
+<h5 class="text-danger text-center">❌ Case Failed</h5>
+<p class="text-center text-muted">No further actions allowed</p>
+{% endif %}
+
+<!-- ================= ACTIVE ================= -->
+{% if i.status != "Completed" and i.status != "Failed" %}
+
+<form method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+{% csrf_token %}
+
+<label class="label">Update Status</label>
+<select name="status" id="status" class="form-control mb-3" onchange="toggleFields()" required>
+
+    <option value="Start Processing" {% if i.status == "Start Processing" %}selected{% endif %}>
+        Start Processing
+    </option>
+
+    <option value="Ongoing" {% if i.status == "Ongoing" %}selected{% endif %}>
+        Ongoing
+    </option>
+
+    <option value="Completed">Completed</option>
+    <option value="Failed">Failed</option>
+
+</select>
+
+<label class="label">Select Date</label>
+<input type="date" 
+       id="date" 
+       name="date" 
+       value="{{ i.date|date:'Y-m-d' }}" 
+       class="form-control mb-3" 
+       required>
+
+<!-- COMPLETED FIELDS -->
+<div id="completedFields" style="display:none;">
+
+<label class="label">Fees</label>
+<input type="text" id="fees" name="fees" class="form-control mb-2">
+
+<label class="label">Upload File</label>
+<input type="file" id="file" name="file" class="form-control mb-2">
+
+<label class="label">Description</label>
+<textarea id="desc" name="desc" class="form-control mb-2"></textarea>
+
+</div>
+
+<button class="btn btn-primary w-100 mt-3">Submit</button>
+
+</form>
+
+{% endif %}
+
+{% endfor %}
+
+</div>
+
+<!-- ================= JS ================= -->
+<script>
+
+// SET MIN DATE (TODAY)
+function setMinDate(){
+    let today = new Date().toISOString().split('T')[0];
+    document.getElementById("date").setAttribute("min", today);
+}
+
+// TOGGLE COMPLETED FIELDS (NO DATE OVERRIDE ❌)
+function toggleFields(){
+    let status = document.getElementById("status").value;
+    let box = document.getElementById("completedFields");
+
+    if(status === "Completed"){
+        box.style.display = "block";
+    } else {
+        box.style.display = "none";
+
+        document.getElementById("fees").value = "";
+        document.getElementById("file").value = "";
+        document.getElementById("desc").value = "";
+    }
+}
+
+// VALIDATION
+function validateForm(){
+
+    let status = document.getElementById("status").value;
+    let date = document.getElementById("date").value;
+    let today = new Date().toISOString().split('T')[0];
+
+    // DATE VALIDATION
+    if(date < today){
+        alert("Please select today or future date only");
+        return false;
+    }
+
+    // COMPLETED VALIDATION
+    if(status === "Completed"){
+
+        let fees = document.getElementById("fees").value.trim();
+        let file = document.getElementById("file").value;
+        let desc = document.getElementById("desc").value.trim();
+
+        if(fees === "" || file === "" || desc === ""){
+            alert("All fields required when case is Completed");
+            return false;
+        }
+
+        if(!/^[0-9]+$/.test(fees)){
+            alert("Fees must be numeric");
+            return false;
+        }
+
+        if(desc.length < 10){
+            alert("Description must be at least 10 characters");
+            return false;
+        }
+    }
+
+    return true;
+}
+
+// ON LOAD
+window.onload = function(){
+    setMinDate();
+    toggleFields();
+}
+
+</script>
+
+{% endblock %}

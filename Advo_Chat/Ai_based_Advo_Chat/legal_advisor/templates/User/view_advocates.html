@@ -1,0 +1,52 @@
+{% extends 'User/common.html' %}
+{% load static %}
+{% block header %}
+<br>
+<section class="ftco-section ftco-no-pt">
+    <div class="container" style="border-radius: 10px;">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+                <span class="subheading">Our Attorney</span>
+                <h2 class="mb-4">Our Legal Attorneys</h2>
+
+                
+            </div>
+        </div>
+        <div class="row no-gutters" style="border-radius: 15px;">
+            {% for i in vie %}
+            <div class="col-lg-3 col-sm-6">
+                <div class="block-2 ftco-animate">
+                    <div class="flipper" style="border-radius: 10px;">
+                        <div class="front"
+                            style="background-image: url(/static/images/media/{{i.image}});border-radius: 15px;">
+                            <div class="box">
+                                <h2>{{i.name}}</h2>
+                                <p class="">{{i.category}}</p>
+                            </div>
+                        </div>
+                        <div class="back" style="border-radius: 15px;">
+                            <!-- back content -->
+                            <blockquote>
+                                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is
+                                    an almost unorthographic life One day however a small line of blind text &rdquo;
+                                </p>
+                            </blockquote>
+                            <div class="author d-flex">
+                                <div class="image align-self-center">
+                                    <img src="{% static 'images/media/profile/{{i.image}}' %}" alt="">
+                                </div>
+                                <div class="name align-self-center ml-3">{{i.name}} <span
+                                        class="position">{{i.category}}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

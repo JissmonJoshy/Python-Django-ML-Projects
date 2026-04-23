@@ -1,0 +1,83 @@
+{% extends 'Admins/common.html' %}
+{% load static %}
+{% block header %}
+{% for i in messages %}
+<script>
+    alert("{{i}}")
+</script>
+{% endfor %}
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary">Pending Advocate Change Requests</h2><br>
+<div class="table-responsive mb-5">
+    <table class="table table-bordered table-striped text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>No</th>
+                <th>User</th>
+                <th>Case Name</th>
+                <th>Date</th>
+                <th>Current Advocate</th>
+                <th>Requested Advocate</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for case in pending_requests %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ case.user.name }}</td>
+                <td>{{ case.sub }}</td>
+                <td>{{ case.date }}</td>
+                <td>{{ case.advocate.name }}</td>
+                <td>{{ case.requested_advocate.name }}</td>
+                <td><span class="badge bg-warning text-dark">{{ case.request }}</span></td>
+                <td>
+                    <a href="/approve_advocate_change/{{ case.id }}" class="btn btn-success btn-sm">Approve</a>
+                    <a href="/reject_advocate_change/{{ case.id }}" class="btn btn-danger btn-sm">Reject</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="8" class="text-muted">No pending requests found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+<h2 class="text-center text-success">Approved Advocate Change Requests</h2><br>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped text-center">
+        <thead class="table-success">
+            <tr>
+                <th>No</th>
+                <th>User</th>
+                <th>Case Name</th>
+                <th>Date</th>
+                <th>Current Advocate</th>
+                {% comment %} <th>Requested Advocate</th> {% endcomment %}
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for case in approved_requests %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ case.user.name }}</td>
+                <td>{{ case.sub }}</td>
+                <td>{{ case.date }}</td>
+                <td>{{ case.advocate.name }}</td>
+                {% comment %} <td>{{ case.requested_advocate.name }}</td> {% endcomment %}
+                <td><span class="badge bg-success">{{ case.request }}</span></td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="7" class="text-muted">No approved requests found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</div>
+
+{% endblock %}

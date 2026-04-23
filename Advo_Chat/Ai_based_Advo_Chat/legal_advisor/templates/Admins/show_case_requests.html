@@ -1,0 +1,159 @@
+{% extends 'Admins/common.html' %}
+{% load static %}
+
+{% block header %}
+
+{% for i in messages %}
+<script>
+    alert("{{ i }}")
+</script>
+{% endfor %}
+
+<style>
+.container-box{
+    max-width:1200px;
+    margin:30px auto;
+}
+
+/* Card */
+.card-box{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Table */
+.table th, .table td{
+    vertical-align:middle;
+    font-size:14px;
+}
+
+/* Description */
+.short-desc{
+    cursor:pointer;
+    color:blue;
+}
+
+.full-desc{
+    display:none;
+}
+
+/* Badges */
+.badge{
+    padding:6px 10px;
+    font-size:12px;
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .table{
+        font-size:12px;
+    }
+}
+</style>
+
+<div class="container-box">
+    <div class="card-box">
+        <h3 class="text-center mb-4">Case Requests</h3>
+
+        <div class="table-responsive">
+            <table class="table table-bordered text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>No</th>
+                        <th>User</th>
+                        <th>Advocate</th>
+                        <th>Subject</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Request</th>
+                        <th>Case</th>
+                        <th>Payment</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for case in case_requests %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ case.user.name }}</td>
+                        <td>{{ case.advocate.name }}</td>
+                        <td>{{ case.sub }}</td>
+
+                        <!-- Description Toggle -->
+                        <td>
+                            <span class="short-desc" onclick="toggleDesc({{ case.id }})">
+                                {{ case.desc|truncatewords:10 }}
+                            </span>
+                            <div id="desc{{ case.id }}" class="full-desc mt-2">
+                                {{ case.desc }}
+                            </div>
+                        </td>
+
+                        <td>{{ case.date }}</td>
+
+                        <!-- Request Status -->
+                        <td>
+                            <span class="badge 
+                                {% if case.request == 'pending' %}bg-warning
+                                {% elif case.request == 'approved' %}bg-success
+                                {% else %}bg-danger
+                                {% endif %}">
+                                {{ case.request }}
+                            </span>
+                        </td>
+
+                        <!-- Case Status -->
+                        <td>
+                            <span class="badge 
+                                {% if case.status == 'Not_Updated' %}bg-secondary
+                                {% elif case.status == 'In Progress' %}bg-primary
+                                {% else %}bg-success
+                                {% endif %}">
+                                {{ case.status }}
+                            </span>
+                        </td>
+
+                        <!-- Payment Details -->
+                        <td>
+                            {% with details=case.case_details_set.first %}
+                                {% if details %}
+                                    ₹{{ details.fees }} <br>
+                                    <span class="badge 
+                                        {% if details.status == 'Paid' %}bg-success
+                                        {% else %}bg-danger
+                                        {% endif %}">
+                                        {{ details.status }}
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-secondary">No Details</span>
+                                {% endif %}
+                            {% endwith %}
+                        </td>
+
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="9">No Case Requests</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleDesc(id){
+    let x = document.getElementById("desc"+id);
+    if(x.style.display === "none" || x.style.display === ""){
+        x.style.display = "block";
+    }else{
+        x.style.display = "none";
+    }
+}
+</script>
+
+{% endblock %}

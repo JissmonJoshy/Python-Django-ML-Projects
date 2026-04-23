@@ -1,0 +1,226 @@
+{% extends 'User/common.html' %}
+{% block header %}
+
+<style>
+body{
+    background:#f4f7fb;
+}
+
+.payment-box{
+    max-width:700px;
+    margin:50px auto;
+    background:#fff;
+    border-radius:12px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.1);
+    padding:30px;
+}
+
+h3{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.form-control{
+    height:45px;
+    border-radius:8px;
+    margin-bottom:10px;
+}
+
+.pay-btn{
+    height:50px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.error{
+    color:red;
+    font-size:12px;
+}
+
+.hidden{
+    display:none;
+}
+</style>
+
+<div class="payment-box">
+
+<h3>Payment - ₹{{amount}}</h3>
+
+<form method="post" onsubmit="return validateForm()">
+{% csrf_token %}
+
+<!-- PAYMENT METHOD -->
+<label>Select Payment Method</label>
+<select id="method" class="form-control" onchange="togglePayment()">
+    <option value="card">Card</option>
+    <option value="upi">UPI</option>
+</select>
+
+<!-- ================= CARD ================= -->
+<div id="cardSection">
+
+<label>Card Number</label>
+<input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456" oninput="formatCard();validateCard()">
+<div id="cardError" class="error"></div>
+
+<label>Card Holder Name</label>
+<input type="text" id="holder" class="form-control" placeholder="Card Holder Name">
+
+<div class="row">
+<div class="col-md-6">
+<label>Expiry</label>
+<input type="text" id="expiry" class="form-control" placeholder="MM/YY" oninput="formatExpiry();validateExpiry()">
+<div id="expiryError" class="error"></div>
+</div>
+
+<div class="col-md-6">
+<label>CVV</label>
+<input type="password" id="cvv" class="form-control" placeholder="123" oninput="validateCVV()">
+<div id="cvvError" class="error"></div>
+</div>
+</div>
+
+</div>
+
+<!-- ================= UPI ================= -->
+<div id="upiSection" class="hidden">
+
+<label>UPI ID</label>
+<input type="text" id="upi" class="form-control" placeholder="example@upi" oninput="validateUPI()">
+<div id="upiError" class="error"></div>
+
+<label>UPI App</label>
+<select id="upiApp" class="form-control">
+    <option value="">Select App</option>
+    <option>Google Pay</option>
+    <option>PhonePe</option>
+    <option>Paytm</option>
+    <option>BHIM</option>
+</select>
+
+</div>
+
+<button type="submit" class="btn btn-primary pay-btn w-100 mt-3">
+Pay ₹{{amount}}
+</button>
+
+</form>
+</div>
+
+<script>
+
+// SWITCH PAYMENT METHOD
+function togglePayment(){
+    let method = document.getElementById("method").value;
+
+    if(method === "card"){
+        document.getElementById("cardSection").style.display = "block";
+        document.getElementById("upiSection").style.display = "none";
+    } else {
+        document.getElementById("cardSection").style.display = "none";
+        document.getElementById("upiSection").style.display = "block";
+    }
+}
+
+// FORMAT CARD
+function formatCard(){
+    let input = document.getElementById("cardNumber");
+    let value = input.value.replace(/\D/g,'').substring(0,16);
+    let formatted = value.match(/.{1,4}/g);
+    input.value = formatted ? formatted.join(" ") : value;
+}
+
+// VALIDATE CARD
+function validateCard(){
+    let card = document.getElementById("cardNumber").value.replace(/\s/g,'');
+    let error = document.getElementById("cardError");
+
+    if(card.length !== 16){
+        error.innerHTML = "Card must be 16 digits";
+        return false;
+    }
+    error.innerHTML = "";
+    return true;
+}
+
+// FORMAT EXPIRY
+function formatExpiry(){
+    let input = document.getElementById("expiry");
+    let value = input.value.replace(/\D/g,'').substring(0,4);
+
+    if(value.length >= 3){
+        input.value = value.substring(0,2) + '/' + value.substring(2);
+    } else {
+        input.value = value;
+    }
+}
+
+// VALIDATE EXPIRY
+function validateExpiry(){
+    let expiry = document.getElementById("expiry").value;
+    let error = document.getElementById("expiryError");
+
+    if(!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)){
+        error.innerHTML = "Invalid format MM/YY";
+        return false;
+    }
+
+    let parts = expiry.split('/');
+    let month = parseInt(parts[0]);
+    let year = parseInt("20" + parts[1]);
+
+    let today = new Date();
+    let currentMonth = today.getMonth() + 1;
+    let currentYear = today.getFullYear();
+
+    if(year < currentYear || (year === currentYear && month < currentMonth)){
+        error.innerHTML = "Card expired";
+        return false;
+    }
+
+    error.innerHTML = "";
+    return true;
+}
+
+// VALIDATE CVV
+function validateCVV(){
+    let cvv = document.getElementById("cvv").value;
+    let error = document.getElementById("cvvError");
+
+    if(!/^[0-9]{3}$/.test(cvv)){
+        error.innerHTML = "CVV must be 3 digits";
+        return false;
+    }
+    error.innerHTML = "";
+    return true;
+}
+
+// VALIDATE UPI
+function validateUPI(){
+    let upi = document.getElementById("upi").value;
+    let error = document.getElementById("upiError");
+
+    let pattern = /^[\w.-]+@[\w.-]+$/;
+
+    if(!pattern.test(upi)){
+        error.innerHTML = "Invalid UPI ID";
+        return false;
+    }
+    error.innerHTML = "";
+    return true;
+}
+
+// FINAL VALIDATION
+function validateForm(){
+    let method = document.getElementById("method").value;
+
+    if(method === "card"){
+        return validateCard() && validateExpiry() && validateCVV();
+    } else {
+        return validateUPI();
+    }
+}
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,162 @@
+{% extends 'Admins/common.html' %}
+{% block header %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+.chart-box {
+    position: relative;
+    height: 350px;
+    width: 100%;
+}
+
+.card-hover:hover {
+    transform: scale(1.03);
+    transition: 0.3s;
+}
+</style>
+
+<div class="container mt-4">
+
+    <h2 class="text-center text-primary mb-4">Admin Dashboard</h2>
+
+    <!-- 🔷 TOP CARDS -->
+    <div class="row g-3 text-center">
+
+        <div class="col-md-3 col-sm-6">
+            <div class="card card-hover shadow bg-primary text-white p-3">
+                <h6>Total Users</h6>
+                <h3>{{ total_users }}</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="card card-hover shadow bg-success text-white p-3">
+                <h6>Total Advocates</h6>
+                <h3>{{ total_advocates }}</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="card card-hover shadow bg-warning text-dark p-3">
+                <h6>Total Cases</h6>
+                <h3>{{ total_cases }}</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="card card-hover shadow bg-danger text-white p-3">
+                <h6>IPC Sections</h6>
+                <h3>{{ total_ipc }}</h3>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 🔷 STATUS CARDS -->
+    <div class="row g-3 text-center mt-3">
+
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="card shadow bg-info text-white p-2">Ongoing<br><b>{{ ongoing }}</b></div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="card shadow bg-success text-white p-2">Completed<br><b>{{ completed }}</b></div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="card shadow bg-secondary text-white p-2">Not Updated<br><b>{{ not_updated }}</b></div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="card shadow bg-danger text-white p-2">Failed<br><b>{{ failed }}</b></div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="card shadow bg-warning text-dark p-2">Processing<br><b>{{ processing }}</b></div>
+        </div>
+
+    </div>
+
+    <!-- 🔷 CHARTS SECTION -->
+    <div class="row mt-5 g-4">
+
+        <!-- PIE CHART -->
+        <div class="col-lg-5 col-md-12">
+            <div class="card shadow p-3">
+                <h5 class="text-center mb-3">Case Status</h5>
+                <div class="chart-box">
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- BAR CHART -->
+        <div class="col-lg-7 col-md-12">
+            <div class="card shadow p-3">
+                <h5 class="text-center mb-3">Cases per Advocate</h5>
+                <div class="chart-box">
+                    <canvas id="barChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+// 🔷 PIE CHART (FIXED SIZE + PERFECT SHAPE)
+new Chart(document.getElementById('pieChart'), {
+    type: 'pie',
+    data: {
+        labels: ['Ongoing', 'Completed', 'Not Updated', 'Failed', 'Processing'],
+        datasets: [{
+            data: [
+                {{ ongoing }},
+                {{ completed }},
+                {{ not_updated }},
+                {{ failed }},
+                {{ processing }}
+            ],
+            backgroundColor: [
+                '#17a2b8',
+                '#28a745',
+                '#6c757d',
+                '#dc3545',
+                '#ffc107'
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
+
+// 🔷 BAR CHART
+new Chart(document.getElementById('barChart'), {
+    type: 'bar',
+    data: {
+        labels: {{ advocate_names|safe }},
+        datasets: [{
+            label: 'Cases',
+            data: {{ advocate_counts|safe }},
+            backgroundColor: '#007bff'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+</script>
+<br><br>
+{% endblock %}
