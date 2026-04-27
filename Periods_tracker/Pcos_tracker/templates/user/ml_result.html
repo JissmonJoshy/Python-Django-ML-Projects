@@ -1,0 +1,18 @@
+{% extends 'user/common.html' %}
+{% block content %}
+
+<div style="max-width:500px;margin:auto;padding:25px;background:#fff;border-radius:10px;text-align:center;box-shadow:0 0 10px #ccc">
+
+    <h2 style="color:#d63384;">ML Period Analysis</h2>
+
+    <p><strong>Predicted Reason:</strong> {{ reason }}</p>
+    <p><strong>Next Expected Period:</strong> {{ next_period }}</p>
+    <p><strong>PCOS Risk:</strong> {{ pcos }}</p>
+
+    <p style="font-size:12px;color:gray;margin-top:15px">
+        *This is a supportive ML prediction, not a medical diagnosis.
+    </p>
+
+</div>
+
+{% endblock %}

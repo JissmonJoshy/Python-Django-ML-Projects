@@ -1,0 +1,49 @@
+{% extends 'user/common.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2 class="mb-0">User Profile</h2>
+                </div>
+                <div class="card-body text-center">
+                    <img src="/static/media/{{profile.image}}" alt="Profile Image" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #ddd;">
+                    
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p><strong>Name:</strong> {{profile.name}}</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p><strong>Age:</strong> {{profile.age}}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p><strong>Email:</strong> {{profile.email}}</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p><strong>Phone:</strong> {{profile.phone}}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p><strong>Weight:</strong> {{profile.weight}} kg</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p><strong>Height:</strong> {{profile.height}} cm</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="/update_profile" class="btn btn-primary">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

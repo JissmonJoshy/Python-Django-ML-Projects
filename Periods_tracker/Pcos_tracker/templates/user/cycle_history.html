@@ -1,0 +1,67 @@
+{% extends 'user/common.html' %}
+{% block content %}
+
+<section class="section-padding">
+    <div class="container">
+        <div class="card cycle-card">
+            <div class="card-header d-flex justify-content-between align-items-start">
+                <div>
+                    <h2 class="mb-1">Cycle History</h2>
+                    <p class="small text-muted mb-0">A concise history of your recorded cycles. Dates are shown as Month Day, Year.</p>
+                </div>
+                <div class="meta text-muted text-right">
+                    <div>Records: <strong>{{ periods|length }}</strong></div>
+                    <div class="mt-2"><a href="/add_period" class="boxed-btn small">Add period</a></div>
+                </div>
+            </div>
+            <div class="card-body">
+                {% if periods %}
+                <div class="table-responsive">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Flow</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for p in periods %}
+                            <tr>
+                                <td>{{ p.start_date|date:"M d, Y" }}</td>
+                                <td>{{ p.end_date|date:"M d, Y" }}</td>
+                                <td><span class="badge">{{ p.flow }}</span></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="empty-state">
+                    <p class="mb-3">No records found — start tracking your cycles to see history here.</p>
+                    <a href="/add_period" class="boxed-btn">Add your first period</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Scoped styles for cycle_history */
+.cycle-card { background:#fff;border-radius:8px;padding:0;box-shadow:0 6px 18px rgba(0,0,0,0.06);overflow:hidden;border:1px solid #e9e9e9;}
+.card-header{padding:20px;background:#fafafa;border-bottom:1px solid #f1f1f1;}
+.card-body{padding:20px}
+.styled-table{width:100%;border-collapse:collapse;font-size:0.95rem}
+.styled-table thead th{background:#fbfbfb;color:#333;text-align:left;padding:12px;border-bottom:1px solid #ececec;font-weight:600}
+.styled-table tbody tr{border-bottom:1px solid #f3f3f3}
+.styled-table tbody tr:nth-child(even){background:#fcfcfc}
+.styled-table td{padding:12px;vertical-align:middle}
+.badge{display:inline-block;padding:.35em .65em;border-radius:999px;background:#6c757d;color:#fff;font-size:.85em}
+.empty-state{padding:28px;text-align:center;color:#666}
+.empty-state .boxed-btn{margin-top:12px}
+.boxed-btn.small{padding:6px 10px;font-size:.85rem}
+@media (max-width:576px){ .card-header h2{font-size:1.25rem} .meta{text-align:left;margin-top:12px} }
+</style>
+
+{% endblock %}

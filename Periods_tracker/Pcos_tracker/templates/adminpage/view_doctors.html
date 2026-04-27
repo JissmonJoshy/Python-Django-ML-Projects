@@ -1,0 +1,77 @@
+{% extends 'adminpage/common.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="mb-4 text-center">Our Doctors</h2>
+
+<div class="row">
+
+{% for doctor in doctors %}
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow-sm h-100">
+
+{% if doctor.image %}
+<img src="/static/assets/{{ doctor.image }}" class="card-img-top" 
+style="height:250px; object-fit:cover;">
+{% else %}
+<img src="{% static 'images/default-doctor.jpg' %}" class="card-img-top"
+style="height:250px; object-fit:cover;">
+{% endif %}
+
+<div class="card-body">
+
+<h5 class="card-title">{{ doctor.name }}</h5>
+
+<p><strong>Specialization:</strong> {{ doctor.specialization|default:"N/A" }}</p>
+
+<p><strong>Qualification:</strong> {{ doctor.qualification }}</p>
+
+<p><strong>Experience:</strong> {{ doctor.experience }}</p>
+
+<p><strong>Address:</strong> {{ doctor.address }}</p>
+
+<p><strong>Phone:</strong> {{ doctor.phone }}</p>
+
+<p><strong>Email:</strong> {{ doctor.email }}</p>
+
+<p><strong>License Number:</strong> {{ doctor.license_number }}</p>
+
+{% if doctor.license_document %}
+<a href="/static/assets/{{doctor.license_document}}" target="_blank" class="btn btn-info btn-sm">
+View License
+</a>
+{% endif %}
+
+<hr>
+
+<a href="/update_doctor/{{doctor.id}}" class="btn btn-success btn-sm">
+Update
+</a>
+
+<a href="/delete_doctor/{{doctor.id}}"
+class="btn btn-danger btn-sm"
+onclick="return confirm('Are you sure you want to delete this doctor?')">
+Delete
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<p class="text-center">No doctors found.</p>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}

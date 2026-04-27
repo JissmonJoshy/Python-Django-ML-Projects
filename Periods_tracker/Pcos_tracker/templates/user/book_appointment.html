@@ -1,0 +1,270 @@
+{% extends 'user/common.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+/* SAME CSS YOU PROVIDED (NO CHANGE) */
+.appointment-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 80px 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.appointment-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.appointment-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+.appointment-header {
+    background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+    color:white;
+    padding:50px 40px;
+    text-align:center;
+}
+
+.appointment-header h2{
+    font-size:32px;
+    font-weight:700;
+}
+
+.doctor-badge{
+    display:inline-block;
+    background:rgba(255,255,255,0.2);
+    padding:12px 25px;
+    border-radius:25px;
+}
+
+.doctor-name{
+    color:#ffd700;
+    font-weight:700;
+}
+
+.appointment-body{
+    padding:50px 40px;
+}
+
+.form-group{
+    margin-bottom:25px;
+}
+
+.form-group label{
+    font-weight:700;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    width:100%;
+    padding:14px;
+    border:2px solid #e8e8e8;
+    border-radius:10px;
+}
+
+.form-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.btn-submit{
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    color:white;
+    padding:16px;
+    border:none;
+    border-radius:10px;
+}
+
+.btn-cancel{
+    border:2px solid #667eea;
+    background:white;
+    padding:16px;
+    border-radius:10px;
+}
+
+.error-message{
+    color:red;
+    font-size:13px;
+    display:none;
+}
+
+.error-message.show{
+    display:block;
+}
+</style>
+
+<div class="appointment-section">
+<div class="appointment-container">
+<div class="appointment-card">
+
+<div class="appointment-header">
+<h2>Book Your Appointment</h2>
+
+<div class="doctor-badge">
+<i class="fas fa-user-md"></i>
+Dr. <span class="doctor-name">{{ doctor.name }}</span>
+</div>
+
+</div>
+
+<div class="appointment-body">
+
+<form method="POST" enctype="multipart/form-data" id="appointmentForm">
+{% csrf_token %}
+
+<!-- DATE & TIME -->
+
+<div class="form-row">
+
+<div class="form-group">
+<label>Preferred Date</label>
+<input type="date" name="date" id="date" required min="{% now 'Y-m-d' %}">
+<div class="error-message" id="dateError"></div>
+</div>
+
+<div class="form-group">
+<label>Preferred Time</label>
+<input type="time" name="time" id="time" required>
+<div class="error-message" id="timeError"></div>
+</div>
+
+</div>
+
+<!-- REASON -->
+
+<div class="form-group">
+<label>Reason for Visit</label>
+
+<select name="visit_reason" id="reason" required>
+<option value="">Select reason</option>
+<option value="General Consultation">General Consultation</option>
+<option value="Follow-up Visit">Follow-up Visit</option>
+<option value="PCOS Management">PCOS Management</option>
+<option value="Medication Review">Medication Review</option>
+<option value="Test Results">Test Results</option>
+<option value="Other">Other</option>
+</select>
+
+<div class="error-message" id="reasonError"></div>
+
+</div>
+
+<!-- NOTES -->
+
+<div class="form-group">
+
+<label>Symptoms / Notes</label>
+
+<textarea
+name="notes"
+id="notes"
+placeholder="Describe your symptoms..."
+required></textarea>
+
+<div class="error-message" id="notesError"></div>
+
+</div>
+
+<!-- MEDICAL REPORT -->
+
+<div class="form-group">
+
+<label>Upload Medical Report</label>
+
+<input
+type="file"
+name="report_file"
+accept=".pdf,.jpg,.png">
+
+<small>Upload previous medical reports (optional)</small>
+
+</div>
+
+<!-- PHONE -->
+
+<div class="form-group">
+
+<label>Contact Phone</label>
+
+<input
+type="tel"
+name="phone"
+placeholder="Enter phone number">
+
+</div>
+
+<!-- BUTTONS -->
+
+<div class="form-actions">
+
+<button type="submit" class="btn-submit">
+Confirm Appointment
+</button>
+
+<button type="button" class="btn-cancel" onclick="history.back()">
+Go Back
+</button>
+
+</div>
+
+</form>
+
+</div>
+</div>
+</div>
+</div>
+
+<script>
+
+document.getElementById('appointmentForm').addEventListener('submit',function(e){
+
+let valid=true;
+
+let date=document.getElementById('date').value;
+let time=document.getElementById('time').value;
+let reason=document.getElementById('reason').value;
+let notes=document.getElementById('notes').value;
+
+if(!date){
+document.getElementById('dateError').innerText="Select date";
+document.getElementById('dateError').classList.add('show');
+valid=false;
+}
+
+if(!time){
+document.getElementById('timeError').innerText="Select time";
+document.getElementById('timeError').classList.add('show');
+valid=false;
+}
+
+if(!reason){
+document.getElementById('reasonError').innerText="Select reason";
+document.getElementById('reasonError').classList.add('show');
+valid=false;
+}
+
+if(notes.length<10){
+document.getElementById('notesError').innerText="Minimum 10 characters";
+document.getElementById('notesError').classList.add('show');
+valid=false;
+}
+
+if(!valid){
+e.preventDefault();
+}
+
+});
+
+</script>
+
+{% endblock %}

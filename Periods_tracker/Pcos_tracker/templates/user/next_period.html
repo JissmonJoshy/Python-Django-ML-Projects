@@ -1,0 +1,62 @@
+{% extends 'user/common.html' %}
+{% block content %}
+
+<style>
+.tracker-box{
+    max-width:500px;
+    margin:40px auto;
+    padding:25px;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 0 12px #ddd;
+    text-align:center;
+}
+.tracker-box h2{
+    color:#d63384;
+    margin-bottom:20px;
+}
+.highlight{
+    font-size:22px;
+    font-weight:bold;
+    color:#b02a6f;
+}
+.info{
+    margin-top:15px;
+    font-size:15px;
+}
+</style>
+
+<div class="tracker-box">
+    <h2>Next Period Tracker</h2>
+    {% if status %}
+<p style="color:red;">{{ status }}</p>
+{% endif %}
+
+
+    {% if next_period %}
+        <p class="info"><strong>Last Period:</strong> {{ last_period }}</p>
+        <p class="info"><strong>Cycle Length:</strong> {{ profile.cycle_length }} days</p>
+
+        <p class="highlight">
+            Next Expected Period: <br>{{ next_period }}
+        </p>
+
+        {% if days_left >= 0 %}
+            <p class="info">⏳ Expected in {{ days_left }} days</p>
+        {% else %}
+            <p class="info">⚠ Period date passed. Please update your period log.</p>
+        {% endif %}
+    {% else %}
+        <p>No period data found.</p>
+        <p>Please add your period log first.</p>
+    {% endif %}
+    <form method="get" action="{% url 'ml_period_analysis' %}">
+    <button type="submit"
+        style="padding:10px 20px;background:#d63384;color:white;border:none;border-radius:6px;">
+        Period Not Arrived – Analyze with ML
+    </button>
+</form>
+
+</div>
+
+{% endblock %}

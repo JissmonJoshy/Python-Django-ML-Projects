@@ -1,0 +1,99 @@
+{% extends 'common.html' %}
+{% block content %}
+
+<style>
+    .register-container {
+        max-width: 520px;
+        margin: 40px auto;
+        padding: 30px;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .register-container h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #d63384;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #444;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #d63384;
+        box-shadow: 0 0 5px rgba(214, 51, 132, 0.3);
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 15px;
+        font-weight: 600;
+        color: #444;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 12px;
+        background-color: #d63384;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-submit:hover {
+        background-color: #b02a6f;
+    }
+</style>
+
+<div class="register-container">
+    <h2>Login</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        
+           
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+     
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Create password" required>
+        </div>
+
+       
+
+        <button type="submit" class="btn-submit">Login</button>
+    </form>
+</div>
+
+{% endblock %}

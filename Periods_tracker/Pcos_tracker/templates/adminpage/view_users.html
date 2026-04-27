@@ -1,0 +1,58 @@
+{% extends 'adminpage/common.html' %}
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="text-center mb-4">Registered Users</h2>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Name</th>
+<th>Age</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+{% for u in users %}
+
+<tr>
+
+<td>{{u.name}}</td>
+<td>{{u.age}}</td>
+<td>{{u.email}}</td>
+<td>{{u.phone}}</td>
+
+<td>
+{% if u.user.is_active %}
+<span class="text-success">Approved</span>
+{% else %}
+<span class="text-danger">Rejected</span>
+{% endif %}
+</td>
+
+<td>
+{% if u.user.is_active %}
+<a href="/reject_user/{{u.user.id}}" class="btn btn-danger btn-sm">
+Reject
+</a>
+
+{% else %}
+<a href="/approve_user/{{u.user.id}}" class="btn btn-success btn-sm">
+Approve
+</a>
+
+{% endif %}
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}

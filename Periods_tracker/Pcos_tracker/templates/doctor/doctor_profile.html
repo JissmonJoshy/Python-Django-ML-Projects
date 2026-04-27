@@ -1,0 +1,57 @@
+{% extends 'doctor/common.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="text-center mb-4">Doctor Profile</h2>
+
+<div class="card shadow p-4">
+
+<div class="row">
+
+<div class="col-md-4 text-center">
+
+{% if doctor.image %}
+<img src="/static/assets/{{doctor.image}}" width="200" height="200">
+{% else %}
+<img src="{% static 'images/default-doctor.jpg' %}" width="200">
+{% endif %}
+
+</div>
+
+<div class="col-md-8">
+
+<p><b>Name:</b> {{doctor.name}}</p>
+
+<p><b>Specialization:</b> {{doctor.specialization}}</p>
+
+<p><b>Qualification:</b> {{doctor.qualification}}</p>
+
+<p><b>Experience:</b> {{doctor.experience}}</p>
+
+<p><b>Email:</b> {{doctor.email}}</p>
+
+<p><b>Phone:</b> {{doctor.phone}}</p>
+
+<p><b>Address:</b> {{doctor.address}}</p>
+
+<p><b>License Number:</b> {{doctor.license_number}}</p>
+
+{% if doctor.license_document %}
+<p>
+<b>License Document:</b>
+<a href="{{doctor.license_document.url}}" target="_blank">View</a>
+</p>
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

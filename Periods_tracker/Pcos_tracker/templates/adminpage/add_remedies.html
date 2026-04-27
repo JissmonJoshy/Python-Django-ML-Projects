@@ -1,0 +1,67 @@
+{% extends 'adminpage/common.html' %}
+{% block content %}
+
+<style>
+.form-box{
+    max-width:500px;
+    margin:40px auto;
+    padding:25px;
+    background:#fff;
+    border-radius:8px;
+    box-shadow:0 0 10px #ccc;
+}
+.form-box h2{
+    text-align:center;
+    color:#d63384;
+    margin-bottom:20px;
+}
+.form-box label{
+    font-weight:600;
+}
+.form-box input,
+.form-box textarea,
+.form-box select{
+    width:100%;
+    padding:10px;
+    margin-bottom:15px;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+.form-box button{
+    width:100%;
+    padding:12px;
+    background:#d63384;
+    color:#fff;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+}
+.form-box button:hover{
+    background:#b02a6f;
+}
+</style>
+
+<div class="form-box">
+    <h2>Add Diet / Remedy</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Title</label>
+        <input type="text" name="title" required>
+
+        <label>Description</label>
+        <textarea name="description" rows="4" required></textarea>
+
+        <label>Category</label>
+        <select name="category" required>
+            <option value="">-- Select --</option>
+            <option value="Diet">Diet</option>
+            <option value="Remedy">Remedy</option>
+        </select>
+
+        <button type="submit">Add</button>
+    </form>
+</div>
+
+{% endblock %}

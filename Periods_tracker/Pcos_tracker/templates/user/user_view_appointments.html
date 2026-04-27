@@ -1,0 +1,69 @@
+{% extends 'user/common.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">My Doctor Appointments</h2>
+
+    {% if appointments %}
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Doctor Name</th>
+                        <th>Specialization</th>
+                        <th>Appointment Date</th>
+                        <th>Time</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                        <th>Booked On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in appointments %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>
+                            {% if a.doctor.image %}
+                                <img src="/static/assets/{{ a.doctor.image }}" width="40" height="40" class="rounded-circle">
+                            {% endif %}
+                            Dr. {{ a.doctor.name }}
+                        </td>
+                        <td>{{ a.doctor.specialization }}</td>
+                        <td>{{ a.appointment_date }}</td>
+                        <td>{{ a.appointment_time }}</td>
+                        <td>{{ a.reason }}</td>
+                        <td>
+                            {% if a.status == "Pending" %}
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            {% elif a.status == "Approved" %}
+                                <span class="badge bg-success">Approved</span>
+                            {% elif a.status == "Rejected" %}
+                                <span class="badge bg-danger">Rejected</span>
+                            {% else %}
+                                <span class="badge bg-secondary">{{ a.status }}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ a.created_at|date:"d M Y" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="alert alert-info text-center">
+        No appointments booked yet.
+    </div>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="/user_view_doctors" class="btn btn-primary">
+            Book New Appointment
+        </a>
+    </div>
+</div>
+
+{% endblock %}

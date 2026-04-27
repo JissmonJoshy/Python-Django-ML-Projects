@@ -1,0 +1,90 @@
+{% extends 'user/common.html' %}
+{% block content %}
+
+<section class="section-padding">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-12 text-center">
+        <h2 class="section-title">PCOS Friendly Diet & Home Remedies</h2>
+        <p class="lead text-muted">Practical, doctor-reviewed tips to help manage symptoms. Browse diet suggestions and gentle home remedies to support your well-being.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6 mb-4">
+        <h3 class="mb-3">PCOS Friendly Diet</h3>
+
+        {% if diet %}
+          <div class="row">
+            {% for d in diet %}
+              <div class="col-md-12 mb-3">
+                <div class="card shadow-sm alt">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div>
+                        <h5 class="card-title mb-1">{{ d.title }}</h5>
+                        <p class="card-text text-muted">{{ d.description|linebreaksbr }}</p>
+                      </div>
+                      <div class="text-right">
+                        <a href="#" class="boxed-btn btn-sm">Read</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="alert alert-warning">No diet tips available.</div>
+        {% endif %}
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <h3 class="mb-3">Home Remedies</h3>
+
+        {% if remedies %}
+          <div class="row">
+            {% for r in remedies %}
+              <div class="col-md-12 mb-3">
+                <div class="card shadow-sm alt">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div>
+                        <h5 class="card-title mb-1">{{ r.title }}</h5>
+                        <p class="card-text text-muted">{{ r.description|linebreaksbr }}</p>
+                      </div>
+                      <div class="text-right">
+                        <a href="#" class="boxed-btn btn-sm">Read</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="alert alert-warning">No remedies available.</div>
+        {% endif %}
+
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-12 text-center">
+        <small class="text-muted">Consult with a healthcare professional before trying new diets or remedies. These tips are informational only.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.section-title { font-weight:700; margin-bottom:0.25rem; }
+.card.alt { border-left: 4px solid #ff8fb1; }
+.card .card-title { font-size:1.05rem; margin-bottom:0.3rem; }
+.lead { font-size:1rem; color:#6c757d; margin-bottom:1rem; }
+.boxed-btn { background:#ff8fb1;color:#fff;padding:6px 10px;border-radius:20px;text-decoration:none;display:inline-block; }
+.boxed-btn:hover { opacity:0.9; }
+.alert { border-radius:6px; }
+</style>
+
+{% endblock %}

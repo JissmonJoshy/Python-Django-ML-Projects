@@ -1,0 +1,72 @@
+{% extends 'adminpage/common.html' %}
+{% load static %}
+{% block content %}
+<style>
+  .update-doctor-card { max-width: 700px; margin: 0 auto; background: #fff; border: 1px solid #ddd; padding: 26px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .update-doctor-card h2 { margin-bottom: 20px; font-size: 1.9rem; color: #2f4f4f; text-align: center; }
+  .update-doctor-form .form-group { margin-bottom: 14px; }
+  .update-doctor-form label { display: block; margin-bottom: 6px; font-weight: 600; color: #333; }
+  .update-doctor-form input[type="text"], .update-doctor-form input[type="email"], .update-doctor-form input[type="file"] { width: 100%; padding: 10px 12px; border: 1px solid #c1c1c1; border-radius: 6px; font-size: 0.97rem; }
+  .update-doctor-form img { display: block; margin-top: 8px; border: 1px solid #ccc; border-radius: 6px; }
+  .update-doctor-form .btn-primary { margin-top: 16px; width: 100%; text-align: center; background-color: #3178c6; color: white; border: none; padding: 12px 16px; border-radius: 6px; font-size: 1.05rem; cursor: pointer; }
+  .update-doctor-form .btn-primary:hover { background-color: #225a99; }
+</style>
+
+<div class="update-doctor-card">
+  <h2>Update Doctor</h2>
+
+  <form class="update-doctor-form" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="id_name">Name</label>
+      <input id="id_name" type="text" name="name" value="{{doctor.name}}" required>
+    </div>
+    <div class="form-group">
+      <label for="id_address">Address</label>
+      <input id="id_address" type="text" name="address" value="{{doctor.address}}" required>
+    </div>
+    <div class="form-group">
+      <label for="id_phone">Phone</label>
+      <input id="id_phone" type="text" name="phone" value="{{doctor.phone}}" required>
+    </div>
+    <div class="form-group">
+      <label for="id_email">Email</label>
+      <input id="id_email" type="email" name="email" value="{{doctor.email}}" required>
+    </div>
+    <div class="form-group">
+      <label for="id_qualification">Qualification</label>
+      <input id="id_qualification" type="text" name="qualification" value="{{doctor.qualification}}" required>
+    </div>
+    <div class="form-group">
+      <label for="id_experience">Experience</label>
+      <input id="id_experience" type="text" name="experience" value="{{doctor.experience}}" required>
+    </div>
+    <div class="form-group">
+      <label for="id_specialization">Specialization</label>
+      <input id="id_specialization" type="text" name="specialization" value="{{doctor.specialization}}" required>
+    </div>
+    <div class="form-group">
+      <label for="id_license_number">License Number</label>
+      <input id="id_license_number" type="text" name="license_number" value="{{doctor.license_number}}" required>
+    </div>
+
+    <div class="form-group">
+      <label>Current Image</label>
+      <img src="/static/assets/{{doctor.image}}" width="120" alt="Doctor Image">
+    </div>
+
+    <div class="form-group">
+      <label for="id_image">New Image</label>
+      <input id="id_image" type="file" name="image">
+    </div>
+
+    <div class="form-group">
+      <label for="id_license_document">License Document</label>
+      <input id="id_license_document" type="file" name="license_document">
+    </div>
+
+    <button class="btn-primary" type="submit">Update Doctor</button>
+  </form>
+</div>
+{% endblock %}

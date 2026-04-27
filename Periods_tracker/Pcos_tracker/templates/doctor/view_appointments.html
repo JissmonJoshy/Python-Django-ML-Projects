@@ -1,0 +1,135 @@
+{% extends 'doctor/common.html' %}
+
+{% block content %}
+
+<style>
+.appointments-container {
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.appointments-container h2 {
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.appointments-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.appointments-table th {
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px;
+    font-weight: 600;
+    text-align: left;
+    border-bottom: 2px solid #1a252f;
+}
+
+.appointments-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.appointments-table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.appointments-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.status-completed {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.status-cancelled {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.appointments-table a {
+    color: #3498db;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.appointments-table a:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.no-report {
+    color: #7f8c8d;
+    font-style: italic;
+}
+</style>
+
+<div class="appointments-container">
+    <h2>Appointments</h2>
+
+    <table class="appointments-table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Reason</th>
+                <th>Report</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for a in appointments %}
+            <tr>
+                <td>{{ a.user.name }}</td>
+                <td>{{ a.appointment_date }}</td>
+                <td>{{ a.appointment_time }}</td>
+                <td>{{ a.reason }}</td>
+                <td>
+                    {% if a.report_file %}
+                    <a href="{{ a.report_file.url }}" target="_blank">📄 View</a>
+                    {% else %}
+                    <span class="no-report">No Report</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <span class="status-{{ a.status|lower }}">{{ a.status }}</span>
+                </td>
+                <td>
+                    <a href="/doctor_give_advice/{{ a.id }}">Give Advice</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,179 @@
+{% extends 'user/common.html' %}
+
+{% block content %}
+
+<style>
+.appointments-container {
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.appointments-container h2 {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 28px;
+    text-align: center;
+}
+
+.appointments-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.appointments-table th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px;
+    font-weight: 600;
+    text-align: left;
+    border-bottom: 2px solid #5a4fcf;
+}
+
+.appointments-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ecf0f1;
+    vertical-align: top;
+}
+
+.appointments-table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.appointments-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.status-completed {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.status-cancelled {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.appointments-table a {
+    color: #3498db;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.appointments-table a:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.advice-section {
+    background-color: #f8f9fa;
+    border-left: 4px solid #28a745;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+}
+
+.advice-section b {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.waiting-advice {
+    color: #7f8c8d;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 6px;
+}
+
+.doctor-name {
+    font-weight: 600;
+    color: #2c3e50;
+}
+</style>
+
+<div class="appointments-container">
+    <h2>My Appointments</h2>
+
+    <table class="appointments-table">
+        <thead>
+            <tr>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Reason</th>
+                <th>Report</th>
+                <th>Status</th>
+                <th>Doctor Advice</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for a in appointments %}
+            <tr>
+                <td><span class="doctor-name">Dr. {{ a.doctor.name }}</span></td>
+                <td>{{ a.appointment_date }}</td>
+                <td>{{ a.appointment_time }}</td>
+                <td>{{ a.reason }}</td>
+                <td>
+                    {% if a.report_file %}
+                    <a href="{{ a.report_file.url }}" target="_blank">📄 View</a>
+                    {% else %}
+                    <span style="color: #7f8c8d; font-style: italic;">No File</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <span class="status-{{ a.status|lower }}">{{ a.status }}</span>
+                </td>
+                <td>
+                    {% if a.status == "Completed" %}
+                    <div class="advice-section">
+                        <b>Home Remedies:</b><br>
+                        {{ a.home_remedies }}<br><br>
+
+                        <b>Diet Plan:</b><br>
+                        {{ a.diet_plan }}<br><br>
+
+                        <b>Doctor Notes:</b><br>
+                        {{ a.doctor_notes }}
+                    </div>
+                    {% else %}
+                    <div class="waiting-advice">
+                        Waiting for Doctor Advice
+                    </div>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

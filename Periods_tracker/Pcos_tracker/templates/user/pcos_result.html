@@ -1,0 +1,22 @@
+{% extends 'user/common.html' %}
+{% block content %}
+
+<div style="max-width:500px;margin:auto;padding:25px;background:#fff;border-radius:10px;text-align:center">
+
+    <h2 style="color:#d63384">PCOS Prediction Result</h2>
+
+    <h3>{{ result }}</h3>
+
+    <p><strong>PCOS Chance:</strong> {{ chance }}%</p>
+
+    <p style="font-size:13px;color:gray">
+        *This prediction is based on machine learning and is not a medical diagnosis.
+    </p>
+            <a href="/download_pcos_report?result={{result}}&chance={{chance}}&advice={{advice}}"
+        class="btn btn-primary">
+        Download PDF Report
+        </a>
+
+</div>
+
+{% endblock %}

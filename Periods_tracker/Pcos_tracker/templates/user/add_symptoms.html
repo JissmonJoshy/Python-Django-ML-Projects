@@ -1,0 +1,115 @@
+{% extends 'user/common.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+/* Keep styles scoped so header/footer won't break */
+.pcos-page {
+    background: #f7f7f7;
+    padding: 40px 0;
+}
+
+.pcos-container {
+    max-width: 450px;
+    margin: auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.pcos-container h2 {
+    text-align: center;
+    color: #d63384;
+    margin-bottom: 20px;
+}
+
+.pcos-container label {
+    font-weight: bold;
+    display: block;
+    margin-top: 12px;
+}
+
+.pcos-container input,
+.pcos-container select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+.checkbox-group {
+    margin-top: 10px;
+}
+
+.checkbox-group label {
+    font-weight: normal;
+}
+
+.pcos-container button {
+    width: 100%;
+    padding: 10px;
+    background: #d63384;
+    color: white;
+    border: none;
+    margin-top: 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pcos-container button:hover {
+    background: #b02a6f;
+}
+
+.note {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #777;
+    text-align: center;
+}
+</style>
+
+<div class="pcos-page">
+    <div class="pcos-container">
+        <h2>PCOS Symptom Checker</h2>
+
+        <form method="POST" action="{% url 'predict_pcos' %}">
+            {% csrf_token %}
+
+            <label>Age</label>
+            <input type="number" name="age" min="10" max="60" required>
+
+            <label>Cycle Length (days)</label>
+            <input type="number" name="cycle_length" placeholder="e.g. 28, 35, 45" required>
+
+            <label>BMI</label>
+            <input type="number" step="0.1" name="bmi" placeholder="e.g. 24.5" required>
+
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="acne"> Acne / Pimples
+                </label>
+            </div>
+
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="hairfall"> Hair Fall
+                </label>
+            </div>
+
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="weight_gain"> Sudden Weight Gain
+                </label>
+            </div>
+
+            <button type="submit">Check PCOS Risk</button>
+
+            <div class="note">
+                *This tool provides a risk estimate only. It is not a medical diagnosis.
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

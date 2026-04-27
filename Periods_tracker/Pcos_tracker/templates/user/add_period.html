@@ -1,0 +1,155 @@
+{% extends 'user/common.html' %}
+{% block content %}
+
+<style>
+    .period-log-container {
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .period-log-container h2 {
+        color: #333;
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 22px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #444;
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .form-group input[type="date"],
+    .form-group select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        font-family: inherit;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .form-group input[type="date"]:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: #d98880;
+        box-shadow: 0 0 0 3px rgba(217, 136, 128, 0.1);
+    }
+
+    .form-group select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23333' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        padding-right: 36px;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 30px;
+    }
+
+    .btn-submit {
+        flex: 1;
+        padding: 12px 24px;
+        background: linear-gradient(135deg, #d98880 0%, #c86b6b 100%);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+    }
+
+    .btn-submit:hover {
+        background: linear-gradient(135deg, #c96b6b 0%, #b85a5a 100%);
+        box-shadow: 0 4px 12px rgba(217, 136, 128, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .btn-cancel {
+        flex: 1;
+        padding: 12px 24px;
+        background: #f0f0f0;
+        color: #666;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+        text-decoration: none;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .btn-cancel:hover {
+        background: #e8e8e8;
+        border-color: #ccc;
+    }
+
+    @media (max-width: 600px) {
+        .period-log-container {
+            margin: 20px 15px;
+            padding: 20px;
+        }
+
+        .period-log-container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    }
+</style>
+
+<div class="period-log-container">
+    <h2>Add Period Log</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="start_date">Start Date *</label>
+            <input type="date" id="start_date" name="start_date" required>
+        </div>
+
+        <div class="form-group">
+            <label for="end_date">End Date</label>
+            <input type="date" id="end_date" name="end_date">
+        </div>
+
+        <div class="form-group">
+            <label for="flow">Flow Level *</label>
+            <select id="flow" name="flow" required>
+                <option value="">Select flow intensity</option>
+                <option value="Light">Light</option>
+                <option value="Medium">Medium</option>
+                <option value="Heavy">Heavy</option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-submit">Save Period Log</button>
+            <a href="javascript:history.back()" class="btn-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
