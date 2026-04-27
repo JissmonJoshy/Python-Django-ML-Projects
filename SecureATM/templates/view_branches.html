@@ -1,0 +1,78 @@
+{% include 'header.html' %}
+  <main>
+
+    <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item ">Branch</li>
+            <li class="breadcrumb-item active">View</li>
+          </ol>
+        </nav>
+      </div><!-- End Page Title -->
+
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+  
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Branches</h5>
+  
+                <!-- Table with stripped rows -->
+                <table class="table datatable text-center">
+                  <thead>
+                    <tr>
+                        <th>Sl No</th>
+                        <th>Branch</th>
+                        <th>City</th>
+                        <th>Zip</th>
+                        <th>Phone</th>
+                        <th>E-mail</th>
+                        <th>Manager</th>
+                        <th data-type="date" data-format="YYYY/DD/MM">Joined Date</th>
+                        <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for branch in branches %}
+                    <tr class="form-switch">
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ branch.state }}</td>
+                        <td>{{ branch.city }}</td>
+                        <td>{{ branch.zip }}</td>
+                        <td>{{ branch.phone }}</td>
+                        <td>{{ branch.email }}</td>
+                        <td>{{ branch.first_name }} {{ branch.last_name }}</td>
+                        <td>{{ branch.date_joined }}</td>
+                        {% if user.is_superuser %}
+                            <td>{% if branch.is_active %}
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked onclick="location.href='/reject_banker?id={{branch.id}}'">
+                            {% else %}
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  onclick="location.href='/approve_banker?id={{branch.id}}'">
+                            {% endif %}
+                        </td>
+                        {% elif user.userType == 'Customer' %}
+                            <td><a href="/apply_atmcard?bid={{branch.id}}"><button type="button" class="btn btn-warning btn-sm">Request ATM Card</button></a></td>
+                        {% endif %}
+                </tr>
+                    {% endfor %}
+                    
+                  </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
+  
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>
+  
+  
+    </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+{% include 'footer.html' %}

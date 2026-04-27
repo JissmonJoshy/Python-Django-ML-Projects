@@ -1,0 +1,215 @@
+{% include 'header.html' %}
+    <div class="container">
+
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+              <!-- <div class="d-flex justify-content-center py-4">
+                <a href="index.html" class="logo d-flex align-items-center w-auto">
+                  <img src="../static/assets/img/logo.png" alt="">
+                  <span class="d-none d-lg-block">NiceAdmin</span>
+                </a>
+              </div> -->
+              <!-- End Logo -->
+
+              <div class="card mb-3">
+
+                <div class="card-body">
+
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Add a branch</h5>
+                    <p class="text-center small">Enter your personal details to create account</p>
+                  </div>
+
+                  <form class="row g-3 needs-validation" novalidate method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="col-12">
+                      <div class="form-floating mb-3">
+                      <input required type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name">
+                      <label for="firstName">First Name</label>
+                      <div class="invalid-feedback">Please, enter your first name!</div>
+                      </div>
+
+                      <div class="form-floating mb-3">
+                      <input required type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name">
+                      <label for="lastName">Last Name</label>
+                      <div class="invalid-feedback">Please, enter your last name!</div>
+                      </div>
+
+                      <div class="form-floating mb-3">
+                        <input required type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+                        <label for="email">Email</label>
+                        <div class="invalid-feedback">Please, enter a valid email address!</div>
+                      </div>
+
+                      <div class="form-floating mb-3">
+                      <input required type="password" class="form-control" id="password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Must contain at least one number and one special character and one uppercase and lowercase letter, and at least 8 or more characters" name="password" placeholder="Password">
+                      <label for="password">Password</label>
+                      <div class="invalid-feedback">Please, enter your password!</div>
+                      </div>
+
+                      <div class="form-floating mb-3">
+                      <input required type="tel" class="form-control" id="phoneNo" pattern="[6789][0-9]{9}" name="phoneNo" maxlength="10" placeholder="Phone Number">
+                      <label for="phoneNo">Phone Number</label>
+                      <div class="invalid-feedback">Please, enter your phone number!</div>
+                      </div>
+
+                      <div class="form-floating mb-3">
+                      <input required type="text" class="form-control" id="address" name="address" placeholder="Address">
+                      <label for="address">Address</label>
+                      <div class="invalid-feedback">Please, enter your address!</div>
+                      </div>
+
+                      <div class="form-floating mb-3">
+                      <input required type="text" class="form-control" id="city" name="city" placeholder="City">
+                      <label for="city">City</label>
+                      <div class="invalid-feedback">Please, enter your city!</div>
+                      </div>
+
+                      <div class="form-floating mb-3">
+                      <input required type="text" class="form-control" id="state" name="state" placeholder="State">
+                      <label for="state">State</label>
+                      <div class="invalid-feedback">Please, enter your state!</div>
+                      </div>
+
+                      <div class="form-floating mb-3">
+                      <input required type="text" class="form-control" id="zip" name="zip" placeholder="Zip Code">
+                      <label for="zip">Zip Code</label>
+                      <div class="invalid-feedback">Please, enter your zip code!</div>
+                      </div>
+
+                      <div class="form-floating mb-3">
+                        <input required type="file" class="form-control" id="profilePicture" name="profilePicture" accept="image/*">
+                        <label for="profilePicture">Branch Picture</label>
+                        <div class="invalid-feedback">Please, upload your profile picture!</div>
+                      </div>
+
+                    <div class="col-12">
+                      <button class="btn btn-primary w-100" type="submit">Add</button>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+
+              <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+                <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.querySelector('.needs-validation');
+
+      form.addEventListener('submit', function (event) {
+        let isValid = true;
+
+        // Validate First Name
+        const firstName = document.getElementById('firstName');
+        if (firstName.value.trim() === '') {
+          firstName.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          firstName.classList.remove('is-invalid');
+        }
+
+        // Validate Last Name
+        const lastName = document.getElementById('lastName');
+        if (lastName.value.trim() === '') {
+          lastName.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          lastName.classList.remove('is-invalid');
+        }
+
+        // Validate Email
+        const email = document.getElementById('email');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value.trim())) {
+          email.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          email.classList.remove('is-invalid');
+        }
+
+        // Validate Password
+        const password = document.getElementById('password');
+        if (password.value.trim() === '') {
+          password.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          password.classList.remove('is-invalid');
+        }
+
+        // Validate Phone Number
+        const phoneNo = document.getElementById('phoneNo');
+        const phoneRegex = /^[0-9]{10}$/;
+        if (!phoneRegex.test(phoneNo.value.trim())) {
+          phoneNo.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          phoneNo.classList.remove('is-invalid');
+        }
+
+        // Validate Address
+        const address = document.getElementById('address');
+        if (address.value.trim() === '') {
+          address.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          address.classList.remove('is-invalid');
+        }
+
+        // Validate City
+        const city = document.getElementById('city');
+        if (city.value.trim() === '') {
+          city.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          city.classList.remove('is-invalid');
+        }
+
+        // Validate State
+        const state = document.getElementById('state');
+        if (state.value.trim() === '') {
+          state.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          state.classList.remove('is-invalid');
+        }
+
+        // Validate Zip Code
+        const zip = document.getElementById('zip');
+        const zipRegex = /^[0-9]{6}$/;
+        if (!zipRegex.test(zip.value.trim())) {
+          zip.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          zip.classList.remove('is-invalid');
+        }
+
+        if (!isValid) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      });
+    });
+  </script>
+
+{% include 'footer.html' %}
