@@ -1,0 +1,389 @@
+{% extends "admin/admin_base.html" %}
+{% block content %}
+{% load humanize %}
+
+{% comment %} {% for i in user %} {% endcomment %}
+<div class="modal fade" id="modalview">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <div class="modal-title h4">Messages</div>
+
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+
+            <div class="modal-body">
+
+
+                <ul class="list-unstyled">
+
+
+                 <a href="#" class="text-decoration-none">
+                    <li class="media hover-media">
+                       
+                            <img src="../static/assets/img/avatar-dhg.png" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+
+                            <div class="media-body text-dark">
+                                    <h6 class="media-header">Jchob Thunder and <strong> 1 others</strong></h6>
+                                    <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+                            </div>
+
+                    </li>
+                </a>
+                <hr class="my-3">
+                
+                <a href="#" class="text-decoration-none">
+                        <li class="media hover-media">
+                           
+                                <img src="../static/assets/img/avatar-fat.jpg" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+
+                                <div class="media-body text-dark">
+                                        <h6 class="media-header">Mark Otto and <strong> 3 others</strong></h6>
+                                        <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+                                </div>
+
+                        </li>
+                    </a>
+
+
+                    <hr class="my-3">
+
+
+                    <a href="#" class="text-decoration-none">
+                        <li class="media hover-media">
+                           
+                                <img src="../static/assets/img/avatar-mdo.png" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+
+                                <div class="media-body text-dark">
+                                        <h6 class="media-header">Archer andu and <strong> 5 others</strong></h6>
+                                        <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+                                </div>
+
+                        </li>
+                    </a>
+
+                    <hr class="my-3">
+
+
+                    <a href="#" class="text-decoration-none">
+                            <li class="media hover-media">
+                               
+                                    <img src="../static/assets/img/avatar-dhg.png" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+    
+                                    <div class="media-body text-dark">
+                                            <h6 class="media-header">Jchob Thunder and <strong> 1 others</strong></h6>
+                                            <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    
+                                    </div>
+    
+                            </li>
+                        </a>
+                        <hr class="my-3">
+    
+    
+                        
+                        <a href="#" class="text-decoration-none">
+                                <li class="media hover-media">
+                                   
+                                        <img src="../static/assets/img/avatar-fat.jpg" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+        
+                                        <div class="media-body text-dark">
+                                                <h6 class="media-header">Mark Otto and <strong> 3 others</strong></h6>
+                                                <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        
+                                        </div>
+        
+                                </li>
+                            </a>
+    
+    
+                            <hr class="my-3">
+    
+    
+                            <a href="#" class="text-decoration-none">
+                                <li class="media hover-media">
+                                   
+                                        <img src="../static/assets/img/avatar-mdo.png" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+        
+                                        <div class="media-body text-dark">
+                                                <h6 class="media-header">Archer andu and <strong> 5 others</strong></h6>
+                                                <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        
+                                        </div>
+        
+                                </li>
+                            </a>
+
+                    
+                            <hr class="my-3">
+                            <a href="#" class="text-decoration-none">
+                                    <li class="media hover-media">
+                                       
+                                            <img src="../static/assets/img/avatar-dhg.png" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+            
+                                            <div class="media-body text-dark">
+                                                    <h6 class="media-header">Jchob Thunder and <strong> 1 others</strong></h6>
+                                                    <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            
+                                            </div>
+            
+                                    </li>
+                                </a>
+                                <hr class="my-3">
+            
+            
+                                
+                                <a href="#" class="text-decoration-none">
+                                        <li class="media hover-media">
+                                           
+                                                <img src="../static/assets/img/avatar-fat.jpg" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+                
+                                                <div class="media-body text-dark">
+                                                        <h6 class="media-header">Mark Otto and <strong> 3 others</strong></h6>
+                                                        <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                
+                                                </div>
+                
+                                        </li>
+                                    </a>
+            
+            
+                                    <hr class="my-3">
+            
+            
+                                    <a href="#" class="text-decoration-none">
+                                        <li class="media hover-media">
+                                           
+                                                <img src="../static/assets/img/avatar-mdo.png" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+                
+                                                <div class="media-body text-dark">
+                                                        <h6 class="media-header">Archer andu and <strong> 5 others</strong></h6>
+                                                        <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                
+                                                </div>
+                
+                                        </li>
+                                    </a>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<!-------------------------------MOdal Ends---------------------------->
+<!-------------------------------------------Start Grids layout for lg-xl-3 columns and (xs-lg 1 columns)--------------------------------->
+
+
+<div class="container">
+    <div class="row">
+        <!--------------------------left columns  start-->
+<!--------------------------Ends Left columns-->
+
+<!-- Middle column -->
+<div class="col-lg-2"></div>
+<div class="col-12 col-lg-6">
+    {% for post in post %}
+    <div class="middle-column">
+
+        <div class="card mt-3 mb-5">
+            <!-- Your other card content -->
+         
+            <div class="card-body">
+                <div class="media text-center">
+                    <img src="../static/assets/image/{{post.uid.profile_image}}" alt="img" style="width: 55px; height: 50px; object-fit: cover;" class="rounded-circle mr-3">
+                    <div class="media-body">
+                        <h5>{{ post.uid.u_fullname }}</h5>
+                        <p class="text-justify">{{ post.post_desc }}</p>
+                        <a href="../static/assets/img/mid5.jpg" data-lightbox="id"><img src="../static/assets/image/{{ post.post_image }}" style="width: 150px; height: 200px; object-fit: cover;" alt="" class="img-fluid shadow-sm img-thumbnail"></a>
+                    </div>
+                    <small class="text-muted">{% if post.post_date %}{{ post.post_date|timesince }} ago{% else %}Recently{% endif %}</small>
+                </div>
+                <div class="mt-3 text-left">
+                    <button class="btn btn-link text-decoration-none text-dark p-0" onclick="toggleComments({{ post.post_id }})">
+                        <i class="far fa-comment"></i> <small>Comment</small>
+                    </button>
+                </div>
+                <!-- Comment section -->
+                <div id="comments-{{ post.post_id }}" class="comments-section mt-3 text-left" style="display: none;">
+                    <hr>
+                    <h6 class="mb-3">Comments</h6>
+                    <div style="max-height: 200px; overflow-y: auto;">
+                        {% for comment in post.comments %}
+                            <div class="media mb-2 border-bottom pb-2">
+                                <img src="../static/assets/image/{{comment.uid.profile_image}}" alt="img" style="width: 30px; height: 30px; object-fit: cover;" class="rounded-circle mr-2">
+                                <div class="media-body">
+                                    <div class="d-flex justify-content-between">
+                                        <strong>{{ comment.uid.u_fullname }}</strong>
+                                        <small class="text-muted">{{ comment.comment_status }}</small>
+                                    </div>
+                                    <p class="mb-0 small text-dark">{{ comment.comment_text }}</p>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <p class="text-muted small">No comments yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    {% endfor %}
+  
+</div>
+{% comment %} <!---------------------------Statrs Right Columns-----------------> {% endcomment %}            
+<div class="col-12 col-lg-3">
+
+
+<div class="right-column">
+
+    <div class="card shadow-sm mb-4" >
+        <div class="card-body">
+            <h6 class="card-title">Sponsored</h6>
+            <img src="../static/assets/img/right1.jpg" alt="card-img" class="card-img mb-3">
+            <p class="card-text text-justify"> <span class="h6">It might be time to visit Iceland.</span> Iceland is so chill, and everything looks cool here. Also, we heard the people are pretty nice.  What are you waiting for?</p>
+            {% comment %} <a href="#" class="btn btn-outline-info card-link btn-sm">Buy a ticket</a> {% endcomment %}
+
+
+        </div>
+
+    </div>
+
+{% comment %} 
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+                <h6 class="card-title ">Likes <a href="#" class="ml-1"><small>.View All</small> </a> </h6>
+                <div class="row no-gutters d-none d-lg-flex">
+                    <div class="col-6 p-1">
+                            <img src="../static/assets/img/avatar-dhg.png" alt="img" width="80px" height="80px" class="rounded-circle mb-4">
+                            <img src="../static/assets/img/avatar-fat.jpg" alt="img" width="80px" height="80px" class="rounded-circle">
+
+
+
+                    </div>
+                    <div class="col-6 p-1 text-left">
+                        <h6>Jacob Thornton @fat</h6>
+                        <a href="#" class="btn btn-outline-info btn-sm mb-3"><i class="fas fa-user-friends"></i>Follow </a>
+
+                        <h6>Mark otto</h6>
+                        <a href="#" class="btn btn-outline-info  btn-sm"><i class="fas fa-user-friends"></i>Follow </a>
+
+                    </div>
+
+                </div>
+
+        </div>
+
+        <div class="card-footer">
+
+            <p class="lead" style="font-size:18px;">Dave really likes these nerds, no one knows why though.</p>
+        </div>
+        
+
+
+    </div> {% endcomment %}
+
+    {% comment %} <div class="card shadow-sm">
+        <div class="card-body">
+            <p>&copy; 2018 Bootstrap
+
+
+
+                    <a href="#">About</a>
+                    <a href="#">Help</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Cookies</a>
+                    <a href="#">Ads </a>
+                    <a href="#">Info</a>
+                    <a href="#">Brand</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Status</a>
+                    <a href="#">Apps</a>
+                    <a href="#">Jobs</a>
+                    <a href="#">Advertise</a>
+                
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            </p>
+        </div>
+
+    </div> {% endcomment %}
+</div>
+        </div>
+
+</div>
+
+{% comment %} {% endfor %} {% endcomment %}
+<script>
+    lightbox.option({
+      
+    })
+
+    function toggleComments(postId) {
+        var x = document.getElementById("comments-" + postId);
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+    function post_time_ago(post_time) {
+    // Convert post_time to JavaScript Date object
+    var postDate = new Date(post_time);
+
+    // Calculate the time difference in milliseconds
+    var timeDiff = Date.now() - postDate.getTime();
+
+    // Convert time difference to minutes
+    var minutes = Math.floor(timeDiff / (1000 * 60));
+
+    // Format the time ago message
+    if (minutes < 60) {
+        return minutes + " min ago";
+    } else if (minutes < 1440) {  // 1440 minutes in a day
+        var hours = Math.floor(minutes / 60);
+        return hours + " hr ago";
+    } else {
+        // You can define more complex logic for longer time periods if needed
+        return "More than a day ago";
+    }
+    }
+</script>
+
+
+
+{% comment %} <!------------------------Light BOx OPtions-------------> {% endcomment %}
+
+
+
+
+{% endblock  %}

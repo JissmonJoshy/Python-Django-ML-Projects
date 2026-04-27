@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+<!------------------LIght BOx for Gallery-------------->
+<link rel="stylesheet" href="{% static 'assets/css/lightbox.min.css' %}r">
+<script type="text/javascript" src="{% static 'assets/js/lightbox-plus-jquery.min.js' %}"></script>
+<!------------------LIght BOx for Gallery-------------->
+<title>TOXICITY SHIELD</title>
+</head>
+<body style="padding-top: 80px;">
+
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top mb-4">
+    <a href="/" class="navbar-brand">TOXICITY SHIELD</a>
+
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#responsive"><span class="navbar-toggler-icon"></span></button>
+
+
+    <div class="collapse navbar-collapse" id="responsive">
+        <ul class="navbar-nav mr-auto text-capitalize">
+            <li class="nav-item"><a href="/" class="nav-link active">home</a></li>
+            <li class="nav-item"><a href="/" class="nav-link">Login</a></li>
+            <li class="nav-item"><a href="/register_user" class="nav-link" >Register</a></li>
+            {% comment %} <li class="nav-item"><a href="notification.html" class="nav-link">docs</a></li> {% endcomment %}
+            {% comment %} <li class="nav-item"><a href="#" class="nav-link d-md-none">growl</a></li> {% endcomment %}
+            <li class="nav-item"><a href="#" class="nav-link d-md-none">logout</a></li>
+
+        </ul>
+{% comment %} 
+        <form action="" class="form-inline ml-auto d-none d-md-block">
+            <input type="text" name="search" id="search" placeholder="Search" class="form-control form-control-sm">
+        </form> {% endcomment %}
+        {% comment %} <a href="notification.html" class="text-decoration-none" style="color:#CBE4F2;font-size:22px;"><i class="far fa-bell ml-3 d-none d-md-block"></i></a>  {% endcomment %}
+        {% comment %} <img src="../static/assets/img/avatar-dhg.png" alt="" class="rounded-circle ml-3 d-none d-md-block" width="32px" height="32px"> {% endcomment %}
+
+
+
+
+
+    </div>
+
+
+
+
+
+</nav>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+{% block content %}
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "admin/admin_base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <h3 class="text-center mb-4">List of Caretakers</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">CareTaker Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    {% comment %} <th scope="col">Edit</th> {% endcomment %}
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in care %}
+                <tr>
+                    <td>{{ i.care_fullname }}</td>
+                    <td>{{ i.care_email }}</td>
+                    <td>{{ i.care_phone }}</td>
+                    {% comment %} <td>
+                        <a class="btn btn-success btn-sm px-3" href="/edit_care?id={{ i.care_id }}">Edit</a>
+
+
+                    </td> {% endcomment %}
+                    <td>
+                        <a class="btn btn-danger btn-sm px-3" href="/care_delete?id={{ i.care_id }}">Delete</a>
+
+
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock  %}

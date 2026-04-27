@@ -1,0 +1,56 @@
+{% extends "user/user_base.html" %}
+{% block content %}
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="row mt-4">
+        {% for i in post %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 social-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="../static/assets/image/{{ i.uid.profile_image }}" class="rounded-circle mr-3" style="width: 45px; height: 45px; object-fit: cover; border: 2px solid var(--glass-border);">
+                        <div>
+                            <h6 class="mb-0 font-weight-bold">{{ i.uid.u_fullname }}</h6>
+                        </div>
+                    </div>
+                    
+                    <p class="post-desc mb-3">{{ i.post_desc }}</p>
+                    
+                    {% if i.post_image %}
+                    <div class="post-img-container mb-3" style="border-radius: 15px; overflow: hidden; height: 200px;">
+                        <img src="../static/assets/image/{{ i.post_image }}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="post image">
+                    </div>
+                    {% endif %}
+
+                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                        <span class="badge badge-pill badge-light text-muted">{{ i.post_status|default:"neutral" }}</span>
+                        <a href="/delete_post?id={{ i.post_id }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this post?')">
+                            <i class="fas fa-trash-alt mr-1"></i> Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <div class="glass-panel p-5">
+                <i class="fas fa-images fa-4x mb-3 text-muted"></i>
+                <h4>No posts yet</h4>
+                <p class="text-muted">Start by sharing what's on your mind!</p>
+                <a href="/add_post" class="btn btn-primary mt-3">Create Post</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+<style>
+    .social-card {
+        display: flex;
+        flex-direction: column;
+    }
+    .social-card:hover .post-img-container img {
+        transform: scale(1.05);
+        transition: transform 0.5s ease;
+    }
+</style>
+{% endblock %}

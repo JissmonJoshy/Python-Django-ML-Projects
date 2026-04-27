@@ -1,0 +1,506 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/391827d54c.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles.css">
+  <title>Artisan</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --primary-color: #6366f1;
+      --secondary-color: #a855f7;
+      --bg-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      --glass-bg: rgba(255, 255, 255, 0.95);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --chat-bg: #f8fafc;
+      --my-msg-bg: #6366f1;
+      --friend-msg-bg: #fff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: var(--bg-gradient);
+      padding: 20px;
+    }
+
+    .main-container {
+      position: relative;
+      width: 1200px;
+      max-width: 100%;
+      height: calc(100vh - 80px);
+      background: var(--glass-bg);
+      display: flex;
+      border-radius: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+    }
+
+    /* Left Container - Users List */
+    .left-container {
+      width: 350px;
+      height: 100%;
+      background: #fff;
+      border-right: 1px solid #f1f5f9;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .left-container .header {
+      padding: 24px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .left-container .header a {
+      color: var(--text-main);
+      transition: transform 0.2s;
+      text-decoration: none;
+    }
+
+    .left-container .header a:hover {
+      transform: translateX(-3px);
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 16px;
+      list-style: none;
+    }
+
+    .nav-icons li i {
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.1em;
+      transition: color 0.2s;
+    }
+
+    .nav-icons li i:hover {
+      color: var(--primary-color);
+    }
+
+    /* Search Container */
+    .search-container {
+      padding: 16px 24px;
+      background: #fff;
+    }
+
+    .search-container .input {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-container .input input {
+      width: 100%;
+      background: #f8fafc;
+      border: 1px solid #f1f5f9;
+      padding: 12px 16px 12px 44px;
+      border-radius: 12px;
+      outline: none;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+
+    .search-container .input input:focus {
+      border-color: var(--primary-color);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    }
+
+    .search-container .input i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    /* Chat List */
+    .chat-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .chat-list::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .chat-list::-webkit-scrollbar-thumb {
+      background: #e2e8f0;
+      border-radius: 4px;
+    }
+
+    .chat-box {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      border-radius: 16px;
+      margin-bottom: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .chat-box:hover {
+      background: #f8fafc;
+    }
+
+    .chat-box.active {
+      background: #f1f5f9;
+    }
+
+    .img-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-right: 14px;
+      background: #f1f5f9;
+    }
+
+    .img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .chat-details {
+      flex: 1;
+    }
+
+    .chat-details .text-head {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .chat-details h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .chat-details .time {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .text-message p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 180px;
+    }
+
+    /* Right Container - Chat Window */
+    .right-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--chat-bg);
+      position: relative;
+    }
+
+    .right-container .header {
+      padding: 20px 32px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #f1f5f9;
+      z-index: 10;
+    }
+
+    .img-text {
+      display: flex;
+      align-items: center;
+    }
+
+    .user-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-right: 16px;
+    }
+
+    .img-text h4 {
+      font-size: 1.1rem;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .img-text h4 span {
+      display: block;
+      font-size: 0.8rem;
+      color: #22c55e;
+      font-weight: 500;
+    }
+
+    /* Chat Area */
+    .chat-container {
+      flex: 1;
+      padding: 32px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: #f8fafc url("https://www.transparenttextures.com/patterns/cubes.png");
+    }
+
+    .message-box {
+      max-width: 75%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message-box p {
+      padding: 14px 18px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      position: relative;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .my-message {
+      align-self: flex-end;
+    }
+
+    .my-message p {
+      background: var(--primary-color);
+      color: #fff;
+      border-radius: 20px 20px 4px 20px;
+    }
+
+    .friend-message {
+      align-self: flex-start;
+    }
+
+    .friend-message p {
+      background: #fff;
+      color: var(--text-main);
+      border-radius: 20px 20px 20px 4px;
+    }
+
+    .message-box span.time {
+      font-size: 0.75rem;
+      margin-top: 6px;
+      color: var(--text-muted);
+      align-self: flex-end;
+    }
+
+    .my-message span.time {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Input Area */
+    .input-wrapper {
+      padding: 24px 32px;
+      background: #fff;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .chatbox-input {
+      display: flex;
+      align-items: center;
+      background: #f8fafc;
+      border: 1px solid #f1f5f9;
+      border-radius: 16px;
+      padding: 8px 12px;
+      gap: 12px;
+    }
+
+    .chatbox-input input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 12px;
+      font-size: 1rem;
+      color: var(--text-main);
+    }
+
+    .chatbox-input button {
+      width: 48px;
+      height: 48px;
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .chatbox-input button:hover {
+      background: var(--secondary-color);
+      transform: scale(1.05);
+    }
+
+    .chatbox-input button svg {
+      fill: currentColor;
+    }
+
+    /* Mobile Responsive Hooks */
+    @media (max-width: 992px) {
+      .main-container {
+        height: 100vh;
+        width: 100vw;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="left-container">
+
+      <!--header -->
+      <div class="header">
+        <a href="/user_home/">Back
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </a>
+
+        <div class="nav-icons">
+          <li><i class="fa-solid fa-users"></i></li>
+          <li><i class="fa-solid fa-message"></i></li>
+          <li><i class="fa-solid fa-ellipsis-vertical"></i></li>
+        </div>
+      </div>
+
+      <!--search-container -->
+      <div class="search-container">
+        <div class="input">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Search or start new chat">
+        </div>
+      </div>
+
+      <!--chats -->
+      <div class="chat-list">
+        {% for i in artistData %}
+        <a href="/chat?id={{i.care_id}}" class="chat-box {% if i.care_id == artistid %}active{% endif %}">
+          <div class="img-box">
+            <img src="/static/assets/img/avatar-dhg.png" alt="">
+          </div>
+          <div class="chat-details">
+            <div class="text-head">
+              <h4>{{i.care_fullname}}</h4>
+              <p class="time unread"></p>
+            </div>
+            <div class="text-message">
+              <p>Click to chat</p>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+
+
+    <div class="right-container">
+      <!--header -->
+      <div class="header">
+        <div class="img-text">
+          <div class="user-img">
+            <img class="dp" src="/static/assets/img/avatar-dhg.png" alt="">
+          </div>
+          <h4>{{artistid}}<br><span>Online</span></h4>
+        </div>
+        <div class="nav-icons">
+          <li><i class="fa-solid fa-magnifying-glass"></i></li>
+          <li><i class="fa-solid fa-ellipsis-vertical"></i></li>
+        </div>
+      </div>
+
+      <!--chat-container -->
+      <div class="chat-container">
+        {% for i in getChatData %}
+        {% if i.utype == "USER" %}
+        <div class="message-box my-message">
+          <p>{{i.message}}</p>
+          <span class="time">{{i.time}}</span>
+        </div>
+        {% else %}
+        <div class="message-box friend-message">
+          <p>{{i.message}}</p>
+          <span class="time">{{i.time}}</span>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="input-wrapper">
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="chatbox-input">
+            <input type="text" name="message" placeholder="Type a message" required>
+            <button type="submit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="send">
+                <path fill="none" d="M0 0h24v24H0V0z"></path>
+                <path d="M3.4 20.4l17.45-7.48c.81-.35.81-1.49 0-1.84L3.4 3.6c-.66-.29-1.39.2-1.39.91L2 9.12c0 .5.37.93.87.99L17 12 2.87 13.88c-.5.07-.87.5-.87 1l.01 4.61c0 .71.73 1.2 1.39.91z"></path>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#searchInput').on('input', function () {
+        var searchQuery = $(this).val().toLowerCase();
+        filterNames(searchQuery);
+      });
+
+      // Scroll to bottom of chat
+      var chatContainer = $('.chat-container');
+      chatContainer.scrollTop(chatContainer[0].scrollHeight);
+    });
+
+    function filterNames(query) {
+      $('.chat-box').each(function () {
+        var text = $(this).find('h4').text().toLowerCase();
+        if (text.includes(query)) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

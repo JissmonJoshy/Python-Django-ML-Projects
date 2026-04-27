@@ -1,0 +1,385 @@
+{% extends "caretaker/caretaker_base.html" %}
+{% block content %}
+{% load humanize %}
+
+{% comment %} {% for i in user %} {% endcomment %}
+<div class="modal fade" id="modalview">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <div class="modal-title h4">Messages</div>
+
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+
+            <div class="modal-body">
+
+
+                <ul class="list-unstyled">
+
+
+                 <a href="#" class="text-decoration-none">
+                    <li class="media hover-media">
+                       
+                            <img src="../static/assets/img/avatar-dhg.png" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+
+                            <div class="media-body text-dark">
+                                    <h6 class="media-header">Jchob Thunder and <strong> 1 others</strong></h6>
+                                    <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+                            </div>
+
+                    </li>
+                </a>
+                <hr class="my-3">
+                
+                <a href="#" class="text-decoration-none">
+                        <li class="media hover-media">
+                           
+                                <img src="../static/assets/img/avatar-fat.jpg" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+
+                                <div class="media-body text-dark">
+                                        <h6 class="media-header">Mark Otto and <strong> 3 others</strong></h6>
+                                        <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+                                </div>
+
+                        </li>
+                    </a>
+
+
+                    <hr class="my-3">
+
+
+                    <a href="#" class="text-decoration-none">
+                        <li class="media hover-media">
+                           
+                                <img src="../static/assets/img/avatar-mdo.png" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+
+                                <div class="media-body text-dark">
+                                        <h6 class="media-header">Archer andu and <strong> 5 others</strong></h6>
+                                        <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+                                </div>
+
+                        </li>
+                    </a>
+
+                    <hr class="my-3">
+
+
+                    <a href="#" class="text-decoration-none">
+                            <li class="media hover-media">
+                               
+                                    <img src="../static/assets/img/avatar-dhg.png" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+    
+                                    <div class="media-body text-dark">
+                                            <h6 class="media-header">Jchob Thunder and <strong> 1 others</strong></h6>
+                                            <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    
+                                    </div>
+    
+                            </li>
+                        </a>
+                        <hr class="my-3">
+    
+    
+                        
+                        <a href="#" class="text-decoration-none">
+                                <li class="media hover-media">
+                                   
+                                        <img src="../static/assets/img/avatar-fat.jpg" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+        
+                                        <div class="media-body text-dark">
+                                                <h6 class="media-header">Mark Otto and <strong> 3 others</strong></h6>
+                                                <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        
+                                        </div>
+        
+                                </li>
+                            </a>
+    
+    
+                            <hr class="my-3">
+    
+    
+                            <a href="#" class="text-decoration-none">
+                                <li class="media hover-media">
+                                   
+                                        <img src="../static/assets/img/avatar-mdo.png" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+        
+                                        <div class="media-body text-dark">
+                                                <h6 class="media-header">Archer andu and <strong> 5 others</strong></h6>
+                                                <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        
+                                        </div>
+        
+                                </li>
+                            </a>
+
+                    
+                            <hr class="my-3">
+                            <a href="#" class="text-decoration-none">
+                                    <li class="media hover-media">
+                                       
+                                            <img src="../static/assets/img/avatar-dhg.png" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+            
+                                            <div class="media-body text-dark">
+                                                    <h6 class="media-header">Jchob Thunder and <strong> 1 others</strong></h6>
+                                                    <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            
+                                            </div>
+            
+                                    </li>
+                                </a>
+                                <hr class="my-3">
+            
+            
+                                
+                                <a href="#" class="text-decoration-none">
+                                        <li class="media hover-media">
+                                           
+                                                <img src="../static/assets/img/avatar-fat.jpg" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+                
+                                                <div class="media-body text-dark">
+                                                        <h6 class="media-header">Mark Otto and <strong> 3 others</strong></h6>
+                                                        <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                
+                                                </div>
+                
+                                        </li>
+                                    </a>
+            
+            
+                                    <hr class="my-3">
+            
+            
+                                    <a href="#" class="text-decoration-none">
+                                        <li class="media hover-media">
+                                           
+                                                <img src="../static/assets/img/avatar-mdo.png" alt="img" width="60px" height="60px" class="rounded-circle mr-3">
+                
+                                                <div class="media-body text-dark">
+                                                        <h6 class="media-header">Archer andu and <strong> 5 others</strong></h6>
+                                                        <p class="media-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                
+                                                </div>
+                
+                                        </li>
+                                    </a>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<!-------------------------------MOdal Ends---------------------------->
+<!-------------------------------------------Start Grids layout for lg-xl-3 columns and (xs-lg 1 columns)--------------------------------->
+
+
+<div class="container main-content mt-4">
+    <div class="row">
+        <!-- Middle column -->
+        <div class="col-lg-8 mx-auto">
+            <div class="glass-panel p-4 mb-4 text-center">
+                <h2 class="font-weight-bold text-primary">Caretaker Dashboard</h2>
+                <p class="text-muted">Monitor and support user mental well-being.</p>
+            </div>
+
+            {% for post in post %}
+            <div class="card mb-4 social-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="../static/assets/image/{{post.uid.profile_image}}" class="rounded-circle mr-3" style="width: 50px; height: 50px; object-fit: cover; border: 2px solid var(--glass-border);">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0 font-weight-bold">{{ post.uid.u_fullname }}</h6>
+                            <small class="text-muted">{% if post.post_date %}{{ post.post_date|timesince }} ago{% else %}Just now{% endif %}</small>
+                        </div>
+                        <span class="badge badge-pill {% if post.post_status == 'sadness' %}badge-danger{% else %}badge-light{% endif %} p-2 px-3">
+                            {{ post.post_status|upper }}
+                        </span>
+                    </div>
+
+                    <p class="post-desc mb-3">{{ post.post_desc }}</p>
+
+                    {% if post.post_image %}
+                    <div class="post-img-container mb-3" style="border-radius: 15px; overflow: hidden; max-height: 400px;">
+                        <img src="../static/assets/image/{{ post.post_image }}" class="img-fluid w-100" style="object-fit: cover;" alt="post image">
+                    </div>
+                    {% endif %}
+
+                    <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                        <button class="btn btn-link text-decoration-none text-muted p-0" onclick="toggleComments({{ post.post_id }})">
+                            <i class="far fa-comment-alt mr-2"></i> {{ post.comments|length }} Comments
+                        </button>
+                        {% comment %} <a href="/chat?id={{ post.uid.uid }}" class="btn btn-outline-primary btn-sm px-4">
+                            <i class="fas fa-paper-plane mr-1"></i> Reach Out
+                        </a> {% endcomment %}
+                           <a href="/post_chat/?post_id={{ post.post_id }}&uid={{ post.uid.uid }}" class="btn btn-outline-primary btn-sm px-4">
+    <i class="fas fa-paper-plane mr-1"></i> Reach Out
+</a>
+                    </div>
+
+                    <!-- Comment section -->
+                    <div id="comments-{{ post.post_id }}" class="comments-section mt-4" style="display: none;">
+                        <h6 class="font-weight-bold mb-3">Discussions</h6>
+                        <div class="comment-list" style="max-height: 300px; overflow-y: auto; padding-right: 10px;">
+                            {% for comment in post.comments %}
+                                <div class="comment-item mb-3 p-3" style="background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid var(--glass-border);">
+                                    <div class="d-flex align-items-start">
+                                        <img src="../static/assets/image/{{comment.uid.profile_image}}" class="rounded-circle mr-2" style="width: 30px; height: 30px; object-fit: cover;">
+                                        <div class="flex-grow-1">
+                                            <div class="d-flex justify-content-between">
+                                                <span class="font-weight-bold small text-primary">{{ comment.uid.u_fullname }}</span>
+                                                <span class="badge badge-light extra-small">{{ comment.comment_status }}</span>
+                                            </div>
+                                            <p class="mb-0 small mt-1">{{ comment.comment_text }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <div class="text-center py-3 text-muted small">No comments on this post.</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% comment %} 
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+                <h6 class="card-title ">Likes <a href="#" class="ml-1"><small>.View All</small> </a> </h6>
+                <div class="row no-gutters d-none d-lg-flex">
+                    <div class="col-6 p-1">
+                            <img src="../static/assets/img/avatar-dhg.png" alt="img" width="80px" height="80px" class="rounded-circle mb-4">
+                            <img src="../static/assets/img/avatar-fat.jpg" alt="img" width="80px" height="80px" class="rounded-circle">
+
+
+
+                    </div>
+                    <div class="col-6 p-1 text-left">
+                        <h6>Jacob Thornton @fat</h6>
+                        <a href="#" class="btn btn-outline-info btn-sm mb-3"><i class="fas fa-user-friends"></i>Follow </a>
+
+                        <h6>Mark otto</h6>
+                        <a href="#" class="btn btn-outline-info  btn-sm"><i class="fas fa-user-friends"></i>Follow </a>
+
+                    </div>
+
+                </div>
+
+        </div>
+
+        <div class="card-footer">
+
+            <p class="lead" style="font-size:18px;">Dave really likes these nerds, no one knows why though.</p>
+        </div>
+        
+
+
+    </div> {% endcomment %}
+
+    {% comment %} <div class="card shadow-sm">
+        <div class="card-body">
+            <p>&copy; 2018 Bootstrap
+
+
+
+                    <a href="#">About</a>
+                    <a href="#">Help</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Cookies</a>
+                    <a href="#">Ads </a>
+                    <a href="#">Info</a>
+                    <a href="#">Brand</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Status</a>
+                    <a href="#">Apps</a>
+                    <a href="#">Jobs</a>
+                    <a href="#">Advertise</a>
+                
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            </p>
+        </div>
+
+    </div> {% endcomment %}
+</div>
+        </div>
+
+</div>
+
+{% comment %} {% endfor %} {% endcomment %}
+<script>
+    lightbox.option({
+      
+    })
+
+    function toggleComments(postId) {
+        var x = document.getElementById("comments-" + postId);
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+    function post_time_ago(post_time) {
+    // Convert post_time to JavaScript Date object
+    var postDate = new Date(post_time);
+
+    // Calculate the time difference in milliseconds
+    var timeDiff = Date.now() - postDate.getTime();
+
+    // Convert time difference to minutes
+    var minutes = Math.floor(timeDiff / (1000 * 60));
+
+    // Format the time ago message
+    if (minutes < 60) {
+        return minutes + " min ago";
+    } else if (minutes < 1440) {  // 1440 minutes in a day
+        var hours = Math.floor(minutes / 60);
+        return hours + " hr ago";
+    } else {
+        // You can define more complex logic for longer time periods if needed
+        return "More than a day ago";
+    }
+    }
+</script>
+
+
+
+{% comment %} <!------------------------Light BOx OPtions-------------> {% endcomment %}
+
+
+
+
+{% endblock  %}

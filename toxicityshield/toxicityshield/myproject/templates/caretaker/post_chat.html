@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post Chat</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/391827d54c.js" crossorigin="anonymous"></script>
+
+<style>
+
+body{
+font-family:'Outfit',sans-serif;
+background:linear-gradient(135deg,#6366f1,#a855f7);
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:0;
+}
+
+.main-container{
+width:1100px;
+height:90vh;
+background:#fff;
+border-radius:20px;
+display:flex;
+overflow:hidden;
+box-shadow:0 20px 40px rgba(0,0,0,0.2);
+}
+
+.left-container{
+width:320px;
+border-right:1px solid #eee;
+display:flex;
+flex-direction:column;
+}
+
+.header{
+padding:20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+border-bottom:1px solid #eee;
+}
+
+.header a{
+text-decoration:none;
+color:#333;
+font-size:20px;
+}
+
+.chat-box{
+display:flex;
+align-items:center;
+padding:15px;
+text-decoration:none;
+color:#333;
+}
+
+.chat-box:hover{
+background:#f5f5f5;
+}
+
+.img-box{
+width:45px;
+height:45px;
+border-radius:50%;
+overflow:hidden;
+margin-right:10px;
+}
+
+.img-box img{
+width:100%;
+}
+
+.right-container{
+flex:1;
+display:flex;
+flex-direction:column;
+background:#f9fafb;
+}
+
+.chat-header{
+padding:18px 25px;
+background:#fff;
+border-bottom:1px solid #eee;
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.chat-container{
+flex:1;
+padding:25px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.message-box{
+max-width:70%;
+}
+
+.my-message{
+align-self:flex-end;
+}
+
+.friend-message{
+align-self:flex-start;
+}
+
+.message-box p{
+padding:12px 16px;
+border-radius:16px;
+font-size:14px;
+}
+
+.my-message p{
+background:#6366f1;
+color:#fff;
+}
+
+.friend-message p{
+background:#fff;
+border:1px solid #eee;
+}
+
+.time{
+font-size:11px;
+color:#888;
+margin-top:3px;
+display:block;
+}
+
+.input-area{
+padding:15px;
+background:#fff;
+border-top:1px solid #eee;
+}
+
+.chatbox-input{
+display:flex;
+gap:10px;
+}
+
+.chatbox-input input{
+flex:1;
+padding:12px;
+border-radius:10px;
+border:1px solid #ddd;
+outline:none;
+}
+
+.chatbox-input button{
+background:#6366f1;
+color:#fff;
+border:none;
+padding:10px 18px;
+border-radius:10px;
+cursor:pointer;
+}
+
+.chatbox-input button:hover{
+background:#4f46e5;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="main-container">
+
+<!-- LEFT SIDE -->
+
+<div class="left-container">
+
+<div class="header">
+
+<!-- BACK BUTTON -->
+
+<a href="/caretaker_home/">back
+<i class="fa fa-arrow-left"></i>
+</a>
+
+<b>Chats</b>
+
+</div>
+
+<div class="chat-box">
+
+<div class="img-box">
+<img src="/static/assets/img/person.png">
+</div>
+
+<div>
+<b>{{ user.u_fullname }}</b><br>
+<small>Post Owner</small>
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT SIDE CHAT -->
+
+<div class="right-container">
+
+<div class="chat-header">
+
+<div class="img-box">
+<img src="/static/assets/img/person.png">
+</div>
+
+<b>{{ user.u_fullname }}</b>
+
+</div>
+
+<div class="chat-container" id="chatContainer">
+
+{% for chat in getChatData %}
+
+{% if chat.utype == "caretaker" %}
+
+<div class="message-box my-message">
+<p>{{ chat.message }}</p>
+<span class="time">{{ chat.time }}</span>
+</div>
+
+{% else %}
+
+<div class="message-box friend-message">
+<p>{{ chat.message }}</p>
+<span class="time">{{ chat.time }}</span>
+</div>
+
+{% endif %}
+
+{% endfor %}
+
+</div>
+
+<!-- MESSAGE INPUT -->
+
+<div class="input-area">
+
+<form method="POST">
+
+{% csrf_token %}
+
+<div class="chatbox-input">
+
+<input type="text" name="message" placeholder="Type message..." required>
+
+<button type="submit">
+<i class="fa-solid fa-paper-plane"></i>
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+var chatContainer=document.getElementById("chatContainer");
+chatContainer.scrollTop=chatContainer.scrollHeight;
+
+</script>
+
+</body>
+</html>
