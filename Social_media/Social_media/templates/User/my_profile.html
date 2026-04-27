@@ -1,0 +1,173 @@
+{% extends "User/common.html" %}
+{% load static %}
+{% block header %}
+
+<div class="max-w-5xl mx-auto mt-10">
+
+    <!-- PROFILE HEADER -->
+    <div class="flex items-center gap-10 mb-10">
+
+        <!-- Profile Image -->
+        <img src="/static/media/{{user.image}}" 
+             class="w-32 h-32 rounded-full border-4 border-gray-200">
+
+        <!-- Info -->
+        <div class="flex-1">
+{% comment %} 
+            <div class="flex items-center gap-5">
+                <h2 class="text-2xl font-semibold">{{user.name}}</h2>
+                <a href="#" class="px-4 py-1 border rounded-lg text-sm">Edit Profile</a>
+            </div> {% endcomment %}
+
+            <!-- Stats -->
+            <div class="flex gap-8 mt-4 text-sm">
+                <div><strong>{{posts|length}}</strong> posts</div>
+                <div><strong>620K</strong> followers</div>
+                <div><strong>38K</strong> following</div>
+            </div>
+
+            <!-- Bio -->
+            <div class="mt-4 text-sm">
+                <p class="font-semibold">{{user.name}}</p>
+                <p class="text-gray-600">{{user.bio}}</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- POSTS GRID -->
+    <div class="grid grid-cols-3 gap-1">
+
+        {% for post in posts %}
+        <div class="relative group cursor-pointer">
+
+            <!-- Image -->
+            <img src="/static/media/{{post.image}}" 
+                 class="w-full h-72 object-cover">
+
+            <!-- HOVER OVERLAY -->
+            <div class="absolute inset-0 bg-black/50 opacity-0 
+                        group-hover:opacity-100 flex items-center justify-center gap-6 text-white text-lg">
+
+                <div>❤️ {{post.like_count}}</div>
+                <div>💬 {{post.comment_count}}</div>
+
+            </div>
+
+            <!-- CLICK OPEN MODAL -->
+            <a href="#post{{post.id}}" uk-toggle 
+               class="absolute inset-0"></a>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<!-- POST MODALS -->
+{% for post in posts %}
+<div id="post{{post.id}}" uk-modal>
+
+    <div class="uk-modal-dialog bg-black rounded-lg overflow-hidden w-[900px]">
+
+        <div class="flex">
+
+            <!-- IMAGE -->
+            <div class="w-1/2 bg-black">
+                <img src="/static/media/{{post.image}}" 
+                     class="w-full h-full object-cover">
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="w-1/2 flex flex-col relative">
+
+                <!-- HEADER -->
+                <div class="flex items-center justify-between p-4 border-b">
+
+                    <div class="flex items-center gap-3">
+                        <img src="/static/media/{{user.image}}" 
+                             class="w-8 h-8 rounded-full">
+                        <strong>{{user.name}}</strong>
+                    </div>
+
+                    <!-- DELETE DROPDOWN -->
+                    <div>
+                        <button type="button" class="button__ico w-8 h-8">
+                            <ion-icon name="ellipsis-horizontal"></ion-icon>
+                        </button>
+
+                        <div class="w-[180px]"
+                            uk-dropdown="pos: bottom-right">
+
+                            <a href="{% url 'delete_post' post.id %}"
+                               onclick="return confirm('Delete this post?')"
+                               class="block px-4 py-2 text-red-500 hover:bg-gray-100">
+                                🗑 Delete
+                            </a>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CAPTION -->
+                <div class="p-4 border-b">
+                    <p>
+                        <strong>{{user.name}}</strong> {{post.caption}}
+                    </p>
+                </div>
+
+                <!-- COMMENTS -->
+                <div class="p-4 flex-1 overflow-y-auto">
+
+                    {% for c in post.comments %}
+                    <p class="text-sm mb-2">
+                        <strong>{{c.uid.name}}</strong> {{c.comment}}
+                    </p>
+                    {% empty %}
+                    <p class="text-gray-400 text-sm">No comments yet</p>
+                    {% endfor %}
+
+                </div>
+
+                <!-- ACTIONS -->
+                <div class="p-4 border-t">
+
+                    <div class="flex gap-4 text-xl">
+                        ❤️ 💬 📤
+                    </div>
+
+                    <p class="mt-2 text-sm font-semibold">
+                        {{post.like_count}} likes
+                    </p>
+
+                </div>
+
+                <!-- ADD COMMENT -->
+                <form method="post" action="/add_comment/">
+                    {% csrf_token %}
+                    <input type="hidden" name="post_id" value="{{post.id}}">
+
+                    <div class="flex border-t">
+                        <input type="text" name="comment"
+                               placeholder="Add a comment..."
+                               class="flex-1 p-3 outline-none text-sm">
+
+                        <button class="px-4 text-blue-500 font-semibold">
+                            Post
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endfor %}
+
+{% endblock %}

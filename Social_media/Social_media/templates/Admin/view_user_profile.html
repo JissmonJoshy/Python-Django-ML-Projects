@@ -1,0 +1,94 @@
+{% extends 'Admin/common.html' %}
+{% load static %}
+{% block header %}
+
+<div style="margin-left:250px; padding:20px;">
+
+    <div class="d-flex justify-content-center">
+
+        <div style="max-width:1000px; width:100%;">
+
+            <!-- PROFILE HEADER -->
+            <div class="d-flex align-items-center justify-content-between flex-wrap">
+
+                <!-- LEFT: Profile Image -->
+                <div class="text-center me-4">
+                    <img src="/static/media/{{ userprofile.image }}" 
+                         class="rounded-circle"
+                         style="width:120px; height:120px; object-fit:cover; border:4px solid #ff4da6;">
+                </div>
+
+                <!-- CENTER: Info -->
+                <div class="flex-grow-1 ms-3">
+
+                    <h3>{{ userprofile.name }}</h3>
+                    <p class="text-primary">@{{ userprofile.username }}</p>
+                    <p>{{ userprofile.bio }}</p>
+
+                    <div class="d-flex gap-4 mt-2">
+                        <div><strong>{{ posts|length }}</strong> Posts</div>
+                        <div><strong>{{ userprofile.followers }}</strong> Followers</div>
+                        <div><strong>{{ userprofile.following }}</strong> Following</div>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT: Buttons -->
+                <div>
+                   <a href="{% url 'admin_send_message' %}?uid={{ userprofile.id }}" class="btn btn-outline-primary">
+   
+    Message
+</a>
+                </div>
+
+            </div>
+
+            <hr class="mt-4">
+
+            <!-- POSTS GRID -->
+           <!-- POSTS GRID -->
+<div style="margin-left:250px; padding:20px;">
+
+    <div style="max-width:1000px; margin:auto;">
+
+        <h5 class="mb-4">Posts</h5>
+
+        <div style="
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: flex-start;
+        ">
+
+            {% for p in posts %}
+            <div style="
+                flex: 1 1 calc(33.33% - 15px);
+                max-width: calc(33.33% - 15px);
+            ">
+
+                <img src="{{ p.image.url }}"
+                     style="
+                        width:100%;
+                        height:250px;
+                        object-fit:cover;
+                        border-radius:10px;
+                     ">
+
+            </div>
+            {% empty %}
+            <p>No posts available</p>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

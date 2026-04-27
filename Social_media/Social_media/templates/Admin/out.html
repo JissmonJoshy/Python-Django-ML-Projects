@@ -1,0 +1,62 @@
+{% extends 'Admin/common.html' %} {% load static %} {% block header %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<style>
+    th{
+        padding: 12px 16px;
+    }
+</style>
+<!-- main contents -->
+<main class="2xl:ml-[--w-side] xl:ml-[--w-side-md] md:ml-[--w-side-small]">
+  <div
+    class="2xl:max-w-6xl mx-auto h-screen relative shadow-lg overflow-hidden border1 max-md:pt-14"
+  >
+    <div class="flex bg-white dark:bg-dark2">
+      <!-- sidebar -->
+    
+         
+      <table class="table-light" style="width:100%;">
+          <tr>
+              <th>name</th>
+              <th></th>
+              <th>post</th>
+              <!-- <th>post</th> -->
+          </tr>
+            {% for i in data %}
+
+           
+            
+                <tr>
+                    <th>{{i.uid.name}}</th>
+                    <th></th>
+                    <th> {{i.caption}}</th>
+                    <!-- <th>post</th> -->
+                </tr>
+                <!-- <span>user id: {{i.p_type}}</span> <br />
+                    
+                    <span>Model: {{i.caption}}</span> <br />
+                    <span>Company: {{i.p_carcompany}}
+                        {{i.p_bikecompany}}{{i.p_inverterbrand}}</span
+                        > -->
+                        
+                        <!-- <a
+                            class="btn btn-sm btn-success"
+                            href="/buy_now?id={{i.pid}}"
+                            style="width: 100%"
+                            >Buy Now</a
+                            > -->
+                            <!-- </div>
+                            </a> -->
+                            <!-- </div>
+                            </div> -->
+                            
+                        </div>
+                        {% endfor %} 
+                    </table>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

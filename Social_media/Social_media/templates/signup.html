@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from demo.foxthemes.net/instello/home.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 08 Dec 2023 09:43:05 GMT -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link href="{% static 'assets/images/favicon.png' %}" rel="icon" type="image/png">
+    <!-- title and description-->
+    <title>Instello</title>
+    <meta name="description" content="Instello - Sharing Photos platform HTML Template">
+    <!-- css files -->
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        #btn {
+            width: 120px;
+            background: rgb(180, 58, 179);
+            background: linear-gradient(90deg, rgba(180, 58, 179, 0.9500175070028011) 0%, rgba(29, 97, 253, 0.938813025210084) 50%, rgba(69, 193, 252, 0.9416141456582633) 100%);
+
+        }
+
+        #file {
+            border-color: transparent;
+            --tw-bg-opacity: 1;
+            background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+        }
+    </style>
+
+</head>
+
+<body class="bg-white dark:bg-slate-900">
+
+
+    <div class="flex flex-col h-screen justify-center items-center">
+
+
+        <div class="max-w-sm mx-auto md:px-10 p-4 w-full">
+
+
+            <div>
+
+                <!-- logo -->
+                <div class="flex justify-center mb-12">
+                    <img src="../static/assets/images/avatars/add-user.png" alt=""
+                        class="w-auto h-16 shrink-0 bg-fuchsia-100 px-3 rounded-2xl p-2.5">
+                </div>
+
+                <form method="post" class="space-y-3"
+                    uk-scrollspy="target: > *; cls: uk-animation-scale-up; delay: 100 ;repeat: true" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <input class="!w-full" id="username" name="name" type="text" autofocus="" placeholder="username"
+                        required="">
+
+                    <input class="!w-full" id="email" name="email" type="email" autofocus="" placeholder="Email"
+                        pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" required="">
+
+                    <input class="!w-full" id="name" name="phone" type="text" autofocus="" minlength="10" maxlength="10"
+                        pattern="[6789][0-9]{9}" placeholder="Mob Number" required="">
+                    <br>
+                    <!-- <span>Profile Image</span> -->
+                    <input class="!w-full" id="file" name="image" type="file" autofocus="" placeholder="Profile Image"
+                        required="">
+
+                    <input class="!w-full" id="name" name="password" type="password"
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+                        autofocus="" placeholder="Enter password" required="">
+
+                    <br><br>
+                    <center> <button type="submit" id="btn"
+                            class="font-medium w-full rounded-lg bg-slate-900 py-1.5 px-4 text-white h-[38px] active:scale-[0.97] transition-all duration-150 c">
+                            <span>Register</span> </button></center>
+                    <br><br>
+
+                    <div class="space-x-2 text-sm text-center text-slate-400 dark:text-white/70">
+                        <span> i have account? </span>
+                        <span>—</span>
+                        <a href="/" class="text-gray-600 hover:text-gray-500">Login</a>
+                    </div>
+
+                </form>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+    <!-- Uikit js you can use cdn  https://getuikit.com/docs/installation  or fine the latest  https://getuikit.com/docs/installation -->
+    <script src="{% static 'assets/js/uikit.min.js' %}"></script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+
+    <!-- Ion icon -->
+    <script type="module" src="../static/assets/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="../static/assets/ionicons/ionicons.js"></script>
+
+</body>
+
+<!-- Mirrored from demo.foxthemes.net/instello/form-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 08 Dec 2023 09:43:28 GMT -->
+
+</html>
