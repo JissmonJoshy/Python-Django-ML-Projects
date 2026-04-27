@@ -1,0 +1,70 @@
+{% extends 'userHome.html' %} {% block content %}
+
+<!-- Services Section -->
+<section id="services" class="services section light-background">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Bookings</h2>
+      <p></p>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+
+      <div class="row gy-4">
+        <table class="table table-hover ">
+            <tr>
+            <th>DATE</th>
+            <th>PRODUCT</th>
+            <th>IMAGE</th>
+            <th>TYPE</th>
+            <th>DESCRIPTION</th>
+            <th>COUNT</th>
+            <th>TOTAL</th>
+            <th>STATUS</th>
+            <!-- <th colspan="2">ACTION</th> -->
+            </tr>
+            {% for i in bok %}
+            {% if i.status != "CART" %}
+            <tr>
+                <td>{{ i.book_date }}</td>
+                <td>{{ i.Product.name }}</td>
+                <td><img src="/static/media/{{ i.Product.image }}" width="90px" alt=""></td>
+                <td>{{ i.Product.type}}</td>
+                <td>{{ i.Product.desc}}</td>
+                <td>{{ i.count }}</td>
+                <td>{{ i.total }}</td>
+                <td>
+                    {{ i.status }}
+                    <br>
+
+                    {% if i.status != "CART" %}
+                        <a href="/viewPayment?id={{ i.id }}" class="btn btn-success btn-sm">
+                            View Payment
+                        </a>
+                    {% endif %}
+
+                    {% if i.status == "Completed" %}
+                        <a href="/userFeedback?id={{ i.id }}" class="btn btn-primary btn-sm">
+                            Feedback
+                        </a>
+                    {% endif %}
+                </td>
+                <!-- <td><a href="/userChat?id={{i.id}}" class="btn btn-info">Chat</a>-->
+                
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+
+      </div>
+
+    </div>
+
+  </section><!-- /Services Section -->
+
+
+
+
+
+{% endblock %}

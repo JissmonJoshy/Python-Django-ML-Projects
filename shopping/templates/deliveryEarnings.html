@@ -1,0 +1,66 @@
+{% extends 'deliveryBoyHome.html' %}
+{% block content %}
+
+<section id="services" class="services section light-background">
+
+  <!-- Title -->
+  <div class="container section-title text-center" data-aos="fade-up">
+    <h2>Earnings</h2>
+  </div>
+
+  <div class="container">
+
+    <!-- TOTAL EARNINGS CARD -->
+    <div class="row mb-4">
+      <div class="col-md-6 offset-md-3">
+        <div class="card shadow text-center p-3">
+          <h4>Total Earnings</h4>
+          <h2 class="text-success">₹ {{ total_earnings }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="row">
+      <div class="col-12">
+
+        {% if salary %}
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover text-center">
+
+            <thead class="table-dark">
+              <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Shop</th>
+                <th>Amount (₹)</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for s in salary %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ s.date|date:"d-m-Y H:i" }}</td>
+                <td>{{ s.shop.name }}</td>
+                <td class="text-success fw-bold">₹ {{ s.amount }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+
+          </table>
+        </div>
+        {% else %}
+          <div class="text-center">
+            <h4>No earnings yet</h4>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'userHome.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Payment Details</h2>
+
+    {% if error %}
+        <div class="alert alert-danger text-center">
+            {{ error }}
+        </div>
+    {% else %}
+
+    <div class="card p-4 shadow">
+
+        
+
+        <!-- CARD DETAILS -->
+        <h5 class="mt-3 mb-3">Card Details</h5>
+
+        <p><strong>Card Number:</strong>
+            Encrypted
+        </p>
+
+        <p><strong>Expiry:</strong>
+            Encrypted
+        </p>
+
+        <p><strong>CVV:</strong>
+            Encrypted
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

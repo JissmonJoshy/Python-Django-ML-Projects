@@ -1,0 +1,200 @@
+{% extends 'shopHome.html' %} {% block content %}
+
+<style>
+@media print {
+  /* Page layout */
+  @page {
+    size: auto;
+    margin: 12mm 10mm;
+  }
+
+  /* Hide layout chrome */
+  #header,
+  #footer,
+  form,
+  .btn,
+  .navmenu,
+  [data-aos],
+  .section-title,
+  .section-title p {
+    display: none !important;
+  }
+
+  /* Ensure content uses full printable width */
+  body,
+  .container,
+  .row {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Professional typography */
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 12pt !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Header for print (report title + date) */
+  .print-header {
+    display: block;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+    color: #1a1a1a;
+  }
+  .print-header h2 {
+    margin: 0 0 6px;
+    font-size: 18pt;
+    font-weight: 700;
+    color: #003366;
+  }
+  .print-header .meta {
+    font-size: 10pt;
+    color: #444;
+  }
+
+  /* Clean table styling for print */
+  .table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 11pt !important;
+    margin-bottom: 12pt !important;
+  }
+  .table th,
+  .table td {
+    border: 1px solid #444 !important;
+    padding: 6px 8px !important;
+    vertical-align: top !important;
+  }
+  .table thead th {
+    background: #e9f2ff !important;
+    color: #0b3c5d !important;
+    font-weight: 600 !important;
+  }
+  .table tbody tr:nth-child(odd) {
+    background: #f7f9fc !important;
+  }
+
+  /* Repeat header row on each printed page */
+  thead {
+    display: table-header-group !important;
+  }
+  tfoot {
+    display: table-footer-group !important;
+  }
+
+  /* Avoid breaking rows across pages */
+  tr {
+    page-break-inside: avoid !important;
+  }
+
+  /* Remove background images and shadows */
+  * {
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+}
+</style>
+
+<div class="print-header d-none d-print-block">
+  <h2>Sales Report</h2>
+  <div class="meta">Printed: {% now "Y-m-d H:i" %}</div>
+</div>
+
+<!-- Services Section -->
+<section id="services" class="services section light-background">
+
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Delivery Boys</h2>
+    <p></p>
+  </div><!-- End Section Title -->
+
+  <!-- Salary payment form -->
+  <div class="container mb-4">
+
+
+    <form method="post" class="row gy-2 gx-2 align-items-end">
+      {% csrf_token %}
+
+      <div class="col-md-4">
+        <label for="delivery_boy" class="form-label">Delivery Boy</label>
+        <select name="delivery_boy" id="delivery_boy" class="form-select" required>
+          <option value="" disabled selected>Select a Delivery Boy</option>
+          {% for dboy in dboys %}
+            <option value="{{ dboy.id }}">{{ dboy.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label for="salary" class="form-label">Salary Amount</label>
+        <div class="input-group">
+          <span class="input-group-text">₹</span>
+          <input type="number" name="salary" id="salary" class="form-control" placeholder="Amount" min="1" required>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label d-none d-md-block">&nbsp;</label>
+        <button type="submit" class="btn btn-success w-100">Pay Salary</button>
+      </div>
+    </form>
+  </div>
+
+    <div class="container">
+      
+
+      <div class="row gy-4">
+        <div class="col-12">
+          <h4 class="mb-3">Salary Send Records</h4>
+          {% if salaries %}
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered align-middle mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Delivery Boy</th>
+                    <th class="text-end">Amount (₹)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for s in salaries %}
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ s.date|date:"Y-m-d H:i" }}</td>
+                      <td>{{ s.boy.name }}</td>
+                      <td class="text-end">{{ s.amount }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th colspan="3" class="text-end">Total Paid</th>
+                    <th class="text-end">₹{{ salary_total }}</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          {% else %}
+            <div class="alert alert-info mb-0">No salary payment records found.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+</section><!-- /Services Section -->
+
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            alert("{{ message }}");
+        </script>
+    {% endfor %}
+{% endif %}
+{% endblock %}

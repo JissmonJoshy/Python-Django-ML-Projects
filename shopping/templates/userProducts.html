@@ -1,0 +1,232 @@
+{% extends 'userHome.html' %}
+{% block content %}
+
+<section id="products" class="py-5 bg-light">
+  <div class="container">
+
+    <!-- ===== TITLE ===== -->
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Products</h2>
+      <p class="text-muted">Search by category or food</p>
+    </div>
+
+    <!-- ===== FOOD SEARCH ===== -->
+    <div class="row mb-4 justify-content-center align-items-center">
+
+  <!-- 🔍 Food Search -->
+  <div class="col-md-5">
+    <form method="get">
+      <div class="search-box shadow-sm d-flex">
+        <input type="text" name="search" class="form-control"
+               value=""
+               placeholder="Search food (eg: biriyani, noodles)">
+        <button class="btn btn-success px-4 ms-2">
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- 📂 Category Search -->
+  <div class="col-md-5">
+    <div class="search-box shadow-sm d-flex">
+      <input type="text" id="categorySearch" class="form-control"
+             placeholder="Search category (eg: grocery, vegetables)">
+    </div>
+  </div>
+
+</div>
+
+    <!-- ===== CATEGORY SEARCH ===== -->
+    <!-- <div class="row mb-5">
+      <div class="col-md-7 mx-auto">
+        <div class="search-box shadow-sm">
+          <i class="bi bi-search"></i>
+          <input type="text" id="categorySearch"
+                 placeholder="Search category (eg: grocery, vegetables)">
+        </div>
+      </div>
+    </div> -->
+
+    <!-- ===== RECOMMENDED PRODUCTS ===== -->
+    {% if recommended_products %}
+    <div class="mb-5">
+
+      <h4 class="text-center mb-4 text-success">
+        🍛 Recommended for "{{ search_query|title }}"
+      </h4>
+
+      <div class="row g-4">
+
+        {% for i in recommended_products %}
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <div class="card shadow border-success h-100">
+
+            <!-- IMAGE -->
+            {% if i.image %}
+              <img src="static/media/{{ i.image }}" class="card-img-top"
+                   style="height:200px; object-fit:cover;">
+            {% else %}
+              <img src="https://via.placeholder.com/200"
+                   class="card-img-top">
+            {% endif %}
+
+            <div class="card-body text-center d-flex flex-column">
+
+              <h6 class="fw-semibold">{{ i.name }}</h6>
+              <small class="text-muted">{{ i.type }}</small>
+
+              <!-- PRICE -->
+              <p class="mt-2 mb-1">
+                <del class="text-muted">₹{{ i.price }}</del>
+              </p>
+
+              <p class="fw-bold text-success">
+                ₹{{ i.discounted_price }}
+              </p>
+
+              <!-- STOCK -->
+              {% if i.qty > 0 %}
+                <span class="badge bg-success mb-2">
+                  In Stock ({{ i.qty }})
+                </span>
+              {% else %}
+                <span class="badge bg-danger mb-2">
+                  Out of Stock
+                </span>
+              {% endif %}
+
+              <!-- ADD TO CART -->
+              {% if i.qty > 0 %}
+              <form method="post" class="mt-auto">
+                {% csrf_token %}
+                <input type="hidden" name="pid" value="{{ i.id }}">
+
+                <input type="number" name="count"
+                       class="form-control mb-2"
+                       value="1" min="1" max="{{ i.qty }}">
+
+                <button class="btn btn-success w-100">
+                  Add to Cart
+                </button>
+              </form>
+              {% endif %}
+
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- ===== ALL PRODUCTS ===== -->
+    {% if pro %}
+    <div class="row g-4" id="productGrid">
+
+      {% for i in pro %}
+      <div class="col-lg-3 col-md-4 col-sm-6 product-item"
+           data-category="{{ i.type|lower }}">
+
+        <div class="card shadow-sm h-100">
+
+          <!-- IMAGE -->
+          {% if i.image %}
+            <img src="static/media/{{ i.image }}" class="card-img-top"
+                 style="height:200px; object-fit:cover;">
+          {% else %}
+            <img src="https://via.placeholder.com/200"
+                 class="card-img-top">
+          {% endif %}
+
+          <div class="card-body text-center d-flex flex-column">
+
+            <h6 class="fw-semibold">{{ i.name }}</h6>
+            <small class="text-muted">{{ i.type }}</small>
+
+            <!-- PRICE -->
+            <p class="mt-2 mb-1">
+              <del class="text-muted">₹{{ i.discountprice }}</del>
+            </p>
+            
+            <p class="fw-bold text-success">
+              ₹{{ i.price }}
+            </p>
+
+            <small class="text-muted">
+              Shop: {{ i.user.name }}
+            </small>
+
+            <!-- STOCK -->
+            {% if i.qty > 0 %}
+              <span class="badge bg-success mb-2">
+                In Stock ({{ i.qty }})
+              </span>
+
+              <form method="post" class="mt-auto">
+                {% csrf_token %}
+                <input type="hidden" name="pid" value="{{ i.id }}">
+
+                <input type="number" name="count"
+                       class="form-control mb-2"
+                       min="1" max="{{ i.qty }}"
+                       placeholder="Qty" required>
+
+                <button class="btn btn-success w-100">
+                  Add to Cart
+                </button>
+              </form>
+            {% else %}
+              <span class="badge bg-danger mt-auto">
+                Out of Stock
+              </span>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+    {% else %}
+      <h4 class="text-center">No Products Available</h4>
+    {% endif %}
+
+  </div>
+</section>
+
+<!-- ===== STYLE ===== -->
+<style>
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 50px;
+  padding: 12px 20px;
+  border: 1px solid #ddd;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+</style>
+
+<!-- ===== CATEGORY FILTER ===== -->
+<script>
+const searchInput = document.getElementById('categorySearch');
+const products = document.querySelectorAll('.product-item');
+
+searchInput.addEventListener('keyup', function () {
+  const value = this.value.toLowerCase();
+
+  products.forEach(p => {
+    const cat = p.getAttribute('data-category');
+    p.style.display = cat.includes(value) ? 'block' : 'none';
+  });
+});
+</script>
+
+{% endblock %}

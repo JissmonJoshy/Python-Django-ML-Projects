@@ -1,0 +1,147 @@
+{% extends 'shopHome.html' %} {% block content %}
+
+<style>
+.original-price {
+  color: #6c757d;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: line-through;
+  margin-bottom: 0.25rem;
+}
+</style>
+
+<!-- Contact Section -->
+<section id="contact" class="contact section">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Add Products</h2>
+      <p></p>
+    </div><!-- End Section Title -->
+
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+
+      <div class="row gy-4">
+          <center>
+              <div class="col-lg-7">
+                  <form action="" method="post" class="" data-aos="fade-up" data-aos-delay="500" enctype="multipart/form-data">
+                      {% csrf_token %}
+                    <div class="row gy-4">
+      
+                      <div class="col-md-6">
+                        <input type="text" name="name" class="form-control" placeholder="Product Name" required="">
+                      </div>
+      
+                      <div class="col-md-6">
+                        <input type="text" name="type" class="form-control" placeholder="Product Type" required="">
+                      </div>
+      
+                      <div class="col-md-6">
+                        <input type="number" name="qty" class="form-control" placeholder="Quantity" min="1" required="">
+                      </div>
+                      
+                      <div class="col-md-6">
+                        <input type="number" name="discountprice"  class="form-control" placeholder="Price" min="0" required="">
+                      </div>
+      
+                      <div class="col-md-6">
+                        <input type="number" name="price"  class="form-control" placeholder="Discount Price" min="0" required="">
+                      </div>
+      
+                      <div class="col-md-6">
+                        <input type="file" name="img"  class="form-control" placeholder="image" required="">
+                      </div>
+
+        
+
+                      <div class="col-md-12">
+                        <textarea class="form-control" name="desc" rows="4" placeholder="Description" required=""></textarea>
+                      </div>  
+      
+      
+      
+                      <div class="col-md-12 text-center">
+      
+                        <button type="submit" class="btn btn-info">Add Now</button>
+                      </div>
+      
+                    </div>
+                  </form>
+                </div><!-- End Contact Form -->
+      
+          </center>
+      </div>
+
+    </div>
+
+  </section><!-- /Contact Section -->
+
+  <!-- Services Section -->
+<section id="services" class="services section light-background py-5">
+
+  <!-- Section Title -->
+  <div class="container section-title text-center" data-aos="fade-up">
+    <h2 class="display-4">Products</h2>
+    <p class="lead"></p>
+  </div><!-- End Section Title -->
+
+  <div class="container">
+    <div class="row gy-4">
+      {% for i in data %}
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-item card shadow-sm border-light rounded">
+          
+          <!-- Product Image -->
+          <img src="static/media/{{ i.image }}" class="card-img-top" alt="Product Image" style="height: 250px; object-fit: cover;">
+          
+          <!-- Card Body -->
+          <div class="card-body">
+            <h3 class="card-title text-center">{{ i.name }} ({{ i.type }})</h3>
+            <h5 class="card-text text-center">{{ i.desc }}</h5>
+            
+            {% if i.qty > 0 %}
+            <h4 class="text-success text-center">Quantity: {{ i.qty }} no.s</h4>
+            {% else %}
+            <h4 class="text-danger text-center">Quantity: Empty!</h4>
+            {% endif %}
+             <h5 class="text-center original-price">{{ i.discountprice }} Rs/-</h5>
+             <h3 class="text-center">{{ i.price }} Rs/-</h3>
+            <!-- <p class="card-text text-center"><strong>Flight : {{ i.fname }} {{ i.fnumber }}</strong></p>
+            <p class="card-text text-center">Arrival Time: {{ i.datetime }}</p> -->
+            
+            <!-- Price Section -->
+            <!-- {% if i.show_original_price %} -->
+            <h3 class="text-center">{{ i.price }} Rs/-</h3>
+            <!-- {% else %}
+            <h3 class="text-center" style="color: red;">
+                {{ i.price }} Rs/- (Discount Available)
+            </h3>
+            {% endif %} -->
+            
+            <!-- Form to Add to Cart -->
+            <form action="/shopAddCount" method="post">
+              {% csrf_token %}
+              <input type="text" name="pid" value="{{ i.id }}" hidden>
+              <input class="form-control mb-3" type="number" name="count" min="1" required>
+              <button type="submit" class="btn btn-success w-100">Add</button>
+            </form> <br>
+            <a href="/shopDelProd?id={{ i.id }}" class="btn btn-danger w-100">Delete</a>
+          </div><!-- End Card Body -->
+        </div><!-- End Service Item -->
+      </div><!-- End Column -->
+      {% endfor %}
+    </div><!-- End Row -->
+  </div><!-- End Container -->
+
+</section><!-- End Services Section -->
+
+
+  {% if messages %}
+  {%for i in messages %}
+    <script>
+      alert("{{ i }}")
+    </script>
+  {% endfor %}
+  {% endif %}
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'adminHome.html' %} {% block content %}
+
+<!-- Services Section -->
+<section id="services" class="services section light-background">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Feedbacks</h2>
+      <p></p>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+
+      <div class="row gy-4">
+        <table class="table table-hover ">
+            <tr>
+            <th>SL.NO</th>
+            <th>PRODUCT</th>
+            <th>CUSTOMER</th>
+            <th>SUPPLIER</th>
+            <th>RATING</th>
+            <th>FEEDBACK</th>
+            <th>DATE</th>
+            </tr>
+            {% for i in pro %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.book.Product.name }}</td>
+                <td>{{ i.user.name }}</td>
+                
+                <td>{{ i.book.Product.user.name }}</td>
+                <td>{{ i.rating }}⭐</td>
+                <td>{{ i.review }}</td>
+                
+                <td>{{ i.date }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+      </div>
+
+    </div>
+
+  </section><!-- /Services Section -->
+
+
+{% endblock %}

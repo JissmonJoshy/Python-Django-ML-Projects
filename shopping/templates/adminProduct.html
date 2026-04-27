@@ -1,0 +1,58 @@
+{% extends 'adminHome.html' %}
+{% block content %}
+
+<!-- Services Section -->
+<section id="services" class="services section light-background py-5">
+
+  <!-- Section Title -->
+  <div class="container section-title text-center" data-aos="fade-up">
+    <h2 class="display-4">Manage Products</h2>
+    <p class="lead">Overview of the products available for sale in the shop</p>
+  </div><!-- End Section Title -->
+
+  <div class="container">
+    <div class="row gy-4">
+      {% for i in pro %}
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-item card shadow-sm border-light rounded">
+          
+          <!-- Product Image -->
+          <img src="static/media/{{ i.image }}" class="card-img-top" alt="Product Image" style="height: 250px; object-fit: cover;">
+          
+          <!-- Card Body -->
+          <div class="card-body">
+            <h3 class="card-title text-center">{{ i.name }}</h3>
+            <h5 class="card-text text-center">{{ i.type }}</h5>
+            <p class="card-text text-center">{{ i.desc }}</p>
+            
+            <!-- Price Information -->
+            <h3 class="text-center">{{ i.price }} Rs/-</h3>
+            
+            <!-- Shop Details -->
+            <h5 class="text-center"><strong>Shop:</strong> {{ i.user.name }}</h5>
+            <!-- <h6 class="text-center"><strong>{{ i.user.airport }}</strong></h6> -->
+            
+            <!-- Availability -->
+            {% if i.qty > 0 %}
+            <h5 class="text-success text-center">Available: {{ i.qty }} no.s</h5>
+            {% else %}
+            <h3 class="text-danger text-center">Unavailable</h3>
+            {% endif %}
+          </div><!-- End Card Body -->
+        </div><!-- End Service Item -->
+      </div><!-- End Column -->
+      {% endfor %}
+    </div><!-- End Row -->
+  </div><!-- End Container -->
+
+</section><!-- End Services Section -->
+
+{% if messages %}
+  {% for i in messages %}
+  <script>
+    alert("{{ i }}")
+  </script>
+  {% endfor %}
+{% endif %}
+
+{% endblock %}

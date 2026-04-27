@@ -1,0 +1,248 @@
+{% extends 'shopHome.html' %} {% block content %}
+
+<style>
+@media print {
+  /* Page layout */
+  @page {
+    size: auto;
+    margin: 12mm 10mm;
+  }
+
+  /* Hide layout chrome */
+  #header,
+  #footer,
+  form,
+  .btn,
+  .navmenu,
+  [data-aos],
+  .section-title,
+  .section-title p {
+    display: none !important;
+  }
+
+  /* Ensure content uses full printable width */
+  body,
+  .container,
+  .row {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Professional typography */
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 12pt !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Header for print (report title + date) */
+  .print-header {
+    display: block;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+    color: #1a1a1a;
+  }
+  .print-header h2 {
+    margin: 0 0 6px;
+    font-size: 18pt;
+    font-weight: 700;
+    color: #003366;
+  }
+  .print-header .meta {
+    font-size: 10pt;
+    color: #444;
+  }
+
+  /* Clean table styling for print */
+  .table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 11pt !important;
+    margin-bottom: 12pt !important;
+  }
+  .table th,
+  .table td {
+    border: 1px solid #444 !important;
+    padding: 6px 8px !important;
+    vertical-align: top !important;
+  }
+  .table thead th {
+    background: #e9f2ff !important;
+    color: #0b3c5d !important;
+    font-weight: 600 !important;
+  }
+  .table tbody tr:nth-child(odd) {
+    background: #f7f9fc !important;
+  }
+
+  /* Repeat header row on each printed page */
+  thead {
+    display: table-header-group !important;
+  }
+  tfoot {
+    display: table-footer-group !important;
+  }
+
+  /* Avoid breaking rows across pages */
+  tr {
+    page-break-inside: avoid !important;
+  }
+
+  /* Remove background images and shadows */
+  * {
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+}
+</style>
+
+<div class="print-header d-none d-print-block">
+  <h2>Sales Report</h2>
+  <div class="meta">Printed: {% now "Y-m-d H:i" %}</div>
+</div>
+
+<!-- Section Title -->
+<div class="container section-title" data-aos="fade-up">
+    <h2>Sales Report</h2>
+    <p></p>
+  </div><!-- End Section Title -->
+
+  <div class="container">
+    <!-- <form method="GET">
+        {% csrf_token %}
+        <label for="month">Select Month:</label>
+        <input type="month" id="month" name="month" value="{{ selected_month }}">
+        <button type="submit" class="btn btn-warning">Filter</button>
+        <button onclick="window.print()" class="btn btn-success">Print</button>
+      </form> -->
+
+      <div class="card mb-4 d-print-none">
+        <div class="card-body">
+          <form method="GET" class="row g-2 align-items-end">
+            {% csrf_token %}
+
+            <div class="col-sm-4">
+              <label for="month" class="form-label">Month</label>
+              <input type="month"
+                     id="month"
+                     name="month"
+                     value="{{ selected_month }}"
+                     class="form-control">
+            </div>
+
+            <div class="col-sm-4">
+              <label for="type" class="form-label">Product type</label>
+              <input type="text"
+                     id="type"
+                     name="type"
+                     value="{{ selected_type }}"
+                     placeholder="e.g. Vegatables, Fruits"
+                     class="form-control">
+            </div>
+
+            <div class="col-auto d-flex gap-2">
+              <button type="submit" class="btn btn-warning">
+                  Apply
+              </button>
+              <button type="button" class="btn btn-secondary" onclick="window.location.href='?';">
+                  Clear
+              </button>
+              <button type="button" class="btn btn-success" onclick="window.print()">
+                  Print
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      {% if selected_month or selected_type %}
+        <div class="mb-3">
+          <small class="text-muted">
+            Showing results for
+            {% if selected_month %} Month: <strong>{{ selected_month }}</strong>{% endif %}
+            {% if selected_month and selected_type %} | {% endif %}
+            {% if selected_type %} Type: <strong>{{ selected_type }}</strong>{% endif %}
+          </small>
+        </div>
+      {% endif %}
+
+      <!-- Show error message if there's an error -->
+      {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+      {% endif %}
+
+      <!-- Display Growth Report -->
+      <h3>Total Price : {{ growth_total_price }}</h3>
+    <div class="row gy-4">
+      <div class="col-12">
+        {% if bok %}
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>SL.NO</th>
+                <th>DATE</th>
+                <th>PRODUCT</th>
+                <th>TYPE</th>
+                <th>CUSTOMER</th>
+                <th>CONTACT</th>
+                <th>EMAIL</th>
+                <th>COUNT</th>
+                <!-- <th>PRICE(1 No.)</th> -->
+                <th>TOTAL</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in bok %}
+              {% if i.status != "CART" %}
+              <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{ i.book_date }}</td>
+                  <td>{{ i.Product.name }}</td>
+                  <td>{{ i.Product.type}}</td>
+                  <td>{{ i.cust.name}}</td>
+                  <td>{{ i.cust.phone}}</td>
+                  <td>{{ i.cust.email}}</td>
+                  <td>{{ i.count }}</td>
+                  <!-- <td>{{ i.Product.price }}</td> -->
+                  <td>{{ i.total }}</td>
+                  <!-- <td>{{ i.status }}</td> -->
+                  <!-- <td><a href="/shopChat?oid={{ i.id }}" class="btn btn-info">Chat</a></td>
+                  
+                  <td>
+                    {% if i.status != "Assigned" %}
+                    <form action="" method="post">
+                      {% csrf_token %}
+                      <select name="boy" id="">
+                    {% for j in boy %}
+                    <option value="{{ j.id }}">{{ j.name }}</option>
+                    {% endfor %}
+                  </select>
+                  <input type="text" name="bid" id="" value="{{ i.id }}" hidden> <br>
+                  <center><button type="submit" class="btn btn-primary">Assign</button></center>
+                  </form>
+                  {% else %}
+                  Assigned
+                  {% endif %} -->
+                </td>
+              
+              </tr>
+              {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <div class="alert alert-info">No sales found for the selected filters.</div>
+        {% endif %}
+      </div>
+
+  </div>
+
+</section><!-- /Services Section -->
+
+
+{% endblock %}
