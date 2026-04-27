@@ -1,0 +1,41 @@
+{% extends "teacherbase.html" %} {% block content %}
+<section id="contact" class="contact">
+	<div class="container">
+		<div class="section-title">
+			<h2>VIEW</h2>
+			<h3>STUD<span>ENTS</span></h3>
+		</div>
+
+		
+		<div class="w3-services-grids py-lg-4 text-center" style="padding: 20px">
+			<div class="fea-gd-vv row">
+				{% for i in students %}
+				<div
+					class="col-lg-4 col-md-7 bg-info"
+					style="margin-bottom: 30px; padding-bottom: 30px; border-radius: 20px"
+				>
+					<div class="feature-gd icon-yellow">
+						<div class="icon bg-info"></div>
+						<div class="info bg-info" style="margin-top: 50px">
+							<h3>{{i.admno}}</h3>
+							<h3>{{i.name}}</h3>
+							<h3>{{i.email}}</h3>
+							<h3>{{i.phone}}</h3>
+							<h3>{{i.address}}</h3>
+							<h3>{{i.acayear}}</h3>
+							<h3>{{i.course.course}}</h3>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	$(document).ready(() => {
+		$('#messageDiv').fadeOut(5000);
+	});
+</script>
+{% endblock %}

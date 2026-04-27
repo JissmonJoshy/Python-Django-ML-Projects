@@ -1,0 +1,75 @@
+{% extends "teacherbase.html" %} {% block content %}
+<section id="contact" class="contact">
+	<div class="container">
+		<div class="section-title">
+			<h2>VIEW</h2>
+			<h3>ATTEN<span>DANCE</span></h3>
+		</div>
+
+	
+		<div class="w3-services-grids py-lg-4 text-center" style="padding: 20px">
+			<form method="post">
+				{% csrf_token %}
+				<input type="date" name="date" id="" required>
+				<select name="course" id="" required>
+					<option value="" selected disabled >Select Course</option>
+					{% for c in courses %}
+						<option value="{{c.id}}">{{c.course}}</option>
+					{% endfor %}
+				</select>
+				<input type="submit" value="Filter" class="btn btn-primary">
+			</form>
+			<div class="fea-gd-vv row">
+				
+				<div
+					style="margin-bottom: 30px; padding-bottom: 30px; border-radius: 20px"
+				>
+					<div class="feature-gd icon-yellow">
+						<div class="icon bg-info"></div>
+							<table class="table table-hover table-striped table-secondary">
+								<tr>
+									<th>Sl/No.</th>
+									<th>Addmission No.</th>
+									<th>Name</th>
+									<th>Email</th>
+									<th>Department</th>
+									<th>Academic Year</th>
+									<th>Course</th>
+									<th>Attendance</th>
+									<!-- <th>Action</th> -->
+								</tr>
+								{% for d in data %}
+									<tr>
+										<td>{{forloop.counter}}</td>
+										<td>{{d.student.admno}}</td>
+										<td>{{d.student.name}}</td>
+										<td>{{d.student.email}}</td>
+										<td>{{d.student.course.dept.department}}</td>
+										<td>{{d.student.acayear}}</td>
+										<td>{{d.student.course.course}}</td>
+										<td>{{d.status}}</td>
+										<!-- <td>
+											{% if d.status == "Present" %}
+												<a href="/updateStatus?id={{d.id}}&status=Absent" class="btn btn-danger">Mark as absent</a>
+												{% else %}
+												<a href="/updateStatus?id={{d.id}}&status=Present" class="btn btn-success">Mark as Present</a>
+											{% endif %}
+										</td> -->
+									</tr>
+								{% endfor %}
+							</table>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	$(document).ready(() => {
+		$('#messageDiv').fadeOut(5000);
+	});
+</script>
+{% endblock %}

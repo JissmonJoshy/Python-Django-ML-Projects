@@ -1,0 +1,78 @@
+{% extends "commonbase.html" %} {% block content %}
+{% if flag == 0 %}
+	<script>
+		alert("Attendance already marked");
+		location = '/';
+	</script>
+	{% elif flag == 1 %}
+	<script>
+		alert("Attendance marked");
+		location = '/';
+	</script>
+
+{% endif %}
+<section id="contact" class="contact">
+	<div class="container">
+		<div class="section-title">
+			<h2></h2>
+			<h3>CONFIRM<span> ATTENDANCE</span></h3>
+		</div>
+
+		<div class="row mt-5">
+			<div class="col-lg-4">
+				<div class="info">
+				</div>
+			</div>
+
+			<div class="col-lg-8 mt-5 mt-lg-0">
+				<form action="" method="post" role="form" class="ourForm">
+					{% csrf_token %}
+					<div class="row text-center">
+						<div class="col-6 text-center">
+							<div class="user">
+								<h3>Admission No.: {{std.admno}}</h3>
+								<h3>Name: {{std.name}}</h3>
+							</div>
+							<div class="col-md-6 form-group" style="margin: auto;">
+								<input
+								type="radio"
+								name="status"
+								value="confirm"
+								required
+								/>Confirm
+							</div>
+							<div class="col-md-6 form-group mt-3 mt-md-0" style="margin: auto;">
+								<input
+								type="radio"
+								name="status"
+								value="notconfirm"
+								required
+								/>Not Confirm
+							</div>
+							<div
+							class="bg-danger p-3 text-light"
+							id="error-message"
+							style="display: none"
+							></div>
+								<button type="submit" id="subBtn">Submit</button>
+						</div>
+					</div>
+				</form>
+				<div class="{{sty}}" id="messageDiv">{{msg}}</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	$(document).ready(() => {
+		$('#messageDiv').fadeOut(5000);
+	});
+</script>
+{% if msg %}
+<script>
+	alert("{{ msg }}")
+</script>
+{% endif %}
+{% endblock %}
