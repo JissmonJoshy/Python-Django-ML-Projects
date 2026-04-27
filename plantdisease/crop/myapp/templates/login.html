@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Fresh Harvest</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fff7; /* Light green background */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- Login Container -->
+    <div class="bg-white shadow-2xl rounded-xl overflow-hidden max-w-4xl w-full flex flex-col md:flex-row">
+
+        <!-- Left Panel: Branding -->
+        <div class="md:w-1/2 p-6 md:p-10 flex flex-col justify-center items-center text-center bg-green-700 text-white space-y-4">
+            <h1 class="text-4xl font-bold tracking-tight">Welcome Back</h1>
+            <p class="text-green-200 text-lg">Your fresh produce marketplace is waiting for you.</p>
+            <img src="https://placehold.co/600x400/065f46/ffffff?text=Fresh+Crops" 
+                 alt="Fresh vegetables" 
+                 class="w-full h-auto object-cover rounded-lg shadow-lg">
+            <p class="text-green-300 pt-4 text-sm">Find and sell the best from the field.</p>
+        </div>
+
+        <!-- Right Panel: Login Form -->
+        <div class="md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+            <h2 class="text-3xl font-extrabold text-green-800 mb-8 text-center">Sign In</h2>
+
+            <!-- Django Form -->
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                    <input type="email" name="email" id="email" placeholder="you@example.com" required
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" name="password" id="password" placeholder="••••••••" required
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">
+                </div>
+
+                <button type="submit" 
+                        class="w-full py-3 text-white bg-green-600 hover:bg-green-700 rounded-lg transition duration-150">
+                    Login
+                </button>
+            </form>
+
+            <!-- Links -->
+            <div class="mt-6 text-center space-y-2">
+                <p class="text-sm">
+                    <a href="" class="font-medium text-green-600 hover:text-green-500">
+                        admin
+                    </a>
+                </p>
+                <p class="text-sm text-gray-600">
+                    Don't have an account? 
+                    <a href="/register/" class="font-medium text-green-600 hover:text-green-500">
+                        Create new account
+                    </a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

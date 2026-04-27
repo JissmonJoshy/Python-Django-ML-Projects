@@ -1,0 +1,233 @@
+<!-- Navigation Bar Component -->
+<nav class="navbar">
+    <div class="navbar-left">
+        <div class="logo">
+            <span class="logo-text">Cropers</span>
+            <span class="logo-tagline">Agricultural Marketplace</span>
+        </div>
+    </div>
+    <div class="navbar-center">
+        <a href="{% url 'home' %}" class="nav-link">Home</a>
+        <a href="{% url 'all_feedback' %}" class="nav-link">Reviews</a>
+        <a href="{% url 'account' %}" class="nav-link">Account</a>
+        <a href="{% url 'my_orders' %}" class="nav-link">Orders</a>
+    </div>
+    <div class="navbar-right">
+        <a href="{% url 'view_cart' %}" class="nav-link cart-link">
+            <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="cart-text">Cart</span>
+        </a>
+        <a href="{% url 'logout' %}" class="nav-link logout-btn">Logout</a>
+    </div>
+</nav>
+
+<style>
+    /* Navbar styling */
+    .navbar {
+        background: linear-gradient(135deg, #1a472a 0%, #0d2818 100%);
+        padding: 16px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        flex-wrap: wrap;
+        gap: 20px;
+        border-bottom: 2px solid #2e7d32;
+    }
+
+    .navbar-left {
+        display: flex;
+        align-items: center;
+        min-width: 200px;
+    }
+
+    .logo {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .logo-text {
+        color: white;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    .logo-tagline {
+        color: rgba(255,255,255,0.8);
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .navbar-center {
+        display: flex;
+        gap: 35px;
+        align-items: center;
+        flex: 1;
+        justify-content: center;
+    }
+
+    .navbar-right {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .nav-link {
+        color: rgba(255,255,255,0.95);
+        font-weight: 500;
+        text-decoration: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+    }
+
+    .nav-link:hover {
+        background: rgba(46,125,50,0.3);
+        color: #fff;
+    }
+
+    .cart-link {
+        background: rgba(46,125,50,0.25);
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: 1px solid rgba(46,125,50,0.4);
+    }
+
+    .cart-link:hover {
+        background: rgba(46,125,50,0.35);
+        border-color: rgba(46,125,50,0.6);
+    }
+
+    .cart-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .logout-btn {
+        background: rgba(220,53,69,0.2);
+        padding: 8px 16px;
+        border-radius: 6px;
+        border: 1px solid rgba(220,53,69,0.3);
+        color: rgba(255,255,255,0.9);
+    }
+
+    .logout-btn:hover {
+        background: rgba(220,53,69,0.3);
+        border-color: rgba(220,53,69,0.5);
+        color: #fff;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+        .navbar {
+            padding: 12px 25px;
+            gap: 12px;
+        }
+
+        .navbar-center {
+            gap: 20px;
+            order: 3;
+            width: 100%;
+            justify-content: flex-start;
+        }
+
+        .logo-text {
+            font-size: 20px;
+        }
+
+        .logo-tagline {
+            font-size: 10px;
+        }
+
+        .nav-link {
+            font-size: 13px;
+            padding: 6px 10px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .navbar {
+            flex-direction: column;
+            padding: 12px 15px;
+            gap: 10px;
+        }
+
+        .navbar-left,
+        .navbar-center,
+        .navbar-right {
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .navbar-center {
+            order: 3;
+            gap: 12px;
+        }
+
+        .logo-text {
+            font-size: 18px;
+        }
+
+        .logo-tagline {
+            font-size: 9px;
+        }
+
+        .nav-link {
+            font-size: 12px;
+            padding: 6px 8px;
+        }
+
+        .cart-text {
+            display: none;
+        }
+
+        .logout-btn {
+            display: none;
+        }
+
+        .navbar-right {
+            gap: 8px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .navbar {
+            padding: 10px 12px;
+        }
+
+        .logo-text {
+            font-size: 16px;
+        }
+
+        .logo-tagline {
+            font-size: 8px;
+        }
+
+        .nav-link {
+            font-size: 11px;
+            padding: 5px 6px;
+        }
+
+        .navbar-center {
+            gap: 6px;
+        }
+    }
+</style>

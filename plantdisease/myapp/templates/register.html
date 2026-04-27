@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Fresh Harvest</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- Register Container -->
+    <div class="bg-white shadow-2xl rounded-2xl overflow-hidden max-w-5xl w-full flex flex-col md:flex-row">
+
+        <!-- Left Panel: Branding -->
+        <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center items-center text-center bg-gradient-to-br from-green-700 to-green-900 text-white space-y-6">
+            <div class="text-6xl mb-4">
+                <i class="fas fa-seedling text-green-300"></i>
+            </div>
+            <h1 class="text-4xl font-bold tracking-tight">Join Fresh Harvest</h1>
+            <p class="text-green-200 text-lg leading-relaxed">Start your journey with quality produce and connect with farmers</p>
+            <div class="w-full h-1 bg-green-500 rounded mt-4"></div>
+            <div class="space-y-3 pt-4 text-sm">
+                <p class="text-green-300"><i class="fas fa-check-circle mr-2"></i>Fresh produce daily</p>
+                <p class="text-green-300"><i class="fas fa-check-circle mr-2"></i>Fast & reliable delivery</p>
+                <p class="text-green-300"><i class="fas fa-check-circle mr-2"></i>Best prices guaranteed</p>
+            </div>
+        </div>
+
+        <!-- Right Panel: Register Form -->
+        <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900">Create Account</h2>
+                <p class="text-gray-600 mt-2">Join our community today</p>
+            </div>
+
+            <!-- Messages -->
+            {% if messages %}
+                <div class="mb-6">
+                    {% for message in messages %}
+                        <div class="p-4 rounded-lg text-sm font-medium {% if message.tags %}text-{{ message.tags }}-700 bg-{{ message.tags }}-100{% else %}text-red-700 bg-red-100{% endif %} mb-3">
+                            <i class="fas fa-{% if message.tags %}check-circle{% else %}exclamation-circle{% endif %} mr-2"></i>{{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- Register Form -->
+            <form method="POST" class="space-y-4">
+                {% csrf_token %}
+
+                <div>
+                    <label for="name" class="block text-sm font-semibold text-gray-800 mb-2">Full Name</label>
+                    <div class="relative">
+                        <i class="fas fa-user absolute left-4 top-3.5 text-gray-400"></i>
+                        <input type="text" name="name" id="name" placeholder="John Doe" required
+                            class="pl-11 w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-semibold text-gray-800 mb-2">Email Address</label>
+                    <div class="relative">
+                        <i class="fas fa-envelope absolute left-4 top-3.5 text-gray-400"></i>
+                        <input type="email" name="email" id="email" placeholder="you@example.com" required
+                            class="pl-11 w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="number" class="block text-sm font-semibold text-gray-800 mb-2">Mobile Number</label>
+                    <div class="relative">
+                        <i class="fas fa-phone absolute left-4 top-3.5 text-gray-400"></i>
+                        <input type="tel" name="number" id="number" placeholder="9876543210" required
+                            class="pl-11 w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-semibold text-gray-800 mb-2">Password</label>
+                    <div class="relative">
+                        <i class="fas fa-lock absolute left-4 top-3.5 text-gray-400"></i>
+                        <input type="password" name="password" id="password" placeholder="••••••••" required
+                            class="pl-11 w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition">
+                    </div>
+                </div>
+
+                <button type="submit" 
+                        class="w-full py-3 mt-2 text-white bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 rounded-lg font-semibold transition duration-200 shadow-md hover:shadow-lg">
+                    <i class="fas fa-user-plus mr-2"></i>Create Account
+                </button>
+            </form>
+
+            <!-- Divider -->
+            <div class="my-6 flex items-center">
+                <div class="flex-1 h-px bg-gray-200"></div>
+                <p class="px-4 text-sm text-gray-600">Already registered?</p>
+                <div class="flex-1 h-px bg-gray-200"></div>
+            </div>
+
+            <!-- Login Link -->
+            <div class="text-center">
+                <p class="text-gray-700">
+                    Already have an account? 
+                    <a href="{% url 'login' %}" class="font-bold text-green-600 hover:text-green-700 transition">
+                        Sign In
+                    </a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

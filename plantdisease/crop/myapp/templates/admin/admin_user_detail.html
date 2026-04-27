@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details - Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+        }
+
+        /* Sidebar Navigation */
+        .admin-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #1a472a 0%, #0d2818 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 280px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .sidebar-header p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 12px 15px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            padding-left: 20px;
+        }
+
+        .sidebar-menu a.active {
+            background: #2e7d32;
+            font-weight: 600;
+        }
+
+        .sidebar-section-title {
+            padding: 15px 15px 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 15px;
+        }
+
+        .logout-btn {
+            position: absolute;
+            bottom: 20px;
+            width: calc(100% - 40px);
+            padding: 10px 15px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+        }
+
+        .logout-btn:hover {
+            background: #c62828;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 30px;
+        }
+
+        .top-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .back-link {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #1a472a;
+        }
+
+        /* Card Sections */
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 2px solid #2e7d32;
+            padding-bottom: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        /* Orders Table */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .table thead {
+            background: #f8f9fa;
+        }
+
+        .table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .table a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .table a:hover {
+            color: #1a472a;
+            text-decoration: underline;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-processing {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-shipped {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .status-delivered {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .stat-display {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-mini {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-mini-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .stat-mini-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2e7d32;
+            margin-top: 5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .admin-container {
+                grid-template-columns: 250px 1fr;
+            }
+
+            .sidebar {
+                width: 250px;
+            }
+
+            .main-content {
+                margin-left: 250px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 15px;
+                display: none;
+            }
+
+            .sidebar.active {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .table {
+                font-size: 12px;
+            }
+
+            .table th, .table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+                <p>Agricultural Marketplace</p>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="sidebar-section-title">Main</li>
+                <li><a href="{% url 'admin_dashboard' %}">Dashboard</a></li>
+
+                <li class="sidebar-section-title">Management</li>
+                <li><a href="{% url 'admin_users' %}" class="active">Users</a></li>
+                <li><a href="{% url 'admin_orders' %}">Orders</a></li>
+                <li><a href="{% url 'admin_feedback' %}">Feedback & Reviews</a></li>
+                <li><a href="{% url 'admin_products' %}">Products</a></li>
+                <li><a href="{% url 'admin_add_product' %}">Add Product</a></li>
+            </ul>
+
+            <a href="{% url 'admin_logout' %}" class="logout-btn">Logout</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div>
+                    <h1>User Details</h1>
+                </div>
+                <a href="{% url 'admin_users' %}" class="back-link">← Back to Users</a>
+            </div>
+
+            <!-- User Information -->
+            <div class="card">
+                <h2 class="card-title">User Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">User ID</div>
+                        <div class="info-value">#{{ user.id }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Name</div>
+                        <div class="info-value">{{ user.name }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">{{ user.email }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Phone Number</div>
+                        <div class="info-value">{{ user.number|default:"N/A" }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Member Since</div>
+                        <div class="info-value">{{ user.date_joined|date:"M d, Y - H:i" }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Username</div>
+                        <div class="info-value">{{ user.username|default:"N/A" }}</div>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="stat-display" style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee;">
+                    <div class="stat-mini">
+                        <div class="stat-mini-label">Total Orders</div>
+                        <div class="stat-mini-value">{{ total_orders }}</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-mini-label">Total Spent</div>
+                        <div class="stat-mini-value">{{ total_spent }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Orders -->
+            <div class="card">
+                <h2 class="card-title">Orders</h2>
+                {% if orders %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Items</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>#{{ order.id }}</td>
+                            <td>₹{{ order.total_price }}</td>
+                            <td>
+                                <span class="status-badge status-{{ order.status|lower }}">
+                                    {{ order.status }}
+                                </span>
+                            </td>
+                            <td>{{ order.created_at|date:"M d, Y" }}</td>
+                            <td>{{ order.items.count }} items</td>
+                            <td><a href="{% url 'admin_order_detail' order.id %}">View</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="empty-state">
+                    <p>This user has no orders yet.</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- User Feedback -->
+            <div class="card">
+                <h2 class="card-title">Feedback & Reviews</h2>
+                {% if feedbacks %}
+                <div style="display: grid; gap: 15px;">
+                    {% for feedback in feedbacks %}
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #2e7d32;">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                            <div>
+                                <div style="font-weight: 600; color: #2c3e50;">{{ feedback.product.name }}</div>
+                                <div style="font-size: 12px; color: #666; margin-top: 3px;">{{ feedback.created_at|date:"M d, Y - H:i" }}</div>
+                            </div>
+                            <div style="font-size: 14px; font-weight: 700; color: #2e7d32;">{{ feedback.rating }}⭐</div>
+                        </div>
+                        <div style="font-size: 14px; line-height: 1.5; color: #555;">{{ feedback.comment }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="empty-state">
+                    <p>This user has not left any feedback yet.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

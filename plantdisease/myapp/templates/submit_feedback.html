@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write a Review - Cropers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            background: white;
+            color: #2e7d32;
+            border: 2px solid #2e7d32;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #2e7d32;
+            color: white;
+        }
+
+        /* Product Card */
+        .product-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .product-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info h2 {
+            font-size: 18px;
+            color: #2e7d32;
+            margin-bottom: 5px;
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 13px;
+            margin: 3px 0;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .form-title {
+            font-size: 24px;
+            color: #2e7d32;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Star Rating */
+        .rating-group {
+            margin-bottom: 30px;
+        }
+
+        .rating-label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 15px;
+            font-size: 40px;
+        }
+
+        .star {
+            cursor: pointer;
+            color: #ddd;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .star:hover,
+        .star.active {
+            color: #ffc107;
+            transform: scale(1.15);
+        }
+
+        .rating-value {
+            display: block;
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        #ratingInput {
+            display: none;
+        }
+
+        /* Text Area */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #2e7d32;
+            box-shadow: 0 0 8px rgba(46,125,50,0.2);
+        }
+
+        .char-count {
+            display: block;
+            margin-top: 8px;
+            color: #999;
+            font-size: 12px;
+            text-align: right;
+        }
+
+        /* Form Actions */
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46,125,50,0.4);
+        }
+
+        .btn-cancel {
+            background: #f0f0f0;
+            color: #666;
+            border: 2px solid #ddd;
+        }
+
+        .btn-cancel:hover {
+            background: #e0e0e0;
+        }
+
+        /* Existing Feedback */
+        .existing-feedback {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .existing-feedback h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .existing-stars {
+            color: #ffc107;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .existing-comment {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        /* Validation Messages */
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+
+        /* Required field */
+        .required {
+            color: #dc3545;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .product-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .product-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .form-title {
+                font-size: 20px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                min-width: 100%;
+            }
+
+            .star-rating {
+                font-size: 32px;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .product-card {
+                padding: 15px;
+            }
+
+            .form-card {
+                padding: 15px;
+            }
+
+            .form-title {
+                font-size: 18px;
+            }
+
+            textarea {
+                min-height: 120px;
+                padding: 12px;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar Component -->
+    {% include 'navbar.html' %}
+
+    <div class="container">
+        <!-- Back Button -->
+        <a href="{% url 'feedback_list' %}?product_id={{ product.id }}" class="back-btn">← Back to Reviews</a>
+
+        <!-- Product Card -->
+        <div class="product-card">
+            <div class="product-image">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    <div style="width: 100%; height: 100%; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999;">📦</div>
+                {% endif %}
+            </div>
+            <div class="product-info">
+                <h2>{{ product.name }}</h2>
+                <p>📏 Weight: {{ product.weight }}</p>
+                <p>💰 Price: ₹{{ product.price }}</p>
+                <p>📦 Category: {{ product.category.name }}</p>
+            </div>
+        </div>
+
+        <!-- Form Card -->
+        <div class="form-card">
+            <h1 class="form-title">⭐ Share Your Review</h1>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="{% if message.tags %}{{ message.tags }}{% else %}success-message{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST" id="feedbackForm">
+                {% csrf_token %}
+
+                <!-- Star Rating -->
+                <div class="rating-group">
+                    <label class="rating-label">Rate this product <span class="required">*</span></label>
+                    <div class="star-rating" id="starRating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <input type="hidden" id="ratingInput" name="rating" value="{{ existing_feedback.rating|default:0 }}" required>
+                    <span class="rating-value" id="ratingValue">Select a rating</span>
+                </div>
+
+                <!-- Comment -->
+                <div class="form-group">
+                    <label class="form-label">Share your feedback <span class="required">*</span></label>
+                    <textarea 
+                        name="comment" 
+                        placeholder="Tell us what you think about this product... (e.g., quality, taste, packaging, delivery)" 
+                        required
+                        onkeyup="updateCharCount()"
+                    >{% if existing_feedback %}{{ existing_feedback.comment }}{% endif %}</textarea>
+                    <span class="char-count"><span id="charCount">0</span>/500 characters</span>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-submit">
+                        {% if existing_feedback %}
+                            ✏️ Update Review
+                        {% else %}
+                            📝 Submit Review
+                        {% endif %}
+                    </button>
+                    <a href="{% url 'feedback_list' %}?product_id={{ product.id }}" class="btn btn-cancel">Cancel</a>
+                </div>
+            </form>
+
+            <!-- Existing Feedback Display -->
+            {% if existing_feedback %}
+            <div class="existing-feedback">
+                <h4>Your Current Review:</h4>
+                <div class="existing-stars">
+                    {% for i in "12345" %}
+                        {% if i|add:"0" <= existing_feedback.rating %}⭐{% else %}☆{% endif %}
+                    {% endfor %}
+                    ({{ existing_feedback.rating }}/5)
+                </div>
+                <div class="existing-comment">
+                    {{ existing_feedback.comment }}
+                </div>
+                <p style="color: #999; font-size: 12px; margin-top: 10px;">
+                    Last updated: {{ existing_feedback.updated_at|date:"M d, Y \a\t h:i A" }}
+                </p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        // Star rating functionality
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.getElementById('ratingInput');
+        const ratingValue = document.getElementById('ratingValue');
+
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = this.dataset.value;
+                ratingInput.value = rating;
+                
+                // Update active stars
+                stars.forEach(s => {
+                    if (s.dataset.value <= rating) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+                
+                // Update rating text
+                const texts = ['', 'Poor', 'Fair', 'Good', 'Very Good', 'Excellent'];
+                ratingValue.textContent = `${texts[rating]} (${rating}/5)`;
+            });
+
+            // Hover effect
+            star.addEventListener('mouseover', function() {
+                const hoverRating = this.dataset.value;
+                stars.forEach(s => {
+                    if (s.dataset.value <= hoverRating) {
+                        s.style.color = '#ffc107';
+                    } else {
+                        s.style.color = '#ddd';
+                    }
+                });
+            });
+        });
+
+        document.getElementById('starRating').addEventListener('mouseleave', function() {
+            // Reset hover state
+            stars.forEach(star => {
+                if (star.classList.contains('active')) {
+                    star.style.color = '#ffc107';
+                } else {
+                    star.style.color = '#ddd';
+                }
+            });
+        });
+
+        // Set initial active stars if editing
+        const initialRating = ratingInput.value;
+        if (initialRating > 0) {
+            stars.forEach(star => {
+                if (star.dataset.value <= initialRating) {
+                    star.classList.add('active');
+                }
+            });
+            const texts = ['', 'Poor', 'Fair', 'Good', 'Very Good', 'Excellent'];
+            ratingValue.textContent = `${texts[initialRating]} (${initialRating}/5)`;
+        }
+
+        // Character count
+        function updateCharCount() {
+            const textarea = document.querySelector('textarea[name="comment"]');
+            const charCount = document.getElementById('charCount');
+            charCount.textContent = textarea.value.length;
+            if (textarea.value.length > 500) {
+                textarea.value = textarea.value.substring(0, 500);
+                charCount.textContent = '500';
+            }
+        }
+
+        // Form validation
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            const rating = ratingInput.value;
+            const comment = document.querySelector('textarea[name="comment"]').value.trim();
+            
+            if (rating <= 0) {
+                e.preventDefault();
+                alert('Please select a rating');
+                return false;
+            }
+            
+            if (comment.length < 10) {
+                e.preventDefault();
+                alert('Please write at least 10 characters in your review');
+                return false;
+            }
+        });
+
+        // Update char count on page load if existing feedback
+        updateCharCount();
+    </script>
+</body>
+</html>

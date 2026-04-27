@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Cropers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 26px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 30px;
+        }
+
+        .navbar-right {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .cart-icon {
+            font-size: 20px;
+        }
+
+        .logout-nav {
+            background: rgba(255,255,255,0.2) !important;
+            padding: 8px 16px !important;
+        }
+
+        .logout-nav:hover {
+            background: rgba(255,255,255,0.3) !important;
+        }
+
+        /* Main container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Welcome section */
+        .welcome-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .welcome-header {
+            font-size: 28px;
+            color: #2e7d32;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .welcome-subtext {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Carousel section */
+        .carousel-section {
+            margin-bottom: 60px;
+        }
+
+        .carousel-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2e7d32;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .carousel-container {
+            background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+            position: relative;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            height: 500px;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 0;
+            animation: scroll 30s linear infinite;
+            width: 200%;
+            height: 100%;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+
+        .carousel-item {
+            flex: 0 0 20%;
+            min-width: 20%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .carousel-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, rgba(46,125,50,0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .carousel-item:hover::before {
+            opacity: 1;
+        }
+
+        .carousel-item img {
+            width: 85%;
+            height: 80%;
+            object-fit: cover;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.4s ease;
+            z-index: 2;
+        }
+
+        .carousel-item:hover img {
+            transform: scale(1.12) translateY(-8px);
+            filter: brightness(1.1);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+        }
+
+        .carousel-item-name {
+            margin-top: 18px;
+            font-weight: 700;
+            color: white;
+            font-size: 18px;
+            z-index: 2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-item:hover .carousel-item-name {
+            color: #a5d6a7;
+            transform: scale(1.05);
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .dot:hover {
+            background: rgba(255,255,255,0.7);
+            transform: scale(1.3);
+        }
+
+        .dot.active {
+            background: #a5d6a7;
+            transform: scale(1.4);
+            border-color: white;
+            box-shadow: 0 0 12px rgba(165,214,167,0.6);
+        }
+
+        /* Categories section */
+        .categories-section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #2e7d32;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .category-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 12px 28px rgba(46,125,50,0.2);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .category-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .category-card:hover .category-image img {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        .category-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .category-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .category-description {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .category-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 13px;
+        }
+
+        .category-link:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(46,125,50,0.3);
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 12px;
+            color: #999;
+        }
+
+        .empty-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        /* Footer section */
+        .footer-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-top: 50px;
+        }
+
+        .footer-text {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+
+            .navbar-left,
+            .navbar-right {
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+            }
+
+            .navbar a {
+                display: block;
+                text-align: center;
+            }
+
+            .carousel-wrapper {
+                height: 350px;
+            }
+
+            .carousel-track {
+                animation: scroll 35s linear infinite;
+            }
+
+            .carousel-item {
+                flex: 0 0 33.33%;
+                min-width: 33.33%;
+                padding: 15px 10px;
+            }
+
+            .carousel-item img {
+                height: 85%;
+            }
+
+            .carousel-item-name {
+                font-size: 14px;
+                margin-top: 10px;
+            }
+
+            .carousel-dots {
+                gap: 8px;
+                padding: 15px;
+            }
+
+            .dot {
+                width: 10px;
+                height: 10px;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 15px;
+            }
+
+            .welcome-header {
+                font-size: 22px;
+            }
+
+            .section-title,
+            .carousel-title {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-wrapper {
+                height: 280px;
+            }
+
+            .carousel-item {
+                flex: 0 0 50%;
+                min-width: 50%;
+                padding: 10px 8px;
+            }
+
+            .carousel-item img {
+                width: 95%;
+            }
+
+            .carousel-item-name {
+                font-size: 12px;
+                margin-top: 8px;
+            }
+
+            .carousel-dots {
+                gap: 6px;
+                padding: 12px;
+            }
+
+            .dot {
+                width: 8px;
+                height: 8px;
+            }
+
+            .welcome-header {
+                font-size: 18px;
+            }
+
+            .section-title,
+            .carousel-title {
+                font-size: 18px;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 12px;
+            }
+
+            .main-container {
+                padding: 20px 10px;
+            }
+        }
+
+        /* Loading animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .category-card {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar Component -->
+    {% include 'navbar.html' %}
+
+    <!-- Main content -->
+    <div class="main-container">
+        <!-- Welcome section -->
+        <div class="welcome-section">
+            <div class="welcome-header">
+                <span>👋</span>
+                <span>Welcome, <strong>{{ name }}</strong>!</span>
+            </div>
+            <p class="welcome-subtext">Discover fresh products from our verified sellers. Happy shopping!</p>
+        </div>
+
+        <!-- Carousel section -->
+        {% if categories %}
+        <div class="carousel-section">
+            <h2 class="carousel-title">✨ Featured Categories</h2>
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <div class="carousel-track">
+                        {% for cat in categories %}
+                            <div class="carousel-item">
+                                {% if cat.image %}
+                                    <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/500x400?text={{ cat.name }}" alt="{{ cat.name }}">
+                                {% endif %}
+                                <div class="carousel-item-name">{{ cat.name }}</div>
+                            </div>
+                        {% endfor %}
+                        {% for cat in categories %}
+                            <div class="carousel-item">
+                                {% if cat.image %}
+                                    <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/500x400?text={{ cat.name }}" alt="{{ cat.name }}">
+                                {% endif %}
+                                <div class="carousel-item-name">{{ cat.name }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="carousel-dots">
+                    {% for cat in categories %}
+                        <div class="dot {% if forloop.first %}active{% endif %}" onclick="scrollCarousel(this)"></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Categories section -->
+        <div class="categories-section">
+            <h2 class="section-title">🛒 Shop by Category</h2>
+            {% if categories %}
+                <div class="categories-grid">
+                    {% for cat in categories %}
+                        <div class="category-card">
+                            <div class="category-image">
+                                {% if cat.image %}
+                                    <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/300x200?text={{ cat.name }}" alt="{{ cat.name }}">
+                                {% endif %}
+                            </div>
+                            <div class="category-info">
+                                <div class="category-name">{{ cat.name }}</div>
+                                <p class="category-description">
+                                    {{ cat.description|truncatewords:10 }}
+                                </p>
+                                <a href="{% url 'category_products' cat.id %}" class="category-link">
+                                    Browse → 
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <div class="empty-icon">📦</div>
+                    <p>No categories available at the moment.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Footer section -->
+        <div class="footer-section">
+            <p class="footer-text">✨ Experience fresh, quality products delivered to your doorstep!</p>
+            <p class="footer-text" style="font-size: 12px; color: #999;">© 2025 AgriPortal - Your Trusted Agricultural Marketplace</p>
+        </div>
+    </div>
+
+    <script>
+        // Auto-rotate carousel
+        let scrollPosition = 0;
+        const carousel = document.querySelector('.carousel-track');
+        const items = document.querySelectorAll('.carousel-item');
+        const itemWidth = 25; // 25% width per item
+
+        function autoScroll() {
+            scrollPosition += 0.5;
+            if (carousel) {
+                carousel.style.animation = 'none';
+                carousel.style.transform = `translateX(${-scrollPosition}%)`;
+            }
+
+            // Update active dot every 6.25% scroll (one item)
+            const currentItem = Math.floor(scrollPosition / itemWidth) % items.length;
+            updateActiveDot(currentItem);
+        }
+
+        function updateActiveDot(index) {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        function scrollCarousel(dotElement) {
+            const dots = document.querySelectorAll('.dot');
+            const index = Array.from(dots).indexOf(dotElement);
+            scrollPosition = index * itemWidth;
+            carousel.style.animation = 'none';
+            carousel.style.transform = `translateX(${-scrollPosition}%)`;
+            updateActiveDot(index);
+        }
+
+        // Start auto-scroll
+        // setInterval(autoScroll, 50);
+    </script>
+</body>
+</html>

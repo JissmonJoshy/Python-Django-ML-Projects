@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Feedback - Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+        }
+
+        /* Sidebar Navigation */
+        .admin-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #1a472a 0%, #0d2818 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 280px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .sidebar-header p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 12px 15px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            padding-left: 20px;
+        }
+
+        .sidebar-menu a.active {
+            background: #2e7d32;
+            font-weight: 600;
+        }
+
+        .sidebar-section-title {
+            padding: 15px 15px 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 15px;
+        }
+
+        .logout-btn {
+            position: absolute;
+            bottom: 20px;
+            width: calc(100% - 40px);
+            padding: 10px 15px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+        }
+
+        .logout-btn:hover {
+            background: #c62828;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 30px;
+        }
+
+        .top-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .top-bar h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        /* Filter Section */
+        .filter-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .filter-form input,
+        .filter-form select {
+            padding: 10px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .filter-form input:focus,
+        .filter-form select:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+
+        .filter-form button {
+            padding: 10px 20px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .filter-form button:hover {
+            background: #1a472a;
+        }
+
+        /* Feedback Cards */
+        .feedback-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .feedback-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #2e7d32;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feedback-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .feedback-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .feedback-user-product {
+            flex: 1;
+        }
+
+        .feedback-user {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 3px;
+        }
+
+        .feedback-product {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .feedback-rating {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ff9800;
+        }
+
+        .feedback-comment {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .feedback-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .feedback-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .feedback-actions a {
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view {
+            background: #2e7d32;
+            color: white;
+        }
+
+        .btn-view:hover {
+            background: #1a472a;
+        }
+
+        .btn-delete {
+            background: #d32f2f;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #c62828;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 10px;
+            color: #999;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .admin-container {
+                grid-template-columns: 250px 1fr;
+            }
+
+            .sidebar {
+                width: 250px;
+            }
+
+            .main-content {
+                margin-left: 250px;
+            }
+
+            .filter-form {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 15px;
+                display: none;
+            }
+
+            .sidebar.active {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .feedback-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .feedback-footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .feedback-actions {
+                width: 100%;
+            }
+
+            .feedback-actions a {
+                flex: 1;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+                <p>Agricultural Marketplace</p>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="sidebar-section-title">Main</li>
+                <li><a href="{% url 'admin_dashboard' %}">Dashboard</a></li>
+
+                <li class="sidebar-section-title">Management</li>
+                <li><a href="{% url 'admin_users' %}">Users</a></li>
+                <li><a href="{% url 'admin_orders' %}">Orders</a></li>
+                <li><a href="{% url 'admin_feedback' %}" class="active">Feedback & Reviews</a></li>
+                <li><a href="{% url 'admin_products' %}">Products</a></li>
+                <li><a href="{% url 'admin_add_product' %}">Add Product</a></li>
+            </ul>
+
+            <a href="{% url 'admin_logout' %}" class="logout-btn">Logout</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <h1>Manage Feedback & Reviews</h1>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-box">
+                <form method="GET" class="filter-form">
+                    <input 
+                        type="text" 
+                        name="search" 
+                        placeholder="Search by user or product..."
+                        value="{{ search_query }}"
+                    />
+                    
+                    <select name="product">
+                        <option value="">All Products</option>
+                        {% for product in products %}
+                        <option value="{{ product.id }}" {% if product.id|stringformat:"s" == product_filter %}selected{% endif %}>
+                            {{ product.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+
+                    <select name="rating">
+                        <option value="">All Ratings</option>
+                        <option value="5" {% if rating_filter == "5" %}selected{% endif %}>5 Stars</option>
+                        <option value="4" {% if rating_filter == "4" %}selected{% endif %}>4 Stars</option>
+                        <option value="3" {% if rating_filter == "3" %}selected{% endif %}>3 Stars</option>
+                        <option value="2" {% if rating_filter == "2" %}selected{% endif %}>2 Stars</option>
+                        <option value="1" {% if rating_filter == "1" %}selected{% endif %}>1 Star</option>
+                    </select>
+                    
+                    <button type="submit">Filter</button>
+                    {% if search_query or product_filter or rating_filter %}
+                    <a href="{% url 'admin_feedback' %}" style="padding: 10px 20px; background: #999; color: white; border-radius: 8px; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center;">Clear</a>
+                    {% endif %}
+                </form>
+            </div>
+
+            <!-- Feedback List -->
+            {% if feedback_list %}
+            <div class="feedback-list">
+                {% for feedback in feedback_list %}
+                <div class="feedback-card">
+                    <div class="feedback-header">
+                        <div class="feedback-user-product">
+                            <div class="feedback-user">{{ feedback.user.name }}</div>
+                            <div class="feedback-product">on {{ feedback.product.name }}</div>
+                        </div>
+                        <div class="feedback-rating">{{ feedback.rating }}⭐</div>
+                    </div>
+
+                    <div class="feedback-comment">
+                        "{{ feedback.comment }}"
+                    </div>
+
+                    <div class="feedback-footer">
+                        <div>{{ feedback.created_at|date:"M d, Y - H:i" }}</div>
+                        <div class="feedback-actions">
+                            <a href="{% url 'admin_feedback_detail' feedback.id %}" class="btn-view">View</a>
+                            <a href="{% url 'admin_delete_feedback' feedback.id %}" class="btn-delete" onclick="return confirm('Delete this feedback?');">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <p>No feedback found.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

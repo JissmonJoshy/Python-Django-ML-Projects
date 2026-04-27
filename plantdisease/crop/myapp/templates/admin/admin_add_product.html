@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+        }
+
+        /* Sidebar Navigation */
+        .admin-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #1a472a 0%, #0d2818 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 280px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .sidebar-header p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 12px 15px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            padding-left: 20px;
+        }
+
+        .sidebar-menu a.active {
+            background: #2e7d32;
+            font-weight: 600;
+        }
+
+        .sidebar-section-title {
+            padding: 15px 15px 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 15px;
+        }
+
+        .logout-btn {
+            position: absolute;
+            bottom: 20px;
+            width: calc(100% - 40px);
+            padding: 10px 15px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+        }
+
+        .logout-btn:hover {
+            background: #c62828;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 30px;
+        }
+
+        .top-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .back-link {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #1a472a;
+        }
+
+        /* Form Card */
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2e7d32;
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-save {
+            flex: 1;
+            background: #2e7d32;
+            color: white;
+        }
+
+        .btn-save:hover {
+            background: #1a472a;
+            transform: translateY(-2px);
+        }
+
+        .btn-cancel {
+            flex: 1;
+            background: #e9ecef;
+            color: #2c3e50;
+        }
+
+        .btn-cancel:hover {
+            background: #dee2e6;
+        }
+
+        .messages {
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .admin-container {
+                grid-template-columns: 250px 1fr;
+            }
+
+            .sidebar {
+                width: 250px;
+            }
+
+            .main-content {
+                margin-left: 250px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 15px;
+                display: none;
+            }
+
+            .sidebar.active {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+                <p>Agricultural Marketplace</p>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="sidebar-section-title">Main</li>
+                <li><a href="{% url 'admin_dashboard' %}">Dashboard</a></li>
+
+                <li class="sidebar-section-title">Management</li>
+                <li><a href="{% url 'admin_users' %}">Users</a></li>
+                <li><a href="{% url 'admin_orders' %}">Orders</a></li>
+                <li><a href="{% url 'admin_feedback' %}">Feedback & Reviews</a></li>
+                <li><a href="{% url 'admin_products' %}" class="active">Products</a></li>
+                <li><a href="{% url 'admin_add_product' %}">Add Product</a></li>
+            </ul>
+
+            <a href="{% url 'admin_logout' %}" class="logout-btn">Logout</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <h1>Add New Product</h1>
+                <a href="{% url 'admin_products' %}" class="back-link">← Back to Products</a>
+            </div>
+
+            <!-- Messages -->
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Form -->
+            <div class="card">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="category">Category *</label>
+                        <select id="category" name="category" required>
+                            <option value="">Select Category</option>
+                            {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Product Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Enter product name" required />
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="weight">Weight/Size *</label>
+                            <input type="text" id="weight" name="weight" placeholder="e.g., 1kg, 500g" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price">Price (₹) *</label>
+                            <input type="number" id="price" name="price" placeholder="0.00" step="0.01" required />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="manufacture_date">Manufacture Date *</label>
+                            <input type="date" id="manufacture_date" name="manufacture_date" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="expiry_date">Expiry Date *</label>
+                            <input type="date" id="expiry_date" name="expiry_date" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantity">Stock Quantity (units) *</label>
+                        <input type="number" id="quantity" name="quantity" placeholder="0" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">Product Image *</label>
+                        <input type="file" id="image" name="image" accept="image/*" required />
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-save">Add Product</button>
+                        <a href="{% url 'admin_products' %}" class="btn btn-cancel" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

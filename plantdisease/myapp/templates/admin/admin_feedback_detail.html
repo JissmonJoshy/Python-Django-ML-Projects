@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin - Feedback Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <div class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-gray-900">Feedback Detail</h1>
+                <div class="space-x-4">
+                    <a href="{% url 'admin_feedback' %}" class="text-blue-600 hover:text-blue-800">Back to Feedback</a>
+                    <a href="{% url 'admin_logout' %}" class="text-red-600 hover:text-red-800">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-white rounded-lg shadow p-8 max-w-2xl">
+            <!-- Product Info -->
+            <div class="mb-6 pb-6 border-b">
+                <h2 class="text-2xl font-bold text-gray-900">{{ feedback.product.name }}</h2>
+                <p class="text-gray-600 mt-1">Product ID: {{ feedback.product.id }}</p>
+            </div>
+
+            <!-- User Info -->
+            <div class="mb-6 pb-6 border-b">
+                <h3 class="text-lg font-bold text-gray-900 mb-3">Customer</h3>
+                <p class="text-gray-900"><span class="font-medium">Name:</span> {{ feedback.user.name }}</p>
+                <p class="text-gray-900"><span class="font-medium">Email:</span> {{ feedback.user.email }}</p>
+            </div>
+
+            <!-- Rating -->
+            <div class="mb-6 pb-6 border-b">
+                <h3 class="text-lg font-bold text-gray-900 mb-3">Rating</h3>
+                <div class="flex items-center">
+                    <span class="text-4xl text-yellow-500">★</span>
+                    <span class="text-3xl font-bold text-gray-900 ml-2">{{ feedback.rating }}<span class="text-lg text-gray-600">/5</span></span>
+                </div>
+            </div>
+
+            <!-- Comment -->
+            <div class="mb-6">
+                <h3 class="text-lg font-bold text-gray-900 mb-3">Comment</h3>
+                <p class="text-gray-700 leading-relaxed">{{ feedback.comment }}</p>
+            </div>
+
+            <!-- Date & Actions -->
+            <div class="flex justify-between items-center pt-6 border-t">
+                <p class="text-sm text-gray-600">{{ feedback.created_at|date:"F d, Y H:i" }}</p>
+                <div class="space-x-3">
+                    <a href="{% url 'admin_feedback' %}" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">Back</a>
+                    <a href="{% url 'admin_delete_feedback' feedback.id %}" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700" onclick="return confirm('Delete this feedback?')">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

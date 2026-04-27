@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Details - Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+        }
+
+        /* Sidebar Navigation */
+        .admin-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #1a472a 0%, #0d2818 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 280px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .sidebar-header p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 12px 15px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            padding-left: 20px;
+        }
+
+        .sidebar-menu a.active {
+            background: #2e7d32;
+            font-weight: 600;
+        }
+
+        .sidebar-section-title {
+            padding: 15px 15px 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 15px;
+        }
+
+        .logout-btn {
+            position: absolute;
+            bottom: 20px;
+            width: calc(100% - 40px);
+            padding: 10px 15px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+        }
+
+        .logout-btn:hover {
+            background: #c62828;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 30px;
+        }
+
+        .top-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .back-link {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #1a472a;
+        }
+
+        /* Card Sections */
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 2px solid #2e7d32;
+            padding-bottom: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .rating-display {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff9800;
+        }
+
+        .feedback-comment {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            line-height: 1.6;
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-delete {
+            background: #d32f2f;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #c62828;
+        }
+
+        .btn-back {
+            background: #e9ecef;
+            color: #2c3e50;
+        }
+
+        .btn-back:hover {
+            background: #dee2e6;
+        }
+
+        /* Product Preview */
+        .product-preview {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 15px;
+            align-items: start;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .product-image {
+            width: 120px;
+            height: 120px;
+            background: #e9ecef;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .product-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .product-category {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .product-price {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2e7d32;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .admin-container {
+                grid-template-columns: 250px 1fr;
+            }
+
+            .sidebar {
+                width: 250px;
+            }
+
+            .main-content {
+                margin-left: 250px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-preview {
+                grid-template-columns: 100px 1fr;
+            }
+
+            .product-image {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 15px;
+                display: none;
+            }
+
+            .sidebar.active {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .product-preview {
+                grid-template-columns: 80px 1fr;
+            }
+
+            .product-image {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+                <p>Agricultural Marketplace</p>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="sidebar-section-title">Main</li>
+                <li><a href="{% url 'admin_dashboard' %}">Dashboard</a></li>
+
+                <li class="sidebar-section-title">Management</li>
+                <li><a href="{% url 'admin_users' %}">Users</a></li>
+                <li><a href="{% url 'admin_orders' %}">Orders</a></li>
+                <li><a href="{% url 'admin_feedback' %}" class="active">Feedback & Reviews</a></li>
+                <li><a href="{% url 'admin_products' %}">Products</a></li>
+                <li><a href="{% url 'admin_add_product' %}">Add Product</a></li>
+            </ul>
+
+            <a href="{% url 'admin_logout' %}" class="logout-btn">Logout</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div>
+                    <h1>Feedback Detail</h1>
+                </div>
+                <a href="{% url 'admin_feedback' %}" class="back-link">← Back to Feedback</a>
+            </div>
+
+            <!-- Feedback Information -->
+            <div class="card">
+                <h2 class="card-title">Feedback Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">User Name</div>
+                        <div class="info-value">{{ feedback.user.name }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">User Email</div>
+                        <div class="info-value">{{ feedback.user.email }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Rating</div>
+                        <div class="rating-display">{{ feedback.rating }}⭐</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Submitted On</div>
+                        <div class="info-value">{{ feedback.created_at|date:"M d, Y - H:i" }}</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <div class="info-label">Feedback Comment</div>
+                    <div class="feedback-comment">
+                        {{ feedback.comment }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Information -->
+            <div class="card">
+                <h2 class="card-title">Product Information</h2>
+                <div class="product-preview">
+                    <div class="product-image">
+                        {% if feedback.product.image %}
+                            <img src="{{ feedback.product.image.url }}" alt="{{ feedback.product.name }}" />
+                        {% else %}
+                            <div style="width: 100%; height: 100%; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 11px;">
+                                No image
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">{{ feedback.product.name }}</div>
+                        <div class="product-category">{{ feedback.product.category.name }}</div>
+                        <div class="product-price">₹{{ feedback.product.price }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="card">
+                <div class="button-group">
+                    <a href="{% url 'admin_delete_feedback' feedback.id %}" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this feedback?');">Delete Feedback</a>
+                    <a href="{% url 'admin_feedback' %}" class="btn btn-back">Back to Feedback List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

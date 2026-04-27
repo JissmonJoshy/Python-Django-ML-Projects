@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Place Order</title>
+    <style>
+        body { font-family: Arial; background: #f9f9f9; padding: 20px; }
+        .order-form { max-width: 500px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .order-form input, .order-form textarea { width: 100%; padding: 8px; margin-bottom: 15px; border-radius: 5px; border:1px solid #ccc; }
+        .order-form button { padding: 10px 15px; background:#2e7d32; color:white; border:none; border-radius:5px; cursor:pointer; }
+        .order-form button:hover { background:#1b5e20; }
+        .total { font-weight:bold; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar Component -->
+    {% include 'navbar.html' %}
+    
+    <div class="order-form">
+        <h2>Confirm Your Order</h2>
+        <div class="total">Total Price: ₹{{ total }}</div>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="full_name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="phone" placeholder="Phone Number" required>
+            <textarea name="address" placeholder="Shipping Address" rows="4" required></textarea>
+            <button type="submit">Place Order</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Feedback - Cropers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Product Header */
+        .product-header {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        .product-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info h1 {
+            font-size: 26px;
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .rating-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .average-rating {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2e7d32;
+        }
+
+        .stars {
+            color: #ffc107;
+            font-size: 20px;
+        }
+
+        .review-count {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46,125,50,0.4);
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2e7d32;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Feedback Cards */
+        .feedback-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .feedback-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid #2e7d32;
+            transition: all 0.3s ease;
+        }
+
+        .feedback-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+
+        .feedback-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: #2e7d32;
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+
+        .feedback-date {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .feedback-rating {
+            color: #ffc107;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .feedback-comment {
+            color: #555;
+            line-height: 1.6;
+            font-size: 14px;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .empty-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .empty-text {
+            color: #999;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* Navigation */
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            background: white;
+            color: #2e7d32;
+            border: 2px solid #2e7d32;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #2e7d32;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .product-header {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image {
+                width: 100%;
+                height: 200px;
+            }
+
+            .feedback-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .main-container {
+                padding: 20px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-info h1 {
+                font-size: 20px;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+
+            .feedback-card {
+                padding: 15px;
+            }
+
+            .feedback-comment {
+                font-size: 13px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar Component -->
+    {% include 'navbar.html' %}
+
+    <div class="main-container">
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <a href="{% url 'home' %}" class="nav-btn">← Back to Home</a>
+        </div>
+
+        <!-- Product Header -->
+        <div class="product-header">
+            <div class="product-image">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    <div style="width: 100%; height: 100%; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999;">📦</div>
+                {% endif %}
+            </div>
+            
+            <div class="product-info">
+                <h1>{{ product.name }}</h1>
+                
+                <div class="rating-section">
+                    <div class="average-rating">{{ avg_rating }}</div>
+                    <div>
+                        <div class="stars">
+                            {% for i in "12345" %}
+                                {% if i|add:"0" <= avg_rating %}
+                                    ⭐
+                                {% elif i|add:"0" <= avg_rating|add:"0.5" %}
+                                    ⭐
+                                {% else %}
+                                    ☆
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="review-count">{{ total_reviews }} review{{ total_reviews|pluralize }}</div>
+                    </div>
+                </div>
+
+                <p>
+                    <strong>Price:</strong> ₹{{ product.price }}<br>
+                    <strong>Category:</strong> {{ product.category.name }}<br>
+                    <strong>Stock:</strong> {{ product.quantity }} available
+                </p>
+
+                {% if user %}
+                    <a href="{% url 'submit_feedback' product.id %}" class="submit-btn">💬 Share Your Feedback</a>
+                {% else %}
+                    <p style="margin-top: 15px; color: #666; font-size: 14px;">
+                        <a href="{% url 'login' %}" style="color: #2e7d32; text-decoration: none; font-weight: 600;">Login</a> to share your feedback
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Feedback Section -->
+        <div class="feedback-section">
+            <h2 class="section-title">💬 Customer Reviews</h2>
+
+            {% if feedbacks %}
+                <div class="feedback-list">
+                    {% for feedback in feedbacks %}
+                    <div class="feedback-card">
+                        <div class="feedback-header">
+                            <div class="user-info">
+                                <div class="user-name">{{ feedback.user.name }}</div>
+                                <div class="feedback-date">{{ feedback.created_at|date:"M d, Y" }}</div>
+                            </div>
+                            <div class="feedback-rating">
+                                {% for i in "12345" %}
+                                    {% if i|add:"0" <= feedback.rating %}⭐{% else %}☆{% endif %}
+                                {% endfor %}
+                                ({{ feedback.rating }}/5)
+                            </div>
+                        </div>
+                        {% if feedback.comment %}
+                        <div class="feedback-comment">
+                            {{ feedback.comment }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <div class="empty-icon">📝</div>
+                    <div class="empty-text">No reviews yet. Be the first to share your feedback!</div>
+                    {% if user %}
+                        <a href="{% url 'submit_feedback' product.id %}" class="submit-btn">💬 Write a Review</a>
+                    {% else %}
+                        <p><a href="{% url 'login' %}" style="color: #2e7d32; text-decoration: none; font-weight: 600;">Login</a> to write a review</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

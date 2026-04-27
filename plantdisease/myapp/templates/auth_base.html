@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Auth - Fresh Harvest{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f7fff7; }
+    </style>
+    {% block head %}{% endblock %}
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white shadow-2xl rounded-xl overflow-hidden max-w-4xl w-full flex flex-col md:flex-row">
+
+        <!-- Left Panel: Branding -->
+        <div class="md:w-1/2 p-6 md:p-10 flex flex-col justify-center items-center text-center bg-green-700 text-white space-y-4">
+            <h1 class="text-4xl font-bold tracking-tight">{% block brand_title %}Welcome{% endblock %}</h1>
+            <p class="text-green-200 text-lg">{% block brand_subtitle %}Your fresh produce marketplace is waiting for you.{% endblock %}</p>
+            <img src="{% block brand_image %}https://placehold.co/600x400/065f46/ffffff?text=Fresh+Crops{% endblock %}"
+                 alt="Fresh vegetables"
+                 class="w-full h-auto object-cover rounded-lg shadow-lg">
+            <p class="text-green-300 pt-4 text-sm">{% block brand_footer %}Find and sell the best from the field.{% endblock %}</p>
+        </div>
+
+        <!-- Right Panel: Form Area -->
+        <div class="md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+            <h2 class="text-3xl font-extrabold text-green-800 mb-8 text-center">{% block form_title %}Authenticate{% endblock %}</h2>
+
+            {% if messages %}
+                <div class="mb-4">
+                    {% for m in messages %}
+                        <div class="text-sm text-red-600">{{ m }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% block form_content %}{% endblock %}
+
+            <div class="mt-6 text-center space-y-2">
+                {% block form_links %}{% endblock %}
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

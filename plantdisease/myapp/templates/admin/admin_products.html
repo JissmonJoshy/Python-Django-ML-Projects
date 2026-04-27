@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin - Products</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <div class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-gray-900">Products Management</h1>
+                <div class="space-x-4">
+                    <a href="{% url 'admin_add_product' %}" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">+ Add Product</a>
+                    <a href="{% url 'admin_categories' %}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Categories</a>
+                    <a href="{% url 'admin_dashboard' %}" class="text-blue-600 hover:text-blue-800">Dashboard</a>
+                    <a href="{% url 'admin_logout' %}" class="text-red-600 hover:text-red-800">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Filters -->
+        <div class="mb-6 bg-white p-4 rounded-lg shadow">
+            <form method="get" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <input 
+                        type="text" 
+                        name="search" 
+                        placeholder="Search by name..." 
+                        value="{{ search_query }}"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <select name="category" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="">All Categories</option>
+                        {% for cat in categories %}
+                            <option value="{{ cat.id }}" {% if category_filter == cat.id|stringformat:"s" %}selected{% endif %}>{{ cat.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <button type="submit" class="w-full px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Filter</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Messages -->
+        {% if messages %}
+            <div class="mb-4">
+                {% for m in messages %}
+                    <div class="text-sm text-green-600">{{ m }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Products Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for product in products %}
+                <div class="bg-white rounded-lg shadow p-4 hover:shadow-lg transition">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-40 object-cover rounded-lg mb-4">
+                    {% else %}
+                        <div class="w-full h-40 bg-gray-200 rounded-lg mb-4 flex items-center justify-center text-gray-400">No image</div>
+                    {% endif %}
+                    
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">{{ product.name }}</h3>
+                    <p class="text-sm text-gray-600 mb-3">{{ product.category.name }}</p>
+                    
+                    <div class="space-y-1 mb-4 text-sm text-gray-700">
+                        <p><span class="font-medium">Price:</span> ₹{{ product.price }}</p>
+                        <p><span class="font-medium">Stock:</span> {{ product.quantity }}</p>
+                        <p><span class="font-medium">Weight:</span> {{ product.weight }}</p>
+                        <p><span class="font-medium">Expiry:</span> {{ product.expiry_date|date:"M d, Y" }}</p>
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <a href="{% url 'admin_edit_product' product.id %}" class="flex-1 px-3 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 text-center">Edit</a>
+                        <a href="{% url 'admin_delete_product' product.id %}" class="flex-1 px-3 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 text-center" onclick="return confirm('Delete this product?')">Delete</a>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-span-full bg-white rounded-lg shadow p-6 text-center text-gray-500">
+                    No products found
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>

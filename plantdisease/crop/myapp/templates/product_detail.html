@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }} - Cropers</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; 
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%); 
+            color: #2c3e50; 
+            padding: 20px; 
+        }
+        
+        .container { max-width: 1000px; margin: 0 auto; }
+        
+        .header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: linear-gradient(135deg, #1a472a 0%, #0d2818 100%); 
+            color: white; 
+            padding: 25px 30px; 
+            border-radius: 12px; 
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 { 
+            font-size: 28px; 
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+        
+        .back-link { 
+            color: rgba(255,255,255,0.9); 
+            text-decoration: none; 
+            font-size: 14px;
+            padding: 8px 16px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover { 
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.5);
+        }
+        
+        .product-card { 
+            background: white; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
+            overflow: hidden; 
+        }
+        
+        .product-content { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 40px; 
+            padding: 40px; 
+        }
+        
+        .product-image { text-align: center; }
+        .product-image img { 
+            max-width: 100%; 
+            height: auto; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+        }
+        
+        .no-image { 
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%); 
+            padding: 80px 40px; 
+            border-radius: 8px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: #999; 
+            font-size: 14px;
+        }
+        
+        .product-info h2 { 
+            color: #1a472a; 
+            font-size: 32px; 
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .product-info .category { 
+            color: #666; 
+            font-size: 14px; 
+            margin-bottom: 20px;
+            text-transform: capitalize;
+        }
+        
+        .price-section { 
+            background: linear-gradient(135deg, #f0f8f0 0%, #e8f5e9 100%);
+            padding: 20px; 
+            border-radius: 8px; 
+            margin-bottom: 25px;
+            border-left: 4px solid #2e7d32;
+        }
+        
+        .price { 
+            font-size: 36px; 
+            color: #2e7d32; 
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .price-label { 
+            color: #999; 
+            font-size: 12px; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .product-details { margin: 25px 0; }
+        
+        .detail-row { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 12px 0; 
+            border-bottom: 1px solid #eee; 
+        }
+        
+        .detail-row:last-child { border-bottom: none; }
+        
+        .detail-label { 
+            font-weight: 600; 
+            color: #1a472a; 
+            font-size: 14px;
+        }
+        
+        .detail-value { 
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .quantity-section { margin: 30px 0; }
+        
+        .quantity-label { 
+            display: block; 
+            margin-bottom: 10px; 
+            font-weight: 600; 
+            color: #1a472a;
+            font-size: 14px;
+        }
+        
+        .quantity-input { 
+            width: 100px; 
+            padding: 10px 12px; 
+            border: 2px solid #ddd; 
+            border-radius: 6px; 
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .quantity-input:focus { 
+            outline: none; 
+            border-color: #2e7d32;
+            box-shadow: 0 0 8px rgba(46,125,50,0.15);
+        }
+        
+        .add-to-cart-btn { 
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: white; 
+            border: none; 
+            padding: 14px 40px; 
+            font-size: 16px; 
+            font-weight: 600; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            transition: all 0.3s ease;
+            width: 100%; 
+            margin-top: 15px;
+            box-shadow: 0 2px 8px rgba(46,125,50,0.2);
+        }
+        
+        .add-to-cart-btn:hover { 
+            box-shadow: 0 6px 20px rgba(46,125,50,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .add-to-cart-btn:active { transform: scale(0.98); }
+        
+        .stock-status { 
+            font-size: 14px; 
+            margin-bottom: 20px;
+            padding: 12px;
+            border-radius: 6px;
+        }
+        
+        .stock-available { 
+            color: #1b5e20;
+            background: #e8f5e9;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .stock-low { 
+            color: #e65100;
+            background: #fff3e0;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .stock-out { 
+            color: #b71c1c;
+            background: #ffebee;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .description-section { 
+            margin-top: 30px; 
+            padding-top: 30px; 
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        .description-section h3 { 
+            color: #1a472a; 
+            margin-bottom: 15px; 
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .description-section p { 
+            color: #666; 
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        
+        .description-section a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 12px;
+            padding: 10px 20px;
+            background: #e8f5e9;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .description-section a:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .product-content { 
+                grid-template-columns: 1fr; 
+                gap: 25px; 
+                padding: 25px; 
+            }
+            
+            .header { 
+                flex-direction: column; 
+                text-align: center; 
+                gap: 15px; 
+            }
+            
+            .product-info h2 {
+                font-size: 24px;
+            }
+            
+            .price {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar Component -->
+    {% include 'navbar.html' %}
+
+    <div class="container">
+        <div class="header">
+            <h1>Product Details</h1>
+            <a href="{% url 'home' %}" class="back-link">Back to Home</a>
+        </div>
+
+        <div class="product-card">
+            <div class="product-content">
+                <!-- Product Image -->
+                <div class="product-image">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                    {% else %}
+                        <div class="no-image">No image available</div>
+                    {% endif %}
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info">
+                    <h2>{{ product.name }}</h2>
+                    <p class="category">Category: <strong>{{ product.category.name }}</strong></p>
+
+                    <div class="price-section">
+                        <p class="price-label">Price per Unit</p>
+                        <p class="price">₹{{ product.price }}</p>
+                    </div>
+
+                    <!-- Product Details -->
+                    <div class="product-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Weight/Size:</span>
+                            <span class="detail-value">{{ product.weight }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Manufactured:</span>
+                            <span class="detail-value">{{ product.manufacture_date|date:"M d, Y" }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Expiry Date:</span>
+                            <span class="detail-value">{{ product.expiry_date|date:"M d, Y" }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Available Stock:</span>
+                            <span class="detail-value">
+                                {% if product.quantity > 10 %}
+                                    <span class="stock-available">{{ product.quantity }} units in stock</span>
+                                {% elif product.quantity > 0 %}
+                                    <span class="stock-low">{{ product.quantity }} units remaining (Low stock)</span>
+                                {% else %}
+                                    <span class="stock-out">Out of stock</span>
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Add to Cart Form -->
+                    {% if product.quantity > 0 %}
+                        <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                            {% csrf_token %}
+                            <div class="quantity-section">
+                                <label class="quantity-label">Quantity:</label>
+                                <input type="number" name="quantity" class="quantity-input" value="1" min="1" max="{{ product.quantity }}" required />
+                            </div>
+                            <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                        </form>
+                    {% else %}
+                        <button class="add-to-cart-btn" disabled style="background: #999; cursor: not-allowed;">Out of Stock</button>
+                    {% endif %}
+
+                    <!-- Description -->
+                    <div class="description-section">
+                        <h3>About This Product</h3>
+                        <p>This is a premium quality product from our <strong>{{ product.category.name }}</strong> collection. Sourced directly from trusted farmers and available from {{ product.manufacture_date|date:"M d, Y" }} to {{ product.expiry_date|date:"M d, Y" }}.</p>
+
+                        <!-- Feedback Section -->
+                        <a href="{% url 'feedback_list' %}?product_id={{ product.id }}">View Customer Reviews</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

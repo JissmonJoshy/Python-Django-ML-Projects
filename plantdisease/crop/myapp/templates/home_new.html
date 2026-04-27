@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cropers - Agricultural Marketplace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #2c3e50;
+            min-height: 100vh;
+        }
+
+        /* Main container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Welcome section */
+        .welcome-section {
+            background: linear-gradient(135deg, #1a472a 0%, #0d2818 100%);
+            padding: 50px 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            margin-bottom: 60px;
+            color: white;
+        }
+
+        .welcome-header {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .welcome-subtext {
+            color: rgba(255,255,255,0.85);
+            font-size: 16px;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        .welcome-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            margin-top: 35px;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #4CAF50;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Carousel section */
+        .carousel-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a472a;
+            margin-bottom: 25px;
+            letter-spacing: -0.3px;
+        }
+
+        .carousel-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            height: 450px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .carousel-track {
+            display: flex;
+            height: 100%;
+            animation: scroll 40s linear infinite;
+        }
+
+        .carousel-item {
+            flex: 0 0 25%;
+            min-width: 25%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-item:hover {
+            background: rgba(46,125,50,0.05);
+        }
+
+        .carousel-item img {
+            max-width: 90%;
+            max-height: 350px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .carousel-item-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a472a;
+            text-align: center;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            background: white;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .dot.active {
+            background: #2e7d32;
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Categories section */
+        .categories-section {
+            margin-bottom: 60px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .category-card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+        }
+
+        .category-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover .category-image img {
+            transform: scale(1.08);
+        }
+
+        .category-info {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a472a;
+            margin-bottom: 8px;
+        }
+
+        .category-description {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: auto;
+            flex-grow: 1;
+        }
+
+        .category-link {
+            display: inline-block;
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 12px;
+            padding-bottom: 2px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .category-link:hover {
+            border-bottom-color: #2e7d32;
+            color: #1b5e20;
+        }
+
+        /* Footer section */
+        .footer-section {
+            background: #f8f9fa;
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 80px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .footer-text {
+            color: #666;
+            font-size: 15px;
+            margin: 8px 0;
+            line-height: 1.8;
+        }
+
+        .footer-text strong {
+            color: #1a472a;
+            font-weight: 600;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 12px;
+            color: #999;
+        }
+
+        .empty-text {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .welcome-section {
+                padding: 40px 30px;
+            }
+
+            .welcome-header {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .carousel-wrapper {
+                height: 380px;
+            }
+
+            .carousel-item {
+                flex: 0 0 33.33%;
+                min-width: 33.33%;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 40px 15px;
+            }
+
+            .welcome-section {
+                padding: 30px 20px;
+                margin-bottom: 40px;
+            }
+
+            .welcome-header {
+                font-size: 24px;
+            }
+
+            .welcome-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                margin-top: 25px;
+            }
+
+            .carousel-wrapper {
+                height: 320px;
+            }
+
+            .carousel-item {
+                flex: 0 0 50%;
+                min-width: 50%;
+                padding: 15px;
+            }
+
+            .carousel-item img {
+                max-height: 250px;
+            }
+
+            .carousel-item-name {
+                font-size: 14px;
+            }
+
+            .section-title {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .category-image {
+                height: 160px;
+            }
+
+            .category-info {
+                padding: 15px;
+            }
+
+            .category-name {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 25px 12px;
+            }
+
+            .welcome-section {
+                padding: 25px 15px;
+                margin-bottom: 30px;
+            }
+
+            .welcome-header {
+                font-size: 20px;
+            }
+
+            .welcome-subtext {
+                font-size: 14px;
+            }
+
+            .welcome-stats {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                margin-top: 20px;
+            }
+
+            .stat-number {
+                font-size: 24px;
+            }
+
+            .carousel-wrapper {
+                height: 250px;
+            }
+
+            .carousel-item {
+                flex: 0 0 100%;
+                min-width: 100%;
+                padding: 12px;
+            }
+
+            .carousel-item img {
+                max-height: 180px;
+            }
+
+            .carousel-dots {
+                padding: 15px;
+                gap: 6px;
+            }
+
+            .dot {
+                width: 8px;
+                height: 8px;
+            }
+
+            .dot.active {
+                width: 20px;
+            }
+
+            .section-title {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .category-image {
+                height: 140px;
+            }
+
+            .category-info {
+                padding: 12px;
+            }
+
+            .category-name {
+                font-size: 14px;
+            }
+
+            .footer-section {
+                padding: 25px 15px;
+                margin-top: 50px;
+            }
+
+            .footer-text {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar Component -->
+    {% include 'navbar.html' %}
+
+    <div class="main-container">
+        <!-- Welcome section -->
+        <div class="welcome-section">
+            <h1 class="welcome-header">Welcome to Cropers</h1>
+            <p class="welcome-subtext">
+                Your trusted agricultural marketplace connecting quality farmers with conscious consumers. Browse fresh produce, explore local farming practices, and support sustainable agriculture.
+            </p>
+            
+            <div class="welcome-stats">
+                <div class="stat-box">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Quality Products</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Happy Customers</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Partner Farmers</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Customer Support</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Products Carousel -->
+        {% if categories %}
+        <div class="carousel-section">
+            <h2 class="section-title">Featured Categories</h2>
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <div class="carousel-track">
+                        <!-- Duplicate categories for infinite loop effect -->
+                        {% for cat in categories %}
+                            <div class="carousel-item">
+                                {% if cat.image %}
+                                    <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+                                {% else %}
+                                    <div style="width: 200px; height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; border-radius: 8px; color: #999;">
+                                        No Image
+                                    </div>
+                                {% endif %}
+                                <div class="carousel-item-name">{{ cat.name }}</div>
+                            </div>
+                        {% endfor %}
+                        <!-- Duplicate for loop effect -->
+                        {% for cat in categories %}
+                            <div class="carousel-item">
+                                {% if cat.image %}
+                                    <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+                                {% else %}
+                                    <div style="width: 200px; height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; border-radius: 8px; color: #999;">
+                                        No Image
+                                    </div>
+                                {% endif %}
+                                <div class="carousel-item-name">{{ cat.name }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="carousel-dots">
+                    {% for cat in categories %}
+                        <div class="dot {% if forloop.first %}active{% endif %}" onclick="scrollCarousel(this)"></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Categories section -->
+        <div class="categories-section">
+            <h2 class="section-title">Shop by Category</h2>
+            {% if categories %}
+                <div class="categories-grid">
+                    {% for cat in categories %}
+                        <div class="category-card">
+                            <div class="category-image">
+                                {% if cat.image %}
+                                    <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+                                {% else %}
+                                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%); display: flex; align-items: center; justify-content: center; color: #999;">
+                                        No Image
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="category-info">
+                                <div class="category-name">{{ cat.name }}</div>
+                                <p class="category-description">
+                                    Explore our collection of premium {{ cat.name|lower }}. Sourced directly from trusted farmers and delivered fresh to your doorstep.
+                                </p>
+                                <a href="{% url 'category_products' cat.id %}" class="category-link">
+                                    Browse Collection
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <p class="empty-text">No categories available at the moment.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Footer section -->
+        <div class="footer-section">
+            <p class="footer-text"><strong>Premium Quality • Farm Fresh • Directly from Farmers</strong></p>
+            <p class="footer-text">Supporting sustainable agriculture and connecting you with the finest agricultural products</p>
+            <p class="footer-text" style="font-size: 12px; color: #999; margin-top: 20px;">© 2025 Cropers Agricultural Marketplace. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Auto-rotate carousel
+        let scrollPosition = 0;
+        const carousel = document.querySelector('.carousel-track');
+        const items = document.querySelectorAll('.carousel-item');
+        const itemWidth = 25; // 25% width per item
+
+        function autoScroll() {
+            scrollPosition += 0.5;
+            if (carousel) {
+                carousel.style.animation = 'none';
+                carousel.style.transform = `translateX(${-scrollPosition}%)`;
+            }
+
+            // Update active dot every 6.25% scroll (one item)
+            const currentItem = Math.floor(scrollPosition / itemWidth) % items.length;
+            updateActiveDot(currentItem);
+        }
+
+        function updateActiveDot(index) {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        function scrollCarousel(dotElement) {
+            const dots = document.querySelectorAll('.dot');
+            const index = Array.from(dots).indexOf(dotElement);
+            scrollPosition = index * itemWidth;
+            carousel.style.animation = 'none';
+            carousel.style.transform = `translateX(${-scrollPosition}%)`;
+            updateActiveDot(index);
+        }
+
+        // Start auto-scroll
+        // setInterval(autoScroll, 50);
+    </script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Orders - Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+        }
+
+        /* Sidebar Navigation */
+        .admin-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #1a472a 0%, #0d2818 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 280px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .sidebar-header p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 12px 15px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            padding-left: 20px;
+        }
+
+        .sidebar-menu a.active {
+            background: #2e7d32;
+            font-weight: 600;
+        }
+
+        .sidebar-section-title {
+            padding: 15px 15px 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 15px;
+        }
+
+        .logout-btn {
+            position: absolute;
+            bottom: 20px;
+            width: calc(100% - 40px);
+            padding: 10px 15px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+        }
+
+        .logout-btn:hover {
+            background: #c62828;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 30px;
+        }
+
+        .top-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .top-bar h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        /* Filter Section */
+        .filter-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .filter-form input,
+        .filter-form select {
+            padding: 10px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .filter-form input:focus,
+        .filter-form select:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+
+        .filter-form button {
+            padding: 10px 20px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .filter-form button:hover {
+            background: #1a472a;
+        }
+
+        /* Table Section */
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 2px solid #2e7d32;
+            padding-bottom: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .table thead {
+            background: #f8f9fa;
+        }
+
+        .table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .table a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .table a:hover {
+            color: #1a472a;
+            text-decoration: underline;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-processing {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-shipped {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .status-delivered {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .admin-container {
+                grid-template-columns: 250px 1fr;
+            }
+
+            .sidebar {
+                width: 250px;
+            }
+
+            .main-content {
+                margin-left: 250px;
+            }
+
+            .filter-form {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 15px;
+                display: none;
+            }
+
+            .sidebar.active {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .table {
+                font-size: 12px;
+            }
+
+            .table th, .table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+                <p>Agricultural Marketplace</p>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="sidebar-section-title">Main</li>
+                <li><a href="{% url 'admin_dashboard' %}">Dashboard</a></li>
+
+                <li class="sidebar-section-title">Management</li>
+                <li><a href="{% url 'admin_users' %}">Users</a></li>
+                <li><a href="{% url 'admin_orders' %}" class="active">Orders</a></li>
+                <li><a href="{% url 'admin_feedback' %}">Feedback & Reviews</a></li>
+                <li><a href="{% url 'admin_products' %}">Products</a></li>
+                <li><a href="{% url 'admin_add_product' %}">Add Product</a></li>
+            </ul>
+
+            <a href="{% url 'admin_logout' %}" class="logout-btn">Logout</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <h1>Manage Orders</h1>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-box">
+                <form method="GET" class="filter-form">
+                    <input 
+                        type="text" 
+                        name="search" 
+                        placeholder="Search by order ID, name, or email..."
+                        value="{{ search_query }}"
+                    />
+                    
+                    <select name="status">
+                        <option value="">All Statuses</option>
+                        {% for status in statuses %}
+                        <option value="{{ status }}" {% if status == status_filter %}selected{% endif %}>
+                            {{ status }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    
+                    <button type="submit">Filter</button>
+                    {% if search_query or status_filter %}
+                    <a href="{% url 'admin_orders' %}" style="padding: 10px 20px; background: #999; color: white; border-radius: 8px; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center;">Clear</a>
+                    {% endif %}
+                </form>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="section">
+                <h2 class="section-title">Orders List</h2>
+                {% if orders %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer Name</th>
+                            <th>Email</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>#{{ order.id }}</td>
+                            <td>{{ order.full_name }}</td>
+                            <td>{{ order.email }}</td>
+                            <td>₹{{ order.total_price }}</td>
+                            <td>
+                                <span class="status-badge status-{{ order.status|lower }}">
+                                    {{ order.status }}
+                                </span>
+                            </td>
+                            <td>{{ order.created_at|date:"M d, Y" }}</td>
+                            <td><a href="{% url 'admin_order_detail' order.id %}">View Details</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="empty-state">
+                    <p>No orders found.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

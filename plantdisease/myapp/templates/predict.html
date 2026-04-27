@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Prediction</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4fcf4; /* Very light green/off-white background */
+            color: #333;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Main Container for the content */
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            /* Adjusted size for a focused prediction tool */
+            max-width: 500px; 
+            text-align: center;
+        }
+
+        /* Header and Back Button Section */
+        .header-group {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #1e8449; /* Darker green for headings */
+            margin-bottom: 15px;
+            border-bottom: 2px solid #a9d9a9;
+            padding-bottom: 10px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background-color: #a9d9a9; /* Light green/gray for a neutral button */
+            color: #1e8449; 
+            padding: 8px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+            margin-bottom: 25px;
+        }
+
+        .back-btn:hover {
+            background-color: #c8e6c9;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; 
+        }
+
+        label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #38761d;
+            font-size: 1.1em;
+        }
+
+        input[type="number"] {
+            padding: 12px; 
+            border: 1px solid #c8e6c9; 
+            border-radius: 6px;
+            width: 45%; /* Slightly increased width for better input area */
+            transition: border-color 0.3s;
+            font-size: 1em;
+        }
+
+        input[type="number"]:focus {
+            border-color: #1e8449;
+            outline: none;
+        }
+
+        /* Button Styling */
+        button[type="submit"] {
+            background-color: #38761d; 
+            color: white;
+            padding: 14px 25px; 
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px; 
+            font-weight: bold;
+            margin-top: 25px; 
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #1e8449; 
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.98);
+        }
+
+        /* Result and Error Styling */
+        .message-box {
+            margin-top: 30px; 
+            padding: 20px; 
+            border-radius: 8px;
+            font-size: 1.2em; 
+            font-weight: bold;
+        }
+
+        /* Error Message */
+        .error-message {
+            background-color: #ffeaea; 
+            color: #cc0000; 
+            border: 1px solid #cc0000;
+        }
+
+        /* Success/Result Message */
+        .result-message {
+            background-color: #e6ffe6; 
+            color: #1e8449; 
+            border: 1px solid #1e8449;
+        }
+
+        .result-message h3 {
+            margin: 0;
+            color: #1e8449;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="{% url 'home' %}" class="back-btn">← Back to Home</a>
+        
+        <h2>🌱 Disease Recommendation</h2>
+
+        <form method="post">
+            {% csrf_token %}
+           <button type="submit">Predict Disease</button>
+        </form>
+
+        
+    </div>
+</body>
+</html>

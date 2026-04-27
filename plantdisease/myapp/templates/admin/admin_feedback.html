@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin - Feedback</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <div class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-gray-900">Feedback Management</h1>
+                <div class="space-x-4">
+                    <a href="{% url 'admin_dashboard' %}" class="text-blue-600 hover:text-blue-800">Dashboard</a>
+                    <a href="{% url 'admin_logout' %}" class="text-red-600 hover:text-red-800">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Filters -->
+        <div class="mb-6 bg-white p-4 rounded-lg shadow">
+            <form method="get" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <input 
+                        type="text" 
+                        name="search" 
+                        placeholder="Search..." 
+                        value="{{ search_query }}"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <select name="product" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="">All Products</option>
+                        {% for product in products %}
+                            <option value="{{ product.id }}" {% if product_filter == product.id|stringformat:"s" %}selected{% endif %}>{{ product.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <select name="rating" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="">All Ratings</option>
+                        <option value="5" {% if rating_filter == "5" %}selected{% endif %}>5 Stars</option>
+                        <option value="4" {% if rating_filter == "4" %}selected{% endif %}>4 Stars</option>
+                        <option value="3" {% if rating_filter == "3" %}selected{% endif %}>3 Stars</option>
+                        <option value="2" {% if rating_filter == "2" %}selected{% endif %}>2 Stars</option>
+                        <option value="1" {% if rating_filter == "1" %}selected{% endif %}>1 Star</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit" class="w-full px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Filter</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Messages -->
+        {% if messages %}
+            <div class="mb-4">
+                {% for m in messages %}
+                    <div class="text-sm text-green-600">{{ m }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Feedback List -->
+        <div class="space-y-4">
+            {% for feedback in feedback_list %}
+                <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">{{ feedback.product.name }}</h3>
+                            <p class="text-sm text-gray-600">By {{ feedback.user.name }}</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <a href="{% url 'admin_feedback_detail' feedback.id %}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">View</a>
+                            <a href="{% url 'admin_delete_feedback' feedback.id %}" class="text-red-600 hover:text-red-800 text-sm font-medium" onclick="return confirm('Delete this feedback?')">Delete</a>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <span class="text-yellow-500 text-lg">★</span>
+                        <span class="text-gray-900 font-bold">{{ feedback.rating }}/5</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">{{ feedback.comment }}</p>
+                    <p class="text-gray-400 text-xs mt-3">{{ feedback.created_at|date:"M d, Y H:i" }}</p>
+                </div>
+            {% empty %}
+                <div class="bg-white rounded-lg shadow p-6 text-center text-gray-500">
+                    No feedback found
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>

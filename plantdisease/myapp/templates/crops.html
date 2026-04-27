@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cropers | Shop Categories</title>
+    <style>
+        /* --- General Styling (Green/White Theme) --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4fcf4; /* Light green background */
+            color: #333;
+            padding: 30px 20px;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            color: #1e8449; /* Dark Green */
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        /* --- Category Grid Layout --- */
+        .categories-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* --- Category Card Styling (Based on your snippet) --- */
+        .category-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(30, 132, 73, 0.2); /* Green glow on hover */
+        }
+        
+        .category-image-placeholder {
+            height: 180px;
+            background: #d4edd5; /* Light green placeholder background */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #1e8449;
+        }
+
+        .category-info {
+            padding: 25px;
+            flex-grow: 1; /* Allows info area to take up remaining height */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .category-name {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #2e7d32; /* Primary Green */
+            margin-bottom: 10px;
+        }
+
+        .category-description {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .category-link {
+            display: inline-block;
+            background-color: #38761d; /* Medium Green Button */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            margin-top: auto; /* Push link to the bottom */
+        }
+
+        .category-link:hover {
+            background-color: #1e8449; /* Darker Green on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="page-header">
+        <h1>🛒 Shop Our Categories</h1>
+        <p>Find the freshest products tailored to your needs.</p>
+    </div>
+
+    <div class="categories-grid">
+        {% for cat in categories %}
+        <div class="category-card">
+            
+            <div class="category-image-placeholder">
+                🌱
+            </div>
+
+            <div class="category-info">
+                <div>
+                    <div class="category-name">{{ cat.name }}</div>
+                    <p class="category-description">
+                        Explore our collection of premium **{{ cat.name|lower }}**. Sourced directly from trusted farmers and delivered fresh to your doorstep.
+                    </p>
+                </div>
+                <a href="{% url 'category_products' cat.id %}" class="category-link">
+                    Browse Collection →
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <p style="grid-column: 1 / -1; text-align: center; color: #999;">No categories available right now. Please check back later.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

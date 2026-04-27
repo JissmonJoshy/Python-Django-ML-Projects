@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Orders</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; background: #2e7d32; color: white; padding: 20px; border-radius: 8px; margin-bottom: 25px; }
+        .header h1 { font-size: 28px; }
+        .back-link { color: white; text-decoration: none; padding: 8px 15px; background: rgba(255,255,255,0.2); border-radius: 4px; }
+        .back-link:hover { background: rgba(255,255,255,0.3); }
+        
+        .orders-card { background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden; }
+        .orders-header { background: #f9f9f9; padding: 20px 25px; border-bottom: 2px solid #eee; }
+        .orders-count { color: #666; font-size: 14px; }
+        
+        .orders-list { padding: 25px; }
+        .order-card { border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s; background: #fafafa; }
+        .order-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); background: white; }
+        
+        .order-info { flex: 1; }
+        .order-id { font-size: 16px; font-weight: 600; color: #2e7d32; margin-bottom: 5px; }
+        .order-meta { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 8px; }
+        .meta-item { font-size: 13px; color: #666; }
+        .meta-label { font-weight: 600; color: #333; }
+        
+        .order-amount { text-align: right; margin-right: 20px; }
+        .amount-value { font-size: 18px; font-weight: 600; color: #2e7d32; }
+        .amount-label { font-size: 12px; color: #999; text-transform: uppercase; }
+        
+        .status-badge { display: inline-block; padding: 6px 12px; border-radius: 20px; font-weight: 600; font-size: 12px; text-transform: uppercase; }
+        .status-Pending { background: #fff3cd; color: #856404; }
+        .status-Completed { background: #d4edda; color: #155724; }
+        .status-Cancelled { background: #f8d7da; color: #721c24; }
+        
+        .view-btn { 
+            text-decoration: none; 
+            color: white; 
+            background: #007bff; 
+            padding: 8px 20px; 
+            border-radius: 6px; 
+            font-weight: 600;
+            font-size: 13px;
+            transition: background 0.3s;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .view-btn:hover { background: #0056b3; }
+        
+        .empty-state { text-align: center; padding: 60px 25px; color: #999; }
+        .empty-icon { font-size: 48px; margin-bottom: 15px; }
+        .empty-title { font-size: 18px; font-weight: 600; color: #333; margin-bottom: 8px; }
+        .empty-description { font-size: 14px; margin-bottom: 25px; }
+        .empty-btn { 
+            display: inline-block; 
+            background: #2e7d32; 
+            color: white; 
+            padding: 12px 30px; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .empty-btn:hover { background: #1b5e20; }
+        
+        .pagination { text-align: center; padding: 20px; color: #666; font-size: 13px; }
+        
+        @media (max-width: 768px) {
+            .order-card { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .order-amount { text-align: left; margin-right: 0; }
+            .order-meta { flex-direction: column; gap: 8px; }
+            .header { flex-direction: column; text-align: center; gap: 10px; }
+            .view-btn { display: block; width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar Component -->
+    {% include 'navbar.html' %}
+
+    <div class="container">
+        <div class="header">
+            <h1>📦 My Orders</h1>
+            <a href="{% url 'home' %}" class="back-link">← Back to Shopping</a>
+        </div>
+
+        <div class="orders-card">
+            {% if orders %}
+                <div class="orders-header">
+                    <p class="orders-count">Total Orders: <strong>{{ orders.count }}</strong></p>
+                </div>
+
+                <div class="orders-list">
+                    {% for order in orders %}
+                    <div class="order-card">
+                        <div class="order-info">
+                            <div class="order-id">#{{ order.id }} - {{ order.full_name }}</div>
+                            <div class="order-meta">
+                                <span class="meta-item">
+                                    <span class="meta-label">Date:</span> {{ order.created_at|date:"M d, Y" }}
+                                </span>
+                                <span class="meta-item">
+                                    <span class="meta-label">Status:</span> 
+                                    <span class="status-badge status-{{ order.status }}">{{ order.status }}</span>
+                                </span>
+                                <span class="meta-item">
+                                    <span class="meta-label">Items:</span> {{ order.items.all|length }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="order-amount">
+                            <div class="amount-label">Total</div>
+                            <div class="amount-value">₹{{ order.total_price }}</div>
+                        </div>
+                        <a href="{% url 'order_detail' order.id %}" class="view-btn">View Details</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <div class="empty-icon">📦</div>
+                    <div class="empty-title">No Orders Yet</div>
+                    <p class="empty-description">You haven't placed any orders yet. Start shopping now!</p>
+                    <a href="{% url 'home' %}" class="empty-btn">Continue Shopping</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

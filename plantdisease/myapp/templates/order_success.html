@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Placed</title>
+    <style>
+        body { font-family: Arial; background:#f9f9f9; padding:20px; text-align:center; }
+        .success { background:#fff; display:inline-block; padding:20px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+        a { text-decoration:none; color:white; padding:10px 15px; background:#2e7d32; border-radius:5px; }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar Component -->
+    {% include 'navbar.html' %}
+    
+    <div class="success">
+        <h2>Thank You, {{ order.full_name }}!</h2>
+        <p>Your order has been placed successfully.</p>
+        <p>Total Amount Paid: ₹{{ order.total_price }}</p>
+        <a href="{% url 'order_detail' order.id %}">View Order Details</a>
+
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>

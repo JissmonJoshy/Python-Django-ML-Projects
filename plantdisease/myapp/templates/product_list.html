@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category.name }} Products - Cropers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header Section */
+        .header-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-left h1 {
+            font-size: 32px;
+            color: #2e7d32;
+            margin-bottom: 8px;
+        }
+
+        .header-left p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46,125,50,0.4);
+        }
+
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+            background: #f0f0f0;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .stock-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #2e7d32;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .stock-badge.low {
+            background: #ff6f00;
+        }
+
+        .stock-badge.out {
+            background: #d32f2f;
+        }
+
+        .product-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2e7d32;
+            margin-bottom: 8px;
+            min-height: 45px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-specs {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        .product-specs-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+        }
+
+        .specs-label {
+            color: #666;
+        }
+
+        .specs-value {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2e7d32;
+        }
+
+        .product-price-label {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .view-btn {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .view-btn:hover {
+            background: #1b5e20;
+            transform: translateX(2px);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .empty-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .empty-text {
+            color: #999;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .header-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .header-left h1 {
+                font-size: 24px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .product-image-container {
+                height: 150px;
+            }
+
+            .product-info {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-left h1 {
+                font-size: 20px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 12px;
+            }
+
+            .product-image-container {
+                height: 120px;
+            }
+
+            .product-name {
+                font-size: 14px;
+                min-height: 35px;
+            }
+
+            .product-price {
+                font-size: 18px;
+            }
+
+            .product-footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .view-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar Component -->
+    {% include 'navbar.html' %}
+
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="header-left">
+                <h1>🌾 {{ category.name }} Products</h1>
+                <p>Browse our fresh collection of {{ category.name }}</p>
+            </div>
+            <a href="{% url 'home' %}" class="back-btn">← Back to Home</a>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid">
+            {% for product in products %}
+            <a href="{% url 'product_detail' product.id %}" style="text-decoration: none; color: inherit;">
+                <div class="product-card">
+                    <!-- Product Image -->
+                    <div class="product-image-container">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                        {% else %}
+                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #e0e0e0; color: #999; font-size: 14px;">📦 No image</div>
+                        {% endif %}
+                        
+                        <!-- Stock Badge -->
+                        {% if product.quantity > 10 %}
+                            <div class="stock-badge">📦 In Stock</div>
+                        {% elif product.quantity > 0 %}
+                            <div class="stock-badge low">⚠️ Low Stock</div>
+                        {% else %}
+                            <div class="stock-badge out">❌ Out of Stock</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Product Info -->
+                    <div class="product-info">
+                        <h3 class="product-name">{{ product.name }}</h3>
+                        
+                        <div class="product-specs">
+                            <div class="product-specs-row">
+                                <span class="specs-label">📏 Weight:</span>
+                                <span class="specs-value">{{ product.weight }}</span>
+                            </div>
+                            <div class="product-specs-row">
+                                <span class="specs-label">📅 Stock:</span>
+                                <span class="specs-value">{{ product.quantity }} units</span>
+                            </div>
+                        </div>
+
+                        <!-- Footer with Price -->
+                        <div class="product-footer">
+                            <div>
+                                <div class="product-price-label">Price</div>
+                                <div class="product-price">₹{{ product.price }}</div>
+                            </div>
+                            <button class="view-btn" onclick="event.stopPropagation(); window.location.href='{% url 'product_detail' product.id %}';">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% empty %}
+            <div class="empty-state" style="grid-column: 1 / -1;">
+                <div class="empty-icon">📭</div>
+                <div class="empty-text">No products available in this category.</div>
+                <p style="color: #999; font-size: 14px;">Please check back soon!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
