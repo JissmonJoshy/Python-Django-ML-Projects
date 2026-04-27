@@ -1,0 +1,45 @@
+{% extends "commonBase.html" %}
+{% block content %}
+
+<!-- Start Page Title Area -->
+<div class="page-title-area">
+    <div class="container">
+        <div class="page-title-content text-center">
+            <h1>OTP Verification</h1>
+            <ul class="list-unstyled ps-0 mb-0">
+                <li class="d-inline-block">
+                    <a class="text-decoration-none" href="/">Home</a>
+                </li>
+                <li class="d-inline-block">OTP</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
+
+<!-- Start OTP Area -->
+<div class="login-area ptb-100">
+    <div class="container">
+        <div class="login-info" data-cue="slideInUp">
+            <h1>Enter OTP</h1>
+            {% if verified %}
+                <p>{{ msg }}</p>
+            {% else %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                    <input type="text" name="otp" class="form-control" placeholder="Enter OTP" required>
+                </div>
+                <button class="default-btn border-0" type="submit">
+                    <i class="ri-check-line"></i>
+                    Verify OTP
+                </button>
+                <p style="color:red;" class="mt-2">{{ msg }}</p>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- End OTP Area -->
+
+{% endblock %}

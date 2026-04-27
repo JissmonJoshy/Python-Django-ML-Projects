@@ -1,0 +1,86 @@
+{% extends 'userBase.html' %}
+{% block content %}
+<br><br>
+<div class="page-heading header-text">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h3>Image Encryption/Decryption</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+<section class="section-padding section-bg" style="min-height:40vh">
+  <div class="container">
+    <div class="row justify-content-center g-4">
+
+      <!-- Encryption Section -->
+      <div class="col-lg-6 col-md-10">
+        <div class="card shadow-sm p-4 rounded-4 bg-white">
+          <h4 class="text-center mb-4">🔒 Encryption</h4>
+          <form action="/userImageEncData/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label">Input Image</label>
+              <input type="file" name="image" class="form-control" required>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary px-4">Submit</button>
+            </div>
+          </form>
+
+          {% if data %}
+          <div class="mt-4 text-center">
+            <h6 class="mb-2">Output:</h6>
+            <a href="/static/media/{{data.output}}" class="btn btn-outline-success btn-sm me-2" download>
+              ⬇ Download Encrypted File
+            </a>
+            <a href="/static/media/{{data.key}}" class="btn btn-outline-info btn-sm" download>
+              🔑 Download Key
+            </a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Decryption Section -->
+      <div class="col-lg-6 col-md-10">
+        <div class="card shadow-sm p-4 rounded-4 bg-white">
+          <h4 class="text-center mb-4">🔓 Decryption</h4>
+          <form action="/userImageEnc/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Input Image</label>
+                <input type="file" name="image" class="form-control" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Key</label>
+                <input type="file" name="key" class="form-control" required>
+              </div>
+            </div>
+            <div class="text-center mt-3">
+              <button type="submit" class="btn btn-primary px-4">Submit</button>
+            </div>
+          </form>
+
+          {% if file %}
+          <div class="mt-4 text-center">
+            <h6 class="mb-2">Decrypted File:</h6>
+            <a href="/static/media/{{file}}" class="btn btn-outline-success btn-sm me-2" download>
+              ⬇ Download
+            </a>
+            <a href="/static/media/{{file}}" class="btn btn-outline-secondary btn-sm" target="_blank">
+              👁 View
+            </a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<br><br>
+{% endblock %}

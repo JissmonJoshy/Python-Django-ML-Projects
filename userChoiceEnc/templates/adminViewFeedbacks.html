@@ -1,0 +1,51 @@
+{% extends 'adminBase.html' %}
+{% block content %}
+<br><br>
+<div class="page-heading header-text">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h3>Feedback</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section-padding section-bg" style="min-height:40vh">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-12 mx-auto mt-5">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover align-middle text-center shadow-sm">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Sl/No.</th>
+                <th scope="col">Created On</th>
+                <th scope="col">Feedback</th>
+                <th scope="col">Added By</th>
+                <th scope="col">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for d in data %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ d.created_at|date:"d M Y, H:i" }}</td>
+                <td class="text-start">{{ d.feedback }}</td>
+                <td class="text-capitalize">{{ d.user.first_name }}</td>
+                <td>{{ d.user.username }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="5" class="text-muted text-center">No feedback available</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br><br>
+{% endblock %}

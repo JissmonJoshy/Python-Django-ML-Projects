@@ -1,0 +1,45 @@
+{% extends "commonBase.html" %}
+{% block content %}
+
+<!-- Start Page Title Area -->
+<div class="page-title-area">
+    <div class="container">
+        <div class="page-title-content text-center">
+            <h1>Login</h1>
+            <ul class="list-unstyled ps-0 mb-0">
+                <li class="d-inline-block">
+                    <a class="text-decoration-none" href="/">Home</a>
+                </li>
+                <li class="d-inline-block">Login</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
+
+<!-- Start Login Area -->
+<div class="login-area ptb-100">
+    <div class="container">
+        <div class="login-info" data-cue="slideInUp">
+            <h1>Login</h1>
+            <form action="#" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="email" class="form-control" placeholder="Username or Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" class="form-control" placeholder="Your Password" required>
+                </div>
+                
+                <button class="default-btn border-0" type="submit">
+                    <i class="ri-arrow-right-line"></i>
+                    Log In Now
+                </button>
+                <p>Don’t have an account? Please <a class="text-decoration-none" href="/reg">Register Here</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Login Area -->
+
+{% endblock %}

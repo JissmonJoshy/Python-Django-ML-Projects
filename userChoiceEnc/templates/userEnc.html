@@ -1,0 +1,135 @@
+{% extends 'userBase.html' %}
+{% block content %}
+<br><br>
+<div class="page-heading header-text">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h3>Audio Encryption/Decryption</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+<section class="section-padding section-bg" style="min-height:40vh">
+  <div class="contact-page section">
+    <div class="container">
+      <div class="row">
+
+        <!-- Encryption Section -->
+        <div class="col-lg-6 col-12 m-auto">
+          <h2 class="text-center mb-4">Encryption</h2>
+          <form action="/userEncData/" method="post" class="custom-form contact-form" role="form" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="row mb-3">
+              <div class="col-lg-6 col-md-6 col-12 m-auto text-center">
+                <button id="start" class="btn btn-success">Start Recording</button>
+                <button id="stop" class="btn btn-danger" disabled>Stop Recording</button>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-lg-8 col-md-8 col-12 m-auto text-center">
+                <audio id="audio" controls></audio>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-floating">
+                  <input type="file" name="audio" id="fileInput" accept="audio/*" class="form-control" required />
+                  <label for="fileInput">Audio File</label>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-floating">
+                  <input type="file" name="image" id="imageInput" class="form-control" required />
+                  <label for="imageInput">Input Image</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-lg-4 col-12 m-auto">
+                <button type="submit" class="form-control btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
+
+          {% if data %}
+            <h3>Output File: <a href="/static/media/{{data.file}}" download>Download</a></h3>
+            <h3>Output File: <a href="/static/media/{{data.file}}" target="_blank">View</a></h3>
+          {% endif %}
+        </div>
+
+        <!-- Decryption Section -->
+        <div class="col-lg-6 col-12 m-auto">
+          <h2 class="text-center mb-4">Decryption</h2>
+          <form action="/userEnc/" method="post" class="custom-form contact-form" role="form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-12">
+                <div class="form-floating">
+                  <input type="file" name="image" id="decryptImage" class="form-control" required />
+                  <label for="decryptImage">Input Image</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-lg-4 col-12 m-auto">
+                <button type="submit" class="form-control btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<br><br>
+<script>
+  let mediaRecorder;
+  let audioChunks = [];
+  const startBtn = document.getElementById("start");
+  const stopBtn = document.getElementById("stop");
+  const audioElement = document.getElementById("audio");
+  const fileInput = document.getElementById("fileInput");
+
+  startBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
+
+    mediaRecorder.ondataavailable = event => {
+      audioChunks.push(event.data);
+    };
+
+    mediaRecorder.onstop = () => {
+      const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+      const audioUrl = URL.createObjectURL(audioBlob);
+      audioElement.src = audioUrl;
+
+      // Assign recording to file input
+      const file = new File([audioBlob], "recording.wav", { type: "audio/wav" });
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      fileInput.files = dataTransfer.files;
+    };
+
+    mediaRecorder.start();
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+  });
+
+  stopBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    mediaRecorder.stop();
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+  });
+</script>
+{% endblock %}

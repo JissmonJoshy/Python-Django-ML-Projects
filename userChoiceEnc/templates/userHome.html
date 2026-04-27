@@ -1,0 +1,145 @@
+{% extends 'userBase.html' %}
+{% block content %}
+
+<!-- Start Banner Area -->
+<div class="banner-area">
+    <div class="container-fluid">
+        <div class="row align-items-center" data-cues="slideInUp">
+            <div class="col-lg-6">
+                <div class="banner-content">
+                    <div class="title">
+                        <h1>Welcome to Users Home</h1>
+                        <p>Securely encrypt and decrypt your audio, images, and text files in one place. Protect sensitive data while maintaining easy access and usability.</p>
+                    </div>
+                    <div class="banner-button d-flex align-items-center">
+                        <a class="demo text-decoration-none" href="">Request A Demo</a>
+                        <div class="play-btn d-flex align-items-center">
+                            <a href="http://www.youtube.com/watch?v=0O2aH4XLbto" class="text-decoration-none popup-youtube icon">
+                                <i class="ri-play-mini-fill"></i>
+                            </a>
+                            <a class="text-decoration-none popup-youtube" href="http://www.youtube.com/watch?v=0O2aH4XLbto">
+                                Watch Intro Video
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="banner-image">
+                    <img src="/static/assets/images/hero/hero-2.png" alt="banner-image">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shape">
+        <div class="shape-2">
+            <img src="/static/assets/images/shape/shape-2.png" alt="shape">
+        </div>
+    </div>
+</div>        
+<!-- End Banner Area -->
+
+<!-- Start Security Area (renamed for encryption context) -->
+<div class="security-area style-2 pt-100 pb-75">
+    <div class="container">
+        <div class="section-title text-center style-2" data-cue="slideInUp">
+            <span class="d-block">What We Do</span>
+            <h2>Our Encryption & Decryption Services</h2>
+        </div>
+        <div class="row justify-content-center" data-cues="fadeIn">
+            <div class="col-lg-4 col-md-6">
+                <div class="single-security-item d-flex align-items-center">
+                    <div class="icon">
+                        <!-- Icon kept the same -->
+                    </div>
+                    <div class="content">
+                        <h3>
+                            <a class="text-decoration-none" href="">Secure Audio File Encryption & Decryption</a>
+                        </h3>
+                        <a class="read-more text-decoration-none" href="">
+                            Read More
+                            <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-security-item d-flex align-items-center">
+                    <div class="icon">
+                        <!-- Icon kept the same -->
+                    </div>
+                    <div class="content">
+                        <h3>
+                            <a class="text-decoration-none" href="">Encrypt and Protect Your Images Safely</a>
+                        </h3>
+                        <a class="read-more text-decoration-none" href="">
+                            Read More
+                            <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-security-item d-flex align-items-center">
+                    <div class="icon">
+                        <!-- Icon kept the same -->
+                    </div>
+                    <div class="content">
+                        <h3>
+                            <a class="text-decoration-none" href="">Text File Encryption & Decryption Made Easy</a>
+                        </h3>
+                        <a class="read-more text-decoration-none" href="">
+                            Read More
+                            <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="background-ellipse"></div>
+</div>
+<!-- End Security Area -->
+
+<!-- Start Counter Area -->
+<div class="counter-area pb-75 style-2">
+    <div class="container">
+        <div class="row" data-cues="fadeIn">
+            <div class="col-lg-3 col-sm-6">
+                <div class="single-counter-card style-2">
+                    <h2>
+                        <span class="counter">500+</span>
+                    </h2>
+                    <p>Files Secured</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="single-counter-card style-2">
+                    <h2>
+                        <span class="counter">150</span>+
+                    </h2>
+                    <p>Happy Users</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="single-counter-card style-2">
+                    <h2>
+                        <span class="counter">100</span>%
+                    </h2>
+                    <p>Data Privacy Ensured</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="single-counter-card style-2">
+                    <h2>
+                        <span class="counter">24</span>/7
+                    </h2>
+                    <p>Service Availability</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Counter Area -->
+
+{% endblock %}

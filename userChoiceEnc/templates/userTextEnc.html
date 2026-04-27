@@ -1,0 +1,72 @@
+{% extends 'userBase.html' %}
+{% block content %}
+<br><br>
+<div class="page-heading header-text">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h3>Text Encryption/Decryption</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+<section class="section-padding section-bg" style="min-height:40vh">
+  <div class="container">
+    <div class="row justify-content-center g-4">
+
+      <!-- Encryption Section -->
+      <div class="col-lg-6 col-md-10">
+        <div class="card shadow-sm p-4 rounded-4 bg-white">
+          <h4 class="text-center mb-4">🔒 Encryption</h4>
+          <form action="/userTextEncData/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label">Input Image</label>
+              <input type="file" name="image" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Input Text for Encryption</label>
+              <textarea name="text_area" class="form-control" rows="5" required></textarea>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary px-4">Submit</button>
+            </div>
+          </form>
+          {% if data %}
+          <div class="mt-3 text-center">
+            <h6>Output File:</h6>
+            <a href="/static/media/{{data.encodeImage}}" class="btn btn-outline-success btn-sm" download>Download</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Decryption Section -->
+      <div class="col-lg-6 col-md-10">
+        <div class="card shadow-sm p-4 rounded-4 bg-white">
+          <h4 class="text-center mb-4">🔓 Decryption</h4>
+          <form action="/userTextEnc/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label">Input Image</label>
+              <input type="file" name="image" class="form-control" required>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary px-4">Submit</button>
+            </div>
+          </form>
+          {% if text %}
+          <div class="mt-3 text-center">
+            <h6>Decrypted Text:</h6>
+            <p class="alert alert-secondary">{{ text }}</p>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<br><br>
+{% endblock %}
