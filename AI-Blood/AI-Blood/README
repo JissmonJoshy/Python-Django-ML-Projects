@@ -1,0 +1,180 @@
+# 🩸 AI Blood – Blood Analysis & Prediction System
+
+## 📌 Overview
+
+AI Blood is a Django-based web application that uses Machine Learning to analyze blood test parameters and predict possible diseases. The system connects users and diagnostic labs, automating the process of booking tests, generating reports, and providing intelligent predictions.
+
+---
+
+## 🚀 Problem Statement
+
+Manual interpretation of blood reports can be time-consuming and prone to human error. This system aims to:
+
+* Automate disease prediction from blood parameters
+* Provide quick and accurate diagnostic insights
+* Assist labs and patients with digital report generation
+
+---
+
+## 🤖 Machine Learning Model
+
+* **Algorithm Used:** Random Forest Classifier
+
+* **Model Type:** Supervised Learning (Classification)
+
+* **Classes Predicted:** 14 diseases including:
+
+  * Anemia
+  * Leukocytosis
+  * Thrombocytopenia
+  * Neutrophilia
+  * Normal condition
+
+* Also supports **pre-trained model (.pkl)** using Pickle
+
+---
+
+## 📊 Dataset
+
+* Custom dataset (`Training.csv`)
+* Features:
+
+  * WBC (White Blood Cells)
+  * RBC (Red Blood Cells)
+  * HGB (Hemoglobin)
+  * PLT (Platelets)
+  * NEUT, LYMPH, MONO, EOS, BASO
+* Target:
+
+  * Disease classification
+
+---
+
+## 🛠️ Tech Stack
+
+* **Backend:** Django
+* **Frontend:** HTML, CSS, Bootstrap
+* **Database:** SQLite
+* **ML Libraries:**
+
+  * NumPy
+  * Pandas
+  * Scikit-learn
+* **Other Tools:**
+
+  * ReportLab (PDF generation)
+  * Pickle (model saving/loading)
+
+---
+
+## ✨ Features
+
+### 👤 User Module
+
+* Register & login
+* View labs
+* Book test slots
+* Make payments
+* View reports
+
+### 🏥 Lab Module
+
+* Manage test slots
+* Upload reports
+* Enter blood parameters
+* Generate AI-based predictions
+
+### 🛠️ Admin Module
+
+* Manage users & labs
+* Approve/block accounts
+* Monitor bookings & payments
+
+### 🤖 AI Features
+
+* Predicts diseases from blood parameters
+* Classifies results into:
+
+  * Low / Normal / High
+* Provides possible causes for diseases
+
+### 📄 Report Generation
+
+* Automatic PDF report generation
+* Includes:
+
+  * Patient details
+  * Predicted disease
+  * Blood parameter analysis
+  * Medical insights
+
+---
+
+## 📈 Results
+
+* Model trained using **70-30 train-test split**
+* Random Forest with **100 estimators**
+* Achieved approximately **85–90% accuracy**
+
+---
+
+## ⚙️ Installation & Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/ai-blood.git
+
+# Navigate to project folder
+cd ai-blood
+
+# Create virtual environment
+python -m venv env
+
+# Activate environment
+env\Scripts\activate   # Windows
+source env/bin/activate  # Mac/Linux
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run migrations
+python manage.py migrate
+
+# Run server
+python manage.py runserver
+```
+
+---
+
+## 📂 Project Structure
+
+```
+ai-blood/
+│── EdiagApp/
+│── templates/
+│── static/
+│── ml/
+│── Training.csv
+│── manage.py
+```
+
+---
+
+## 🔮 Future Improvements
+
+* Improve model accuracy using deep learning
+* Add real-time lab integration
+* Deploy on cloud (AWS / Render)
+* Add advanced visualization dashboards
+
+---
+
+## 👨‍💻 Author
+
+**Your Name**
+
+---
+
+## 📜 License
+
+This project is for educational purposes.
