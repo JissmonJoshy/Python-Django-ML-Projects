@@ -1,12 +1,14 @@
-# 🩸 AI Blood – Blood Analysis & Prediction System
+🩸 AI Blood – Blood Analysis & Prediction System
 
-## 📌 Overview
+📌 Overview
 
-AI Blood is a Django-based web application that uses Machine Learning to analyze blood test parameters and predict possible diseases. The system connects users and diagnostic labs, automating the process of booking tests, generating reports, and providing intelligent predictions.
+AI Blood is a Django-based web application that uses Machine Learning to analyze blood test parameters and predict possible diseases. 
+The system connects users and diagnostic labs, automating the process of booking tests, generating reports, and providing intelligent 
+predictions.
 
 ---
 
-## 🚀 Problem Statement
+🚀 Problem Statement
 
 Manual interpretation of blood reports can be time-consuming and prone to human error. This system aims to:
 
@@ -16,13 +18,13 @@ Manual interpretation of blood reports can be time-consuming and prone to human 
 
 ---
 
-## 🤖 Machine Learning Model
+🤖 Machine Learning Model
 
-* **Algorithm Used:** Random Forest Classifier
+* Algorithm Used: Random Forest Classifier
 
-* **Model Type:** Supervised Learning (Classification)
+* Model Type: Supervised Learning (Classification)
 
-* **Classes Predicted:** 14 diseases including:
+* Classes Predicted: 14 diseases including:
 
   * Anemia
   * Leukocytosis
@@ -30,11 +32,11 @@ Manual interpretation of blood reports can be time-consuming and prone to human 
   * Neutrophilia
   * Normal condition
 
-* Also supports **pre-trained model (.pkl)** using Pickle
+* Also supports pre-trained model (.pkl) using Pickle
 
 ---
 
-## 📊 Dataset
+ 📊 Dataset
 
 * Custom dataset (`Training.csv`)
 * Features:
@@ -50,26 +52,26 @@ Manual interpretation of blood reports can be time-consuming and prone to human 
 
 ---
 
-## 🛠️ Tech Stack
+🛠️ Tech Stack
 
-* **Backend:** Django
-* **Frontend:** HTML, CSS, Bootstrap
-* **Database:** SQLite
-* **ML Libraries:**
+* Backend: Django
+* Frontend: HTML, CSS, Bootstrap
+* Database: SQLite
+* ML Libraries:
 
   * NumPy
   * Pandas
   * Scikit-learn
-* **Other Tools:**
+* Other Tools:
 
   * ReportLab (PDF generation)
   * Pickle (model saving/loading)
 
 ---
 
-## ✨ Features
+ ✨ Features
 
-### 👤 User Module
+ 👤 User Module
 
 * Register & login
 * View labs
@@ -77,20 +79,20 @@ Manual interpretation of blood reports can be time-consuming and prone to human 
 * Make payments
 * View reports
 
-### 🏥 Lab Module
+ 🏥 Lab Module
 
 * Manage test slots
 * Upload reports
 * Enter blood parameters
 * Generate AI-based predictions
 
-### 🛠️ Admin Module
+ 🛠️ Admin Module
 
 * Manage users & labs
 * Approve/block accounts
 * Monitor bookings & payments
 
-### 🤖 AI Features
+ 🤖 AI Features
 
 * Predicts diseases from blood parameters
 * Classifies results into:
@@ -98,7 +100,7 @@ Manual interpretation of blood reports can be time-consuming and prone to human 
   * Low / Normal / High
 * Provides possible causes for diseases
 
-### 📄 Report Generation
+ 📄 Report Generation
 
 * Automatic PDF report generation
 * Includes:
@@ -110,43 +112,43 @@ Manual interpretation of blood reports can be time-consuming and prone to human 
 
 ---
 
-## 📈 Results
+ 📈 Results
 
-* Model trained using **70-30 train-test split**
-* Random Forest with **100 estimators**
-* Achieved approximately **85–90% accuracy**
+* Model trained using 70-30 train-test split
+* Random Forest with 100 estimators
+* Achieved approximately 85–90% accuracy
 
 ---
 
-## ⚙️ Installation & Setup
+ ⚙️ Installation & Setup
 
 ```bash
-# Clone the repository
+ Clone the repository
 git clone https://github.com/your-username/ai-blood.git
 
-# Navigate to project folder
+ Navigate to project folder
 cd ai-blood
 
-# Create virtual environment
+ Create virtual environment
 python -m venv env
 
-# Activate environment
-env\Scripts\activate   # Windows
-source env/bin/activate  # Mac/Linux
+ Activate environment
+env\Scripts\activate    Windows
+source env/bin/activate   Mac/Linux
 
-# Install dependencies
+ Install dependencies
 pip install -r requirements.txt
 
-# Run migrations
+ Run migrations
 python manage.py migrate
 
-# Run server
+ Run server
 python manage.py runserver
 ```
 
 ---
 
-## 📂 Project Structure
+ 📂 Project Structure
 
 ```
 ai-blood/
@@ -160,7 +162,7 @@ ai-blood/
 
 ---
 
-## 🔮 Future Improvements
+ 🔮 Future Improvements
 
 * Improve model accuracy using deep learning
 * Add real-time lab integration
@@ -169,12 +171,12 @@ ai-blood/
 
 ---
 
-## 👨‍💻 Author
+ 👨‍💻 Author
 
-**Your Name**
+Jissmon Joshy
 
 ---
 
-## 📜 License
+ 📜 License
 
 This project is for educational purposes.
