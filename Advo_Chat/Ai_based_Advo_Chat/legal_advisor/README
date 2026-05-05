@@ -1,0 +1,190 @@
+ ⚖️ AdvoChat – Online Legal Consultation & Case Management System
+
+ 📌 Overview
+
+AdvoChat is a Django-based web application that connects users with advocates for legal consultation, case management, and real-time communication. The platform digitizes legal processes such as case requests, advocate selection, document handling, and payments.
+
+---
+
+ 🚀 Problem Statement
+
+Traditional legal consultation processes are slow, manual, and lack transparency. This system aims to:
+
+* Simplify communication between users and advocates
+* Digitize case handling and document management
+* Provide a centralized platform for legal services
+
+---
+
+ 🧠 Intelligent Features
+
+* Basic NLP setup using NLTK (for chatbot/processing support)
+* Real-time chat system between user and advocate
+* Smart advocate selection based on case category
+
+---
+
+ 🛠️ Tech Stack
+
+* Backend: Django
+* Frontend: HTML, CSS, Bootstrap
+* Database: SQLite
+* Libraries & Tools:
+
+  * NLTK (Natural Language Processing)
+  * Django Authentication System
+  * ReportLab (PDF invoice generation)
+  * Email (SMTP integration)
+
+---
+
+ ✨ Features
+
+ 👤 User Module
+
+* Register & login (OTP-based password reset)
+* View advocates by category
+* Book legal cases
+* Upload multiple case documents
+* Chat with advocates
+* Make payments & download invoice
+* Give feedback & ratings
+
+---
+
+ 👨‍⚖️ Advocate Module
+
+* Register with document verification & payment
+* View and manage case requests
+* Accept / reject cases
+* Update case status (Ongoing, Completed, Failed)
+* Upload case details & fees
+* Chat with users
+* View ratings and feedback
+
+---
+
+ 🛠️ Admin Module
+
+* Approve / reject users & advocates
+* Manage IPC sections & case categories
+* Monitor all case requests
+* Dashboard analytics:
+
+  * Total users
+  * Total advocates
+  * Case status statistics
+* Manage feedback and ratings
+
+---
+
+ 💬 Chat System
+
+* Real-time messaging between user and advocate
+* Stores chat history
+* Separate interfaces for both roles
+
+---
+
+ 📂 Case Management
+
+* Case request creation
+* Advocate assignment
+* Advocate change request system
+* File uploads (multiple documents)
+* Case tracking:
+
+  * Pending
+  * Approved
+  * Completed
+  * Cancelled
+
+---
+
+ 📄 Payment & Invoice
+
+* Payment system for case fees
+* Automatic PDF invoice generation using ReportLab
+* Payment tracking and status updates
+
+---
+
+ 📧 Email System
+
+* OTP-based password reset
+* Registration confirmation emails
+* Case approval/rejection notifications
+* Cancellation alerts
+
+---
+
+ 📊 Key Functional Highlights
+
+* Role-based authentication (Admin / User / Advocate)
+* Secure password handling
+* File upload & storage system
+* Dynamic dashboard analytics
+* Advocate rating system (average rating calculation)
+
+---
+
+ ⚙️ Installation & Setup
+
+```bash id="k29dj2"
+ Clone repository
+git clone https://github.com/your-username/advochat.git
+
+ Navigate to folder
+cd advochat
+
+ Create virtual environment
+python -m venv env
+
+ Activate environment
+env\Scripts\activate    Windows
+source env/bin/activate   Mac/Linux
+
+ Install dependencies
+pip install -r requirements.txt
+
+ Apply migrations
+python manage.py migrate
+
+ Run server
+python manage.py runserver
+```
+
+---
+
+ 📂 Project Structure
+
+```id="d93kd2"
+advochat/
+│── app/
+│── templates/
+│── static/
+│── media/
+│── manage.py
+```
+
+---
+
+ 🔮 Future Improvements
+
+* Add AI-based legal chatbot
+* Video consultation feature
+* Payment gateway integration (Razorpay/Stripe)
+* Deploy on cloud (AWS / Render)
+* Improve NLP capabilities
+
+---
+
+ 👨‍💻 Author
+
+Jissmon Joshy
+
+---
+
+ 📜 License
+
+This project is for educational purposes.
