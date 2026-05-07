@@ -1,0 +1,348 @@
+ 🎓 Career Path Recommendation & E-Learning Management System
+
+ 📌 Overview
+
+Career Path Recommendation & E-Learning Management System is a Django-based web application that helps students and job seekers discover suitable career paths using Machine Learning. The platform integrates career prediction, online learning, job recruitment, quizzes, tutor interaction, and company hiring into a single system.
+
+The system uses NLP and Machine Learning techniques to analyze user interests, skills, hobbies, and educational background to recommend the most suitable career options.
+
+---
+
+ 🚀 Problem Statement
+
+Students often face difficulties in:
+
+* Choosing the right career path
+* Finding proper learning resources
+* Connecting with tutors and companies
+* Accessing personalized career guidance
+
+Traditional career guidance systems are mostly generic and do not consider individual interests and skill sets.
+
+This project solves these problems by:
+
+* Providing AI-based career recommendations
+* Integrating courses and recruitment in one platform
+* Offering communication between students, tutors, and companies
+* Creating a centralized career development ecosystem
+
+---
+
+ 🧠 Machine Learning Implementation
+
+ ML Model Used
+
+* Random Forest Classifier
+
+ NLP Techniques Used
+
+* TF-IDF Vectorization
+* Text preprocessing and feature combination
+
+ Input Features
+
+The model predicts careers based on:
+
+* Educational Stream
+* Favorite Subject
+* Technical Skills
+* Soft Skills
+* Languages Known
+* Interests
+* Hobbies
+
+ Target Prediction
+
+* Career Recommendation
+
+Examples:
+
+* Data Scientist
+* Software Engineer
+* UI/UX Designer
+* Teacher
+* Cyber Security Analyst
+
+---
+
+ 📊 Dataset Used
+
+ Dataset
+
+* Indian Career Dataset (100K Records)
+
+ Dataset File
+
+bash
+indian_career_dataset_100k.csv
+
+
+ Dataset Features
+
+* Stream
+* Favorite Subject
+* Technical Skills
+* Soft Skills
+* Languages Known
+* Interests
+* Hobbies
+* Career Label
+
+---
+
+ 🛠️ Tech Stack
+
+ Backend
+
+* Django
+
+ Frontend
+
+* HTML
+* CSS
+* Bootstrap
+
+ Database
+
+* SQLite
+
+ Machine Learning Libraries
+
+* pandas
+* scikit-learn
+
+ ML Components Used
+
+python
+TfidfVectorizer
+RandomForestClassifier
+LabelEncoder
+train_test_split
+accuracy_score
+classification_report
+
+
+---
+
+ ✨ Features
+
+ 👤 Client Module
+
+* User registration and login
+* Profile management
+* AI-based career prediction
+* Browse available courses
+* Apply for courses
+* Apply for jobs
+* Upload CV/resume
+* Attempt quizzes
+* View quiz scores
+* Give feedback and ratings
+* Chat with tutors and companies
+* Attend online sessions via meeting links
+
+---
+
+ 🧑‍🏫 Tutor Module
+
+* Tutor registration and approval
+* Create and manage courses
+* Upload study materials and notes
+* View enrolled students
+* Add quiz questions
+* Chat with students
+* View student feedback
+
+---
+
+ 🏢 Company Module
+
+* Company registration and approval
+* Post job opportunities
+* Manage job listings
+* View job applicants
+* Schedule interviews
+* Communicate with candidates
+* Receive ratings and feedback
+
+---
+
+ 🛠️ Admin Module
+
+* Manage users, tutors, and companies
+* Approve/reject tutor and company registrations
+* Manage courses and job postings
+* Monitor enrollments and applications
+* View feedback and ratings
+* System monitoring and analytics
+
+---
+
+ 💬 Chat System
+
+Real-time communication system between:
+
+* Student ↔ Tutor
+* Student ↔ Company
+
+Features:
+
+* Message history
+* Separate chat interfaces
+* Direct communication support
+
+---
+
+ 📚 Course Management System
+
+* Course application workflow
+* Course approval system
+* Study material upload
+* Enrollment tracking
+* Payment status handling
+* Notes and file sharing
+
+---
+
+ 💼 Job Recruitment System
+
+* Job posting and filtering
+* Job application tracking
+* Resume upload
+* Company recruitment management
+* Interview meeting link generation
+
+---
+
+ 🧪 Quiz & Assessment Module
+
+* Randomized quiz generation
+* Automatic score calculation
+* Quiz history tracking
+* Performance evaluation
+
+---
+
+ 🔗 Online Meeting Integration
+
+The system automatically generates online meeting links using:
+
+python
+https://meet.jit.si/
+
+
+Used for:
+
+* Online tutoring
+* Job interviews
+* Student guidance sessions
+
+---
+
+ ⚙️ Machine Learning Workflow
+
+ Step 1: Data Collection
+
+User enters:
+
+* Skills
+* Interests
+* Subjects
+* Hobbies
+* Languages
+
+ Step 2: Text Combination
+
+All text features are combined into a single input.
+
+ Step 3: Feature Extraction
+
+TF-IDF Vectorization converts text into numerical vectors.
+
+ Step 4: Model Training
+
+Random Forest model is trained using dataset.
+
+ Step 5: Career Prediction
+
+Model predicts the most suitable career.
+
+---
+
+ 📊 Results & Accuracy
+
+ Training Method
+
+* 80-20 Train-Test Split
+
+ Approximate Accuracy
+
+* 85% – 92%
+
+ Evaluation Metrics
+
+* Accuracy Score
+* Precision
+* Recall
+* F1-Score
+* Classification Report
+
+---
+
+ 🔐 Security & Validation
+
+* Role-based authentication
+* Session management
+* File upload handling
+* Duplicate application prevention
+* Form validations
+* Secure login system
+
+---
+
+ 📂 Project Structure
+
+bash
+career_path/
+│
+├── myapp/
+├── templates/
+├── static/
+├── media/
+├── dataset/
+├── manage.py
+└── db.sqlite3
+
+
+---
+
+ ⚠️ Current Limitation
+
+Currently, the ML model is trained dynamically whenever a prediction request is submitted.
+
+This increases processing time and is not optimal for production environments.
+
+---
+
+ 🔮 Future Improvements
+
+* Deploy pre-trained model using Pickle/Joblib
+* Add Deep Learning-based recommendations
+* Implement recommendation history
+* Add video call integration
+* Cloud deployment (AWS/Render)
+* Payment gateway integration
+* Resume ranking using AI
+* Real-time notifications
+
+---
+
+ 👨‍💻 Author
+
+Jissmon Joshy
+
+---
+
+ 📜 License
+
+This project is for educational purposes only.
