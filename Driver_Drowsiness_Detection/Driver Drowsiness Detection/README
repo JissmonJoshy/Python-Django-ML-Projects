@@ -1,0 +1,180 @@
+Copy-paste this directly into your GitHub README.md.
+
+ 🚗 Smart Driver Booking & Drowsiness Detection System
+
+ 📌 Overview
+
+A Django-based intelligent transport management system that allows users to book drivers online while integrating AI-powered drowsiness detection for driver safety monitoring.
+
+The system ensures secure driver booking, payment handling, feedback management, and real-time driver fatigue detection to improve road safety.
+
+---
+
+ 🚀 Problem Solved
+
+Traditional driver hiring systems lack:
+
+* Real-time safety monitoring
+* Efficient online booking workflow
+* Driver approval verification
+* User feedback transparency
+
+This system solves these issues through smart booking automation + AI-based drowsiness detection.
+
+---
+
+ 🧠 AI / ML Model Used
+
+* Computer Vision-Based Drowsiness Detection
+* Real-time webcam monitoring
+* Driver fatigue detection using facial/eye movement analysis
+
+---
+
+ 📊 Core Detection Features
+
+* Detects driver eye closure
+* Monitors fatigue patterns
+* Real-time alert triggering
+* Background thread execution for live monitoring
+
+---
+
+ 🛠️ Tech Stack
+
+ Backend
+
+* Django
+
+ Frontend
+
+* HTML
+* CSS
+* Bootstrap
+
+ Database
+
+* SQLite
+
+ AI / Detection Tools
+
+* OpenCV
+* Python Threading
+* Computer Vision Algorithms
+
+---
+
+ ✨ Features
+
+ 👤 User Module
+
+* Register/Login
+* View approved drivers
+* Book drivers instantly
+* Online payment simulation
+* Cancel bookings
+* Submit ratings & feedback
+* Track booking status
+
+---
+
+ 🚘 Driver Module
+
+* Registration with admin approval
+* Manage booking requests
+* Approve customer bookings
+* Set trip charges
+* View feedback & ratings
+* Start drowsiness detection
+
+---
+
+ 🛠️ Admin Module
+
+* Approve/Reject drivers
+* Manage users
+* Monitor booking activities
+* System control dashboard
+
+---
+
+ 💳 Payment System
+
+* Secure payment simulation
+* Booking confirmation after payment
+* Automatic status update
+
+---
+
+ ⭐ Feedback & Rating System
+
+Users can:
+
+* Rate drivers
+* Submit trip feedback
+* Improve driver quality assurance
+
+---
+
+ 👁️ Drowsiness Detection Workflow
+
+1. Start live camera monitoring
+2. Detect facial landmarks
+3. Analyze eye closure ratio
+4. Detect fatigue state
+5. Trigger alert instantly
+
+---
+
+ 🔐 Security Features
+
+* Session-based authentication
+* Role-based access control
+* Duplicate registration prevention
+* Driver approval verification
+
+---
+
+ 📂 Project Structure
+
+```bash
+smart_driver_booking/
+│── app/
+│── templates/
+│── static/
+│── utils/
+│   └── drowsiness.py
+│── manage.py
+```
+
+---
+
+ 📈 Key Highlights
+
+✔ Real-time AI safety monitoring
+✔ Online booking automation
+✔ Payment & feedback system
+✔ Multi-role secure authentication
+✔ Driver approval workflow
+
+---
+
+ 🔮 Future Improvements
+
+* GPS live driver tracking
+* Razorpay payment integration
+* SMS booking alerts
+* AI route optimization
+* Cloud deployment
+
+---
+
+ 👨‍💻 Author
+
+Your Name
+
+---
+
+ 📜 License
+
+Educational Purpose Only.
