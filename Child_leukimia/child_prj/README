@@ -1,0 +1,178 @@
+ 🩸 Child Leukemia Detection & Smart Appointment System
+
+ 📌 Overview
+
+A Django-based healthcare web application that helps patients book doctor appointments and uses Deep Learning to detect childhood leukemia stages from blood cell images.
+
+The system integrates AI-powered medical image classification, doctor appointment management, online payment simulation, and role-based dashboards for Admin, Doctor, and Customer.
+
+---
+
+ 🚀 Problem Solved
+
+Traditional leukemia diagnosis requires expert manual analysis and takes time.
+This system provides:
+
+* Faster leukemia stage prediction using AI
+* Easy doctor appointment booking
+* Secure patient-doctor interaction
+* Digital healthcare workflow automation
+
+---
+
+ 🧠 ML / Deep Learning Model Used
+
+* TensorFlow / Keras CNN Model
+* Pre-trained model file: `leukemia_model.h5`
+
+ Predicted Classes
+
+* Benign → Normal Cell
+* Early → Early Stage ALL
+* Pre → Pre-B ALL
+* Pro → Pro-B ALL
+
+---
+
+ 📊 Dataset Used
+
+Blood cell microscopic image dataset for leukemia classification.
+
+Image Size: `224 x 224`
+
+Classification Type: Multi-Class Image Classification
+
+---
+
+ 🛠️ Tech Stack
+
+ Backend
+
+* Django
+
+ Frontend
+
+* HTML
+* CSS
+* Bootstrap
+
+ Database
+
+* SQLite
+
+ AI / ML Libraries
+
+* TensorFlow / Keras
+* OpenCV
+* NumPy
+
+ Security
+
+* Password Hashing
+* Input Validation
+* Role-Based Authentication
+
+---
+
+ ✨ Features
+
+ 👤 Customer Module
+
+* Registration & Login
+* Book doctor appointments
+* View appointment status
+* Online payment simulation
+* Upload blood cell image
+* View leukemia prediction result
+
+---
+
+ 👨‍⚕️ Doctor Module
+
+* Registration & approval system
+* Manage appointments
+* Approve consultations
+* Set consultation fees
+* View patient requests
+
+---
+
+ 🛠️ Admin Module
+
+* Approve / Reject doctors
+* Manage customers
+* Monitor system activities
+
+---
+
+ 🩸 AI Leukemia Detection
+
+* Upload blood cell image
+* Image preprocessing using OpenCV
+* CNN-based prediction
+* Confidence score display
+* Leukemia stage diagnosis
+
+---
+
+ ⚙️ Model Workflow
+
+1. Image Upload
+2. Resize to 224×224
+3. Normalize pixel values
+4. CNN prediction
+5. Leukemia stage classification
+6. Confidence score output
+
+---
+
+ 📈 Results
+
+* High multi-class prediction accuracy
+* Confidence score provided for each prediction
+* Real-time diagnosis prediction
+
+---
+
+ 🔐 Security Features
+
+* Strong password validation
+* Email & phone validation
+* Secure password hashing
+* Session-based access control
+
+---
+
+ 📂 Project Structure
+
+```bash
+child_leukemia_detection/
+│── app/
+│── templates/
+│── static/
+│── media/
+│── leukemia_model.h5
+│── manage.py
+```
+
+---
+
+ 🔮 Future Improvements
+
+* Deploy on cloud
+* Real payment gateway integration
+* Doctor video consultation
+* Advanced medical report generation
+* Improved CNN model accuracy
+
+---
+
+ 👨‍💻 Author
+
+Your Name
+
+Jissmon Joshy
+
+ 📜 License
+
+Educational Purpose Only.
