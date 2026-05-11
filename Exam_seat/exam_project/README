@@ -1,0 +1,91 @@
+ 🎓 Smart Exam Management System with Face Recognition Authentication
+
+A secure AI-powered college examination management system built using Django, Python, Face Recognition, and SQLite that automates student authentication, exam scheduling, seat allocation, staff assignment, and secure access control.
+
+---
+
+ 🚀 Key Features
+
+ 🔐 Secure Authentication
+- Face Recognition based student login
+- OTP Email Verification
+- Auto-generated secure passwords
+- Role-based login (Admin / Staff / Student)
+
+ 👨‍🎓 Student Module
+- Face capture registration
+- Profile management
+- Secure biometric login
+- View exam schedules
+- View seat allocations
+
+ 👨‍🏫 Staff Module
+- Staff registration & admin approval
+- Profile management
+- Invigilation schedule view
+- Exam hall assignment
+
+ 🛠 Admin Module
+- Manage Departments
+- Manage Courses
+- Manage Semesters
+- Manage Subjects
+- Manage Exam Halls
+- Approve / Reject Students & Staff
+- Schedule Exams
+- Assign Invigilators
+- Auto Seat Allocation System
+- Reset / Modify Seat Allocations
+
+ 🧠 AI & Automation
+- Face encoding & verification using face_recognition
+- Conflict-free hall scheduling
+- Automatic random seat allocation
+- Staff clash detection
+- OTP & credential email automation
+
+---
+
+ 🛠 Tech Stack
+
+Backend: Django, Python  
+Database: SQLite  
+Authentication: Face Recognition + OTP Verification  
+AI/ML Libraries: NumPy, face_recognition, Pickle  
+Image Processing: PIL  
+Email Service: Django SMTP  
+Frontend: HTML, CSS, Bootstrap
+
+---
+
+ ⚙ Core Algorithms
+- Facial Encoding Matching
+- Hall Conflict Detection
+- Randomized Seat Allocation
+- Staff Availability Validation
+- OTP Verification Workflow
+
+---
+
+ 📌 Highlights
+✔ Biometric Authentication  
+✔ Secure Exam Access Control  
+✔ Automated Scheduling System  
+✔ Real-time Staff Assignment  
+✔ Smart Seat Allocation  
+✔ Full CRUD Administration Panel
+
+---
+
+ 🎯 Project Goal
+To digitize and secure examination processes using Artificial Intelligence and automation, reducing manual errors and improving institutional efficiency.
+
+---
+
+ 👨‍💻 Developed Using
+Python • Django • Face Recognition • SQLite • Bootstrap • SMTP Automation
+
+---
+
+ ⭐ Project Type
+AI + Full Stack Web Application
