@@ -1,0 +1,136 @@
+# 🏋️ FitPal AI - Smart Fitness & Nutrition Management System
+
+An AI-powered full-stack fitness and nutrition platform built using Django + Machine Learning, designed to provide personalized workout recommendations, diet tracking, expert guidance, and real-time fitness management.
+
+---
+
+ 🚀 Key Features
+
+ 👤 User Module
+- Secure registration with OTP email verification
+- Profile & health metric tracking (BMI calculation)
+- View fitness image/video plans
+- Join nutrition programs
+- Track step-by-step progress
+- Workout recommendation using Machine Learning
+- Chat with Experts & Dieticians
+- Submit feedback & ratings
+
+---
+
+ 🧑‍🏫 Expert Module
+- Upload fitness plans (Images & Videos)
+- Create structured diet programs
+- Monitor joined users progress
+- Real-time chat with users
+- Manage profile & content
+
+---
+
+ 🥗 Dietician Module
+- Registration with admin approval
+- Create nutrition plans with steps/images
+- Accept/Reject join requests
+- Track user completion %
+- Chat support with users
+- Manage nutrition feedback
+
+---
+
+ 🛠️ Admin Module
+- Manage Users, Experts & Dieticians
+- Approve / Reject accounts
+- View all uploaded fitness content
+- Monitor nutrition plans & feedback
+- Full platform control dashboard
+
+---
+
+ 🤖 Machine Learning Integration
+
+ Workout Recommendation System
+Uses a trained ML model to recommend personalized workouts based on:
+
+- Age
+- Gender
+- Weight
+- Height
+- BMI
+- Body Fat %
+- Workout Frequency
+- Experience Level
+
+ ML Tools Used
+- Scikit-learn
+- NumPy
+- Pickle Model Deployment
+
+---
+
+ 🛠️ Tech Stack
+
+Frontend
+- HTML
+- CSS
+- Bootstrap
+- JavaScript
+
+Backend
+- Django
+- Python
+
+Database
+- SQLite
+
+Machine Learning
+- Scikit-learn
+- NumPy
+- Pickle
+
+Other Integrations
+- Email OTP Verification
+- Real-Time Chat System
+- File Upload Management
+
+---
+
+ 🔐 Security Features
+
+- OTP Email Authentication
+- Role-Based Login Access
+- Admin Approval Workflow
+- Session Management
+- Input Validation
+
+---
+
+ 📌 Project Highlights
+
+✔ Multi-role Authentication System  
+✔ AI-based Workout Prediction  
+✔ Nutrition Progress Tracking  
+✔ Real-Time Expert Consultation  
+✔ Feedback & Rating System  
+✔ Full CRUD Operations  
+✔ Production-Level Django Architecture
+
+---
+
+ 🎯 Outcome
+
+FitPal AI delivers a smart digital fitness ecosystem that combines:
+
+- Artificial Intelligence
+- Fitness Coaching
+- Nutrition Planning
+- Expert Guidance
+- User Progress Analytics
+
+to provide a personalized health transformation experience.
+
+---
+
+ 👨‍💻 Developed With
+Python | Django | Machine Learning | SQLite | Bootstrap
+
+⭐ *A complete industry-level AI Fitness Recommendation Platform*
