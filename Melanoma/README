@@ -1,0 +1,178 @@
+Copy-paste this directly into your **README.md** for GitHub portfolio.
+
+# 🩺 Skin Cancer Detection & Smart Doctor Appointment System
+
+## 📌 Overview
+
+A Django-based healthcare platform that combines **AI-powered skin cancer detection** with an online doctor consultation and appointment booking system.
+
+The system allows users to upload skin lesion images for instant melanoma risk prediction, book appointments with dermatologists, receive digital prescriptions, and manage complete consultation history.
+
+---
+
+## 🚀 Problem Solved
+
+Early detection of skin cancer is critical, but manual diagnosis can be slow and inaccessible.
+
+This system solves that by:
+
+* Detecting melanoma using **Deep Learning**
+* Enabling online doctor appointments
+* Providing digital prescriptions
+* Managing patient medical history
+* Improving accessibility to dermatology services
+
+---
+
+## 🧠 AI / ML Model Used
+
+* **TensorFlow / Keras CNN Model**
+* Model File: `melanoma_model.h5`
+
+### Classification Output
+
+* **BENIGN** → Low Risk
+* **MALIGNANT** → High Risk
+
+---
+
+## 📊 Dataset Used
+
+Skin lesion image dataset for melanoma classification.
+
+**Input Size:** `224 x 224`
+
+**Classification Type:** Binary Image Classification
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+
+* Django
+
+### Frontend
+
+* HTML, CSS, Bootstrap
+
+### Database
+
+* SQLite
+
+### AI Libraries
+
+* TensorFlow / Keras
+* NumPy
+* Pillow (PIL)
+
+### Authentication & Security
+
+* Django Authentication
+* Session Management
+* Secure User Roles
+
+---
+
+## ✨ Features
+
+### 👤 Patient Module
+
+* Registration & login
+* Upload skin lesion image
+* Instant cancer prediction
+* View confidence score
+* Book doctor appointments
+* Online payment simulation
+* Download consultation token
+* View diagnosis history
+* Access prescriptions
+* Chat with admin
+
+---
+
+### 👨‍⚕️ Doctor Module
+
+* Doctor registration & approval
+* View patient bookings
+* Access patient history
+* Add prescriptions
+* Diagnose cases
+* Mark consultation complete
+
+---
+
+### 🛠️ Admin Module
+
+* Manage doctors & patients
+* Monitor all detections
+* View feedback
+* Chat with users
+* Activate / deactivate doctors
+
+---
+
+### 🔬 AI Skin Cancer Detection
+
+* Upload image
+* Image preprocessing
+* CNN prediction
+* Confidence score analysis
+* Risk classification
+* Medical recommendation output
+
+---
+
+## ⚙️ AI Workflow
+
+1. Upload skin image
+2. Resize to **224×224**
+3. Normalize image
+4. CNN prediction
+5. Risk classification
+6. Confidence score generation
+7. Diagnosis recommendation display
+
+---
+
+## 📈 Results
+
+* High prediction accuracy
+* Real-time detection response
+* Confidence score reporting
+* Automated medical suggestion
+
+---
+
+## 🔐 Security Features
+
+* Role-based authentication
+* Session protection
+* Secure login system
+* Appointment validation
+* Payment verification simulation
+
+---
+
+## 📂 Project Structure
+
+```bash
+skin_cancer_detection/
+│── app/
+│── templates/
+│── static/
+│── media/
+│── melanoma_model.h5
+│── manage.py
+```
+
+---
+
+## 🔮 Future Improvements
+
+* Cloud deployment
+* Real payment gateway integration
+* Doctor video consultation
+* Medical report PDF export
+* Multi-class skin disease detection
+* Improved CNN accuracy
