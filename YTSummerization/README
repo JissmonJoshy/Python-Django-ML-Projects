@@ -1,0 +1,201 @@
+
+# 🎥 AI Video & Text Summarization System with Face Authentication
+
+ 📌 Overview
+
+An AI-powered Django web application that generates smart summaries for YouTube videos and long text content using Natural Language Processing (NLP) and Transformer-based Deep Learning models.
+
+The system also includes Face Recognition Authentication, premium subscription management, history tracking, and feedback analysis.
+
+---
+
+ 🚀 Problem Solved
+
+Reading lengthy documents and watching long educational videos consumes time.
+
+This system solves that by:
+
+* Generating instant AI-based summaries
+* Extracting YouTube transcripts automatically
+* Summarizing large text efficiently
+* Providing secure face-recognition login
+
+---
+
+ 🧠 AI / ML Models Used
+
+ Abstractive Summarization
+
+* `facebook/bart-large-cnn` (Hugging Face Transformers)
+
+ Extractive Summarization
+
+* NLTK Tokenization
+* Word Frequency Analysis
+* Stopword Removal
+
+ Face Authentication
+
+* Face Recognition Encoding & Matching
+
+---
+
+ 📊 Input Sources
+
+* YouTube Video URLs
+* Long Text Documents
+* Live Webcam Face Capture
+
+---
+
+ 🛠️ Tech Stack
+
+ Backend
+
+* Django
+
+ Frontend
+
+* HTML, CSS, Bootstrap
+
+ Database
+
+* SQLite
+
+ AI / NLP Libraries
+
+* Hugging Face Transformers
+* NLTK
+* YouTube Transcript API
+* yt-dlp
+
+ Computer Vision
+
+* OpenCV
+* Face Recognition
+
+---
+
+ ✨ Features
+
+ 👤 User Module
+
+* User Registration with Face Capture
+* Face Recognition Login
+* Profile Management
+* Premium Subscription
+* Summary History Tracking
+
+---
+
+ 🎥 Video Summarization
+
+* Extract YouTube Captions
+* Fallback to Description Extraction
+* AI-generated concise summary
+
+---
+
+ 📝 Text Summarization
+
+* Extractive summarization
+* Transformer-based abstractive summary
+* Smart sentence ranking
+
+---
+
+ 🔐 Face Authentication
+
+* Webcam image capture
+* Face encoding comparison
+* Secure biometric login verification
+
+---
+
+ 💎 Premium Subscription
+
+* Subscription package management
+* Expiry tracking
+* Payment simulation
+
+---
+
+ ⭐ Feedback System
+
+* User ratings & feedback
+* Admin reply management
+
+---
+
+ 🛠️ Admin Module
+
+* Manage users
+* Activate / deactivate accounts
+* Manage premium plans
+* Review feedback analytics
+
+---
+
+ ⚙️ AI Workflow
+
+ Video Summary
+
+1. Extract transcript / description
+2. Tokenize text
+3. Extract important sentences
+4. Generate abstractive summary using BART
+
+ Text Summary
+
+1. Text preprocessing
+2. Frequency-based extraction
+3. Transformer summarization
+4. Final concise output
+
+ Face Login
+
+1. Capture webcam image
+2. Generate face encoding
+3. Compare stored encoding
+4. Authenticate user
+
+---
+
+ 📈 Results
+
+* High-quality abstractive summaries
+* Fast YouTube content summarization
+* Accurate biometric authentication
+* Real-time AI response generation
+
+---
+
+ 🔐 Security Features
+
+* Face Recognition Login
+* Password Hashing
+* Duplicate Email Validation
+* Account Activation Control
+
+---
+
+ 📂 Project Structure
+
+```bash
+VideoSummary/
+│── summary/
+│── templates/
+│── static/
+│── media/
+│── manage.py
+```
+
+---
+
+ 🔮 Future Improvements
+
+* Multi-language summarization
+* PDF summarization
+* Voice-based summarization
+* Cloud deployment
+* Advanced subscription gateway
