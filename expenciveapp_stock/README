@@ -1,0 +1,127 @@
+# 📊 Smart Financial Management & Stock Prediction System
+
+An AI-powered personal finance management platform built with Django and Machine Learning to help users track income, manage expenses, analyze bills, visualize financial trends, and predict stock prices using predictive analytics.
+
+---
+
+ 🚀 Key Features
+
+ 👤 User Management
+- Secure user registration & login system
+- Admin approval/rejection workflow
+- User account management dashboard
+
+ 💰 Financial Tracking
+- Fixed Income Management
+- Other Income Tracking
+- Fixed Expense Tracking
+- Other Expense Monitoring
+- Update / Delete financial records
+
+ 📈 Financial Analytics Dashboard
+- Monthly & Annual income analysis
+- Expense calculations
+- Net savings tracking
+- Automated tax estimation
+- Financial summary reports
+
+ 📊 Data Visualization
+- Monthly income vs expense trend graphs
+- Dynamic chart generation using Matplotlib
+- Financial performance insights
+
+ 🧾 Smart Bill Scanner (OCR)
+- Upload bill receipts
+- Extract invoice details using Tesseract OCR
+- Parse:
+  - Invoice Number
+  - Date
+  - Items Purchased
+  - Quantity & Price
+  - Total Amount
+
+ 🤖 Stock Price Prediction (AI)
+Machine Learning based stock forecasting using:
+
+- Artificial Neural Network (Keras)
+- Support Vector Regression (SVR)
+- Linear Regression
+- Decision Tree Regression
+
+Predicts future stock prices using historical market data from Alpha Vantage API.
+
+ ☁️ Sentiment & Text Analysis
+- Text sentiment analysis using TextBlob
+- WordCloud generation for review insights
+- Data-driven visualization reports
+
+---
+
+ 🛠️ Tech Stack
+
+Backend
+- Django
+- Python
+
+Machine Learning / AI
+- TensorFlow / Keras
+- Scikit-learn
+- NumPy
+- Pandas
+
+Data Visualization
+- Matplotlib
+- WordCloud
+
+OCR & Image Processing
+- OpenCV
+- Tesseract OCR
+
+External APIs
+- Alpha Vantage API
+- Tweepy API
+
+Database
+- SQLite
+
+---
+
+ 🧠 ML Models Used
+
+- Artificial Neural Network (ANN)
+- Support Vector Regression (SVR)
+- Linear Regression
+- Decision Tree Regressor
+
+---
+
+ 📌 Core Functionalities
+
+✔ Expense & income automation  
+✔ Bill receipt OCR extraction  
+✔ Financial dashboard analytics  
+✔ Graph-based trend analysis  
+✔ Stock market prediction  
+✔ User approval workflow  
+✔ Smart tax estimation  
+
+---
+
+ 🎯 Project Outcome
+
+This project combines:
+
+- FinTech Application Development
+- Machine Learning Prediction
+- Computer Vision (OCR)
+- Data Visualization
+- Full Stack Django Development
+
+Designed to provide smart financial decision support using AI-driven insights.
+
+---
+
+ 👨‍💻 Developed By
+Jissmon Joshy
+
+AI | Machine Learning | Django Developer
