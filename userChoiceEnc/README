@@ -1,0 +1,167 @@
+
+# 🔐 Secure Multi-Modal Data Encryption & OTP Authentication System
+
+ 📌 Overview
+
+This project is a Django-based secure data encryption system that supports:
+
+* Image encryption & decryption
+* Text encryption using image steganography concepts
+* Audio generation from encoded images
+* OTP-based user registration system
+* Role-based authentication (Admin & User)
+
+It focuses on data security, steganography, and secure communication systems.
+
+---
+
+ 🚀 Problem Statement
+
+With increasing digital data exchange, securing sensitive information is critical.
+
+This system solves:
+
+* Lack of secure data hiding techniques
+* Weak authentication systems
+* Unsafe file transmission
+* Limited multi-modal encryption tools
+
+---
+
+ 🧠 Core Concepts Used
+
+* OTP-based email verification
+* Image steganography (data hiding in images)
+* Audio reconstruction from encoded images
+* Secure password generation
+* Session-based authentication
+
+---
+
+ 🛠️ Tech Stack
+
+ Backend
+
+* Django
+
+ Frontend
+
+* HTML
+* CSS
+* Bootstrap
+
+ Libraries Used
+
+* NumPy
+* Pillow (PIL)
+* SciPy
+* OS module
+* Django Email System
+
+---
+
+ 🔐 Features
+
+ 👤 User Module
+
+* OTP-based registration via email
+* Secure login system
+* Profile management
+* Upload images, text, and audio
+* Encrypt and decrypt data
+* Submit feedback
+
+---
+
+ 🛠️ Admin Module
+
+* View all users
+* Activate / deactivate users
+* Monitor feedbacks
+* Manage system activity
+
+---
+
+ 🖼️ Image Encryption
+
+* Hide data inside images
+* Key-based encryption system
+* Secure image upload & storage
+* Decryption using stored key
+
+---
+
+ 🔊 Audio Generation System
+
+* Extract encoded pixel values from images
+* Convert RGB data into audio signals
+* Generate `.wav` file dynamically
+* Downloadable output audio
+
+---
+
+ 📝 Text Encryption
+
+* Convert text into encoded image format
+* Decode hidden text from images
+* Secure steganography-based communication
+
+---
+
+ 📧 OTP Authentication System
+
+* Email-based OTP verification
+* Auto-generated secure password
+* Session-based registration flow
+* Prevents fake user registration
+
+---
+
+ ⚙️ System Workflow
+
+1. User registers with email
+2. OTP sent to email
+3. Password auto-generated and shared
+4. User logs in securely
+5. User uploads image/text/audio
+6. Data is encrypted using backend logic
+7. System allows decryption or audio generation
+
+---
+
+ 📊 Key Highlights
+
+* Multi-modal encryption system (Image + Text + Audio)
+* Secure authentication with OTP verification
+* Real-time file processing
+* Steganography-based data hiding
+* Downloadable encrypted outputs
+
+---
+
+ 🔮 Future Improvements
+
+* Add AES/RSA hybrid encryption
+* Cloud-based secure storage
+* AI-based steganalysis detection
+* Mobile application support
+* Real-time secure messaging system
+
+---
+
+ 👨‍💻 Author
+
+Your Name
+
+---
+
+ 📜 License
+
+Educational Project Only
+
+---
+
+If you want, I can next:
+✅ Combine ALL your projects into ONE portfolio GitHub README (very professional)
+✅ Or create a resume (ATS optimized)
+✅ Or rank your top 5 strongest projects for placements
