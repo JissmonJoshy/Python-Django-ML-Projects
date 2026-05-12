@@ -1,0 +1,94 @@
+# 🏥 Smart Medical Management System
+
+A full-stack Django-based healthcare management platform that connects Patients, Doctors, Pharmacists, and Admin in one secure system with appointment booking, prescription management, medicine ordering, payment processing, inventory tracking, and real-time communication.
+
+---
+
+ 🚀 Features
+
+ 👨‍⚕️ Doctor Module
+- Doctor registration with admin approval
+- Profile management with validation
+- View and manage appointments
+- Accept / Reject bookings
+- Create digital prescriptions
+- Assign medicines to pharmacists
+- Search available medicines
+- View completed consultations
+
+ 💊 Pharmacist Module
+- Registration & verification system
+- Add / Update / Delete medicines
+- Stock & expiry date management
+- Process prescription-based medicine sales
+- Order confirmation workflow
+- Profit calculation & sales reports
+- Invoice generation
+- Paid orders management
+
+ 👤 User Module
+- Secure registration & login
+- Profile management
+- Book doctor appointments
+- Online appointment payment
+- View prescriptions
+- Browse medicines
+- Add medicines to cart
+- Place medicine orders
+- Order confirmation & invoice tracking
+
+ 🛠 Admin Module
+- Approve / Reject doctors, pharmacists, users
+- View all registered members
+- Monitor medicine inventory
+- Expired stock tracking
+- Profit analytics dashboard
+- Medicine sales reports
+
+ 💬 Communication
+- Real-time Doctor ↔ Patient chat system
+
+---
+
+ 🔒 Security & Validation
+- Django authentication system
+- Password hashing
+- Role-based access control
+- Email validation
+- Phone validation
+- Image upload validation
+- Database transaction safety
+
+---
+
+ 🛠 Tech Stack
+
+- Backend: Django, Python
+- Database: SQLite
+- Frontend: HTML, CSS, Bootstrap, JavaScript
+- Authentication: Django Auth
+- ORM: Django ORM
+
+---
+
+ 📌 Key Functionalities
+✔ Appointment Scheduling  
+✔ Digital Prescription System  
+✔ Medicine Inventory Management  
+✔ Online Payments  
+✔ Pharmacy Order Workflow  
+✔ Profit Tracking  
+✔ Stock Expiry Monitoring  
+✔ Real-Time Messaging  
+
+---
+
+ 🎯 Project Outcome
+Built a complete Healthcare ERP-style system automating hospital consultation, pharmacy workflow, prescription handling, and medicine commerce with secure multi-user access.
+
+---
+
+ 👨‍💻 Developed By
+Jissmon Joshy  
+B.Tech Computer Science Engineer  
+Machine Learning & Full Stack Django Developer
