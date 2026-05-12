@@ -1,0 +1,100 @@
+ 🥗 AI Smart Diet & Fitness Recommendation System
+
+A full-stack Django-based Diet & Fitness Management Platform that connects Customers, Dieticians, and Admin with smart health tracking, personalized diet/workout plans, payment integration, progress monitoring, OTP verification, and chatbot assistance.
+
+---
+
+ 🚀 Key Features
+
+ 👤 Customer Module
+- OTP-based secure registration & email verification
+- Browse dieticians and chat in real-time
+- Join free/paid diet plans
+- Request personalized custom diet plans
+- Purchase workout plans
+- Track daily food intake
+- BMI, BMR & SMR health analysis
+- View nutrition reports & progress tracking
+- Give feedback and ratings
+
+---
+
+ 🧑‍⚕️ Dietician Module
+- Register with license verification
+- Create free/paid diet plans
+- Upload PDF diet resources
+- Manage custom diet requests
+- Add nutritional food database
+- Create structured workout plans with videos/images
+- Track joined customer progress
+- Chat with customers
+
+---
+
+ 🛠 Admin Module
+- Approve / reject dieticians
+- Manage customers and dieticians
+- Monitor diet/workout plans
+- View system-wide feedback analytics
+- Track all joined plans and progress reports
+
+---
+
+ 🧠 Smart Health Features
+- BMI Calculator
+- BMR Calculator
+- SMR Analysis
+- Daily nutrition intake evaluation
+- Diet completion percentage tracking
+- Personalized health progress insights
+
+---
+
+ 💬 Communication System
+- Real-time Customer ↔ Dietician chat
+- Automated OTP & email notifications
+- Password auto-generation after verification
+
+---
+
+ 💳 Payment Simulation
+- Paid diet/workout plan purchase flow
+- Access control after successful payment
+
+---
+
+ 🤖 AI Integration
+- Python Chatbot Support
+- Smart health assistance automation
+
+---
+
+ 🛠 Tech Stack
+
+Backend: Django, Python  
+Frontend: HTML, CSS, JavaScript, Bootstrap  
+Database: SQLite  
+Authentication: Django Auth + OTP Verification  
+Email Service: SMTP  
+File Handling: PDF / Image / Video Uploads
+
+---
+
+ 🔥 Highlights
+✔ Multi-user Role-Based System  
+✔ Real-Time Chat  
+✔ Health Tracking Analytics  
+✔ Diet + Workout Marketplace  
+✔ Secure OTP Authentication  
+✔ Full CRUD Operations  
+✔ Payment Workflow Simulation  
+
+---
+
+ 📌 Project Type
+Full Stack Web Application | HealthTech Platform | Smart Diet & Fitness System
+
+---
+
+ 👨‍💻 Developed With
+Python • Django • SQLite • Bootstrap • JavaScript
