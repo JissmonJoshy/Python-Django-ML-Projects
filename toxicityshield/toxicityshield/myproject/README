@@ -1,0 +1,225 @@
+
+# 🧠 MindCare – AI Mental Health Support & Counseling Platform
+
+ 📌 Overview
+
+MindCare is a Django-based AI-powered mental wellness platform that helps users share emotions, detect mental health status using Machine Learning, connect with caretakers, and receive counseling support in real time.
+
+The system combines sentiment analysis, OCR-based content moderation, chatbot assistance, secure payments, and live caretaker chat to create a smart mental health ecosystem.
+
+---
+
+ 🚀 Problem Solved
+
+Mental health issues often go unnoticed due to lack of support and monitoring.
+
+MindCare solves this by:
+
+* Detecting emotional state from user posts
+* Identifying users needing counseling support
+* Blocking harmful/inappropriate content
+* Connecting users with professional caretakers
+* Providing secure private counseling chat
+
+---
+
+ 🧠 AI / ML Models Used
+
+ Sentiment Analysis
+
+* Logistic Regression
+* CountVectorizer (NLP)
+
+Detects emotions:
+
+* Happiness
+* Sadness
+* Anger
+* Neutral
+
+---
+
+ OCR-Based Content Moderation
+
+* Tesseract OCR
+* OpenCV Image Processing
+
+Detects restricted words inside uploaded images.
+
+---
+
+ AI Chatbot Support
+
+* Gemini AI Integration *(optional support module)*
+
+Provides mental health guidance and instant assistance.
+
+---
+
+ 📊 Dataset Used
+
+ Emotion Dataset
+
+```bash id="1dd2"
+mydata1.csv
+```
+
+Contains labeled emotional text samples.
+
+ Restricted Word Dataset
+
+```bash id="2ddd"
+english.csv
+```
+
+Used for content moderation.
+
+---
+
+ 🛠️ Tech Stack
+
+ Backend
+
+* Django
+
+ Frontend
+
+* HTML
+* CSS
+* Bootstrap
+
+ Database
+
+* SQLite
+
+ AI / ML Libraries
+
+* Scikit-learn
+* Pandas
+* OpenCV
+* Tesseract OCR
+* NumPy
+
+ AI Assistant
+
+* Google Gemini API
+
+---
+
+ ✨ Features
+
+ 👤 User Module
+
+* Registration & Login
+* Create emotional posts
+* Upload post images
+* Comment on posts
+* View counseling alerts
+* Profile management
+* Payment for premium caretaker access
+* Chat with caretakers
+* Submit feedback
+
+---
+
+ 🩺 Caretaker Module
+
+* Secure registration
+* View user emotional activity
+* Chat with assigned users
+* Counseling support
+* View payments
+* Monitor user posts
+
+---
+
+ 🛠️ Admin Module
+
+* Manage caretakers
+* View all users
+* Monitor emotional trends
+* Identify users needing support
+* Send automatic counseling alerts
+* Moderate system activity
+
+---
+
+ 💬 Real-Time Chat System
+
+Private chat between:
+
+* User ↔ Caretaker
+
+Includes:
+
+* Message history
+* Counseling conversation tracking
+* Paid access verification
+
+---
+
+ 🔍 Smart Content Moderation
+
+Before posting:
+
+* OCR extracts image text
+* Checks restricted words
+* Blocks unsafe uploads automatically
+
+Also moderates harmful comments.
+
+---
+
+ 📈 Emotion Detection Workflow
+
+1. User writes post
+2. NLP preprocessing
+3. CountVectorizer transformation
+4. Logistic Regression prediction
+5. Emotion classification
+6. Detect users with repeated sadness
+7. Trigger counseling recommendation
+
+---
+
+ 📊 Results
+
+* High sentiment classification accuracy
+* Fast emotional prediction
+* Automated counseling alert generation
+* Real-time content moderation
+
+---
+
+ 🔐 Security Features
+
+* Session authentication
+* Access control
+* Restricted content filtering
+* Payment validation
+* Secure caretaker-user communication
+
+---
+
+ 📂 Project Structure
+
+```bash id="92kd2"
+mindcare/
+│── app/
+│── templates/
+│── static/
+│── media/
+│── mydata1.csv
+│── english.csv
+│── manage.py
+```
+
+---
+
+ 🔮 Future Improvements
+
+* Advanced deep learning sentiment detection
+* Video counseling sessions
+* AI depression risk prediction
+* Cloud deployment
+* Emotion trend analytics dashboard
