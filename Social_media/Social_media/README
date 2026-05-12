@@ -1,0 +1,169 @@
+🧠 AI-Powered Social Media Mental Health Detection System
+
+ 📌 Project Overview
+
+A smart AI-integrated social media platform built using Django + Deep Learning (CNN) that detects suicidal or harmful text content before publishing posts.
+
+The system helps create a safer digital environment by automatically analyzing user captions and blocking harmful mental-health-related content.
+
+---
+
+ 🚀 Key Features
+
+ 👤 User Module
+
+* User Registration & Secure Login
+* Profile Management
+* Upload Posts, Stories & Media
+* Like, Comment & Follow Users
+* Friend Request System
+* Personal Chat / Messaging
+* Delete & Manage Posts
+
+---
+
+ 🛡️ Admin Module
+
+* View All Users
+* Monitor Posts & Stories
+* Detect Flagged Harmful Posts
+* View User Profiles
+* Admin-to-User Messaging
+* Content Moderation Dashboard
+
+---
+
+ 💬 Real-Time Communication
+
+* User ↔ User Chat
+* Admin ↔ User Chat
+* File/Image Sharing
+* Chat History Storage
+
+---
+
+ 🤖 AI / Deep Learning Integration
+
+ Model Used
+
+* Convolutional Neural Network (CNN)
+
+ Libraries
+
+* TensorFlow / Keras
+* NumPy
+* Pandas
+* Scikit-learn
+
+ Text Processing
+
+* Tokenization
+* Sequence Padding
+* Embedding Layer
+* Conv1D Feature Extraction
+
+---
+
+ 📊 Dataset
+
+Suicide Detection Dataset
+
+Features Used
+
+* User Caption Text
+
+Target
+
+* Suicidal
+* Non-Suicidal
+
+---
+
+ ⚙️ AI Workflow
+
+1. User uploads caption
+2. Text preprocessing
+3. CNN prediction
+4. Harm score evaluation
+5. If harmful → Block post
+6. Else → Publish post
+
+---
+
+ 🛠️ Technologies Used
+
+ Backend
+
+* Django
+* Python
+
+ Database
+
+* SQLite
+
+ Machine Learning
+
+* TensorFlow / Keras
+* Scikit-learn
+
+ Frontend
+
+* HTML
+* CSS
+* Bootstrap
+* JavaScript
+
+---
+
+ 📈 Core Functionalities
+
+✔ Social Media Platform
+✔ Deep Learning Content Detection
+✔ Automated Moderation
+✔ Messaging System
+✔ Story Uploading
+✔ Like / Comment System
+✔ Friend Management
+✔ Secure Authentication
+
+---
+
+ 🔥 Project Highlights
+
+* Combines Full Stack Development + Deep Learning
+* Real-world Mental Health Detection Use Case
+* AI-based Content Moderation
+* End-to-End Social Networking Workflow
+
+---
+
+ ⚠️ Future Improvements
+
+* Deploy pre-trained model using Joblib / SavedModel
+* Real-time WebSocket Chat
+* Better NLP with LSTM / BERT
+* Cloud Deployment (AWS / Render)
+
+---
+
+ 🎯 Resume Value
+
+This project demonstrates:
+
+* Full Stack Django Development
+* Deep Learning Implementation
+* NLP Text Classification
+* Database Design
+* Authentication & Security
+* Real-world AI Product Building
+
+---
+
+ 👨‍💻 Developed By
+
+Jissmon Joshy
+Machine Learning & Full Stack Developer
+
+---
+
+⭐ If you like this project, give it a star on GitHub!
