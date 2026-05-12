@@ -1,0 +1,151 @@
+🌸 AI-Based PCOS Prediction & Women Health Management System
+
+An intelligent healthcare web application built using Django + Machine Learning for predicting PCOS risk, tracking menstrual cycles, managing appointments, and providing personalized health recommendations.
+
+---
+🚀 Project Overview
+
+This system helps women monitor reproductive health by combining:
+
+- 🧠 AI-powered PCOS Prediction
+- 📅 Menstrual Cycle Tracking
+- 👩‍⚕️ Doctor Appointment Booking
+- 📊 Health Analysis Dashboard
+- 📄 Automated PDF Medical Reports
+- 🥗 Diet & Home Remedy Suggestions
+
+It provides early health insights and supports preventive care through predictive analytics.
+
+---
+
+ 🛠 Tech Stack
+
+Frontend
+- HTML
+- CSS
+- Bootstrap
+- JavaScript
+
+Backend
+- Django (Python)
+
+Database
+- SQLite
+
+Machine Learning
+- Scikit-learn
+- Joblib
+- NumPy
+
+PDF Report Generation
+- ReportLab
+
+---
+
+ 🧠 Machine Learning Features
+
+ PCOS Prediction Model
+Predicts PCOS risk using:
+
+- Age
+- Cycle Length
+- BMI
+- Acne Symptoms
+- Hair Fall
+- Weight Gain
+
+Algorithms Used
+- Random Forest Classifier
+- Probability-based Risk Prediction
+
+---
+
+ ✨ Core Features
+
+ 👩 User Module
+- Secure Registration & Login
+- Profile Management
+- Period Tracking
+- Cycle History Analysis
+- Next Period Prediction
+- PCOS Risk Prediction
+- Download Medical Report PDF
+- Book Doctor Appointment
+- View Doctor Advice
+
+---
+
+ 👨‍⚕️ Doctor Module
+- Doctor Registration
+- Appointment Management
+- View Patient Reports
+- Provide Diet Plans
+- Give Medical Advice
+- Treatment Notes
+
+---
+
+ 🛡 Admin Module
+- Manage Doctors
+- Manage Users
+- Approve / Reject Appointments
+- Add Diet & Remedies
+- Monitor System Activities
+
+---
+
+ 📊 Prediction Output
+
+The system predicts:
+
+- PCOS Detection Status
+- Risk Probability (%)
+- Personalized Health Advice
+- Next Cycle Prediction
+- Hormonal Delay Analysis
+
+---
+
+ 📄 Smart Report Generation
+
+Generate downloadable PCOS Diagnostic Reports including:
+
+- Patient Details
+- Risk Analysis
+- Probability Score
+- Doctor Recommendation
+- Generated PDF Summary
+
+---
+
+ 🎯 Problem Solved
+
+Women often struggle with:
+
+- Irregular cycle monitoring
+- Early PCOS detection
+- Health record management
+- Finding proper medical guidance
+
+This system offers AI-assisted early diagnosis and medical support.
+
+---
+
+ 🔥 Key Highlights
+
+✔ Full Stack Healthcare System  
+✔ Real Machine Learning Integration  
+✔ Predictive Health Analytics  
+✔ PDF Medical Report Automation  
+✔ Appointment & Doctor Management  
+✔ Professional Healthcare Dashboard
+
+---
+
+ 👨‍💻 Developed With
+
+Python | Django | Machine Learning | SQLite | Bootstrap | ReportLab
+
+---
+
+# ⭐ If you like this project, give it a star!
