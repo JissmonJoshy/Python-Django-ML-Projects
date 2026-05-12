@@ -1,22 +1,20 @@
-Copy-paste this directly into your **README.md** for GitHub portfolio.
+🩺 Skin Cancer Detection & Smart Doctor Appointment System
 
-# 🩺 Skin Cancer Detection & Smart Doctor Appointment System
+ 📌 Overview
 
-## 📌 Overview
-
-A Django-based healthcare platform that combines **AI-powered skin cancer detection** with an online doctor consultation and appointment booking system.
+A Django-based healthcare platform that combines AI-powered skin cancer detection with an online doctor consultation and appointment booking system.
 
 The system allows users to upload skin lesion images for instant melanoma risk prediction, book appointments with dermatologists, receive digital prescriptions, and manage complete consultation history.
 
 ---
 
-## 🚀 Problem Solved
+ 🚀 Problem Solved
 
 Early detection of skin cancer is critical, but manual diagnosis can be slow and inaccessible.
 
 This system solves that by:
 
-* Detecting melanoma using **Deep Learning**
+* Detecting melanoma using Deep Learning
 * Enabling online doctor appointments
 * Providing digital prescriptions
 * Managing patient medical history
@@ -24,49 +22,49 @@ This system solves that by:
 
 ---
 
-## 🧠 AI / ML Model Used
+ 🧠 AI / ML Model Used
 
-* **TensorFlow / Keras CNN Model**
+* TensorFlow / Keras CNN Model
 * Model File: `melanoma_model.h5`
 
-### Classification Output
+ Classification Output
 
-* **BENIGN** → Low Risk
-* **MALIGNANT** → High Risk
+* BENIGN → Low Risk
+* MALIGNANT → High Risk
 
 ---
 
-## 📊 Dataset Used
+ 📊 Dataset Used
 
 Skin lesion image dataset for melanoma classification.
 
-**Input Size:** `224 x 224`
+Input Size: `224 x 224`
 
-**Classification Type:** Binary Image Classification
+Classification Type: Binary Image Classification
 
 ---
 
-## 🛠️ Tech Stack
+ 🛠️ Tech Stack
 
-### Backend
+ Backend
 
 * Django
 
-### Frontend
+ Frontend
 
 * HTML, CSS, Bootstrap
 
-### Database
+ Database
 
 * SQLite
 
-### AI Libraries
+ AI Libraries
 
 * TensorFlow / Keras
 * NumPy
 * Pillow (PIL)
 
-### Authentication & Security
+ Authentication & Security
 
 * Django Authentication
 * Session Management
@@ -74,9 +72,9 @@ Skin lesion image dataset for melanoma classification.
 
 ---
 
-## ✨ Features
+ ✨ Features
 
-### 👤 Patient Module
+ 👤 Patient Module
 
 * Registration & login
 * Upload skin lesion image
@@ -91,7 +89,7 @@ Skin lesion image dataset for melanoma classification.
 
 ---
 
-### 👨‍⚕️ Doctor Module
+ 👨‍⚕️ Doctor Module
 
 * Doctor registration & approval
 * View patient bookings
@@ -102,7 +100,7 @@ Skin lesion image dataset for melanoma classification.
 
 ---
 
-### 🛠️ Admin Module
+ 🛠️ Admin Module
 
 * Manage doctors & patients
 * Monitor all detections
@@ -112,7 +110,7 @@ Skin lesion image dataset for melanoma classification.
 
 ---
 
-### 🔬 AI Skin Cancer Detection
+ 🔬 AI Skin Cancer Detection
 
 * Upload image
 * Image preprocessing
@@ -123,10 +121,10 @@ Skin lesion image dataset for melanoma classification.
 
 ---
 
-## ⚙️ AI Workflow
+ ⚙️ AI Workflow
 
 1. Upload skin image
-2. Resize to **224×224**
+2. Resize to 224×224
 3. Normalize image
 4. CNN prediction
 5. Risk classification
@@ -135,7 +133,7 @@ Skin lesion image dataset for melanoma classification.
 
 ---
 
-## 📈 Results
+ 📈 Results
 
 * High prediction accuracy
 * Real-time detection response
@@ -144,7 +142,7 @@ Skin lesion image dataset for melanoma classification.
 
 ---
 
-## 🔐 Security Features
+ 🔐 Security Features
 
 * Role-based authentication
 * Session protection
@@ -154,7 +152,7 @@ Skin lesion image dataset for melanoma classification.
 
 ---
 
-## 📂 Project Structure
+ 📂 Project Structure
 
 ```bash
 skin_cancer_detection/
@@ -168,7 +166,7 @@ skin_cancer_detection/
 
 ---
 
-## 🔮 Future Improvements
+ 🔮 Future Improvements
 
 * Cloud deployment
 * Real payment gateway integration
