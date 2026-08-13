@@ -9,3 +9,26 @@ __pycache__/
 *.pdf
 *.weights
 *.yml
+
+
+# Python virtual environments
+env/
+venv/
+.venv/
+ENV/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Django database
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
