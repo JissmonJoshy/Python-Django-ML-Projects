@@ -1,0 +1,149 @@
+{% extends "user/common.html" %}
+{% load static %}
+
+{% block content %}
+<br><br><br><br><br>
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-xl-8 col-lg-9 col-md-10">
+
+            <div class="card border-0 shadow-lg rounded-4">
+
+                <div class="card-header bg-primary text-white text-center py-4 rounded-top-4">
+                    <h2 class="fw-bold mb-1">
+                        <i class="fas fa-robot me-2"></i>
+                        AI vs Real Image Detection
+                    </h2>
+                    <p class="mb-0">
+                        Upload an image to detect whether it is AI Generated or Real.
+                    </p>
+                </div>
+
+                <div class="card-body p-5">
+
+                    <form method="POST" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+                                Select Image
+                            </label>
+
+                            <input
+                                type="file"
+                                name="image"
+                                class="form-control form-control-lg"
+                                accept="image/*"
+                                required>
+
+                        </div>
+
+                        <button class="btn btn-primary btn-lg w-100">
+
+                            <i class="fas fa-search me-2"></i>
+
+                            Predict Image
+
+                        </button>
+
+                    </form>
+
+                    {% if history %}
+
+                    <hr class="my-5">
+
+                    <div class="row align-items-center">
+
+                        <div class="col-md-6 text-center mb-4 mb-md-0">
+
+                            <img src="{{ history.image.url }}"
+                                 class="img-fluid rounded-4 shadow"
+                                 style="max-height:350px;">
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <h3 class="fw-bold mb-4">
+                                Prediction Result
+                            </h3>
+
+                            {% if history.prediction == "Real" %}
+
+                            <span class="badge bg-success fs-5 px-4 py-3">
+                                {{ history.prediction }}
+                            </span>
+
+                            {% else %}
+
+                            <span class="badge bg-danger fs-5 px-4 py-3">
+                                {{ history.prediction }}
+                            </span>
+
+                            {% endif %}
+
+                            <div class="mt-4">
+
+                                <h5 class="fw-bold">
+                                    Confidence
+                                </h5>
+
+                                <div class="progress" style="height:28px;">
+
+                                    <div
+                                        class="progress-bar progress-bar-striped progress-bar-animated"
+                                        role="progressbar"
+                                        style="width: {{ history.confidence }}%;">
+
+                                        {{ history.confidence }}%
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="mt-4">
+
+                                <table class="table table-bordered">
+
+                                    <tr>
+                                        <th width="40%">Prediction</th>
+                                        <td>{{ history.prediction }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Confidence</th>
+                                        <td>{{ history.confidence }}%</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Date</th>
+                                        <td>{{ history.date }}</td>
+                                    </tr>
+
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

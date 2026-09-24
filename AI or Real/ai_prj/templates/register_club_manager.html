@@ -1,0 +1,137 @@
+{% extends "common.html" %}
+{% load static %}
+{% block content %}
+
+<br><br><br><br>
+
+<section class="contact section-padding">
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-7">
+
+                <div class="form-box">
+
+                    <h4 class="text-center mb-4">
+                        Club Manager Registration
+                    </h4>
+
+                    {% if messages %}
+                        {% for i in messages %}
+                        <div class="alert alert-danger">
+                            {{ i }}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <div class="row">
+
+                            <div class="col-md-6 form-group">
+                                <input type="text"
+                                       name="club_name"
+                                       placeholder="Club Name"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input type="text"
+                                       name="manager_name"
+                                       placeholder="Manager Name"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input type="email"
+                                       name="email"
+                                       placeholder="Email"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input type="text"
+                                       name="phone"
+                                       maxlength="10"
+                                       placeholder="Phone Number"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input type="text"
+                                       name="country"
+                                       placeholder="Country"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input type="text"
+                                       name="league"
+                                       placeholder="League"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input type="number"
+                                       name="club_budget"
+                                       placeholder="Club Budget"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input type="number"
+                                       name="established_year"
+                                       placeholder="Established Year"
+                                       required>
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <input type="text"
+                                       name="stadium"
+                                       placeholder="Stadium"
+                                       required>
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <label>Club Logo</label>
+                                <input type="file"
+                                       name="club_logo"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input type="text"
+                                       name="username"
+                                       placeholder="Username"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input type="password"
+                                       name="password"
+                                       placeholder="Password"
+                                       required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <input type="submit"
+                                       value="Register">
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

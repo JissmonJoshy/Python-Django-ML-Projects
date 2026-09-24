@@ -1,0 +1,175 @@
+{% extends "common.html" %}
+{% load static %}
+
+{% block content %}
+
+<br><br><br><br>
+
+<section class="contact section-padding">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-7">
+
+                <div class="form-box shadow p-4 rounded">
+
+                    <h3 class="text-center mb-4" style="color: #fcfcfc; font-weight: bold;">
+                        User Registration
+                    </h3>
+
+                    {% if messages %}
+                        {% for i in messages %}
+                            <div class="alert alert-info">
+                                {{ i }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="POST"
+                          enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <div class="row">
+
+                            <div class="col-md-6 form-group mb-3">
+
+                                <label>Name</label>
+
+                                <input
+                                    type="text"
+                                    name="name"
+                                    class="form-control"
+                                    placeholder="Enter Name"
+                                    required>
+
+                            </div>
+
+                            <div class="col-md-6 form-group mb-3">
+
+                                <label>Phone Number</label>
+
+                                <input
+                                    type="text"
+                                    name="phone"
+                                    maxlength="10"
+                                    class="form-control"
+                                    placeholder="Enter Mobile Number"
+                                    required>
+
+                            </div>
+
+                            <div class="col-md-6 form-group mb-3">
+
+                                <label>Email</label>
+
+                                <input
+                                    type="email"
+                                    name="email"
+                                    class="form-control"
+                                    placeholder="Enter Email"
+                                    required>
+
+                            </div>
+
+                            <div class="col-md-6 form-group mb-3">
+
+                                <label>Username</label>
+
+                                <input
+                                    type="text"
+                                    name="username"
+                                    class="form-control"
+                                    placeholder="Choose Username"
+                                    required>
+
+                            </div>
+
+                            <div class="col-md-12 form-group mb-3">
+
+                                <label>Address</label>
+
+                                <textarea
+                                    name="address"
+                                    rows="3"
+                                    class="form-control"
+                                    placeholder="Enter Address"
+                                    required></textarea>
+
+                            </div>
+
+                            <div class="col-md-6 form-group mb-3">
+
+                                <label>Password</label>
+
+                                <input
+                                    type="password"
+                                    name="password"
+                                    class="form-control"
+                                    placeholder="Password"
+                                    required>
+
+                            </div>
+
+                            <div class="col-md-6 form-group mb-3">
+
+                                <label>Confirm Password</label>
+
+                                <input
+                                    type="password"
+                                    name="cpassword"
+                                    class="form-control"
+                                    placeholder="Confirm Password"
+                                    required>
+
+                            </div>
+
+                            <div class="col-md-12 form-group mb-4">
+
+                                <label>Profile Photo</label>
+
+                                <input
+                                    type="file"
+                                    name="profile"
+                                    class="form-control"
+                                    accept="image/*"
+                                    required>
+
+                            </div>
+
+                            <div class="col-md-12 text-center">
+
+                                <input
+                                    type="submit"
+                                    value="Register"
+                                    class="btn btn-primary px-5">
+
+                            </div>
+
+                            <div class="col-md-12 text-center mt-3">
+
+                                Already have an account?
+
+                                <a href="{% url 'login' %}">
+                                    Login Here
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

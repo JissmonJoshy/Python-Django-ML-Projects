@@ -1,0 +1,205 @@
+{% extends "user/common.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Header -->
+<header class="header">
+    <div class="video-fullscreen-wrap">
+
+        <div class="video-fullscreen-video" data-overlay-dark="2">
+            <video playsinline autoplay loop muted>
+                <source src="{% static 'ai.mp4' %}" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="v-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+
+                        <h6>* AI-Powered Image Authenticity Detection Platform</h6>
+
+                        <h1>AI or Real Image Detection System</h1>
+
+                        <h5>
+                            Detect Whether an Image is
+                            <span>AI Generated <i>or Real</i></span>
+                        </h5>
+
+                        <a href="#0" class="button-1 mt-15 mb-15 mr-15">
+                            View Detection History
+                            <span class="ti-arrow-top-right"></span>
+                        </a>
+
+                        <a href="#" data-scroll-nav="1" class="button-2 mt-15 mb-15">
+                            Upload Image
+                            <span class="ti-arrow-top-right"></span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- Process -->
+<section class="process-number mt--120 mb-60">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4 col-md-12 mb-30">
+                <div class="item">
+                    <div class="con">
+
+                        <div class="no">1</div>
+
+                        <h5>Upload an Image</h5>
+
+                        <p>
+                            Upload any digital image to the platform. The system
+                            accepts supported image formats and prepares them for
+                            AI-based authenticity analysis.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 mb-30">
+                <div class="item">
+                    <div class="con">
+
+                        <div class="no">2</div>
+
+                        <h5>AI Image Analysis</h5>
+
+                        <p>
+                            A deep learning model analyzes image patterns, textures,
+                            artifacts, and visual inconsistencies to determine whether
+                            the uploaded image is AI-generated or a genuine photograph.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 mb-30">
+                <div class="item">
+                    <div class="con">
+
+                        <div class="no">3</div>
+
+                        <h5>View Prediction Result</h5>
+
+                        <p>
+                            The system displays the prediction as either
+                            <strong>Real Image</strong> or
+                            <strong>AI Generated Image</strong> along with the
+                            confidence score and prediction details.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- About -->
+<section class="about section-padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12">
+
+                <div class="content">
+
+                    <div class="section-subtitle">
+                        Intelligent Image Verification
+                    </div>
+
+                    <div class="section-title">
+                        AI-Based <span>Real or AI Image Detection</span>
+                    </div>
+
+                    <p class="mb-30">
+                        The AI or Real Image Detection System is an advanced deep
+                        learning application designed to distinguish between authentic
+                        photographs and AI-generated images. By analyzing visual
+                        patterns, textures, pixel distributions, and synthetic
+                        artifacts, the model accurately predicts whether an uploaded
+                        image has been generated using artificial intelligence or
+                        captured from the real world.
+                    </p>
+
+                    <p class="mb-30">
+                        This solution is useful for journalists, researchers, digital
+                        content creators, educational institutions, organizations,
+                        and cybersecurity professionals who need to verify image
+                        authenticity. The platform helps combat misinformation,
+                        detect manipulated media, improve digital trust, and support
+                        responsible AI usage through fast and reliable image
+                        verification.
+                    </p>
+
+                    <ul class="list-unstyled list mb-30">
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>Automatic AI vs Real Image Classification</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>Deep Learning-Based Image Analysis</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>Confidence Score Prediction</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>Fast, Reliable, and Accurate Image Verification</p>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <a href="#" class="button-1">
+                        Explore System
+                        <span class="ti-arrow-top-right"></span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

@@ -1,0 +1,174 @@
+{% extends "user/common.html" %}
+{% load static %}
+
+{% block content %}
+<br><br><br><br><br>
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-12">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-header bg-primary text-white py-3">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <h3 class="mb-0">
+                            <i class="fas fa-history me-2"></i>
+                            Prediction History
+                        </h3>
+
+                        <span class="badge bg-light text-dark fs-6">
+                            Total Predictions : {{ history|length }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+                    {% if history %}
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover align-middle text-center">
+
+                            <thead class="table-dark">
+
+                                <tr>
+                                    <th>#</th>
+                                    <th>Image</th>
+                                    <th>Prediction</th>
+                                    <th>Confidence</th>
+                                    <th>Date</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                {% for i in history %}
+
+                                <tr>
+
+                                    <td>
+                                        <strong>{{ forloop.counter }}</strong>
+                                    </td>
+
+                                    <td>
+
+                                        <img src="{{ i.image.url }}"
+                                             class="img-thumbnail rounded"
+                                             style="width:100px;height:100px;object-fit:cover;">
+
+                                    </td>
+
+                                    <td>
+
+                                        {% if i.prediction == "Real" %}
+
+                                            <span class="badge bg-success px-3 py-2">
+                                                {{ i.prediction }}
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="badge bg-danger px-3 py-2">
+                                                {{ i.prediction }}
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+                                    <td style="min-width:180px;">
+
+                                        <div class="progress" style="height:22px;">
+
+                                            <div class="progress-bar
+                                            {% if i.confidence >= 80 %}
+                                                bg-success
+                                            {% elif i.confidence >= 60 %}
+                                                bg-warning
+                                            {% else %}
+                                                bg-danger
+                                            {% endif %}"
+
+                                            role="progressbar"
+
+                                            style="width:{{ i.confidence }}%;">
+
+                                                {{ i.confidence }}%
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+
+                                        <strong>{{ i.date|date:"d M Y" }}</strong>
+
+                                        <br>
+
+                                        <small class="text-muted">
+
+                                            {{ i.date|time:"h:i A" }}
+
+                                        </small>
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    {% else %}
+
+                    <div class="text-center py-5">
+
+                        <img src="{% static 'img/no-data.png' %}"
+                             width="180"
+                             class="mb-3">
+
+                        <h4 class="text-muted">
+
+                            No Prediction History Found
+
+                        </h4>
+
+                        <p class="text-secondary">
+
+                            Upload an image to see your prediction history here.
+
+                        </p>
+
+                        <a href="{% url 'predict_image' %}" class="btn btn-primary">
+
+                            <i class="fas fa-upload me-2"></i>
+
+                            Predict New Image
+
+                        </a>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
