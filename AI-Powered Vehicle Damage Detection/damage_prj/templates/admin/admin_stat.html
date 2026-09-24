@@ -1,0 +1,499 @@
+{% extends "admin/common.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Banner -->
+<section class="banner-header middle-height section-padding bg-img"
+         data-overlay-dark="6"
+         data-background="{% static 'img/slider/30.avif' %}">
+
+    <div class="v-middle">
+        <div class="container text-center">
+            <h6>Admin Panel</h6>
+            <h1>Dashboard <span>Statistics</span></h1>
+        </div>
+    </div>
+
+</section>
+
+<!-- Dashboard -->
+<section class="section-padding">
+
+<div class="container">
+
+    <!-- ========================= -->
+    <!-- Summary Cards -->
+    <!-- ========================= -->
+
+    <div class="row g-4">
+
+        <div class="col-xl-2 col-lg-4 col-md-6">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h2 class="fw-bold text-primary">
+                        {{ total_claims }}
+                    </h2>
+
+                    <h6>Total Claims</h6>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-2 col-lg-4 col-md-6">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h2 class="fw-bold text-success">
+                        {{ approved }}
+                    </h2>
+
+                    <h6>Approved</h6>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-2 col-lg-4 col-md-6">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h2 class="fw-bold text-danger">
+                        {{ rejected }}
+                    </h2>
+
+                    <h6>Rejected</h6>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-2 col-lg-4 col-md-6">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h2 class="fw-bold text-warning">
+                        {{ pending }}
+                    </h2>
+
+                    <h6>Pending</h6>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-2 col-lg-4 col-md-6">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h2 class="fw-bold text-danger">
+                        {{ damage }}
+                    </h2>
+
+                    <h6>Damage</h6>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-2 col-lg-4 col-md-6">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h2 class="fw-bold text-success">
+                        {{ whole }}
+                    </h2>
+
+                    <h6>Whole Vehicle</h6>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- Primary Charts -->
+    <!-- ========================= -->
+
+    <div class="row mt-5 g-4">
+
+        <div class="col-lg-4">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-header bg-dark text-white">
+
+                    <h5 class="mb-0" style="color: white;">
+
+                        Claim Status
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <canvas id="statusChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-header bg-dark text-white">
+
+                    <h5 class="mb-0" style="color: white;">
+
+                        AI Prediction
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <canvas id="predictionChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-header bg-dark text-white">
+
+                    <h5 class="mb-0" style="color: white;">
+
+                        Overall Distribution
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <canvas id="overallChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- Secondary Charts -->
+    <!-- ========================= -->
+
+    <div class="row mt-5 g-4">
+
+        <div class="col-lg-6">
+
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h5 class="mb-0">
+
+                        Claims Per Month
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <canvas id="monthChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6">
+
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-success text-white">
+
+                    <h5 class="mb-0">
+
+                        Claims Per Insurance Company
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <canvas id="companyChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- AI Confidence -->
+    <!-- ========================= -->
+
+    <div class="row mt-5">
+
+        <div class="col-lg-12">
+
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-info text-white">
+
+                    <h5 class="mb-0">
+
+                        AI Confidence Distribution
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <canvas id="confidenceChart"
+                            height="90">
+
+                    </canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- Chart JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+// ---------------------------
+// Claim Status
+// ---------------------------
+
+new Chart(document.getElementById("statusChart"),{
+
+type:"pie",
+
+data:{
+labels:["Approved","Rejected","Pending"],
+datasets:[{
+data:[
+{{ approved }},
+{{ rejected }},
+{{ pending }}
+],
+backgroundColor:[
+"#28a745",
+"#dc3545",
+"#ffc107"
+]
+}]
+}
+
+});
+
+
+// ---------------------------
+// Prediction
+// ---------------------------
+
+new Chart(document.getElementById("predictionChart"),{
+
+type:"bar",
+
+data:{
+labels:["Damage","Whole"],
+datasets:[{
+label:"Vehicle Images",
+data:[
+{{ damage }},
+{{ whole }}
+],
+backgroundColor:[
+"#dc3545",
+"#28a745"
+]
+}]
+},
+
+options:{
+responsive:true,
+scales:{
+y:{
+beginAtZero:true
+}
+}
+}
+
+});
+
+
+// ---------------------------
+// Overall
+// ---------------------------
+
+new Chart(document.getElementById("overallChart"),{
+
+type:"doughnut",
+
+data:{
+labels:[
+"Approved",
+"Rejected",
+"Pending",
+"Damage",
+"Whole"
+],
+datasets:[{
+data:[
+{{ approved }},
+{{ rejected }},
+{{ pending }},
+{{ damage }},
+{{ whole }}
+]
+}]
+}
+
+});
+
+
+// ---------------------------
+// Monthly
+// ---------------------------
+
+new Chart(document.getElementById("monthChart"),{
+
+type:"line",
+
+data:{
+labels: {{ month_labels|safe }},
+datasets:[{
+label:"Claims",
+data: {{ month_values|safe }},
+fill:true,
+tension:.4
+}]
+},
+
+options:{
+responsive:true
+}
+
+});
+
+
+// ---------------------------
+// Company
+// ---------------------------
+
+new Chart(document.getElementById("companyChart"),{
+
+type:"bar",
+
+data:{
+labels: {{ company_labels|safe }},
+datasets:[{
+label:"Claims",
+data: {{ company_values|safe }}
+}]
+},
+
+options:{
+responsive:true,
+scales:{
+y:{
+beginAtZero:true
+}
+}
+}
+
+});
+
+
+// ---------------------------
+// Confidence
+// ---------------------------
+
+new Chart(document.getElementById("confidenceChart"),{
+
+type:"bar",
+
+data:{
+labels: {{ confidence_labels|safe }},
+datasets:[{
+label:"Images",
+data: {{ confidence_values|safe }}
+}]
+},
+
+options:{
+responsive:true,
+plugins:{
+legend:{
+display:false
+}
+},
+scales:{
+y:{
+beginAtZero:true
+}
+}
+}
+
+});
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,137 @@
+
+{% extends "admin/common.html" %}
+{% load static %}
+{% block content %}
+
+<!-- <section class="banner-header middle-height section-padding bg-img"
+    data-overlay-dark="6"
+    data-background="{% static 'img/slider/30.avif' %}">
+
+    <div class="v-middle">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h6>AI Powered Vehicle Damage Detection System</h6>
+                    <h1>Insurance <span>Registration</span></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<br><br><br><br>
+
+<section class="contact section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-lg-5">
+
+                <div class="form-box">
+
+                    <h5 class="mb-4 text-center">
+                        Insurance Assessor Registration
+                    </h5>
+
+                    {% if messages %}
+                        {% for i in messages %}
+                            <div class="alert alert-danger">
+                                {{ i }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="POST" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <div class="row">
+
+                            <div class="col-md-12 form-group">
+                                <input
+                                    type="text"
+                                    name="company_name"
+                                    placeholder="Insurance Company Name"
+                                    required>
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <input
+                                    type="text"
+                                    name="assessor_name"
+                                    placeholder="Assessor Name"
+                                    required>
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <input
+                                    type="text"
+                                    name="username"
+                                    placeholder="Username"
+                                    required>
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email Address"
+                                    required>
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <input
+                                    type="text"
+                                    name="phone"
+                                    placeholder="Phone Number"
+                                    maxlength="10"
+                                    pattern="[0-9]{10}"
+                                    required>
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <input
+                                    type="text"
+                                    name="license_number"
+                                    placeholder="License Number"
+                                    required>
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <input
+                                    type="file"
+                                    name="profile_pic"
+                                    accept="image/*">
+                            </div>
+
+                            <div class="col-md-12">
+
+                                <input
+                                    type="submit"
+                                    value="Register">
+
+                            </div>
+
+                            <div class="col-md-12 text-center mt-3">
+
+                                <small>
+                                    A secure password will be generated automatically
+                                    and sent to your registered email address after
+                                    successful registration.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
