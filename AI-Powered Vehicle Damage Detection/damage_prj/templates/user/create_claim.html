@@ -1,0 +1,39 @@
+{% extends "user/common.html" %}
+{% load static %}
+{% block content %}
+<br><br><br><br>
+<div class="container mt-5">
+
+    <h2>Create Claim</h2>
+
+    <hr>
+
+    <h4>{{ insurance.company_name }}</h4>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <div class="mb-3">
+
+            <label>Vehicle Image</label>
+
+            <input
+            type="file"
+            name="image"
+            class="form-control"
+            required>
+
+        </div>
+
+        <button class="btn btn-success">
+
+            Submit Claim
+
+        </button>
+
+    </form>
+
+</div>
+<br><br><br>
+{% endblock %}

@@ -1,0 +1,187 @@
+{% extends "user/common.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Banner -->
+<section class="banner-header middle-height section-padding bg-img"
+         data-overlay-dark="6"
+         data-background="{% static 'img/slider/30.avif' %}">
+
+    <div class="v-middle">
+        <div class="container text-center">
+            <h6>User Panel</h6>
+            <h1>My <span>Claims</span></h1>
+        </div>
+    </div>
+
+</section>
+
+<!-- Claims Section -->
+<section class="section-padding">
+
+    <div class="container">
+
+        <div class="card shadow-lg border-0">
+
+            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+
+                <h4 class="mb-0" style="color: white;">
+                    My Vehicle Insurance Claims
+                </h4>
+
+                <span class="badge bg-light text-dark">
+                    Total Claims : {{ claims|length }}
+                </span>
+
+            </div>
+
+            <div class="card-body">
+
+                {% if claims %}
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered table-hover align-middle text-center">
+
+                        <thead class="table-dark">
+
+                            <tr>
+
+                                <th>Claim ID</th>
+                                <th>Vehicle Image</th>
+                                <th>AI Prediction</th>
+                                <th>Status</th>
+                                <th>Submitted On</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                        {% for claim in claims %}
+
+                            <tr>
+
+                                <td>
+                                    <strong>#{{ claim.id }}</strong>
+                                </td>
+
+                                <td>
+
+                                    <img src="{{ claim.image.url }}"
+                                         class="img-thumbnail"
+                                         style="width:140px;height:100px;object-fit:cover;">
+
+                                </td>
+
+                                <td>
+
+                                    {% if claim.prediction %}
+
+                                        {% if claim.prediction == "Damage" %}
+
+                                            <span class="badge bg-danger">
+                                                Damage Detected
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="badge bg-success">
+                                                No Damage
+                                            </span>
+
+                                        {% endif %}
+
+                                        <br>
+
+                                        <small class="text-muted">
+
+                                            Confidence :
+                                            {{ claim.confidence|floatformat:2 }}%
+
+                                        </small>
+
+                                    {% else %}
+
+                                        <span class="badge bg-secondary">
+                                            Waiting for AI Detection
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                                <td>
+
+                                    {% if claim.status == "Approved" %}
+
+                                        <span class="badge bg-success">
+                                            Approved
+                                        </span>
+
+                                    {% elif claim.status == "Rejected" %}
+
+                                        <span class="badge bg-danger">
+                                            Rejected
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="badge bg-warning text-dark">
+                                            Pending
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                                <td>
+
+                                    {{ claim.created_at|date:"d M Y" }}
+
+                                    <br>
+
+                                    <small class="text-muted">
+
+                                        {{ claim.created_at|time:"h:i A" }}
+
+                                    </small>
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                {% else %}
+
+                <div class="alert alert-warning text-center">
+
+                    <h5>No Claims Found</h5>
+
+                    <p class="mb-0">
+
+                        You haven't submitted any insurance claims yet.
+
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

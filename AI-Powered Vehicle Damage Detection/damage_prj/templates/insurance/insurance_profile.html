@@ -1,0 +1,303 @@
+
+{% extends "insurance/common.html" %}
+{% load static %}
+{% block content %}
+
+<section class="banner-header middle-height section-padding bg-img"
+         data-overlay-dark="6"
+         data-background="{% static 'img/slider/30.avif' %}">
+
+    <div class="v-middle">
+        <div class="container text-center">
+
+            <h6>Insurance Dashboard</h6>
+
+            <h1>My <span>Profile</span></h1>
+
+        </div>
+    </div>
+
+</section>
+
+
+
+<section class="section-padding">
+
+<div class="container">
+
+<div class="row justify-content-center">
+
+<div class="col-lg-9">
+
+<div class="card border-0 shadow-lg">
+
+<div class="card-body p-5">
+
+<div class="row">
+
+<!-- Profile Image -->
+
+<div class="col-lg-4 text-center">
+
+{% if profile.profile_pic %}
+
+<img src="{{ profile.profile_pic.url }}"
+     class="img-fluid rounded-circle shadow"
+     style="width:190px;
+            height:190px;
+            object-fit:cover;
+            border:5px solid #f3f3f3;">
+
+{% else %}
+
+<img src="{% static 'img/default.png' %}"
+     class="img-fluid rounded-circle shadow"
+     style="width:190px;
+            height:190px;
+            object-fit:cover;
+            border:5px solid #f3f3f3;">
+
+{% endif %}
+
+<h4 class="mt-4 mb-1">
+
+{{ profile.assessor_name }}
+
+</h4>
+
+<p class="text-muted">
+
+Insurance Assessor
+
+</p>
+
+{% if profile.login.is_active %}
+
+<span class="badge bg-success px-3 py-2">
+
+Active
+
+</span>
+
+{% else %}
+
+<span class="badge bg-danger px-3 py-2">
+
+Inactive
+
+</span>
+
+{% endif %}
+
+</div>
+
+
+
+<!-- Details -->
+
+<div class="col-lg-8">
+
+<h3 class="mb-4">
+
+Insurance Information
+
+</h3>
+
+<table class="table table-bordered table-striped">
+
+<tr>
+
+<th width="35%">
+
+Company Name
+
+</th>
+
+<td>
+
+{{ profile.company_name }}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<th>
+
+Assessor Name
+
+</th>
+
+<td>
+
+{{ profile.assessor_name }}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<th>
+
+Username
+
+</th>
+
+<td>
+
+{{ profile.login.username }}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<th>
+
+Email
+
+</th>
+
+<td>
+
+{{ profile.email }}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<th>
+
+Phone Number
+
+</th>
+
+<td>
+
+{{ profile.phone }}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<th>
+
+License Number
+
+</th>
+
+<td>
+
+{{ profile.license_number }}
+
+</td>
+
+</tr>
+
+
+
+
+
+<tr>
+
+<th>
+
+Account Status
+
+</th>
+
+<td>
+
+{% if profile.login.is_active %}
+
+<span class="text-success">
+
+<b>Active</b>
+
+</span>
+
+{% else %}
+
+<span class="text-danger">
+
+<b>Inactive</b>
+
+</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<th>
+
+Registered On
+
+</th>
+
+<td>
+
+{{ profile.created_at }}
+
+</td>
+
+</tr>
+
+</table>
+
+
+<div class="mt-4">
+
+<a href="{% url 'insurance_dashboard' %}"
+   class="btn btn-dark">
+
+<i class="ti-arrow-left"></i>
+
+Back to Dashboard
+
+</a>
+
+<a href="#"
+   class="btn btn-primary">
+
+<i class="ti-pencil"></i>
+
+Edit Profile
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}
