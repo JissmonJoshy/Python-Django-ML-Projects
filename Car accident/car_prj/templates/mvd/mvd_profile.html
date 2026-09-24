@@ -1,0 +1,99 @@
+{% extends "mvd/common.html" %}
+{% load static %}
+{% block content %}
+
+<section class="banner-header middle-height section-padding bg-img"
+    data-overlay-dark="6"
+    data-background="{% static 'img/slider/7.jpg' %}">
+
+    <div class="v-middle">
+        <div class="container text-center">
+            <h6>MVD Dashboard</h6>
+            <h1>My <span>Profile</span></h1>
+        </div>
+    </div>
+
+</section>
+
+
+<section class="section-padding">
+
+<div class="container">
+
+<div class="card p-4 shadow">
+
+<div class="row">
+
+    <div class="col-md-4 text-center">
+
+        <img src="{{ mvd.profile_pic.url }}"
+             width="180"
+             height="180"
+             style="border-radius:50%; object-fit:cover;">
+
+        <h4 class="mt-3">{{ mvd.name }}</h4>
+
+        <p>{{ mvd.job_post }}</p>
+
+        <a href="{% url 'edit_mvd_profile' %}"
+           class="btn btn-primary mt-2">
+
+            Edit Profile
+
+        </a>
+
+    </div>
+
+
+    <div class="col-md-8">
+
+        <table class="table">
+
+            <tr>
+                <th>Email</th>
+                <td>{{ mvd.email }}</td>
+            </tr>
+
+            <tr>
+                <th>Phone</th>
+                <td>{{ mvd.phone }}</td>
+            </tr>
+
+            <tr>
+                <th>Gender</th>
+                <td>{{ mvd.gender }}</td>
+            </tr>
+
+            <tr>
+                <th>DOB</th>
+                <td>{{ mvd.dob }}</td>
+            </tr>
+
+            <tr>
+                <th>Address</th>
+                <td>{{ mvd.address }}</td>
+            </tr>
+
+            <tr>
+                <th>Experience</th>
+                <td>{{ mvd.experience }}</td>
+            </tr>
+
+            <tr>
+                <th>Status</th>
+                <td>{{ mvd.status }}</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

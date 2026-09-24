@@ -1,0 +1,232 @@
+{% extends "admin/common.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+
+.dashboard-header{
+    border-radius:20px;
+    padding:40px;
+    color:white;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.prediction-card{
+    border:none;
+    border-radius:20px;
+    overflow:hidden;
+    transition:0.4s;
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+    background:#fff;
+    position:relative;
+}
+
+.prediction-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,.18);
+}
+
+.prediction-image{
+    height:250px;
+    width:100%;
+    object-fit:cover;
+}
+
+.status-badge{
+    position:absolute;
+    top:15px;
+    right:15px;
+    padding:8px 15px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+    color:white;
+}
+
+.accident{
+    background:#dc3545;
+}
+
+.safe{
+    background:#198754;
+}
+
+.card-content{
+    padding:20px;
+}
+
+.info-item{
+    margin-bottom:10px;
+}
+
+.info-label{
+    font-weight:600;
+    color:#555;
+}
+
+.confidence-box{
+    background:#f8f9fa;
+    border-radius:12px;
+    padding:12px;
+    text-align:center;
+    margin-top:15px;
+}
+
+.confidence-value{
+    font-size:24px;
+    font-weight:bold;
+    color:#0d6efd;
+}
+
+.date-box{
+    font-size:13px;
+    color:#777;
+    margin-top:15px;
+    text-align:center;
+}
+
+.empty-box{
+    background:white;
+    padding:60px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+</style>
+<br><br><br><br>
+<div class="container-fluid py-4">
+
+    <div class="dashboard-header">
+
+        <h1 class="fw-bold" style="color:#0d6efd;">
+            Accident Prediction Records
+        </h1>
+
+        <p class="mb-0">
+            View all accident detection uploads from MVD officers
+        </p>
+
+    </div>
+
+    <div class="row">
+
+        {% for i in history %}
+
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+
+            <div class="prediction-card">
+
+                <img src="{{ i.image.url }}"
+                     class="prediction-image">
+
+                {% if i.result == 'Accident' %}
+
+                <span class="status-badge accident">
+
+                    Accident
+
+                </span>
+
+                {% else %}
+
+                <span class="status-badge safe">
+
+                    Non Accident
+
+                </span>
+
+                {% endif %}
+
+                <div class="card-content">
+
+                    <h5 class="fw-bold mb-3">
+
+                        {{ i.mvd.name }}
+
+                    </h5>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            Email :
+                        </span>
+
+                        {{ i.mvd.email }}
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            Phone :
+                        </span>
+
+                        {{ i.mvd.phone }}
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            Position :
+                        </span>
+
+                        {{ i.mvd.job_post }}
+
+                    </div>
+
+                    <div class="confidence-box">
+
+                        <small>
+                            Prediction Confidence
+                        </small>
+
+                        <div class="confidence-value">
+
+                            {{ i.confidence|floatformat:2 }}%
+
+                        </div>
+
+                    </div>
+
+                    <div class="date-box">
+
+                        Uploaded On<br>
+
+                        {{ i.date }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="col-12">
+
+            <div class="empty-box">
+
+                <h3>
+                    No Prediction Records Found
+                </h3>
+
+                <p class="text-muted">
+                    MVD officers have not uploaded any images yet.
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

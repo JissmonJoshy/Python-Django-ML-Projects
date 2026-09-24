@@ -1,0 +1,198 @@
+{% extends "common.html" %}
+{% load static %}
+{% block content %}
+
+<header class="header">
+    <div class="video-fullscreen-wrap">
+        
+        <div class="video-fullscreen-video" data-overlay-dark="2">
+            <video playsinline autoplay loop muted>
+                <source src="https://duruthemes.com/demo/html/renax/video.mp4" type="video/mp4">
+                <source src="https://duruthemes.com/demo/html/renax/video.webm" type="video/webm">
+            </video>
+        </div>
+
+        <div class="v-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+
+                        <h6>* AI Powered Safety Detection</h6>
+
+                        <h1>Car Accident Detection System</h1>
+
+                        <h5>Predict Road Risks with <span>Machine Learning <i>/ Analysis</i></span></h5>
+
+                        <a href="#0" class="button-1 mt-15 mb-15 mr-15">
+                            View Detection Details
+                            <span class="ti-arrow-top-right"></span>
+                        </a>
+
+                        <a href="#" data-scroll-nav="1" class="button-2 mt-15 mb-15">
+                            Predict Now
+                            <span class="ti-arrow-top-right"></span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!-- Process Number -->
+<section class="process-number mt--120 mb-60">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4 col-md-12 mb-30">
+                <div class="item">
+                    <div class="con">
+                        <div class="no">1</div>
+                        <h5>Enter Vehicle Data</h5>
+                        <p>
+                            Provide traffic, weather, speed, and road condition details
+                            for accurate accident Detection.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 mb-30">
+                <div class="item">
+                    <div class="con">
+                        <div class="no">2</div>
+                        <h5>AI Risk Analysis</h5>
+                        <p>
+                            Our machine learning model analyzes patterns and detects
+                            possible accident risk factors instantly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 mb-30">
+                <div class="item">
+                    <div class="con">
+                        <div class="no">3</div>
+                        <h5>Get Detection Results</h5>
+                        <p>
+                            Receive accident probability insights and preventive
+                            recommendations for safer driving decisions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- About -->
+<section class="about section-padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6 col-md-12 mb-30">
+                <div class="content">
+
+                    <div class="section-subtitle">
+                        Smart Detection System
+                    </div>
+
+                    <div class="section-title">
+                        We Predict <span>Accidents If They Happen</span>
+                    </div>
+
+                    <p class="mb-30">
+                        Our advanced AI-driven accident Detection platform uses
+                        real-time road condition analysis, traffic monitoring,
+                        weather intelligence, and historical accident data to
+                        identify potential collision risks before they occur,
+                        helping drivers make safer travel decisions.
+                    </p>
+
+                    <ul class="list-unstyled list mb-30">
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>Real-Time Risk Detection</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>AI-Based Preventive Alerts</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>Traffic & Weather Analysis</p>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <a href="about.html" class="button-1">
+                        Learn More
+                        <span class="ti-arrow-top-right"></span>
+                    </a>
+
+                </div>
+            </div>
+
+
+            <div class="col-lg-5 offset-lg-1 col-md-12">
+                <div class="item">
+                    <img src="{% static 'img/about.jpg' %}" class="img-fluid" alt="">
+
+                    <div class="curv-butn icon-bg">
+                        <a href="https://youtu.be/1LxcTt1adfY" class="vid">
+                            <div class="icon">
+                                <i class="ti-control-play"></i>
+                            </div>
+                        </a>
+
+                        <div class="br-left-top">
+                            <svg viewBox="0 0 11 11" fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-11 h-11">
+                                <path
+                                    d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z"
+                                    fill="#1b1b1b">
+                                </path>
+                            </svg>
+                        </div>
+
+                        <div class="br-right-bottom">
+                            <svg viewBox="0 0 11 11" fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-11 h-11">
+                                <path
+                                    d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z"
+                                    fill="#1b1b1b">
+                                </path>
+                            </svg>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

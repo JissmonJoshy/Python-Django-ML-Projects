@@ -1,0 +1,274 @@
+{% extends "admin/common.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+
+/* (keep your same CSS - unchanged for design consistency) */
+
+.mvd-card{
+    border:none;
+    border-radius:20px;
+    box-shadow:0 5px 25px rgba(0,0,0,0.08);
+    overflow:hidden;
+    background:#fff;
+}
+
+.table thead{
+    background:#111827;
+    color:white;
+}
+
+.table thead th{
+    padding:18px 15px;
+    font-size:15px;
+    font-weight:600;
+    border:none;
+    white-space:nowrap;
+}
+
+.table tbody td{
+    vertical-align:middle;
+    padding:16px 12px;
+    font-size:14px;
+}
+
+.mvd-profile{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #e5e7eb;
+}
+
+.badge-post{
+    background:#e0f2fe;
+    color:#0369a1;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.gender-badge{
+    background:#f3f4f6;
+    padding:7px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:500;
+}
+
+.status-active{
+    background:#dcfce7;
+    color:#166534;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.status-inactive{
+    background:#fee2e2;
+    color:#991b1b;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.delete-btn{
+    border-radius:30px;
+    padding:8px 18px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.table tbody tr:hover{
+    background:#f9fafb;
+}
+
+</style>
+
+<!-- Header -->
+<section class="banner-header middle-height section-padding bg-img"
+    data-overlay-dark="6"
+    data-background="{% static 'img/slider/7.jpg' %}">
+
+    <div class="v-middle">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-12 text-center">
+
+                    <h6>Admin Dashboard</h6>
+                    <h1>View <span>MVD Officers</span></h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Table -->
+<section class="section-padding">
+
+<div class="container">
+
+<!-- Messages -->
+{% if messages %}
+    {% for i in messages %}
+        <div class="alert alert-{{ i.tags }}">
+            {{ i }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="card mvd-card">
+
+<div class="card-body p-4">
+
+<div class="table-responsive">
+
+<table class="table align-middle">
+
+<thead>
+
+<tr>
+    <th>#</th>
+    <th>Officer</th>
+    <th>Contact</th>
+    <th>Job</th>
+    <th>Gender</th>
+    <th>DOB</th>
+    <th>Address</th>
+    <th>Aadhar</th>
+    <th>Experience</th>
+    <th>Joining</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for i in mvd %}
+
+<tr>
+
+<td>#{{ forloop.counter }}</td>
+
+<!-- Officer -->
+<td>
+    <div class="d-flex align-items-center">
+
+        <img src="{{ i.profile_pic.url }}" class="mvd-profile me-2">
+
+        <div>
+            <strong>{{ i.name }}</strong><br>
+            <small>{{ i.email }}</small>
+        </div>
+
+    </div>
+</td>
+
+<!-- Contact -->
+<td>{{ i.phone }}</td>
+
+<!-- Job -->
+<td>
+    <span class="badge-post">{{ i.job_post }}</span>
+</td>
+
+<!-- Gender -->
+<td>
+    <span class="gender-badge">{{ i.gender }}</span>
+</td>
+
+<!-- DOB -->
+<td>{{ i.dob }}</td>
+
+<!-- Address -->
+<td>
+    <small>{{ i.address }}</small>
+</td>
+
+<!-- Aadhar -->
+<td>
+    <a href="{{ i.aadhar_image.url }}" target="_blank">
+        View
+    </a>
+</td>
+
+<!-- Experience -->
+<td>
+    {% if i.experience %}
+        {{ i.experience }}
+    {% else %}
+        <span class="text-muted">N/A</span>
+    {% endif %}
+</td>
+
+<!-- Joining -->
+<td>
+    {{ i.joining_date }}
+</td>
+
+<!-- Status -->
+<td>
+
+    {% if i.status == "active" %}
+        <span class="status-active">Active</span>
+    {% else %}
+        <span class="status-inactive">Inactive</span>
+    {% endif %}
+
+</td>
+
+<!-- Action -->
+<td>
+
+    <a href="{% url 'delete_mvd' i.id %}"
+       class="btn btn-danger delete-btn"
+       onclick="return confirm('Delete this MVD officer?')">
+
+        Delete
+
+    </a>
+
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+    <td colspan="12" class="text-center py-5">
+        No MVD Officers Found
+    </td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends "mvd/common.html" %}
+{% load static %}
+{% block content %}
+<br><br><br><br>
+<div class="container py-5">
+
+    <div class="row mb-4">
+
+        <div class="col-md-12">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h2 class="fw-bold">
+                        Prediction History
+                    </h2>
+
+                    <p class="text-muted">
+                        View all accident detection predictions uploaded by you.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        {% for i in history %}
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card shadow h-100">
+
+                <img src="{{ i.image.url }}"
+                     class="card-img-top"
+                     style="height:250px;object-fit:cover;">
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+
+                        {% if i.result == 'Accident' %}
+
+                        <span class="badge bg-danger">
+                            Accident
+                        </span>
+
+                        {% else %}
+
+                        <span class="badge bg-success">
+                            Non Accident
+                        </span>
+
+                        {% endif %}
+
+                    </h5>
+
+                    <p class="mb-2">
+
+                        <strong>Confidence :</strong>
+
+                        {{ i.confidence|floatformat:2 }} %
+
+                    </p>
+
+                    <p class="mb-2">
+
+                        <strong>Date :</strong>
+
+                        {{ i.date }}
+
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-white">
+
+                    <a href="{% url 'prediction_result' i.id %}"
+                       class="btn btn-primary w-100">
+
+                        View Details
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="col-md-12">
+
+            <div class="alert alert-warning text-center">
+
+                No Predictions Found
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

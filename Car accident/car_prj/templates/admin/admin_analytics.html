@@ -1,0 +1,422 @@
+{% extends "admin/common.html" %}
+{% load static %}
+{% block content %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+.analytics-card{
+    border:none;
+    border-radius:20px;
+    overflow:hidden;
+    transition:0.3s;
+}
+
+.analytics-card:hover{
+    transform:translateY(-5px);
+}
+
+.chart-card{
+    border:none;
+    border-radius:20px;
+}
+
+.chart-container{
+    position:relative;
+    height:280px;
+}
+
+.stat-icon{
+    font-size:45px;
+    opacity:0.2;
+    position:absolute;
+    right:15px;
+    top:10px;
+}
+
+.gradient-blue{
+    background:linear-gradient(135deg,#4e73df,#224abe);
+    color:white;
+}
+
+.gradient-red{
+    background:linear-gradient(135deg,#e74a3b,#c0392b);
+    color:white;
+}
+
+.gradient-green{
+    background:linear-gradient(135deg,#1cc88a,#17a673);
+    color:white;
+}
+
+.gradient-orange{
+    background:linear-gradient(135deg,#f6c23e,#e0a800);
+    color:white;
+}
+
+.table thead{
+    background:#212529;
+    color:white;
+}
+
+</style>
+<br><br><br>
+<div class="container-fluid py-4">
+
+```
+<!-- TITLE -->
+
+<div class="card shadow-lg border-0 rounded-4 mb-4">
+
+    <div class="card-body text-center p-4">
+
+        <h1 class="fw-bold text-primary">
+
+            AI Accident Analytics Dashboard
+
+        </h1>
+
+        <p class="text-muted mb-0">
+
+            Smart Monitoring & Prediction Statistics
+
+        </p>
+
+    </div>
+
+</div>
+
+<!-- TOP STATS -->
+
+<div class="row g-4 mb-4">
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="card analytics-card gradient-blue shadow">
+
+            <div class="card-body position-relative">
+
+                <h6>Total Predictions</h6>
+
+                <h2 class="fw-bold">
+
+                    {{ total_predictions }}
+
+                </h2>
+
+                <i class="fas fa-chart-line stat-icon"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="card analytics-card gradient-red shadow">
+
+            <div class="card-body position-relative">
+
+                <h6>Total Accidents</h6>
+
+                <h2 class="fw-bold">
+
+                    {{ total_accidents }}
+
+                </h2>
+
+                <i class="fas fa-car-crash stat-icon"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="card analytics-card gradient-green shadow">
+
+            <div class="card-body position-relative">
+
+                <h6>Non Accidents</h6>
+
+                <h2 class="fw-bold">
+
+                    {{ total_non_accidents }}
+
+                </h2>
+
+                <i class="fas fa-check-circle stat-icon"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="card analytics-card gradient-orange shadow">
+
+            <div class="card-body position-relative">
+
+                <h6>Accident Rate</h6>
+
+                <h2 class="fw-bold">
+
+                    {{ accident_percentage }}%
+
+                </h2>
+
+                <i class="fas fa-percentage stat-icon"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CHART ROW -->
+
+<div class="row g-4 mb-4">
+
+    <div class="col-lg-6">
+
+        <div class="card chart-card shadow">
+
+            <div class="card-header fw-bold">
+
+                Monthly Prediction Trend
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="chart-container">
+
+                    <canvas id="monthlyChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-6">
+
+        <div class="card chart-card shadow">
+
+            <div class="card-header fw-bold">
+
+                Accident Distribution
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="chart-container">
+
+                    <canvas id="pieChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MVD GRAPH -->
+
+<div class="row g-4 mb-4">
+
+    <div class="col-lg-12">
+
+        <div class="card chart-card shadow">
+
+            <div class="card-header fw-bold">
+
+                Top MVD Upload Activity
+
+            </div>
+
+            <div class="card-body">
+
+                <div style="height:350px;">
+
+                    <canvas id="mvdChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="card shadow border-0 rounded-4">
+
+    <div class="card-header bg-dark text-white">
+
+        Recent Prediction Records
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>MVD Officer</th>
+                        <th>Result</th>
+                        <th>Confidence</th>
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for i in recent_predictions %}
+
+                    <tr>
+
+                        <td>
+
+                            {{ i.mvd.name }}
+
+                        </td>
+
+                        <td>
+
+                            {% if i.result == 'Accident' %}
+
+                            <span class="badge bg-danger px-3 py-2">
+
+                                Accident
+
+                            </span>
+
+                            {% else %}
+
+                            <span class="badge bg-success px-3 py-2">
+
+                                Non Accident
+
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {{ i.confidence|floatformat:2 }} %
+
+                        </td>
+
+                        <td>
+
+                            {{ i.date }}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<script>
+
+new Chart(
+document.getElementById("monthlyChart"),
+{
+type:"line",
+data:{
+labels:{{ months|safe }},
+datasets:[{
+label:"Predictions",
+data:{{ monthly_counts|safe }},
+borderWidth:3,
+tension:0.4
+}]
+},
+options:{
+responsive:true,
+maintainAspectRatio:false
+}
+}
+);
+
+new Chart(
+document.getElementById("pieChart"),
+{
+type:"doughnut",
+data:{
+labels:["Accident","Non Accident"],
+datasets:[{
+data:[
+{{ total_accidents }},
+{{ total_non_accidents }}
+]
+}]
+},
+options:{
+responsive:true,
+maintainAspectRatio:false
+}
+}
+);
+
+new Chart(
+document.getElementById("mvdChart"),
+{
+type:"bar",
+data:{
+labels:{{ mvd_names|safe }},
+datasets:[{
+label:"Uploads",
+data:{{ mvd_counts|safe }}
+}]
+},
+options:{
+responsive:true,
+maintainAspectRatio:false
+}
+}
+);
+
+</script>
+
+{% endblock %}

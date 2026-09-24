@@ -1,0 +1,148 @@
+{% extends "mvd/common.html" %}
+{% load static %}
+{% block content %}
+
+<section class="section-padding">
+    <div class="container">
+
+        <div class="result-card">
+
+            <div class="heading">
+                <h2>Prediction Result</h2>
+            </div>
+
+            <div class="image-box">
+
+                <img src="{{ data.image.url }}" alt="Prediction Image">
+
+            </div>
+
+            <div class="result-content">
+
+                {% if data.result == "Accident" %}
+
+                <div class="status accident">
+                    Accident Detected
+                </div>
+
+                {% else %}
+
+                <div class="status safe">
+                    No Accident Detected
+                </div>
+
+                {% endif %}
+
+                <h3>
+                    Prediction :
+                    <span>{{ data.result }}</span>
+                </h3>
+
+                <h4>
+                    Confidence :
+                    {{ data.confidence|floatformat:2 }} %
+                </h4>
+
+                <p>
+                    The AI model analyzed the uploaded image and classified it
+                    as <strong>{{ data.result }}</strong> with a confidence score
+                    of <strong>{{ data.confidence|floatformat:2 }}%</strong>.
+                </p>
+
+                <a href="{% url 'upload_image' %}" class="upload-again">
+                    Upload Another Image
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+
+.result-card{
+    max-width:900px;
+    margin:auto;
+    background:#fff;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(0,0,0,0.1);
+}
+
+.heading{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.heading h2{
+    font-size:35px;
+}
+
+.image-box{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.image-box img{
+    max-width:100%;
+    max-height:450px;
+    border-radius:10px;
+}
+
+.result-content{
+    text-align:center;
+}
+
+.status{
+    display:inline-block;
+    padding:10px 25px;
+    border-radius:30px;
+    color:white;
+    margin-bottom:20px;
+    font-weight:bold;
+}
+
+.accident{
+    background:red;
+}
+
+.safe{
+    background:green;
+}
+
+.result-content h3{
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.result-content h4{
+    color:#d4a017;
+    margin-bottom:20px;
+}
+
+.result-content p{
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+    color:#666;
+}
+
+.upload-again{
+    display:inline-block;
+    margin-top:25px;
+    padding:12px 30px;
+    background:#d4a017;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+}
+
+.upload-again:hover{
+    opacity:0.9;
+}
+
+</style>
+
+{% endblock %}
