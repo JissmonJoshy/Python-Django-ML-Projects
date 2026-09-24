@@ -1,0 +1,73 @@
+{% extends "user/common.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="container mt-5">
+
+<div class="row">
+
+<div class="col-md-6">
+
+<img src="{{data.image.url}}"
+class="img-fluid rounded shadow">
+
+</div>
+
+<div class="col-md-6">
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h2>Prediction Result</h2>
+
+<hr>
+
+<h4>
+
+Prediction :
+
+<span class="text-primary">
+
+{{data.prediction}}
+
+</span>
+
+</h4>
+
+<h4>
+
+Confidence :
+
+{{data.confidence}} %
+
+</h4>
+
+<h5>
+
+Date :
+
+{{data.date}}
+
+</h5>
+
+<a href="{% url 'upload_image' %}"
+class="btn btn-primary mt-3">
+
+Predict Another
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

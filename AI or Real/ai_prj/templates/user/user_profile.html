@@ -1,0 +1,115 @@
+{% extends "user/common.html" %}
+{% load static %}
+
+{% block content %}
+
+<br><br><br>
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-lg border-0">
+
+                <div class="card-header bg-primary text-white text-center">
+
+                    <h3 class="mb-0">
+                        My Profile
+                    </h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    {% if messages %}
+                        {% for i in messages %}
+                            <div class="alert alert-success alert-dismissible fade show">
+                                {{ i }}
+                                <button class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="row">
+
+                        <div class="col-md-4 text-center mb-4">
+
+                            <img src="{{ data.profile.url }}"
+                                 class="img-fluid rounded-circle border shadow"
+                                 style="width:220px;height:220px;object-fit:cover;">
+
+                        </div>
+
+                        <div class="col-md-8">
+
+                            <table class="table table-bordered table-striped">
+
+                                <tr>
+                                    <th width="35%">Name</th>
+                                    <td>{{ data.name }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Username</th>
+                                    <td>{{ data.login.username }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Email</th>
+                                    <td>{{ data.email }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Phone</th>
+                                    <td>{{ data.phone }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Address</th>
+                                    <td>{{ data.address }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Account Status</th>
+
+                                    <td>
+
+                                        {% if data.login.is_active %}
+
+                                            <span class="badge bg-success fs-6">
+                                                Active
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="badge bg-danger fs-6">
+                                                Inactive
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+                                </tr>
+
+                            </table>
+
+                            
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

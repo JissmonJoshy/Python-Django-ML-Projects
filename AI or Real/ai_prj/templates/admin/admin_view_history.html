@@ -1,0 +1,246 @@
+{% extends "admin/common.html" %}
+{% load static %}
+
+{% block content %}
+<br><br><br><br><br><br>
+<div class="container-fluid py-4">
+
+    <div class="row mb-4">
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card shadow border-0 bg-primary text-white">
+
+                <div class="card-body text-center">
+
+                    <h2>{{ total_predictions }}</h2>
+
+                    <h5>Total Predictions</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card shadow border-0 bg-success text-white">
+
+                <div class="card-body text-center">
+
+                    <h2>{{ real_count }}</h2>
+
+                    <h5>Real Images</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card shadow border-0 bg-danger text-white">
+
+                <div class="card-body text-center">
+
+                    <h2>{{ fake_count }}</h2>
+
+                    <h5>Fake Images</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card shadow-lg border-0 rounded-4">
+
+        <div class="card-header bg-dark text-white">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <h3 class="mb-0" style="color: white;">
+                   
+                    Prediction History
+                </h3>
+
+                <span class="badge bg-warning text-dark fs-6">
+
+                    {{ total_predictions }} Records
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if history %}
+
+            <div class="table-responsive">
+
+                <table class="table table-hover table-bordered align-middle text-center">
+
+                    <thead class="table-dark">
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>User</th>
+
+                        <th>Image</th>
+
+                        <th>Prediction</th>
+
+                        <th>Confidence</th>
+
+                        <th>Date</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    {% for i in history %}
+
+                    <tr>
+
+                        <td>{{ forloop.counter }}</td>
+
+                        <td>
+
+                            <strong>{{ i.user.name }}</strong>
+
+                            <br>
+
+                            <small class="text-muted">
+
+                                {{ i.user.email }}
+
+                            </small>
+
+                        </td>
+
+                        <td>
+
+                            <img src="{{ i.image.url }}"
+
+                                 class="img-thumbnail rounded"
+
+                                 style="width:110px;height:110px;object-fit:cover;">
+
+                        </td>
+
+                        <td>
+
+                            {% if i.prediction == "Real" %}
+
+                            <span class="badge bg-success px-3 py-2">
+
+                                {{ i.prediction }}
+
+                            </span>
+
+                            {% else %}
+
+                            <span class="badge bg-danger px-3 py-2">
+
+                                {{ i.prediction }}
+
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td style="min-width:180px">
+
+                            <div class="progress" style="height:22px;">
+
+                                <div class="progress-bar
+
+                                {% if i.confidence >= 80 %}
+
+                                    bg-success
+
+                                {% elif i.confidence >= 60 %}
+
+                                    bg-warning
+
+                                {% else %}
+
+                                    bg-danger
+
+                                {% endif %}"
+
+                                style="width:{{ i.confidence }}%;">
+
+                                    {{ i.confidence }}%
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            <strong>
+
+                                {{ i.date|date:"d M Y" }}
+
+                            </strong>
+
+                            <br>
+
+                            <small>
+
+                                {{ i.date|time:"h:i A" }}
+
+                            </small>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="text-center py-5">
+
+                <img src="{% static 'img/no-data.png' %}"
+
+                     width="180">
+
+                <h4 class="mt-3 text-muted">
+
+                    No Prediction History Found
+
+                </h4>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+<br><br><br><br>
+{% endblock %}

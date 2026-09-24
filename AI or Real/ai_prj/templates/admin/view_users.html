@@ -1,0 +1,247 @@
+{% extends "admin/common.html" %}
+{% load static %}
+
+{% block content %}
+
+<br><br><br><br><br><br>
+
+<div class="container-fluid">
+
+    <div class="card shadow border-0">
+
+
+        <div class="card-header bg-primary text-white py-3">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-6">
+                    <h3 class="mb-0 fw-bold">
+                        <i class="fas fa-users me-2"></i>
+                        View Users
+                    </h3>
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="input-group">
+
+                        <span class="input-group-text bg-white">
+                            <i class="fas fa-search"></i>
+                        </span>
+
+                        <input
+                            type="text"
+                            id="search"
+                            class="form-control"
+                            placeholder="Search by Name, Email, Username...">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+   
+
+        <div class="card-body">
+
+            {% if messages %}
+
+                {% for i in messages %}
+
+                <div class="alert alert-success alert-dismissible fade show">
+
+                    {{ i }}
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert">
+                    </button>
+
+                </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover align-middle text-center mb-0" id="userTable">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th width="5%">#</th>
+
+                            <th width="10%">Profile</th>
+
+                            <th>Name</th>
+
+                            <th>Username</th>
+
+                            <th>Email</th>
+
+                            <th>Phone</th>
+
+                            <th width="10%">Status</th>
+
+                            <th width="18%">Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for i in data %}
+
+                        <tr>
+
+                            <td class="fw-bold">
+                                {{ forloop.counter }}
+                            </td>
+
+                            <td>
+
+                                <img
+                                    src="{{ i.profile.url }}"
+                                    class="rounded-circle img-thumbnail"
+                                    width="70"
+                                    height="70"
+                                    style="object-fit:cover;">
+
+                            </td>
+
+                            <td class="fw-semibold">
+                                {{ i.name }}
+                            </td>
+
+                            <td>
+                                {{ i.login.username }}
+                            </td>
+
+                            <td>
+                                {{ i.email }}
+                            </td>
+
+                            <td>
+                                {{ i.phone }}
+                            </td>
+
+                            <td>
+
+                                {% if i.login.is_active %}
+
+                                <span class="badge bg-success px-3 py-2">
+                                    Active
+                                </span>
+
+                                {% else %}
+
+                                <span class="badge bg-danger px-3 py-2">
+                                    Inactive
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                <div class="d-flex justify-content-center gap-2 flex-wrap">
+
+                                    {% if i.login.is_active %}
+
+                                    <a
+                                        href="{% url 'toggle_user_status' i.login.id %}"
+                                        class="btn btn-warning btn-sm">
+
+                                        <i class="fas fa-user-slash"></i>
+                                        Deactivate
+
+                                    </a>
+
+                                    {% else %}
+
+                                    <a
+                                        href="{% url 'toggle_user_status' i.login.id %}"
+                                        class="btn btn-success btn-sm">
+
+                                        <i class="fas fa-user-check"></i>
+                                        Activate
+
+                                    </a>
+
+                                    {% endif %}
+
+                                    <a
+                                        href="{% url 'delete_user' i.login.id %}"
+                                        class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Are you sure you want to delete this user?')">
+
+                                        <i class="fas fa-trash-alt"></i>
+                                        Delete
+
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="8" class="py-5">
+
+                                <h5 class="text-muted mb-2">
+                                    No Users Found
+                                </h5>
+
+                                <small class="text-secondary">
+                                    Registered users will appear here.
+                                </small>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+document.getElementById("search").addEventListener("keyup", function () {
+
+    let value = this.value.toLowerCase();
+
+    let rows = document.querySelectorAll("#userTable tbody tr");
+
+    rows.forEach(function(row){
+
+        row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
+
+    });
+
+});
+
+</script>
+
+{% endblock %}
