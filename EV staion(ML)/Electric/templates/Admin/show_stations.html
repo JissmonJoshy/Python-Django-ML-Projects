@@ -1,0 +1,75 @@
+{% extends 'Admin/common.html' %}
+
+{% block content %}
+<main class="container mt-4">
+    <h2 class="text-center mb-4">All Stations</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>No</th>
+                    <th>Station Name</th>
+                    <th>Location</th>
+                    <th>Contact Number</th>
+                    <th>Licence Number</th>
+                    <th>Operating Hours</th>
+                    <th>Charging Types</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Waiting Area</th>
+                    <th>Owner Name</th>  <!-- Added Owner Name Column -->
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for station in stations %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ station.station_name }}</td>
+                    <td>{{ station.location }}</td>
+                    <td>{{ station.contact_number }}</td>
+                    <td>{{ station.licence_number }}</td>
+                    <td>{{ station.operating_hours }}</td>
+                    <td>{{ station.charging_types }}</td>
+                    <td>
+                        {% if station.image %}
+                        <img src="{{ station.image.url }}" alt="Station Image" width="80" height="80" class="rounded">
+                        {% else %}
+                        No Image
+                        {% endif %}
+                    </td>
+                    <td>{{ station.price }}</td>
+                    <td>{{ station.waiting_area }}</td>
+                    <td>
+                        {% if station.owner %}
+                            {{ station.owner.firstName }} {{ station.owner.lastName }}
+                        {% else %}
+                            No Owner
+                        {% endif %}
+                    </td> <!-- Display Owner Name -->
+                    <td>
+                        <span class="badge {% if station.status == 'Approved' %} bg-success {% elif station.status == 'Pending' %} bg-warning {% else %} bg-danger {% endif %}">
+                            {{ station.status }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if station.status == "Pending" %}
+                            <a href="{% url 'approve_station' station.id %}" class="btn btn-success btn-sm">Approve</a>
+                            <a href="{% url 'reject_station' station.id %}" class="btn btn-danger btn-sm">Reject</a>
+                        {% else %}
+                            <a href="{% url 'reject_station' station.id %}" class="btn btn-danger btn-sm">Reject</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="13" class="text-center text-danger">No stations available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            
+        </table>
+    </div>
+</main>
+{% endblock %}

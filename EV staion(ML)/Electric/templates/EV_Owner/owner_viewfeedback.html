@@ -1,0 +1,46 @@
+{% extends 'EV_Owner/common.html' %}
+{% block content %}
+{% load static %}
+{% for message in messages %}
+<script>
+    alert('{{ message }}');
+</script>
+{% endfor %}
+
+<br><br><br>
+
+<div class="dashboard-section pt-120 pb-120">
+<h2 style="text-align: center;">User Feedback</h2>
+<br><br>
+  <div class="table-wrapper container-fluid">
+    <h3 class="text-capitalize text-success"></h3>
+
+    <table class="eg-table order-table table mb-0">
+      <thead>
+        <tr class="bg-dark">
+          <th class="text-light">USER Name</th>
+          <th class="text-light">STATION</th>
+          <th class="text-light">FEEDBACK</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in data %}
+        
+        <tr>
+          <td>{{ i.user.firstName }}</td>
+          <td>{{ i.station.station_name }}</td>
+          <td>{{ i.feedback }}</td>
+          
+          <td>
+            {% comment %} <a href="/give_feedback/{{ i.station.id }}/" class="btn btn-outline-danger">FEEDBACK</a> {% endcomment %}
+          </td>
+        </tr>
+       
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<br><br><br><br><br><br>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'EV_Owner/common.html' %}
+{% block content %}
+{% load static %}
+<br><br><br>
+<section class="space-pb">
+    <div class="container">
+          <div class="contact-us-form">
+          <div class="section-title">
+            <h2 style="text-align: center;">Update Ev Stations </h2>
+          </div>
+          <form method="post" action=""  enctype="multipart/form-data" >
+            {% for i in data %}
+            {% csrf_token %}
+            <div class="row">
+             <div class="mb-3 col-md-6">
+                <input type="text" class="form-control"  value="{{i.station_name}}" name="station_name" id="station_name" placeholder="station_name" required>
+              </div>
+              <div class="mb-3 col-md-6">
+                <input type="text" class="form-control" name="location"  value="{{i.location}}"  id="location" placeholder="location" required>
+              </div> 
+              <div class="mb-3 col-md-6">
+                <input type="text" class="form-control" pattern="[6789][0-9]{9}" value="{{i.contact_number}}" maxlength="10"   name="contact_number" id="contact_number" placeholder="contact_number" required>
+              </div>
+              <div class="mb-3 col-md-6">
+                <input type="licence_number" class="form-control" name="licence_number" value="{{i.licence_number}}"  id="licence_number" placeholder="licence_number" required >
+              </div>
+              <div class="mb-3 col-md-6">
+                <input type="text" class="form-control" name="operating_hours" value="{{i.operating_hours}}" id="operating_hours" placeholder="operating_hours" required>
+              </div>
+              <div class="mb-3 col-md-6">
+                <label>Charging Types</label>
+                <select class="form-control" name="charging_types" multiple required>
+                    <option value="AC" {% if "AC" in i.charging_types %}selected{% endif %}>AC</option>
+                    <option value="DC" {% if "DC" in i.charging_types %}selected{% endif %}>DC</option>
+                    <option value="FAST" {% if "FAST" in i.charging_types %}selected{% endif %}>FAST</option>
+                    <option value="ULTRA" {% if "ULTRA" in i.charging_types %}selected{% endif %}>ULTRA</option>
+                </select>
+                <small class="text-muted">Hold Ctrl (Windows) / Cmd (Mac) to select multiple</small>
+              </div>
+
+              <div class="mb-3 col-md-6">
+                <input type="text" class="form-control" name="price" value="{{i.price}}" id="price" placeholder="Price" required>
+              </div>
+              <div class="mb-3 col-md-6">
+                <input type="text" class="form-control" name="waiting_area" value="{{i.waiting_area}}" id="waiting_area" placeholder="waiting_area" required>
+              </div>
+              <div class="mb-3 col-md-6">
+                {% if i.image %}
+                    <img src="{{ i.image.url }}" alt="Station Image" style="width: 100px; height: auto;">
+                {% endif %}
+                <input type="file" class="form-control" name="image" id="image">
+            </div>
+            
+            </div>
+            <div class="mt-4">
+             <input type="submit" class="btn btn-primary">
+             </div>
+             {% endfor %}
+          </form>
+        </div>
+       </div>
+      </div>
+    </div>
+  </section>
+  {% endblock %}

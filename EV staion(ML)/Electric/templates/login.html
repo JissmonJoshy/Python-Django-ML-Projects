@@ -1,0 +1,33 @@
+{% extends "common.html" %}
+{% block content %}
+
+            <div class="col-lg-7" style="margin-left: 20%;">
+              <div class="contact-us-form">
+                <br><br>
+              <div class="section-title">
+                
+                <h2 style="text-align: center;" >Login</h2>
+              </div>
+              <form method="post" action="">
+                {% csrf_token %}
+                <div class="row">
+                  
+                  <div class="mb-3 col-md-6">
+                    <input type="text" class="form-control"  name="email" id="email" placeholder="Your Email">
+                  </div>
+                  <div class="mb-3 col-md-6">
+                    <input type="password" class="form-control" name="password"  id="password" placeholder="Password">
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <input type="submit"  value="login" class="btn btn-primary">
+                 </div>
+              </form>
+            </div>
+
+            </div>
+            <br>
+            <br>
+            <br>
+
+      {% endblock  %}

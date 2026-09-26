@@ -1,0 +1,64 @@
+{% extends 'EV_Owner/common.html' %}
+{% block content %}
+{% load static %}
+
+<section class="space-pb">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <div class="contact-us-form">
+          <div class="section-title">
+            <h2>Add Station </h2>
+          </div>
+          <form method="post"  enctype="multipart/form-data" >
+            {% csrf_token %}
+            <div class="row">
+             <div class="mb-3 col-md-6">
+                <input type="text" class="form-control" name="station_name" id="station_name" placeholder="station_name" required>
+              </div>
+              <div class="mb-3 col-md-6">
+                <input type="text" class="form-control" name="location" id="location" placeholder="location" required>
+              </div> 
+              <div class="mb-3 col-md-6">
+                <input type="text" class="form-control" pattern="[6789][0-9]{9}" maxlength="10"   name="contact_number" id="contact_number" placeholder="contact_number" required>
+              </div>
+              <div class="mb-3 col-md-6">
+                <input type="licence_number" class="form-control" name="licence_number"  id="licence_number" placeholder="licence_number" required >
+              </div>
+              <div class="mb-3 col-md-6">
+                <input type="text" class="form-control" name="operating_hours"  id="operating_hours" placeholder="operating_hours" required>
+              </div>
+              <div class="mb-3 col-md-6">
+                <label>Charging Types</label>
+                <select class="form-control" name="charging_types" multiple required>
+                    <option value="AC">AC</option>
+                    <option value="DC">DC</option>
+                    <option value="FAST">FAST</option>
+                    <option value="ULTRA">ULTRA</option>
+                </select>
+                <small class="text-muted">Hold Ctrl (Windows) / Cmd (Mac) to select multiple</small>
+              </div>
+
+              <div class="mb-3 col-md-6">
+                <input type="text" class="form-control" name="price"  id="price" placeholder="Price" required>
+              </div>
+              <div class="mb-3 col-md-6">
+                <input type="text" class="form-control" name="waiting_area"  id="waiting_area" placeholder="waiting_area" required>
+              </div>
+              <div class="mb-3 col-md-6">
+                <input type="file" class="form-control" name="image"  id="image" placeholder="" required>
+              </div>
+            </div>
+            <div class="mt-4">
+             <input type="submit" class="btn btn-primary">
+             </div>
+          </form>
+        </div>
+       </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  {% endblock %}

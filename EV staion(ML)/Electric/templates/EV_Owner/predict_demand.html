@@ -1,0 +1,139 @@
+{% extends 'EV_Owner/common.html' %}
+
+{% block content %}
+<br><br>
+<div class="container mt-5">
+
+<h3 class="mb-4">Predict Charging Demand</h3>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+<label>Station ID</label>
+<input type="text" name="station_id" class="form-control" required>
+</div>
+
+<div class="col-md-6 mb-3">
+<label>Location Type</label>
+<select name="location_type" class="form-control">
+<option>Urban</option>
+<option>Highway</option>
+</select>
+</div>
+
+<div class="col-md-6 mb-3">
+<label>Vehicle Type</label>
+<select name="vehicle_type" class="form-control">
+<option>Car</option>
+<option>Bus</option>
+<option>Truck</option>
+<option>Two-Wheeler</option>
+</select>
+</div>
+
+<div class="col-md-6 mb-3">
+<label>Charging Power (kW)</label>
+<input type="number" step="0.01" name="charging_power_kW" class="form-control" required>
+</div>
+
+<div class="col-md-6 mb-3">
+<label>Queue Length</label>
+<input type="number" name="queue_length" class="form-control" required>
+</div>
+
+<div class="col-md-6 mb-3">
+<label>Station Load</label>
+<input type="number" step="0.01" name="station_load" class="form-control" required>
+</div>
+
+<div class="col-md-6 mb-3">
+<label>Electricity Price</label>
+<input type="number" step="0.01" name="electricity_price" class="form-control" required>
+</div>
+
+<div class="col-md-6 mb-3">
+<label>Renewable Energy Ratio</label>
+<input type="number" step="0.01" min="0" max="1" name="renewable_energy_ratio" class="form-control" required>
+</div>
+
+<div class="col-md-6 mb-3">
+<label>Traffic Density</label>
+<select name="traffic_density" class="form-control">
+<option>Low</option>
+<option>Medium</option>
+<option>High</option>
+</select>
+</div>
+
+<div class="col-md-6 mb-3">
+<label>Weather Condition</label>
+<select name="weather_condition" class="form-control">
+<option>Clear</option>
+<option>Cloudy</option>
+<option>Rainy</option>
+</select>
+</div>
+
+<div class="col-md-6 mb-3">
+<label>Day of Week</label>
+<select name="day_of_week" class="form-control">
+<option>Monday</option>
+<option>Tuesday</option>
+<option>Wednesday</option>
+<option>Thursday</option>
+<option>Friday</option>
+<option>Saturday</option>
+<option>Sunday</option>
+</select>
+</div>
+
+<div class="col-md-6 mb-3">
+<label>Time Slot</label>
+<select name="time_slot" class="form-control">
+<option>Peak</option>
+<option>Off-Peak</option>
+</select>
+</div>
+
+</div>
+
+<button class="btn btn-success">
+Predict Demand
+</button>
+
+</form>
+
+{% if prediction %}
+
+<hr>
+
+<h4>Prediction Result</h4>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Predicted Charging Demand</th>
+<td>{{ prediction }}</td>
+</tr>
+
+<tr>
+<th>Demand Level</th>
+<td>{{ level }}</td>
+</tr>
+
+<tr>
+<th>Recommendation</th>
+<td>{{ recommendation }}</td>
+</tr>
+
+</table>
+
+{% endif %}
+
+</div>
+<br><br><br>
+{% endblock %}

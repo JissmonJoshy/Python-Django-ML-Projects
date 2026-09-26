@@ -1,0 +1,13 @@
+{% extends 'EV_Owner/common.html' %}
+{% block content %}
+{% load static %}
+
+<h2>Upload QR CODE</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="receipt_image" required>
+    <button type="submit">Upload</button>
+</form>
+
+{% endblock %}

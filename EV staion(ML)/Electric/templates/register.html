@@ -1,0 +1,51 @@
+
+{% extends 'common.html' %}
+{% block content %}
+{% load static %}
+<br><br><br>
+<section class="space-pb">
+    <div class="container">
+      <div class="row align-items-center">
+
+        <div class="col-lg-7" style=" margin-left: 20%;">
+          <div class="contact-us-form">
+          <div class="section-title">
+            <h2 style=" text-align: center;">Register Page</h2>
+          </div>
+          <form method="post" action=""  enctype="multipart/form-data" >
+            {% csrf_token %}
+            <div class="row">
+             <div class="mb-3 col-md-6">
+                <input type="text" class="form-control" name="firstName" id="name" placeholder="Your firstName" required>
+              </div>
+              <div class="mb-3 col-md-6">
+                <input type="text" class="form-control" name="lastName" id="name" placeholder="Your lastName" required>
+              </div> 
+              <div class="mb-3 col-md-6">
+                <input type="email" class="form-control"  name="email" id="email" placeholder="Your Email" required>
+              </div>
+              
+              <div class="mb-3 col-md-6">
+                <input type="place" class="form-control" name="place"  id="place" placeholder="Place" required>
+              </div>
+              <div class="mb-3 col-md-6">
+                <input type="phone" class="form-control" pattern="[6789][0-9]{9}" maxlength="10"  name="phone"  id="phone" placeholder="Phone" required>
+              </div>
+              <div class="mb-3 col-md-6">
+                <input type="file" class="form-control" name="image"  id="image" placeholder="" required>
+              </div>
+              
+            </div>
+            <div class="mt-4">
+             <input type="submit" class="btn btn-primary">
+             </div>
+          </form>
+        </div>
+       </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  {% endblock %}

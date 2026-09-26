@@ -1,0 +1,34 @@
+{% extends 'EV_Owner/common.html' %}
+{% block content %}
+{% load static %}
+
+<section class="space-ptb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <h4 class="text-center">MY STATION BOOKINGS</h4>
+            </div>
+
+            {% for b in data %}
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-post blog-style-02 mb-4 p-3 shadow rounded">
+
+                    <div class="blog-info text-center mt-3">
+                        <p><strong>User:</strong> {{ b.user.firstName }} {{ b.user.lastName }}</p>
+                        <p><strong>Station:</strong> {{ b.station.station_name }}</p>
+                        <p><strong>Date:</strong> {{ b.date }}</p>
+                        <p><strong>Time:</strong> {{ b.start_time }} - {{ b.end_time }}</p>
+                    </div>
+
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>No bookings found</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

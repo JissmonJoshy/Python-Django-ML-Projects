@@ -1,0 +1,107 @@
+{% extends 'User/common.html' %}
+{% block content %}
+{% load static %}
+
+{% for message in messages %}
+<script>
+    alert('{{ message }}');
+</script>
+{% endfor %}
+
+<br><br><br>
+
+<div class="dashboard-section pt-120 pb-120">
+  <h2 style="text-align: center;">Booking Details</h2>
+  <br><br>
+
+  <div class="table-wrapper container-fluid">
+    <table class="eg-table order-table table mb-0">
+      <thead>
+        <tr class="bg-dark">
+          <th class="text-light">USER NAME</th>
+          <th class="text-light">STATION</th>
+          <th class="text-light">DATE</th>
+          <th class="text-light">START TIME</th>
+          <th class="text-light">END TIME</th>
+          <th class="text-light">PAYMENT STATUS</th>
+          {% comment %} <th class="text-light">RECEIPT</th> {% endcomment %}
+          <th class="text-light">BOOKING STATUS</th>
+          <th class="text-light">ACTION</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for i in data %}
+        <tr>
+          <td>{{ i.user.firstName }}</td>
+          <td>{{ i.station.station_name }}</td>
+          <td>{{ i.date }}</td>
+          <td>{{ i.start_time }}</td>
+          <td>{{ i.end_time }}</td>
+
+          <td>
+            {% with payment=i.payment_set.all|first %}
+              {% if payment and payment.status == "PAID" %}
+                <span class="text-success">Paid</span>
+              {% else %}
+                {% if i.status != "Cancelled" %}
+                  <a href="{% url 'make_payment' i.id %}">Make Payment</a>
+                {% else %}
+                  <span class="text-muted">N/A</span>
+                {% endif %}
+              {% endif %}
+            {% endwith %}
+          </td>
+{% comment %} 
+          <td>
+            {% with payment=i.payment_set.all|first %}
+              {% if payment and payment.receipt_image %}
+                <a href="{{ payment.receipt_image.url }}" target="_blank">
+                  <img src="{{ payment.receipt_image.url }}" width="50">
+                </a>
+              {% else %}
+                <span class="text-muted">—</span>
+              {% endif %}
+            {% endwith %}
+          </td> {% endcomment %}
+
+          <td>
+            {% if i.status == "Cancelled" %}
+              <span class="text-danger">Cancelled</span>
+            {% else %}
+              <span class="text-success">Booked</span>
+            {% endif %}
+          </td>
+
+          <td>
+            {% if i.status != "Cancelled" %}
+              {% with payment=i.payment_set.all|first %}
+                {% if not payment or payment.status != "PAID" %}
+                  <a href="{% url 'cancel_booking' i.id %}"
+                     class="btn btn-danger btn-sm"
+                     onclick="return confirm('Are you sure you want to cancel this booking?');">
+                    Cancel
+                  </a>
+                {% else %}
+                  <span class="text-muted">Paid</span>
+                {% endif %}
+              {% endwith %}
+            {% else %}
+              <span class="text-muted">N/A</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="9" class="text-center text-muted">
+            No bookings found
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br><br>
+{% endblock %}
