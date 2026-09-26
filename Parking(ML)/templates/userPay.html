@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Vehicle Parking Ticket Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 flex items-center justify-center h-screen">
+    
+    <!-- <div class="absolute top-10 bg-yellow-500 text-black p-4 rounded-lg shadow-lg w-3/4 md:w-1/2 text-center">
+        <h3 class="text-lg font-bold">⚠ Attention</h3>
+        <p class="text-sm mt-2">If the customer does not acquire the slot within 24 hours of booking, the authority reserves the right to terminate the booking without a refund. Additionally, if the parking duration is extended, extra charges will be applied.</p>
+    </div>
+     -->
+    <div class="bg-gray-800 text-white p-8 rounded-2xl shadow-xl w-96 space-y-6">
+        <h2 class="text-2xl font-semibold text-center">Secure Payment</h2>
+        
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <label class="block text-sm">Amount</label>
+                <input type="text" class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="{{rate}}" readonly>
+            </div>
+            
+            <div>
+                <label class="block text-sm">Card Number</label>
+                <input type="text" class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="1234 5678 9012 3456" required minlength="16" maxlength="16">
+            </div>
+            
+            <div class="flex space-x-4">
+                <div class="w-1/2">
+                    <label class="block text-sm">Expiry</label>
+                    <input type="text" class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="MM/YY" maxlength="4" required>
+                </div>
+                <div class="w-1/2">
+                    <label class="block text-sm">CVV</label>
+                    <input type="password" class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="•••" maxlength="3" required>
+                </div>
+            </div>
+        
+            <br>
+            
+            <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-400 text-white py-3 rounded-lg font-semibold text-lg shadow-lg transition">Pay Now</button>
+        </form>
+    </div>
+    
+</body>
+</html>

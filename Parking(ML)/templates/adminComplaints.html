@@ -1,0 +1,52 @@
+{% extends 'adminHome.html' %} {% block content %}
+
+<br><br>
+
+<!-- Section Title -->
+<div class="container section-title" data-aos="fade-up">
+    <span>Complaints</span>
+    <h2>Complaints</h2>
+    <p></p>
+  </div><!-- End Section Title -->>
+
+  <div class="container">
+    
+    <div class="row gy-4">
+      
+        <table class="table table-bordered" id="notificationTable">
+          <tr class="table-dark">
+          <th>SL.NO</th>
+          <th>DATE</th>
+          <th>CUSTOMER</th>
+          <th>EMAIL</th>
+          <th>PHONE</th>
+          <th>COMPLAINT</th>
+         
+         
+          </tr>
+          {% for i in data %}
+          
+          <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ i.date }}</td>
+              <td>{{ i.user.name }}</td>
+              <td>{{ i.user.email}}</td>
+              <td>{{ i.user.phone}}</td>
+              <td>{{ i.complaint}}</td>
+              
+              
+          
+          </tr>
+          
+          {% endfor %}
+      </table>
+     
+
+    </div>
+
+  </div>
+
+</section><!-- /Services Section -->
+
+
+{% endblock %}

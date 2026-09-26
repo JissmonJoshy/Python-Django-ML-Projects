@@ -1,0 +1,171 @@
+{% extends 'managerHome.html' %} {% block content %}
+
+<!-- Contact Section -->
+<section id="contact" class="contact section">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <span>Add New Slot</span>
+      <h2>Add New Slot</h2>
+      <p></p>
+    </div><!-- End Section Title -->
+  
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+  
+      
+  
+      <div class="row gy-4 mt-1">
+        
+  
+        <style>
+            .form-container {
+              background: #f8f9fa;
+              padding: 30px;
+              border-radius: 10px;
+              box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .form-control {
+              border-radius: 8px;
+              border: 1px solid #ced4da;
+              padding: 10px;
+            }
+            .form-control:focus {
+              border-color: #007bff;
+              box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+            }
+            button {
+              background: #007bff;
+              color: white;
+              padding: 10px 15px;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+              width: 100%;
+              font-size: 16px;
+              transition: 0.3s;
+            }
+            button:hover {
+              background: #0056b3;
+            }
+          </style>
+          <center>
+          <div class="col-lg-6">
+         
+            <div class="form-container">
+                <form action="" method="post" data-aos="fade-up" data-aos-delay="400">
+                    {% csrf_token %}
+                  <div class="row gy-4">
+
+                    <div class="col-md-12">
+                        <input type="number" 
+                        class="form-control" name="number" placeholder="Slot Number" min="1" required>
+                      </div>
+            
+                    <div class="col-md-12">
+                      <label for="options">Choose Vehicle:</label>
+                    <select id="options" class="form-control"  name="type">
+                        <option value="Two Wheeler" class="form-control">Two Wheeler</option>
+                        <option value="Three Wheeler" class="form-control">Three Wheeler</option>
+                        <option value="Four Wheeler" class="form-control">Four Wheeler</option>
+                        
+                    </select>
+                    </div>
+            
+            
+  
+            
+                    <div class="col-md-12">
+                      <button type="submit">Add</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+         
+          
+  
+      </div>
+    </center>
+  
+    </div>
+  
+  </section><!-- /Contact Section -->
+
+  <style>
+    .cards {
+      background: #f8f9fa;
+      padding: 60px 0;
+    }
+    .card {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+      text-align: center;
+      margin: 15px 0;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    .card span {
+      font-size: 18px;
+      font-weight: bold;
+      color: #007bff;
+    }
+    .card h4 {
+      font-size: 22px;
+      font-weight: 600;
+      margin: 10px 0;
+      color: #333;
+    }
+    .card p {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ff4b5c;
+      background: #ffecec;
+      padding: 5px 10px;
+      display: inline-block;
+      border-radius: 5px;
+    }
+  </style>
+  
+  <!-- Cards Section -->
+  
+
+  <section id="cards" class="cards section">
+    <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <span>Added Slots</span>
+    <h2>Added Slots</h2>
+    <p></p>
+  </div><!-- End Section Title -->
+    <div class="container">
+      <div class="row no-gutters">
+        {% for i in data %}
+        <div class="col-lg-4 col-md-6">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <span>Slot Number : {{ i.slot }}</span>
+            <h4>{{ i.type }}</h4>
+            <p>{{ i.price }} Rs/-</p>
+            {% if i.status == "Available" %}
+            <h4 style="color: rgb(24, 175, 24);"><b>{{ i.status }}</b></h4>
+            {% else %}
+            <h4 style="color: red;"><b>{{ i.status }}</b></h4>
+            {% endif %}
+            {% if i.status == "Unavailable" %}
+            <h4><a href="/managerActive?id={{i.id}}&status=Available" class="btn btn-success">Make Available</a></h4>
+            {% else %}
+            <h4><a href="/managerActive?id={{i.id}}&status=Unavailable" class="btn btn-danger">Make Unavailable</a></h4>
+            {% endif %}
+          </div> <br>
+        </div><!-- End Card Item -->
+        {% endfor %}
+      </div>
+    </div>
+  </section><!-- /Cards Section -->
+
+
+  {% endblock %}
+  

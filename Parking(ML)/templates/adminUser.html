@@ -1,0 +1,75 @@
+<style>
+    .team {
+      background: #f8f9fa;
+      padding: 60px 0;
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .section-title h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #333;
+    }
+    .member {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+      text-align: center;
+    }
+    .member:hover {
+      transform: translateY(-5px);
+    }
+    .member-content h4 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+    .member-content p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+  </style>
+  
+  {% extends 'adminHome.html' %} {% block content %}
+  
+  <!-- Team Section -->
+  <section id="team" class="team section">
+  
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <span>Registered Users</span>
+        <h2>Registered Users</h2>
+        <p></p>
+      </div><!-- End Section Title -->
+  
+      <div class="container">
+        <div class="row">
+          {% for i in data %}
+          <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+            <div class="member">
+              <div class="member-content">
+                <h4>{{ i.name }}</h4>
+                <p><strong>Email:</strong> {{ i.email }}</p>
+                <p><strong>Phone:</strong> {{ i.phone }}</p>
+                <p><strong>Address:</strong> {{ i.address }}</p>
+                {% if i.user.is_active %} <br>
+                <a href="/adminActiveUser?id={{ i.user.id }}&status=0" class="btn btn-danger">Make Inactive</a>
+                {% else %}
+                <a href="/adminActiveUser?id={{ i.user.id }}&status=1" class="btn btn-success">Make Active</a>
+                {% endif %}
+              </div>
+            </div>
+          </div><!-- End Team Member -->
+          {% endfor %}
+        </div>
+      </div>
+  
+  </section><!-- /Team Section -->
+  
+  {% endblock %}
+  

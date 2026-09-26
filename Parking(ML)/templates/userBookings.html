@@ -1,0 +1,67 @@
+{% extends 'userHome.html' %} {% block content %}
+
+<section id="cards" class="cards section">
+    <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <span>Slot Bookings</span>
+    <h2>Slot Bookings</h2>
+    <p></p>
+  </div><!-- End Section Title -->
+  <div class="container">
+    <form method="GET">
+        {% csrf_token %}
+        <label for="month">Select Month:</label>
+        <input type="month" id="month" name="month" value="{{ selected_month }}">
+        <button type="submit" class="btn btn-warning">Filter</button>
+        <!-- <button onclick="window.print()" class="btn btn-success">Print</button> -->
+      </form>
+
+      <!-- Show error message if there's an error -->
+      {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+      {% endif %}
+
+      <!-- Display Growth Report -->
+      <h3>Total Price : {{ growth_total_price }}</h3>
+
+<div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="notificationTable">
+            <thead class="table-dark">
+                <tr>
+                    <th>DATE</th>
+                    <th>SLOT</th>
+                    <th>VEHICLE</th>
+                    <th>PARKING LOCATION</th>
+                    <th>MANAGER</th>
+                    <th>CONTACT</th>
+                    <th>EMAIL</th>
+                    <th>AMOUNT</th>
+                    <th>STATUS</th>
+                </tr>
+            </thead>
+            <tbody id="notificationContainer">
+                {% for i in bok %}
+                <tr>
+                    <td>{{ i.date }}</td>
+                    <td>{{ i.slot.slot }}</td>
+                    <td>{{ i.slot.type }}</td>
+                    <td>{{ i.slot.amount.man.location }}</td>
+                    <td>{{ i.slot.amount.man.name }}</td>
+                    <td>{{ i.slot.amount.man.phone }}</td>
+                    <td>{{ i.slot.amount.man.email }}</td>
+                    <td>{{ i.slot.price }}</td>
+                    <td>{{ i.status }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="9" class="text-center text-muted">No Bookings.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+  </section><!-- /Cards Section -->
+
+{% endblock %}

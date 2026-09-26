@@ -1,0 +1,73 @@
+{% extends 'adminHome.html' %} {% block content %}
+
+<br><br>
+
+<!-- Section Title -->
+<div class="container section-title" data-aos="fade-up">
+    <span>Report</span>
+    <h2>Report</h2>
+    <p></p>
+  </div><!-- End Section Title -->>
+
+  <div class="container">
+    <form method="GET">
+        {% csrf_token %}
+        <label for="month">Select Month:</label>
+        <input type="month" id="month" name="month" value="{{ selected_month }}">
+        <button type="submit" class="btn btn-warning">Filter</button>
+        <button onclick="window.print()" class="btn btn-success">Print</button>
+      </form>
+
+      <!-- Show error message if there's an error -->
+      {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+      {% endif %}
+
+      <!-- Display Growth Report -->
+      <h3>Total Price : {{ growth_total_price }}</h3>
+    <div class="row gy-4">
+      
+        <table class="table table-bordered" id="notificationTable">
+          <tr class="table-dark">
+          <th>SL.NO</th>
+          <th>DATE</th>
+          <th>VEHICLE</th>
+          <th>CUSTOMER</th>
+          <th>EMAIL</th>
+          <th>LOCATION</th>
+          <th>MANAGER</th>
+          <th>EMAIL</th>
+          <th>AMOUNT</th>
+          <th>STATUS</th>
+         
+          </tr>
+          {% for i in bok %}
+          
+          <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ i.date }}</td>
+              <td>{{ i.slot.type }}</td>
+              <td>{{ i.user.name }}</td>
+              <td>{{ i.user.email}}</td>
+              <td>{{ i.slot.amount.man.location}}</td>
+              <td>{{ i.slot.amount.man.name}}</td>
+              <td>{{ i.slot.amount.man.email}}</td>
+              <td>{{ i.slot.price }}</td>
+              <td>{{ i.status }}</td>
+              
+              
+          
+          </tr>
+          
+          {% endfor %}
+      </table>
+     
+
+    </div>
+
+  </div>
+
+</section><!-- /Services Section -->
+
+
+{% endblock %}

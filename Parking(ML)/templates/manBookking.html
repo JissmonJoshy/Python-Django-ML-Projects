@@ -1,0 +1,56 @@
+{% extends 'managerHome.html' %} {% block content %}
+
+<section id="cards" class="cards section">
+    <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <span>Slot Bookings</span>
+    <h2>Slot Bookkings</h2>
+    <p></p>
+  </div><!-- End Section Title -->
+  
+
+<div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="notificationTable">
+            <thead class="table-dark">
+                <tr>
+                    <th>DATE</th>
+                    <th>SLOT</th>
+                    <th>VEHICLE</th>
+                    <th>USER</th>
+                    <th>EMAIL</th>
+                    <th>PHONE</th>
+                    <th>AMOUNT</th>
+                    <th>STATUS</th>
+                </tr>
+            </thead>
+            <tbody id="notificationContainer">
+                {% for i in bok %}
+                <tr>
+                    <td>{{ i.date }}</td>
+                    <td>{{ i.slot.slot }}</td>
+                    <td>{{ i.slot.type }}</td>
+                    <td>{{ i.user.name }}</td>
+                    <td>{{ i.user.phone }}</td>
+                    <td>{{ i.user.email }}</td>
+                    <td>{{ i.slot.price }}</td>
+                    <td>{% if i.status == "Booked" %}
+                        {{ i.status }} <br>
+                        <a href="/manComplete?id={{ i.id }}" class="btn btn-success">Mark Completed</a>
+                        {% else %}
+                        {{ i.status }}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8" class="text-center text-muted">No Bookkings.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+  </section><!-- /Cards Section -->
+
+{% endblock %}

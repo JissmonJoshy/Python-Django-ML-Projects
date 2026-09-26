@@ -1,0 +1,28 @@
+{% extends 'userHome.html' %} {% block content %}
+
+<section id="cards" class="cards section">
+    <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <span>Complaint Registeration</span>
+    <h2>Complaint Registeration</h2>
+    <p></p>
+  </div><!-- End Section Title -->
+  
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="card shadow-lg p-4 rounded border-0 bg-light">
+            <form method="POST" action="">
+                {% csrf_token %}
+                
+                <div class="mb-4">
+                    <label for="message" class="form-label fw-semibold">Complaint Details</label>
+                    <textarea class="form-control border-2 shadow-sm" id="message" name="message" rows="6" required placeholder="Describe your issue in detail..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100 py-2 shadow-sm">Submit Complaint</button>
+            </form>
+        </div>
+    </div>
+</section><!-- /Cards Section -->
+
+{% endblock %}
+
