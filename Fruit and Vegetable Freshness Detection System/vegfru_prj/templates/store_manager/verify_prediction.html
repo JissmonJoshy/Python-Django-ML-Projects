@@ -1,0 +1,131 @@
+{% extends "store_manager/common.html" %}
+{% load static %}
+
+{% block content %}
+<br><br><br><br>
+<div class="container mt-5">
+
+<div class="row justify-content-center">
+
+<div class="col-lg-8">
+
+<div class="card shadow">
+
+<div class="card-header bg-primary text-white">
+
+<h3>Verify Prediction</h3>
+
+</div>
+
+<div class="card-body">
+
+<div class="row">
+
+<div class="col-md-5 text-center">
+
+<img
+src="{{prediction.image.url}}"
+class="img-fluid rounded">
+
+</div>
+
+<div class="col-md-7">
+
+<h5>
+
+Prediction
+
+</h5>
+
+<p>
+
+{{prediction.predicted_class}}
+
+</p>
+
+<h5>
+
+Freshness
+
+</h5>
+
+<p>
+
+{{prediction.freshness}}
+
+</p>
+
+<h5>
+
+Confidence
+
+</h5>
+
+<p>
+
+{{prediction.confidence}} %
+
+</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<div class="mb-3">
+
+<label>
+
+Remarks
+
+</label>
+
+<textarea
+name="remarks"
+class="form-control"
+rows="4"
+required></textarea>
+
+</div>
+
+<div class="mb-3">
+
+<label>
+
+Recommendation
+
+</label>
+
+<textarea
+name="recommendation"
+class="form-control"
+rows="4"
+required></textarea>
+
+</div>
+
+<button
+class="btn btn-success w-100">
+
+Verify & Generate Report
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

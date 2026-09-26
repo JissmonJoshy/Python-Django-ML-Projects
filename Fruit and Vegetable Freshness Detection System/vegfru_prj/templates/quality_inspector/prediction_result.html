@@ -1,0 +1,188 @@
+{% extends "quality_inspector/common.html" %}
+{% load static %}
+
+{% block content %}
+<br><br><br><br><br>
+<div class="container-fluid py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-xl-9 col-lg-10 col-md-12">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-header bg-success text-white py-3">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <h3 class="mb-0">
+                            <i class="fas fa-microscope me-2"></i>
+                            Prediction Result
+                        </h3>
+
+                        <span class="badge bg-light text-success fs-6">
+                            Analysis Completed
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <div class="row">
+
+                        <!-- Image -->
+
+                        <div class="col-lg-5 text-center mb-4">
+
+                            <img src="{{ data.image.url }}"
+                                 class="img-fluid rounded-4 shadow"
+                                 style="max-height:350px;width:100%;object-fit:cover;">
+
+                        </div>
+
+                        <!-- Details -->
+
+                        <div class="col-lg-7">
+
+                            <div class="table-responsive">
+
+                                <table class="table table-bordered table-hover align-middle">
+
+                                    <tbody>
+
+                                        <tr>
+
+                                            <th width="35%" class="bg-light">
+                                                <i class="fas fa-leaf text-success me-2"></i>
+                                                Predicted Class
+                                            </th>
+
+                                            <td>
+                                                <span class="fw-bold fs-5">
+                                                    {{ data.predicted_class }}
+                                                </span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <th class="bg-light">
+                                                <i class="fas fa-check-circle text-primary me-2"></i>
+                                                Freshness
+                                            </th>
+
+                                            <td>
+
+                                                {% if data.freshness == "Fresh" %}
+
+                                                <span class="badge bg-success fs-6 px-3 py-2">
+                                                    Fresh
+                                                </span>
+
+                                                {% else %}
+
+                                                <span class="badge bg-danger fs-6 px-3 py-2">
+                                                    Rotten
+                                                </span>
+
+                                                {% endif %}
+
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <th class="bg-light">
+                                                <i class="fas fa-chart-line text-warning me-2"></i>
+                                                Confidence
+                                            </th>
+
+                                            <td>
+
+                                                <div class="progress" style="height:28px;">
+
+                                                    <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated"
+                                                         role="progressbar"
+                                                         style="width: {{ data.confidence }}%;">
+
+                                                        {{ data.confidence }}%
+
+                                                    </div>
+
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <th class="bg-light">
+                                                <i class="fas fa-calendar-alt text-info me-2"></i>
+                                                Prediction Date
+                                            </th>
+
+                                            <td>
+
+                                                {{ data.uploaded_at|date:"d M Y" }}
+
+                                                <br>
+
+                                                <small class="text-muted">
+
+                                                    {{ data.uploaded_at|time:"h:i A" }}
+
+                                                </small>
+
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                            <div class="text-center mt-4">
+
+                                <a href="{% url 'upload_image' %}"
+                                   class="btn btn-success btn-lg px-5">
+
+                                    <i class="fas fa-upload me-2"></i>
+
+                                    Predict Another Image
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer text-center bg-light">
+
+                    <small class="text-muted">
+
+                        AI Fruit & Vegetable Freshness Detection System
+
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,341 @@
+{% extends "quality_inspector/common.html" %}
+{% load static %}
+
+{% block content %}
+<br><br><br><br><br>
+<style>
+
+.page-title{
+    font-size:32px;
+    font-weight:700;
+}
+
+.dashboard-card{
+    border:none;
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.table thead th{
+    background:#198754;
+    color:#fff;
+    text-align:center;
+    vertical-align:middle;
+    white-space:nowrap;
+    font-size:15px;
+}
+
+.table tbody td{
+    vertical-align:middle;
+    text-align:center;
+    padding:18px 10px;
+}
+
+.table-hover tbody tr:hover{
+    background:#f5fff8;
+    transition:.3s;
+}
+
+.preview-img{
+    width:90px;
+    height:90px;
+    border-radius:12px;
+    object-fit:cover;
+    border:3px solid #fff;
+    box-shadow:0 3px 10px rgba(0,0,0,.2);
+}
+
+.progress{
+    height:24px;
+    border-radius:30px;
+    background:#e9ecef;
+}
+
+.progress-bar{
+    font-weight:bold;
+    font-size:13px;
+}
+
+.badge{
+    padding:8px 14px;
+    font-size:13px;
+}
+
+.table-responsive{
+    border-radius:15px;
+}
+
+.table{
+    margin-bottom:0;
+}
+
+.serial{
+    font-weight:bold;
+    color:#198754;
+}
+
+.date-box{
+    font-size:14px;
+}
+
+.date-box small{
+    color:#6c757d;
+}
+
+.empty-box{
+    padding:70px 20px;
+}
+
+.empty-box img{
+    width:180px;
+}
+
+.card-header-custom{
+    background:white;
+    border-bottom:1px solid #ececec;
+    padding:20px;
+}
+
+.info-card{
+    border-radius:15px;
+    border:none;
+}
+
+</style>
+
+
+<div class="container-fluid py-4">
+
+    <div class="row mb-4">
+
+        <div class="col-lg-12">
+
+            <div class="card shadow dashboard-card">
+
+                <div class="card-body">
+
+                    <div class="row align-items-center">
+
+                        <div class="col-lg-8">
+
+                            <h2 class="page-title text-success">
+                                Prediction History
+                            </h2>
+
+                            <p class="text-muted mb-0">
+                                Complete history of fruit and vegetable freshness predictions.
+                            </p>
+
+                        </div>
+
+                        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+
+                            <span class="badge bg-success fs-6 px-4 py-3">
+
+                                Total Predictions :
+                                {{ history.count }}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card shadow dashboard-card">
+
+        <div class="card-header card-header-custom">
+
+            <h5 class="mb-0 fw-bold">
+
+                Prediction Records
+
+            </h5>
+
+        </div>
+
+        <div class="card-body p-0">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead>
+
+                    <tr>
+
+                        <th width="60">#</th>
+
+                        <th width="120">Image</th>
+
+                        <th width="220">Predicted Class</th>
+
+                        <th width="140">Freshness</th>
+
+                        <th width="220">Confidence</th>
+
+                        <th width="140">Verification</th>
+
+                        <th width="170">Date</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    {% for i in history %}
+
+                    <tr>
+
+                        <td class="serial">
+
+                            {{ forloop.counter }}
+
+                        </td>
+
+                        <td>
+
+                            <img src="{{ i.image.url }}" class="preview-img">
+
+                        </td>
+
+                        <td>
+
+                            <strong>
+
+                                {{ i.predicted_class }}
+
+                            </strong>
+
+                        </td>
+
+                        <td>
+
+                            {% if i.freshness == "Fresh" %}
+
+                            <span class="badge bg-success">
+
+                                Fresh
+
+                            </span>
+
+                            {% else %}
+
+                            <span class="badge bg-danger">
+
+                                Rotten
+
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <div class="progress">
+
+                                <div class="progress-bar bg-primary"
+
+                                     role="progressbar"
+
+                                     style="width:{{ i.confidence }}%;">
+
+                                    {{ i.confidence }}%
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            {% if i.verified %}
+
+                                <span class="badge bg-success">
+
+                                    ✓ Verified
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-warning text-dark">
+
+                                    Pending
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td class="date-box">
+
+                            {{ i.uploaded_at|date:"d M Y" }}
+
+                            <br>
+
+                            <small>
+
+                                {{ i.uploaded_at|time:"h:i A" }}
+
+                            </small>
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="7">
+
+                            <div class="empty-box text-center">
+
+                                <img src="{% static 'images/no-data.png' %}">
+
+                                <h4 class="mt-4 text-secondary">
+
+                                    No Prediction History Available
+
+                                </h4>
+
+                                <p class="text-muted">
+
+                                    Predictions will appear here after image analysis.
+
+                                </p>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

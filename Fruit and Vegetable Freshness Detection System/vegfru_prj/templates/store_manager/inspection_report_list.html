@@ -1,0 +1,158 @@
+{% extends "store_manager/common.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<div class="card shadow">
+
+<div class="card-header bg-success text-white">
+
+<h3 class="mb-0">
+
+Inspection Reports
+
+</h3>
+
+</div>
+
+<div class="card-body table-responsive">
+
+<table class="table table-bordered table-hover align-middle">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>#</th>
+
+<th>Report No</th>
+
+<th>Fruit Image</th>
+
+<th>Prediction</th>
+
+<th>Confidence</th>
+
+<th>Inspector</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for i in reports %}
+
+<tr>
+
+<td>{{forloop.counter}}</td>
+
+<td>
+
+{{i.report_number}}
+
+</td>
+
+<td>
+
+<img
+
+src="{{i.prediction.image.url}}"
+
+width="80"
+
+height="80"
+
+class="rounded shadow">
+
+</td>
+
+<td>
+
+{{i.prediction.predicted_class}}
+
+</td>
+
+<td>
+
+{{i.prediction.confidence}} %
+
+</td>
+
+<td>
+
+{{i.prediction.inspector.name}}
+
+</td>
+
+<td>
+
+{% if i.verified %}
+
+<span class="badge bg-success">
+
+Verified
+
+</span>
+
+{% else %}
+
+<span class="badge bg-warning text-dark">
+
+Pending
+
+</span>
+
+{% endif %}
+
+</td>
+
+<td>
+
+<a
+
+href="{% url 'inspection_report_detail' i.id %}"
+
+class="btn btn-primary btn-sm">
+
+View
+
+</a>
+
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="8"
+
+class="text-center">
+
+No Reports Found
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

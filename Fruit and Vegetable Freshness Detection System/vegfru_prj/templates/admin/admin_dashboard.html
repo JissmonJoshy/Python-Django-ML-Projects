@@ -1,0 +1,277 @@
+
+{% extends "admin/common.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Header -->
+<header class="header">
+    <div class="video-fullscreen-wrap">
+
+        <div class="video-fullscreen-video" data-overlay-dark="2">
+            <video playsinline autoplay loop muted>
+                <source src="{% static 'fruits.mp4' %}" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="v-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+
+                        <h6>* AI-Based Vehicle Damage Assessment Platform</h6>
+
+                        <h1>AI-Powered Vehicle Damage Detection System</h1>
+
+                        <h5>
+                            Detect Vehicle Damage using
+                            <span>Deep Learning <i>/ Image Analysis</i></span>
+                        </h5>
+
+                        <a href="#0" class="button-1 mt-15 mb-15 mr-15">
+                            View Damage Reports
+                            <span class="ti-arrow-top-right"></span>
+                        </a>
+
+                        <a href="#" data-scroll-nav="1" class="button-2 mt-15 mb-15">
+                            Upload Vehicle Image
+                            <span class="ti-arrow-top-right"></span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- Process -->
+<section class="process-number mt--120 mb-60">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4 col-md-12 mb-30">
+                <div class="item">
+                    <div class="con">
+
+                        <div class="no">1</div>
+
+                        <h5>Upload Vehicle Images</h5>
+
+                        <p>
+                            Vehicle owners can upload photographs of damaged vehicles.
+                            The system accepts clear vehicle images for automated
+                            inspection and damage analysis.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 mb-30">
+                <div class="item">
+                    <div class="con">
+
+                        <div class="no">2</div>
+
+                        <h5>AI Damage Detection</h5>
+
+                        <p>
+                            Deep learning models analyze uploaded images to identify
+                            dents, scratches, broken components, cracks, and other
+                            visible vehicle damages with high accuracy.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 mb-30">
+                <div class="item">
+                    <div class="con">
+
+                        <div class="no">3</div>
+
+                        <h5>Generate Assessment Report</h5>
+
+                        <p>
+                            The application estimates damage severity and generates
+                            detailed reports to support insurance claim verification
+                            and vehicle repair decisions.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- About -->
+<section class="about section-padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12">
+
+                <div class="content">
+
+                    <div class="section-subtitle">
+                        Intelligent Vehicle Inspection
+                    </div>
+
+                    <div class="section-title">
+                        AI-Based <span>Vehicle Damage Detection</span>
+                    </div>
+
+                    <p class="mb-30">
+                        The AI-Powered Vehicle Damage Detection System is an advanced
+                        machine learning application that automatically detects vehicle
+                        damages from uploaded images. Using image classification and
+                        object detection techniques, the system identifies damaged
+                        regions such as dents, scratches, cracks, broken headlights,
+                        damaged bumpers, and other external defects. The automated
+                        inspection process minimizes manual effort while improving
+                        assessment speed and accuracy.
+                    </p>
+
+                    <p class="mb-30">
+                        The solution is designed for insurance companies, vehicle
+                        owners, and automobile service centers. AI-generated damage
+                        assessment reports help insurance assessors verify claims,
+                        estimate damage severity, reduce processing time, eliminate
+                        human errors, and enhance customer satisfaction throughout
+                        the insurance claim and vehicle maintenance process.
+                    </p>
+
+                    <ul class="list-unstyled list mb-30">
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>Automatic Vehicle Damage Detection</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>AI-Based Damage Severity Analysis</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>Insurance Claim Assistance</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>Fast & Accurate Damage Assessment Reports</p>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <a href="#" class="button-1">
+                        Explore System
+                        <span class="ti-arrow-top-right"></span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Modules -->
+<section class="services section-padding bg-dark">
+    <div class="container">
+
+        <div class="row mb-50">
+            <div class="col-md-12 text-center">
+
+                <div class="section-subtitle">
+                    System Modules
+                </div>
+
+                <div class="section-title text-white">
+                    User <span>Responsibilities</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-4 col-md-6 mb-30">
+                <div class="item">
+
+                    <h4>Admin</h4>
+
+                    <ul class="list-unstyled mt-20">
+                        <li>Manage user accounts</li>
+                        <li>Manage vehicle damage datasets</li>
+                        <li>Monitor AI system performance</li>
+                        <li>Manage feedback and complaints</li>
+                        <li>Generate system reports</li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-30">
+                <div class="item">
+
+                    <h4>Insurance Assessor</h4>
+
+                    <ul class="list-unstyled mt-20">
+                        <li>Review uploaded vehicle images</li>
+                        <li>Verify AI detection results</li>
+                        <li>Analyze damage severity reports</li>
+                        <li>Approve or reject insurance claims</li>
+                        <li>Generate assessment reports</li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-30">
+                <div class="item">
+
+                    <h4>Vehicle Owner</h4>
+
+                    <ul class="list-unstyled mt-20">
+                        <li>Upload damaged vehicle images</li>
+                        <li>View detected damage regions</li>
+                        <li>Check AI assessment results</li>
+                        <li>Submit insurance claim requests</li>
+                        <li>Track claim approval status</li>
+                    </ul>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
