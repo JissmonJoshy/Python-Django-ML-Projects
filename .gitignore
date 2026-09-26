@@ -1,26 +1,25 @@
 venv/
 env/
 myenv/
-__pycache__/
-*.pyc
-*.pkl
-*.h5
-*.csv
-*.pdf
-*.weights
-*.yml
-
-
-# Python virtual environments
-env/
-venv/
 .venv/
 ENV/
 
-# Python cache
 __pycache__/
 *.pyc
 *.pyo
+
+# Machine learning files
+*.pkl
+*.h5
+*.keras
+*.joblib
+*.onnx
+*.weights
+*.csv
+*.yml
+
+# PDF files
+*.pdf
 
 # Django database
 *.sqlite3
@@ -32,9 +31,3 @@ __pycache__/
 # OS
 Thumbs.db
 .DS_Store
-
-
-# ML model files
-*.keras
-*.joblib
-*.onnx
