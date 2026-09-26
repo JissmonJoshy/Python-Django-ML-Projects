@@ -1,0 +1,173 @@
+{% extends 'scout/common.html' %}
+{% load static %}
+{% block content %}
+
+<br><br><br><br>
+
+<section class="contact section-padding">
+
+<div class="container">
+
+<div class="row justify-content-center">
+
+<div class="col-lg-8">
+
+<div class="card border-0 shadow-lg rounded-4">
+
+<div class="card-header text-center text-white py-4"
+style="background:#198754;">
+
+<h3 class="mb-0">
+
+Scout Profile
+
+</h3>
+
+</div>
+
+<div class="card-body p-5">
+
+{% if messages %}
+{% for i in messages %}
+<div class="alert alert-success">
+{{ i }}
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="text-center mb-4">
+
+    
+
+<h4 class="mt-3">
+
+{{ scout.scout_name }}
+
+</h4>
+
+</div>
+
+<form method="post">
+
+{% csrf_token %}
+
+<div class="row">
+
+<div class="col-md-6 mb-4">
+
+<label class="fw-bold">
+Scout Name
+</label>
+
+<input type="text"
+name="scout_name"
+class="form-control"
+value="{{ scout.scout_name }}">
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="fw-bold">
+Username
+</label>
+
+<input type="text"
+class="form-control"
+value="{{ scout.login.username }}"
+readonly>
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="fw-bold">
+Email
+</label>
+
+<input type="email"
+name="email"
+class="form-control"
+value="{{ scout.email }}">
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="fw-bold">
+Phone
+</label>
+
+<input type="text"
+name="phone"
+class="form-control"
+value="{{ scout.phone }}">
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="fw-bold">
+Experience (Years)
+</label>
+
+<input type="number"
+name="experience"
+class="form-control"
+value="{{ scout.experience }}">
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="fw-bold">
+Region
+</label>
+
+<input type="text"
+name="region"
+class="form-control"
+value="{{ scout.region }}">
+
+</div>
+
+<div class="col-12 mb-4">
+
+<label class="fw-bold">
+Club
+</label>
+
+<input type="text"
+class="form-control"
+value="{{ scout.club.club_name }}"
+readonly>
+
+</div>
+
+<div class="col-12 text-center">
+
+<button class="btn btn-success px-5 py-2">
+
+Update Profile
+
+</button>
+
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

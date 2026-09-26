@@ -1,0 +1,212 @@
+{% extends "admin/common.html" %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br>
+<div class="container-fluid py-4">
+
+    <div class="card shadow-lg border-0 rounded-3">
+
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">
+                <i class="fas fa-futbol me-2"></i>Club Manager List
+            </h4>
+   
+            <span class="badge bg-light text-dark fs-6">
+                Total : {{ clubs|length }}
+            </span>
+        </div>
+
+        <div class="card-body">
+
+            {% if messages %}
+                {% for i in messages %}
+                    <div class="alert alert-success alert-dismissible fade show">
+                        {{ i }}
+                        <button class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover align-middle text-center">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th width="60">#</th>
+                            <th width="90">Logo</th>
+                            <th>Club Name</th>
+                            <th>Manager</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Country</th>
+                            <th>League</th>
+                            <th>Budget</th>
+                            <th>Year</th>
+                            <th>Username</th>
+                            <th>Status</th>
+                            <th width="190">Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    {% for i in clubs %}
+
+                        <tr>
+
+                            <td>
+                                <strong>{{ forloop.counter }}</strong>
+                            </td>
+
+                            <td>
+
+                                <img src="{{ i.club_logo.url }}"
+                                     class="rounded-circle border shadow"
+                                     width="65"
+                                     height="65"
+                                     style="object-fit:cover;">
+
+                            </td>
+
+                            <td class="fw-bold">
+                                {{ i.club_name }}
+                            </td>
+
+                            <td>
+                                {{ i.manager_name }}
+                            </td>
+
+                            <td>
+                                {{ i.email }}
+                            </td>
+
+                            <td>
+                                {{ i.phone }}
+                            </td>
+
+                            <td>
+                                {{ i.country }}
+                            </td>
+
+                            <td>
+                                {{ i.league }}
+                            </td>
+
+                            <td>
+                                ₹ {{ i.club_budget }}
+                            </td>
+
+                            <td>
+                                {{ i.established_year }}
+                            </td>
+
+                            <td>
+
+                                <span class="badge bg-secondary">
+
+                                    {{ i.login.username }}
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                {% if i.login.is_active %}
+
+                                    <span class="badge bg-success px-3 py-2">
+
+                                        Active
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-warning text-dark px-3 py-2">
+
+                                        Pending
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                {% if i.login.is_active %}
+
+                                <a href="{% url 'admin_toggle_club_manager' i.id %}"
+                                   class="btn btn-warning btn-sm mb-1 w-100"
+                                   onclick="return confirm('Deactivate this Club Manager?')">
+
+                                    <i class="fas fa-ban"></i>
+
+                                    Deactivate
+
+                                </a>
+
+                                {% else %}
+
+                                <a href="{% url 'admin_toggle_club_manager' i.id %}"
+                                   class="btn btn-success btn-sm mb-1 w-100"
+                                   onclick="return confirm('Activate this Club Manager?')">
+
+                                    <i class="fas fa-check"></i>
+
+                                    Activate
+
+                                </a>
+
+                                {% endif %}
+
+                                <a href="{% url 'admin_delete_club_manager' i.id %}"
+                                   class="btn btn-danger btn-sm w-100"
+                                   onclick="return confirm('Delete this Club Manager?')">
+
+                                    <i class="fas fa-trash"></i>
+
+                                    Delete
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    {% empty %}
+
+                        <tr>
+
+                            <td colspan="13" class="py-5">
+
+                                <h5 class="text-muted">
+
+                                    No Club Managers Found
+
+                                </h5>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

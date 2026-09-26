@@ -1,0 +1,263 @@
+{% extends 'club_manager/common.html' %}
+{% load static %}
+{% block content %}
+
+<br><br><br>
+
+<section class="contact section-padding">
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="form-box shadow p-4 rounded">
+
+                    <h4 class="text-center mb-4" style="color: #ffffff; font-weight: bold;">
+                        Register Scout
+                    </h4>
+
+                    {% if messages %}
+                        {% for i in messages %}
+                            <div class="alert alert-info">
+                                {{ i }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post">
+
+                        {% csrf_token %}
+
+                        <div class="row">
+
+                            <div class="col-md-6 form-group mb-3">
+                                <label class="mb-2">
+                                    Scout Name
+                                </label>
+
+                                <input type="text"
+                                       name="scout_name"
+                                       class="form-control"
+                                       placeholder="Enter Scout Name"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group mb-3">
+                                <label class="mb-2">
+                                    Username
+                                </label>
+
+                                <input type="text"
+                                       name="username"
+                                       class="form-control"
+                                       placeholder="Choose Username"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group mb-3">
+                                <label class="mb-2">
+                                    Email Address
+                                </label>
+
+                                <input type="email"
+                                       name="email"
+                                       class="form-control"
+                                       placeholder="Enter Email Address"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group mb-3">
+                                <label class="mb-2">
+                                    Phone Number
+                                </label>
+
+                                <input type="text"
+                                       name="phone"
+                                       maxlength="10"
+                                       class="form-control"
+                                       placeholder="Enter Phone Number"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group mb-3">
+                                <label class="mb-2">
+                                    Experience (Years)
+                                </label>
+
+                                <input type="number"
+                                       name="experience"
+                                       min="0"
+                                       max="50"
+                                       class="form-control"
+                                       placeholder="Experience in Years"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group mb-3">
+                                <label class="mb-2">
+                                    Scouting Region
+                                </label>
+
+                                <input type="text"
+                                       name="region"
+                                       class="form-control"
+                                       placeholder="Eg. South America"
+                                       required>
+                            </div>
+
+                            <div class="col-md-12 mt-3 text-center">
+
+                                <button type="submit"
+                                        class="btn btn-success px-5 py-2">
+
+                                    Register Scout
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr class="my-5">
+
+<h3 class="text-center mb-4 text-white">
+    Registered Scouts
+</h3>
+
+<div class="table-responsive">
+
+<table class="table table-bordered table-striped table-hover">
+
+    <thead class="table-dark">
+
+        <tr>
+
+            <th>#</th>
+
+            <th>Name</th>
+
+            <th>Username</th>
+
+            <th>Email</th>
+
+            <th>Phone</th>
+
+            <th>Experience</th>
+
+            <th>Region</th>
+
+            <th>Status</th>
+
+            <th width="180">Action</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% for i in scouts %}
+
+    <tr>
+
+        <td style="color: #ffffff;">{{ forloop.counter }}</td>
+
+        <td style="color: #ffffff;">{{ i.scout_name }}</td>
+
+        <td style="color: #ffffff;">{{ i.login.username }}</td>
+
+        <td style="color: #ffffff;">{{ i.email }}</td>
+
+        <td style="color: #ffffff;">{{ i.phone }}</td>
+
+        <td style="color: #ffffff;">{{ i.experience }} Years</td>
+
+        <td style="color: #ffffff;">{{ i.region }}</td>
+
+        <td>
+
+            {% if i.login.is_active %}
+
+                <span class="badge bg-success">
+                    Active
+                </span>
+
+            {% else %}
+
+                <span class="badge bg-danger">
+                    Inactive
+                </span>
+
+            {% endif %}
+
+        </td>
+
+        <td>
+
+            {% if i.login.is_active %}
+
+            <a href="{% url 'toggle_scout' i.id %}"
+               class="btn btn-warning btn-sm"
+               onclick="return confirm('Deactivate this scout?')">
+
+                Deactivate
+
+            </a>
+
+            {% else %}
+
+            <a href="{% url 'toggle_scout' i.id %}"
+               class="btn btn-success btn-sm"
+               onclick="return confirm('Activate this scout?')">
+
+                Activate
+
+            </a>
+
+            {% endif %}
+
+            <a href="{% url 'delete_scout' i.id %}"
+               class="btn btn-danger btn-sm"
+               onclick="return confirm('Delete this scout?')">
+
+                Delete
+
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+
+        <td colspan="9" class="text-center">
+
+            No Scouts Registered
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+</div>
+
+    </div>
+</section>
+
+{% endblock %}

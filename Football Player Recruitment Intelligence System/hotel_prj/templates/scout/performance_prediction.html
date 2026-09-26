@@ -1,0 +1,162 @@
+{% extends 'scout/scout_dashboard.html' %}
+
+{% block content %}
+<br><br><br><br><br>
+
+
+<div class="container mt-4">
+
+<h3>Performance Prediction</h3>
+
+<form method="post">
+
+{% csrf_token %}
+
+<div class="mb-3">
+
+<label>Player Name</label>
+
+<input
+type="text"
+name="player_name"
+class="form-control"
+required>
+
+</div>
+
+<button class="btn btn-success">
+
+Predict
+
+</button>
+
+</form>
+
+<br>
+
+{% if result %}
+
+<h4 class="mt-4 text-white">Player Performance Report</h4>
+
+<table class="table table-bordered table-striped">
+
+    <tr>
+        <th style="color: white;">Player Name</th>
+        <td style="color: white;">{{ result.player_name }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Club</th>
+        <td style="color: white;">{{ result.club }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Nationality</th>
+        <td style="color: white;">{{ result.nationality }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Age</th>
+        <td style="color: white;">{{ result.age }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Position</th>
+        <td style="color: white;">{{ result.position }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Current Overall Rating</th>
+        <td style="color: white;">{{ result.overall_rating }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Predicted Rating</th>
+        <td>
+            <span class="badge bg-success fs-6">
+                {{ result.predicted_rating }}
+            </span>
+        </td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Potential</th>
+        <td style="color: white;">{{ result.potential }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Pace</th>
+        <td style="color: white;">{{ result.pace }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Shooting</th>
+        <td style="color: white;">{{ result.shooting }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Passing</th>
+        <td style="color: white;">{{ result.passing }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Dribbling</th>
+        <td style="color: white;">{{ result.dribbling }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Defending</th>
+        <td style="color: white;">{{ result.defending }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Physical</th>
+        <td style="color: white;">{{ result.physical }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Goals</th>
+        <td style="color: white;">{{ result.goals }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Assists</th>
+        <td style="color: white;">{{ result.assists }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Market Value (€)</th>
+        <td style="color: white;">{{ result.market_value }}</td>
+    </tr>
+
+    <tr>
+        <th style="color: white;">Performance Status</th>
+        <td>
+
+            {% if result.predicted_rating >= 90 %}
+                <span class="badge bg-success">Excellent Prospect</span>
+
+            {% elif result.predicted_rating >= 85 %}
+                <span class="badge bg-primary">Very Good Prospect</span>
+
+            {% elif result.predicted_rating >= 80 %}
+                <span class="badge bg-info text-dark">Good Prospect</span>
+
+            {% elif result.predicted_rating >= 70 %}
+                <span class="badge bg-warning text-dark">Average Prospect</span>
+
+            {% else %}
+                <span class="badge bg-danger">Needs Improvement</span>
+
+            {% endif %}
+
+        </td>
+    </tr>
+
+</table>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

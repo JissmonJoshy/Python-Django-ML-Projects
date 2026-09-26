@@ -1,0 +1,137 @@
+{% extends 'club_manager/club_manager_dashboard.html' %}
+
+{% block content %}
+
+<br><br><br>
+
+<div class="container">
+
+<h2>Similar Player Recommendation</h2>
+
+<form method="post">
+
+{% csrf_token %}
+
+<div class="mb-3">
+
+<label>Search Player</label>
+
+<input
+type="text"
+id="player_name"
+name="player_name"
+class="form-control"
+autocomplete="off"
+placeholder="Type player name...">
+
+<div
+id="suggestions"
+class="list-group">
+</div>
+
+</div>
+
+<button class="btn btn-success">
+
+Find Similar Players
+
+</button>
+
+</form>
+
+<br>
+
+{% if result %}
+
+<table class="table table-bordered" style="background-color: #f8f9fa;">
+
+<tr>
+
+<th>Player</th>
+
+<th>Club</th>
+
+<th>Position</th>
+
+<th>Overall</th>
+
+<th>Market Value (€)</th>
+
+</tr>
+
+{% for player in result %}
+
+<tr>
+
+<td>{{player.name}}</td>
+
+<td>{{player.club}}</td>
+
+<td>{{player.position}}</td>
+
+<td>{{player.overall}}</td>
+
+<td>{{player.market_value}}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endif %}
+
+</div>
+
+<script>
+
+const input=document.getElementById("player_name");
+const suggestionBox=document.getElementById("suggestions");
+
+input.addEventListener("keyup",function(){
+
+let value=this.value;
+
+if(value.length<1){
+
+suggestionBox.innerHTML="";
+
+return;
+
+}
+
+fetch("/search_players/?term="+value)
+
+.then(response=>response.json())
+
+.then(data=>{
+
+suggestionBox.innerHTML="";
+
+data.forEach(function(player){
+
+let item=document.createElement("a");
+
+item.className="list-group-item list-group-item-action";
+
+item.innerHTML=player;
+
+item.onclick=function(){
+
+input.value=player;
+
+suggestionBox.innerHTML="";
+
+}
+
+suggestionBox.appendChild(item);
+
+});
+
+});
+
+});
+
+</script>
+
+{% endblock %}

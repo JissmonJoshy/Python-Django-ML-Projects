@@ -1,0 +1,206 @@
+
+{% extends "common.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Header -->
+<header class="header">
+    <div class="video-fullscreen-wrap">
+
+        <div class="video-fullscreen-video" data-overlay-dark="2">
+            <video playsinline autoplay loop muted>
+                <source src="{% static 'ff.mp4' %}" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="v-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+
+                        <h6>* AI-Powered Football Player Recruitment Intelligence Platform</h6>
+
+                        <h1>Football Player Recruitment Intelligence System</h1>
+
+                        <h5>
+                            Discover
+                            <span>Future Football Stars <i>Using Artificial Intelligence</i></span>
+                        </h5>
+
+                        <a href="#0" class="button-1 mt-15 mb-15 mr-15">
+                            View Recruitment Reports
+                            <span class="ti-arrow-top-right"></span>
+                        </a>
+
+                        <a href="#" data-scroll-nav="1" class="button-2 mt-15 mb-15">
+                            Analyze Player
+                            <span class="ti-arrow-top-right"></span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- Process -->
+<section class="process-number mt--120 mb-60">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4 col-md-12 mb-30">
+                <div class="item">
+                    <div class="con">
+
+                        <div class="no">1</div>
+
+                        <h5>Enter Player Statistics</h5>
+
+                        <p>
+                            Upload player information including age, position,
+                            nationality, club, pace, shooting, passing,
+                            dribbling, defending, physical attributes, and
+                            previous performance statistics.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 mb-30">
+                <div class="item">
+                    <div class="con">
+
+                        <div class="no">2</div>
+
+                        <h5>Machine Learning Analysis</h5>
+
+                        <p>
+                            The AI model analyzes player performance,
+                            technical abilities, physical attributes,
+                            and historical statistics to predict
+                            future performance and estimate transfer value.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 mb-30">
+                <div class="item">
+                    <div class="con">
+
+                        <div class="no">3</div>
+
+                        <h5>Recruitment Recommendation</h5>
+
+                        <p>
+                            The system predicts player potential,
+                            estimates market value, and recommends
+                            similar football players to help clubs
+                            make intelligent recruitment decisions.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- About -->
+<section class="about section-padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12">
+
+                <div class="content">
+
+                    <div class="section-subtitle">
+                        Intelligent Football Scouting
+                    </div>
+
+                    <div class="section-title">
+                        AI-Based <span>Football Player Recruitment Intelligence</span>
+                    </div>
+
+                    <p class="mb-30">
+                        The Football Player Recruitment Intelligence System is an
+                        advanced machine learning platform developed to help football
+                        clubs identify talented players and make smarter recruitment
+                        decisions. By analyzing player statistics, physical
+                        attributes, match performance, and historical data, the
+                        system predicts future player performance and transfer market
+                        value with high accuracy.
+                    </p>
+
+                    <p class="mb-30">
+                        The platform enables scouts and club managers to compare
+                        players, discover similar talents, evaluate recruitment
+                        opportunities, and reduce scouting costs through data-driven
+                        insights. Intelligent recommendations improve recruitment
+                        efficiency, minimize transfer risks, and support long-term
+                        squad planning for football clubs.
+                    </p>
+
+                    <ul class="list-unstyled list mb-30">
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>Football Player Performance Prediction</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>AI-Based Talent Identification</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>Market Value Estimation and Recruitment Analysis</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>Similar Player Recommendation for Smart Recruitment</p>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <a href="#" class="button-1">
+                        Explore System
+                        <span class="ti-arrow-top-right"></span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+

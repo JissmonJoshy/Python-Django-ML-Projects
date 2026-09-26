@@ -1,0 +1,199 @@
+{% extends "common.html" %}
+{% load static %}
+{% block content %}
+
+<br><br><br><br>
+
+<section class="contact section-padding">
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-9">
+
+                <div class="form-box shadow-lg p-4 rounded">
+
+                    <div class="text-center mb-4">
+                        <h2 style="color: #ffffff;">⚽ Club Manager Registration</h2>
+                        <p class="text-muted">
+                            Register your football club to access AI-powered recruitment intelligence.
+                        </p>
+                    </div>
+
+                    {% if messages %}
+                        {% for i in messages %}
+                        <div class="alert alert-danger">
+                            {{ i }}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <!-- Club Information -->
+
+                        <h5 class="mb-3">🏟 Club Information</h5>
+
+                        <div class="row">
+
+                            <div class="col-md-6 form-group">
+                                <label>Club Name</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="club_name"
+                                       placeholder="Manchester United FC"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Manager Name</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="manager_name"
+                                       placeholder="John Smith"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Email Address</label>
+                                <input type="email"
+                                       class="form-control"
+                                       name="email"
+                                       placeholder="manager@club.com"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Phone Number</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="phone"
+                                       maxlength="10"
+                                       placeholder="9876543210"
+                                       required>
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <label>Country</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="country"
+                                       placeholder="England"
+                                       required>
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <label>League</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="league"
+                                       placeholder="Premier League"
+                                       required>
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <label>Club Budget (€)</label>
+                                <input type="number"
+                                       class="form-control"
+                                       name="club_budget"
+                                       placeholder="50000000"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Established Year</label>
+                                <input type="number"
+                                       class="form-control"
+                                       name="established_year"
+                                       placeholder="1878"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Home Stadium</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="stadium"
+                                       placeholder="Old Trafford"
+                                       required>
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <label>Club Logo</label>
+                                <input type="file"
+                                       class="form-control"
+                                       name="club_logo"
+                                       accept="image/*"
+                                       required>
+                            </div>
+
+                        </div>
+
+                        <hr class="my-4">
+
+                        <!-- Login Credentials -->
+
+                        <h5 class="mb-3">🔐 Login Credentials</h5>
+
+                        <div class="row">
+
+                            <div class="col-md-6 form-group">
+                                <label>Username</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="username"
+                                       placeholder="clubmanager01"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Password</label>
+                                <input type="password"
+                                       class="form-control"
+                                       name="password"
+                                       placeholder="Enter Password"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Confirm Password</label>
+                                <input type="password"
+                                       class="form-control"
+                                       name="confirm_password"
+                                       placeholder="Confirm Password"
+                                       required>
+                            </div>
+
+                        </div>
+
+                        <div class="text-center mt-4">
+
+                            <button type="submit" class="btn btn-dark px-5 py-2">
+                                Register Club
+                            </button>
+
+                        </div>
+
+                        <div class="text-center mt-3">
+
+                            Already have an account?
+                            <a href="{% url 'login' %}">
+                                Login Here
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

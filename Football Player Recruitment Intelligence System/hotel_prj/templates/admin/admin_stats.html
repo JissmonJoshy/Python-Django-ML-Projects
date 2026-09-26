@@ -1,0 +1,289 @@
+{% extends 'admin/admin_dashboard.html' %}
+
+{% block content %}
+
+<br><br><br><br><br>
+
+<div class="container-fluid">
+
+    <!-- Summary Cards -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-lg col-md-4 col-6">
+            <div class="card shadow text-center border-0">
+                <div class="card-body">
+                    <h2 class="text-primary">{{ total_clubs }}</h2>
+                    <h6>Club Managers</h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg col-md-4 col-6">
+            <div class="card shadow text-center border-0">
+                <div class="card-body">
+                    <h2 class="text-success">{{ total_scouts }}</h2>
+                    <h6>Scouts</h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg col-md-4 col-6">
+            <div class="card shadow text-center border-0">
+                <div class="card-body">
+                    <h2 class="text-warning">{{ total_predictions }}</h2>
+                    <h6>Predictions</h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg col-md-4 col-6">
+            <div class="card shadow text-center border-0">
+                <div class="card-body">
+                    <h2 class="text-info">{{ total_similar }}</h2>
+                    <h6>Similar Searches</h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg col-md-4 col-6">
+            <div class="card shadow text-center border-0">
+                <div class="card-body">
+                    <h2 class="text-danger">{{ total_recruitment }}</h2>
+                    <h6>Recruitments</h6>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- First Row -->
+    <div class="row">
+
+        <div class="col-md-6 mb-4">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white">
+                    Club Wise Scouts
+                </div>
+
+                <div class="card-body">
+
+                    <canvas id="clubChart" height="220"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 mb-4">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-success text-white">
+                    Player Position Distribution
+                </div>
+
+                <div class="card-body">
+
+                    <canvas id="positionChart" height="220"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Second Row -->
+
+    <div class="row">
+
+        <div class="col-md-6 mb-4">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-warning">
+                    Most Searched Players
+                </div>
+
+                <div class="card-body">
+
+                    <canvas id="playerChart" height="220"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 mb-4">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-info text-white">
+                    Prediction Status
+                </div>
+
+                <div class="card-body">
+
+                    <canvas id="ratingChart" height="220"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Third Row -->
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-danger text-white">
+                    Recruitment Position Analysis
+                </div>
+
+                <div class="card-body">
+
+                    <canvas id="recruitChart" height="110"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+Chart.defaults.font.size = 12;
+
+Chart.defaults.plugins.legend.position = 'bottom';
+
+
+new Chart(document.getElementById("clubChart"),{
+
+type:"bar",
+
+data:{
+labels:{{ club_names|safe }},
+datasets:[{
+label:"Scouts",
+data:{{ scout_counts }},
+backgroundColor:"#0d6efd"
+}]
+},
+
+options:{
+responsive:true,
+maintainAspectRatio:false
+}
+
+});
+
+
+new Chart(document.getElementById("positionChart"),{
+
+type:"pie",
+
+data:{
+labels:{{ positions|safe }},
+datasets:[{
+data:{{ position_count }}
+}]
+},
+
+options:{
+responsive:true,
+maintainAspectRatio:false
+}
+
+});
+
+
+new Chart(document.getElementById("playerChart"),{
+
+type:"bar",
+
+data:{
+labels:{{ players|safe }},
+datasets:[{
+label:"Search Count",
+data:{{ player_count }},
+backgroundColor:"#ffc107"
+}]
+},
+
+options:{
+indexAxis:'y',
+responsive:true,
+maintainAspectRatio:false
+}
+
+});
+
+
+new Chart(document.getElementById("ratingChart"),{
+
+type:"doughnut",
+
+data:{
+labels:[
+"Excellent",
+"Very Good",
+"Good",
+"Average",
+"Needs Improvement"
+],
+datasets:[{
+data:{{ rating }}
+}]
+},
+
+options:{
+responsive:true,
+maintainAspectRatio:false
+}
+
+});
+
+
+new Chart(document.getElementById("recruitChart"),{
+
+type:"line",
+
+data:{
+labels:{{ recruit_position|safe }},
+datasets:[{
+label:"Recruitments",
+data:{{ recruit_count }},
+fill:false,
+tension:0.3,
+borderWidth:3
+}]
+},
+
+options:{
+responsive:true,
+maintainAspectRatio:false
+}
+
+});
+
+</script>
+
+{% endblock %}

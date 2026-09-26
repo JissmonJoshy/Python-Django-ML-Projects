@@ -1,0 +1,230 @@
+{% extends 'club_manager/club_manager_dashboard.html' %}
+
+{% block content %}
+
+<br><br><br><br><br>
+
+<div class="container">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h3>AI Recruitment Recommendation</h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="row">
+
+                    <div class="col-md-4">
+
+                        <label><b>Position</b></label>
+
+                        <select name="position" class="form-control" required>
+
+                            <option value="">Select Position</option>
+
+                            {% for position in positions %}
+
+                            <option value="{{ position }}">
+
+                                {{ position }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <label><b>Maximum Age</b></label>
+
+                        <input
+                        type="number"
+                        name="max_age"
+                        class="form-control"
+                        placeholder="25"
+                        required>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <label><b>Minimum Rating</b></label>
+
+                        <input
+                        type="number"
+                        name="min_rating"
+                        class="form-control"
+                        placeholder="80"
+                        required>
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <button class="btn btn-success">
+
+                    Find Recommended Players
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+{% if recommendations %}
+
+<div class="container">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+
+            <h4>Top AI Recommended Players</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>Player</th>
+
+                        <th>Club</th>
+
+                        <th>Position</th>
+
+                        <th>Age</th>
+
+                        <th>Overall Rating</th>
+
+                        <th>Market Value (€)</th>
+
+                        <th>AI Match %</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for player in recommendations %}
+
+                    <tr>
+
+                        <td>{{ forloop.counter }}</td>
+
+                        <td>{{ player.name }}</td>
+
+                        <td>{{ player.club }}</td>
+
+                        <td>{{ player.position }}</td>
+
+                        <td>{{ player.age }}</td>
+
+                        <td>{{ player.overall_rating }}</td>
+
+                        <td>€ {{ player.market_value_eur }}</td>
+
+                        <td>
+
+                            {{ player.score|floatformat:2 }}
+
+                        </td>
+
+                        <td>
+
+                            {% if forloop.first %}
+
+                            <span class="badge bg-success">
+
+                                ⭐ Top Recommendation
+
+                            </span>
+
+                            {% elif player.score >= 0.90 %}
+
+                            <span class="badge bg-primary">
+
+                                Excellent
+
+                            </span>
+
+                            {% elif player.score >= 0.80 %}
+
+                            <span class="badge bg-info">
+
+                                Very Good
+
+                            </span>
+
+                            {% elif player.score >= 0.70 %}
+
+                            <span class="badge bg-warning text-dark">
+
+                                Good
+
+                            </span>
+
+                            {% else %}
+
+                            <span class="badge bg-secondary">
+
+                                Average
+
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+
+
+
+
+
+
