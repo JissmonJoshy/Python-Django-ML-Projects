@@ -1,0 +1,95 @@
+{% extends "user/common.html" %}
+{% load static %}
+{% block content %}
+<br><br><br>
+
+<section class="contact section-padding">
+    <div class="container">
+
+        {% if messages %}
+            {% for i in messages %}
+                <div class="alert alert-info text-center">
+                    {{ i }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="card shadow-lg border-0">
+
+                    <div class="card-header bg-dark text-white text-center">
+                        <h5 class="mb-0">My Profile</h5>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row align-items-center">
+
+                            <!-- IMAGE -->
+                            <div class="col-md-4 text-center">
+                                <img src="{{ user.image.url }}"
+                                     style="width:160px;height:160px;border-radius:50%;object-fit:cover;border:4px solid #ddd;">
+                            </div>
+
+                            <!-- DETAILS -->
+                            <div class="col-md-8">
+
+                                <table class="table table-borderless">
+
+                                    <tr>
+                                        <th>Name:</th>
+                                        <td>{{ user.name }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Email:</th>
+                                        <td>{{ user.email }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Phone:</th>
+                                        <td>{{ user.phone }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Address:</th>
+                                        <td>{{ user.address }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Username:</th>
+                                        <td>{{ user.login.username }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Status:</th>
+                                        <td>
+                                            {% if user.login.is_active %}
+                                                <span class="badge bg-success">Active</span>
+                                            {% else %}
+                                                <span class="badge bg-danger">Inactive</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

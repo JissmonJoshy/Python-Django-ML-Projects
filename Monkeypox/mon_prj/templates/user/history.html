@@ -1,0 +1,62 @@
+{% extends "user/common.html" %}
+{% load static %}
+{% block content %}
+
+<br><br><br>
+
+<section class="contact section-padding">
+    <div class="container">
+
+        {% if messages %}
+            {% for i in messages %}
+                <div class="alert alert-info text-center">
+                    {{ i }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-7 col-md-9 col-sm-12">
+
+                <div class="card shadow-lg border-0">
+
+                    <!-- HEADER -->
+                    <div class="card-header bg-dark text-white text-center">
+                        <h5 class="mb-0">Monkeypox Emotion Detection</h5>
+                    </div>
+
+                    <!-- BODY -->
+                    <div class="card-body p-4">
+
+                        <h3>My Emotion Prediction History</h3>
+
+                        <table border="1">
+                            <tr>
+                                <th>Text</th>
+                                <th>Emotion</th>
+                                <th>Date</th>
+                            </tr>
+
+                            {% for i in history %}
+                            <tr>
+                                <td>{{ i.text }}</td>
+                                <td>{{ i.predicted_emotion }}</td>
+                                <td>{{ i.created_at }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<br><br><br>
+{% endblock %}

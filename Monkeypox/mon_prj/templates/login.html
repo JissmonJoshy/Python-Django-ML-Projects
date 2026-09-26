@@ -1,0 +1,83 @@
+{% extends "common.html" %}
+{% load static %}
+{% block content %}
+
+<section class="banner-header middle-height section-padding bg-img"
+    data-overlay-dark="6"
+    data-background="{% static 'img/slider/pox.webp' %}">
+
+```
+<div class="v-middle">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h6>AI-Powered Emotion Classification System</h6>
+                <h1>Login <span>Here</span></h1>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+</section>
+
+<section class="contact section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+
+        <div class="col-lg-5">
+
+            <div class="form-box">
+
+                <h5 class="mb-4 text-center">
+                    Monkeypox Emotion Analysis Login
+                </h5>
+
+                <p class="text-center mb-4">
+                    Access the NLP dashboard to analyze Monkeypox-related
+                    social media posts, predict emotions, and view
+                    deep learning classification results.
+                </p>
+
+                
+
+                <form method="post">
+
+                    {% csrf_token %}
+
+                    <div class="row">
+
+                        <div class="col-md-12 form-group">
+                            <input type="text"
+                                   name="username"
+                                   placeholder="Enter Username"
+                                   required>
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <input type="password"
+                                   name="password"
+                                   placeholder="Enter Password"
+                                   required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <input type="submit"
+                                   value="Access Dashboard">
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+```
+
+</section>
+
+{% endblock %}

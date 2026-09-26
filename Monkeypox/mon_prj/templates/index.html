@@ -1,0 +1,199 @@
+{% extends "common.html" %}
+{% load static %}
+{% block content %}
+
+<header class="header">
+    <div class="video-fullscreen-wrap">
+
+        <div class="video-fullscreen-video" data-overlay-dark="2">
+            <video playsinline autoplay loop muted>
+                <source src="{% static 'monkey.mp4' %}" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="v-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+
+                        <h6>* Deep Learning & Natural Language Processing Project</h6>
+
+                        <h1>Monkeypox Emotion Analysis System</h1>
+
+                        <h5>Analyze Public Emotions using <span>AI, NLP <i>/ Deep Learning Models</i></span></h5>
+
+                        <a href="#0" class="button-1 mt-15 mb-15 mr-15">
+                            View Analysis Results
+                            <span class="ti-arrow-top-right"></span>
+                        </a>
+
+                        <a href="#" data-scroll-nav="1" class="button-2 mt-15 mb-15">
+                            Start Prediction
+                            <span class="ti-arrow-top-right"></span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!-- Process Number -->
+<section class="process-number mt--120 mb-60">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4 col-md-12 mb-30">
+                <div class="item">
+                    <div class="con">
+                        <div class="no">1</div>
+                        <h5>Collect Twitter Data</h5>
+                        <p>
+                            Gather Monkeypox-related tweets from social media platforms
+                            and prepare large-scale textual datasets for analysis.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 mb-30">
+                <div class="item">
+                    <div class="con">
+                        <div class="no">2</div>
+                        <h5>Emotion Detection</h5>
+                        <p>
+                            Apply Natural Language Processing techniques to identify
+                            emotions such as fear, trust, sadness, anger, and anticipation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 mb-30">
+                <div class="item">
+                    <div class="con">
+                        <div class="no">3</div>
+                        <h5>Deep Learning Prediction</h5>
+                        <p>
+                            Utilize CNN, LSTM, BiLSTM, and CLSTM models to classify
+                            emotions and generate meaningful insights.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- About -->
+<section class="about section-padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6 col-md-12 mb-30">
+                <div class="content">
+
+                    <div class="section-subtitle">
+                        Monkeypox Emotion Intelligence Platform
+                    </div>
+
+                    <div class="section-title">
+                        We Analyze <span>Public Emotions in Real-Time</span>
+                    </div>
+
+                    <p class="mb-30">
+                        This project focuses on emotion classification of Monkeypox-related
+                        social media posts using advanced Natural Language Processing (NLP)
+                        and Deep Learning techniques. By analyzing over 800,000 tweets,
+                        the system identifies emotional responses such as fear, anger,
+                        sadness, trust, and anticipation. The extracted insights can help
+                        healthcare organizations, researchers, and policymakers better
+                        understand public concerns during disease outbreaks.
+                    </p>
+
+                    <ul class="list-unstyled list mb-30">
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>Large-Scale Twitter Text Mining</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>Emotion Detection using NLP Techniques</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="list-icon">
+                                <span class="ti-check"></span>
+                            </div>
+                            <div class="list-text">
+                                <p>CNN, LSTM, BiLSTM & CLSTM Classification Models</p>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <a href="about.html" class="button-1">
+                        Learn More
+                        <span class="ti-arrow-top-right"></span>
+                    </a>
+
+                </div>
+            </div>
+
+
+            <div class="col-lg-5 offset-lg-1 col-md-12">
+                <div class="item">
+                    <img src="{% static 'img/mon.jpg' %}" class="img-fluid" alt="">
+
+                    <div class="curv-butn icon-bg">
+                        <a href="#" class="vid">
+                            <div class="icon">
+                                <i class="ti-control-play"></i>
+                            </div>
+                        </a>
+
+                        <div class="br-left-top">
+                            <svg viewBox="0 0 11 11" fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-11 h-11">
+                                <path
+                                    d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z"
+                                    fill="#1b1b1b">
+                                </path>
+                            </svg>
+                        </div>
+
+                        <div class="br-right-bottom">
+                            <svg viewBox="0 0 11 11" fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-11 h-11">
+                                <path
+                                    d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z"
+                                    fill="#1b1b1b">
+                                </path>
+                            </svg>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
