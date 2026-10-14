@@ -1,0 +1,115 @@
+# 🛡️ ToxicityShield – AI-Based Mental Health Monitoring and Counseling System
+
+ 📌 About the Project
+ToxicityShield is a web application developed using Python and Django. It uses Machine Learning and Natural Language Processing (NLP) to analyze user posts and comments, identify sentiment, and support online counseling.
+
+ ✨ Features
+
+ 👨‍💼 Admin Module
+- Admin dashboard
+- View registered users
+- Add, view, and delete caretakers
+- Send counseling messages to users who may need support
+
+ 👤 User Module
+- User registration and login
+- Create and view posts
+- Update profile details
+- Comment on posts
+- Chat with caretakers after payment
+- Use the AI chatbot
+- Submit feedback
+
+ 🧑‍⚕️ Caretaker Module
+- Caretaker dashboard
+- Chat with users
+- Reply to user messages
+- View payment details
+- Submit feedback
+
+ 🤖 AI and Machine Learning Modules
+- Sentiment Analysis: Uses Machine Learning to analyze the sentiment of posts and comments.
+- Logistic Regression: Classifies text sentiment.
+- CountVectorizer: Converts text into numerical features.
+- OCR: Extracts text from uploaded images to check for restricted words.
+- OpenCV: Helps preprocess images for OCR.
+- AI Chatbot: Provides chatbot responses through the configured Gemini API.
+
+ 🛠️ Technologies Used
+- Python
+- Django
+- Machine Learning
+- Natural Language Processing (NLP)
+- Scikit-learn
+- OpenCV
+- Tesseract OCR
+- SQLite / configured database
+- HTML, CSS, Bootstrap
+- Google Gemini API
+
+ 📂 Project Modules
+- Admin
+- User
+- Caretaker
+- Posts and Comments
+- Chat and Counseling
+- Payment
+- Feedback
+- Sentiment Analysis
+- Image Text Detection
+- AI Chatbot
+
+ ▶️ How to Run the Project
+
+1. Clone or download the project from GitHub.
+2. Open the project folder in the terminal.
+3. Create a virtual environment:
+
+   
+   python -m venv venv
+   
+
+4. Activate the virtual environment on Windows:
+
+   
+   venv\Scripts\activate
+   
+
+5. Install the required packages:
+
+   
+   pip install -r requirements.txt
+   
+
+6. Run database migrations:
+
+   
+   python manage.py migrate
+   
+
+7. Start the Django development server:
+
+   
+   python manage.py runserver
+   
+
+8. Open the displayed local URL in your browser.
+
+ 📊 Dataset Files
+- `mydata1.csv` – Used for sentiment analysis.
+- `english.csv` – Used for checking restricted words.
+
+Keep the required dataset files in their expected project locations.
+
+ 🎯 Project Objective
+The main objective of ToxicityShield is to use AI and Machine Learning to analyze online content and support a platform for communication and counseling.
+
+Note: Sentiment analysis is not a medical diagnosis. Configure Tesseract OCR and the Gemini API as required before using their features.
+
+ 👨‍💻 Developer
+Jiss Mon Joshy
+
+GitHub: [JissmonJoshy](https://github.com/JissmonJoshy)
+
+ 🔗 Project Repository
+[ToxicityShield – GitHub](https://github.com/JissmonJoshy/Python-Django-ML-Projects/tree/main/toxicityshield/toxicityshield)
